@@ -1,2 +1,2 @@
 # dev
-Repo used for development of the mobile Corre mobile application SD UCF
+Repo used for development of the Corre application SD UCF
