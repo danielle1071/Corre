@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-corre-dev-134932-authRole",
+      "UnauthRoleArn": "arn:aws:iam::499601096215:role/amplify-corre-dev-134932-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::499601096215:role/amplify-corre-dev-134932-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-corre-dev-134932-deployment",
+      "UnauthRoleName": "amplify-corre-dev-134932-unauthRole",
+      "StackName": "amplify-corre-dev-134932",
+      "StackId": "arn:aws:cloudformation:us-east-1:499601096215:stack/amplify-corre-dev-134932/96c99e50-61c5-11ec-abf6-0ef913a177ab",
+      "AmplifyAppId": "dnvcdpk71i13v"
+    },
+    "categories": {
+      "auth": {
+        "corre065ecec1": {
+          "userPoolId": "us-east-1_tW0zBr0ob",
+          "userPoolName": "correPool",
+          "webClientId": "67p225alcmjhgt6s17k5c37s9q",
+          "nativeClientId": "67p225alcmjhgt6s17k5c37s9q"
+        }
+      }
+    }
+  }
+}
