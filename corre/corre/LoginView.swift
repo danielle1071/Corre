@@ -21,7 +21,7 @@ struct LoginView: View {
         VStack {
             Spacer()
             
-            TextField("Phone Number or Email", text: $login)
+            TextField("Username", text: $login)
             SecureField("Password", text: $password)
             Button("Login", action: {
                 sessionManager.login(

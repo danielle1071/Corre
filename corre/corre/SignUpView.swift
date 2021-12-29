@@ -13,26 +13,58 @@ import SwiftUI
 struct SignUpView: View {
     
     @EnvironmentObject var sessionManager: SessionManger
-    
-    @State var username = ""
+        
+    @State var givenName = ""
+    @State var familyName = ""
     @State var email = ""
+    @State var dateOfBirth = ""
     @State var phone = ""
     @State var password = ""
+    @State var username = ""
+    @State var gender = ""
+    @State var locality = ""
+    @State var region = ""
+    @State var postal_code = ""
+    @State var country = ""
+   
     
     var body: some View {
         VStack{
             Spacer()
             
-            TextField("Username", text: $username)
-            TextField("Email", text: $email)
-            TextField("Phone Number", text: $phone)
-            SecureField("Password", text: $password)
+            Group {
+                
+                TextField("Username", text: $username)
+                SecureField("Password", text: $password)
+            
+                TextField("Email", text: $email)
+                TextField("Phone Number (+1##########)", text: $phone)
+                TextField("First Name", text: $givenName)
+                TextField("Last Name", text: $familyName)
+                TextField("Birthday (YYYY-MM-DD)", text: $dateOfBirth)
+                TextField("Gender", text: $gender)
+            }
+            Group {
+                TextField("City", text: $locality)
+                TextField("State", text: $region)
+                TextField("Country", text: $country)
+                TextField("Zip Code (#####)", text: $postal_code)
+            }
+            
             Button("Sign Up", action: {
                 sessionManager.signUp(
                     username: username,
                     email: email,
                     phone: phone,
-                    password: password
+                    password: password,
+                    givenName: givenName,
+                    familyName: familyName,
+                    dateOfBirth: dateOfBirth,
+                    locality: locality,
+                    region: region,
+                    postal_code: postal_code,
+                    country: country,
+                    gender: gender
                 )
             })
             

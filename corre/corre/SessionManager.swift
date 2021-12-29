@@ -20,6 +20,13 @@ enum AuthState {
 final class SessionManger: ObservableObject {
     @Published var authState: AuthState = .login
     
+    struct Address: Codable {
+        var locality: String
+        var region: String
+        var postal_code: String
+        var country: String
+    }
+    
     func getCurrentAuthUser() {
         if let user = Amplify.Auth.getCurrentUser() {
             authState = .session(user: user)
@@ -36,8 +43,22 @@ final class SessionManger: ObservableObject {
         authState = .login
     }
     
-    func signUp(username: String, email: String, phone: String, password: String) {
-        let attributes = [AuthUserAttribute(.email, value: email), AuthUserAttribute(.phoneNumber, value: phone)]
+    func signUp(username: String, email: String, phone: String, password: String,
+                givenName: String,
+                familyName: String,
+                dateOfBirth: String,
+                locality: String,
+                region: String,
+                postal_code: String,
+                country: String,
+                gender: String) {
+        let address = Address(locality:locality, region:region, postal_code:postal_code, country:country)
+        var jsonString = ""
+        do {
+            let jsonData = try JSONEncoder().encode(address)
+            jsonString = String(data: jsonData, encoding: .utf8)!
+        } catch { print(error) }
+        let attributes = [AuthUserAttribute(.email, value: email), AuthUserAttribute(.phoneNumber, value: phone), AuthUserAttribute(.givenName, value: givenName), AuthUserAttribute(.familyName, value:familyName), AuthUserAttribute(.birthDate, value:dateOfBirth), AuthUserAttribute(.gender, value: gender), AuthUserAttribute(.address, value: jsonString)]
         let options = AuthSignUpRequest.Options(userAttributes: attributes)
         
         _ = Amplify.Auth.signUp(
