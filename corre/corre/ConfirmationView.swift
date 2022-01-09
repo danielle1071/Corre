@@ -9,6 +9,8 @@
 
 import Foundation
 import SwiftUI
+import Amplify
+import Combine
 
 struct ConfirmationView: View {
     
@@ -17,6 +19,7 @@ struct ConfirmationView: View {
     @State var confirmationCode = ""
     
     let username: String
+    // let user: AuthUser
     
     var body: some View {
         VStack {
@@ -29,9 +32,16 @@ struct ConfirmationView: View {
                     code: confirmationCode
                 )
             })
+            .padding()
+            Button("[WORK IN PROGRESS] Resend code", action: {
+                print("This button is broken")
+                // sessionManager.resendCode()
+             })
         }
         .padding()
     }
+    // This function was taken from https://docs.amplify.aws/lib/auth/user-attributes/q/platform/ios/#resend-verification-code
+    
     
 }
 
