@@ -14,7 +14,7 @@ import Combine
 enum AuthState {
     case signUp
     case login
-    case confirmCode(username: String)
+    case confirmCode(username: String /* ,email: String */ )
     // add case profileCreate(user: CognitoUser)
     case session(user: AuthUser)
 }
@@ -87,7 +87,7 @@ final class SessionManger: ObservableObject {
                 case .confirmUser(let details):
                     print(details ?? "no details")
                     DispatchQueue.main.async {
-                        self?.authState = .confirmCode(username: username)
+                        self?.authState = .confirmCode(username: username/*, email: email*/)
                     }
                 }
                 
@@ -149,12 +149,13 @@ final class SessionManger: ObservableObject {
                         print("Inside resetPassword")
                     case .confirmSignUp(let info):
                         print("Confirm signup additional info \(String(describing: info))")
-                        let user = Amplify.Auth.getCurrentUser()
+                        // let user = Amplify.Auth.getCurrentUser()
                         DispatchQueue.main.async {
                             self?.authState = .confirmCode(username: username)
                         }
                     case .done:
                         print("Inside done")
+                    print(Amplify.Auth.fetchUserAttributes())
                         DispatchQueue.main.async {
                             self?.getCurrentAuthUser()
                         }
@@ -183,8 +184,9 @@ final class SessionManger: ObservableObject {
         }
     }
     
+    /*
     func resendCode() -> AnyCancellable {
-        _ = print(Amplify.Auth.getCurrentUser())
+        // _ = print(Amplify.Auth.getCurrentUser())
         return Amplify.Auth.resendConfirmationCode(for: .email)
             .resultPublisher
             .sink {
@@ -196,5 +198,6 @@ final class SessionManger: ObservableObject {
                 print("Resend code sent to - \(deliveryDetails)")
             }
     }
+    */
     
 }

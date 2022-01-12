@@ -33,14 +33,15 @@ struct ConfirmationView: View {
                 )
             })
             .padding()
-            Button("[WORK IN PROGRESS] Resend code", action: {
+            Button("Resend code", action: {
                 print("This button is broken")
+                print(Amplify.Auth.resendSignUpCode(for: username))
                 // sessionManager.resendCode()
              })
         }
         .padding()
     }
-    // This function was taken from https://docs.amplify.aws/lib/auth/user-attributes/q/platform/ios/#resend-verification-code
+    
     
     
 }
