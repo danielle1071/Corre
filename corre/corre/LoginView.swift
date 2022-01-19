@@ -7,10 +7,12 @@
 //  This file is based on the youtube tutorial: https://www.youtube.com/watch?v=wSHnmtnzbfs
 //
 
-import Foundation
+// import Foundation
 import SwiftUI
 
 struct LoginView: View {
+    
+    
     
     @EnvironmentObject var sessionManager: SessionManger
     
@@ -28,11 +30,15 @@ struct LoginView: View {
                     username: login,
                     password: password
                 )
+                // print("Test")
             })
             
             Spacer()
-            Button("Not a user yet?, sign up!", action:
-                    sessionManager.showSignUp)
+            Button("Not a user yet?, sign up!", action:{
+                
+                sessionManager.showSignUp()
+                })
+                    
         }
         .padding()
     }

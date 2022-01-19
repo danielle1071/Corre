@@ -19,7 +19,6 @@ struct ConfirmationView: View {
     @State var confirmationCode = ""
     
     let username: String
-    // let user: AuthUser
     
     var body: some View {
         VStack {
@@ -34,20 +33,17 @@ struct ConfirmationView: View {
             })
             .padding()
             Button("Resend code", action: {
-                print("This button is broken")
-                print(Amplify.Auth.resendSignUpCode(for: username))
-                // sessionManager.resendCode()
-             })
+                    Amplify.Auth.resendSignUpCode(for: username)
+                    })
+            .padding()
+            }
         }
-        .padding()
-    }
-    
-    
     
 }
 
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
         ConfirmationView(username: "Corre Database Developer!")
+        
     }
 }

@@ -13,6 +13,7 @@ import Amplify
 
 struct SessionView: View {
     
+    
     @EnvironmentObject var sessionManager: SessionManger
     
     let user: AuthUser
@@ -25,12 +26,18 @@ struct SessionView: View {
                 .multilineTextAlignment(.center)
             
             Spacer()
-            Button("Sign Out", action: sessionManager.signOut)
+            Button("Sign Out", action: {
+                sessionManager.signOut()
+                
+            })
         }
     }
+    
+    
 }
 
 struct SessionView_Previews: PreviewProvider {
+    
     private struct TestUser: AuthUser {
         let userId: String = "1"
         let username: String = "Test"
@@ -38,4 +45,6 @@ struct SessionView_Previews: PreviewProvider {
     static var previews: some View {
         SessionView(user: TestUser())
     }
+     
+    
 }
