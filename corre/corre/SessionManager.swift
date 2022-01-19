@@ -14,8 +14,7 @@ import Combine
 enum AuthState {
     case signUp
     case login
-    case confirmCode(username: String /* ,email: String */ )
-    // add case profileCreate(user: CognitoUser)
+    case confirmCode(username: String)
     case session(user: AuthUser)
 }
 
@@ -30,7 +29,12 @@ final class SessionManger: ObservableObject {
     }
     
     func getCurrentAuthUser() {
-        if let user = Amplify.Auth.getCurrentUser() {
+        
+        // some duck tape and glue :)
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            authState = .login
+        }
+        else if let user = Amplify.Auth.getCurrentUser() {
             print("This is user: ", user)
             authState = .session(user: user)
         } else {
@@ -80,22 +84,21 @@ final class SessionManger: ObservableObject {
                     username: username,
                     password: password
                 )
-                // let userCheck = Amplify.Auth.getCurrentUser()
+                
                 switch signUpResult.nextStep {
                 case .done:
                     print("Finished sign up!")
-                case .confirmUser(let details):
-                    print(details ?? "no details")
+                case .confirmUser(.some(_), let details):
+                    print(details!)
                     DispatchQueue.main.async {
-                        self?.authState = .confirmCode(username: username/*, email: email*/)
+                       self?.authState = .confirmCode(username: username)
                     }
+                case .confirmUser(.none, let details):
+                    print("Not sure what this switch does -- details: ", details!)
                 }
-                
             case .failure(let error):
-                print("sign up error", error)
+                print("Sign up error", error)
             }
-                
-                
         }
     }
     
@@ -111,7 +114,6 @@ final class SessionManger: ObservableObject {
                 print(confirmResult)
                 if confirmResult.isSignupComplete{
                     print("SignUp Complete! - Enter Verification Code Step")
-                    // print(Amplify.Auth.getCurrentUser())
                     DispatchQueue.main.async {
                         self?.showLogin()
                     }
@@ -149,9 +151,8 @@ final class SessionManger: ObservableObject {
                         print("Inside resetPassword")
                     case .confirmSignUp(let info):
                         print("Confirm signup additional info \(String(describing: info))")
-                        // let user = Amplify.Auth.getCurrentUser()
                         DispatchQueue.main.async {
-                            self?.authState = .confirmCode(username: username)
+                           self?.authState = .confirmCode(username: username)
                         }
                     case .done:
                         print("Inside done")
@@ -166,10 +167,12 @@ final class SessionManger: ObservableObject {
             case .failure(let error):
                 print("Login error:", error)
             }
-            
         }
     }
     
+    
+        
+
     func signOut() {
         _ = Amplify.Auth.signOut {
             [weak self] result in
@@ -184,20 +187,5 @@ final class SessionManger: ObservableObject {
         }
     }
     
-    /*
-    func resendCode() -> AnyCancellable {
-        // _ = print(Amplify.Auth.getCurrentUser())
-        return Amplify.Auth.resendConfirmationCode(for: .email)
-            .resultPublisher
-            .sink {
-                if case let .failure(authError) = $0 {
-                    print("Resend code failed with error \(authError)")
-                }
-            }
-            receiveValue: { deliveryDetails in
-                print("Resend code sent to - \(deliveryDetails)")
-            }
-    }
-    */
-    
 }
+

@@ -9,6 +9,7 @@
 import SwiftUI
 import Amplify
 import AWSCognitoAuthPlugin
+import AWSAPIPlugin
 
 @main
 struct correApp: App {
@@ -16,12 +17,16 @@ struct correApp: App {
     @ObservedObject var sessionManager = SessionManger()
     
     init() {
-        configureAmplify()
-        sessionManager.getCurrentAuthUser()
-        
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            sessionManager.authState = .login
+        } else {
+            configureAmplify()
+            sessionManager.getCurrentAuthUser()
+        }
     }
     
     var body: some Scene {
+        
         WindowGroup {
             switch sessionManager.authState {
             case .login:
@@ -35,7 +40,7 @@ struct correApp: App {
                     .environmentObject(sessionManager)
             case .session(let user):
                 SessionView(user: user)
-                    .environmentObject(sessionManager)
+                   .environmentObject(sessionManager)
             }
             
         }

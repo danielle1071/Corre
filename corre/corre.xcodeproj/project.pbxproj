@@ -11,8 +11,6 @@
 		4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53A62770FE6F001BEA58 /* ContentView.swift */; };
 		4C0E53A92770FE70001BEA58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E53A82770FE70001BEA58 /* Assets.xcassets */; };
 		4C0E53AC2770FE70001BEA58 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E53AB2770FE70001BEA58 /* Preview Assets.xcassets */; };
-		4C0E53B427712C27001BEA58 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E53B227712C27001BEA58 /* awsconfiguration.json */; };
-		4C0E53B527712C27001BEA58 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C0E53B327712C27001BEA58 /* amplifyconfiguration.json */; };
 		4C0E53B827712CA4001BEA58 /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 4C0E53B727712CA4001BEA58 /* AWSAPIPlugin */; };
 		4C0E53BA27712CA4001BEA58 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 4C0E53B927712CA4001BEA58 /* AWSCognitoAuthPlugin */; };
 		4C0E53BC27712CA4001BEA58 /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 4C0E53BB27712CA4001BEA58 /* AWSDataStorePlugin */; };
@@ -24,6 +22,8 @@
 		4C0E53C827712DAA001BEA58 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53C727712DAA001BEA58 /* SessionView.swift */; };
 		4C0E53CA27712DBE001BEA58 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53C927712DBE001BEA58 /* LoginView.swift */; };
 		4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */; };
+		4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */; };
+		4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCB2793140D00FDCF6E /* awsconfiguration.json */; };
 		C0D1D47BCA36C82E45CDC20F /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */; };
 		E4B3EDF3439FB6B8094E621C /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */; };
 /* End PBXBuildFile section */
@@ -34,13 +34,14 @@
 		4C0E53A62770FE6F001BEA58 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4C0E53A82770FE70001BEA58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C0E53AB2770FE70001BEA58 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		4C0E53B227712C27001BEA58 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
-		4C0E53B327712C27001BEA58 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = SOURCE_ROOT; };
 		4C0E53C327712D5A001BEA58 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4C0E53C527712D7B001BEA58 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		4C0E53C727712DAA001BEA58 /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
 		4C0E53C927712DBE001BEA58 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		4C792CC62793136A00FDCF6E /* InterfaceBuilderKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilderKit.framework; path = Library/Frameworks/InterfaceBuilderKit.framework; sourceTree = DEVELOPER_DIR; };
+		4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		4C792CCB2793140D00FDCF6E /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,9 +66,12 @@
 		4C0E53982770FE6F001BEA58 = {
 			isa = PBXGroup;
 			children = (
+				4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */,
+				4C792CCB2793140D00FDCF6E /* awsconfiguration.json */,
 				4C0E53A32770FE6F001BEA58 /* corre */,
 				4C0E53A22770FE6F001BEA58 /* Products */,
 				766E70382FD1F00A29FA0F7B /* AmplifyConfig */,
+				4C792CC52793136A00FDCF6E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,8 +86,6 @@
 		4C0E53A32770FE6F001BEA58 /* corre */ = {
 			isa = PBXGroup;
 			children = (
-				4C0E53B327712C27001BEA58 /* amplifyconfiguration.json */,
-				4C0E53B227712C27001BEA58 /* awsconfiguration.json */,
 				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
 				4C0E53A62770FE6F001BEA58 /* ContentView.swift */,
 				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
@@ -103,6 +105,14 @@
 				4C0E53AB2770FE70001BEA58 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4C792CC52793136A00FDCF6E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C792CC62793136A00FDCF6E /* InterfaceBuilderKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		766E70382FD1F00A29FA0F7B /* AmplifyConfig */ = {
@@ -183,10 +193,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C0E53B427712C27001BEA58 /* awsconfiguration.json in Resources */,
-				4C0E53B527712C27001BEA58 /* amplifyconfiguration.json in Resources */,
 				4C0E53AC2770FE70001BEA58 /* Preview Assets.xcassets in Resources */,
 				4C0E53A92770FE70001BEA58 /* Assets.xcassets in Resources */,
+				4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */,
+				4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */,
 				C0D1D47BCA36C82E45CDC20F /* awsconfiguration.json in Resources */,
 				E4B3EDF3439FB6B8094E621C /* amplifyconfiguration.json in Resources */,
 			);
@@ -270,6 +280,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -325,6 +336,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -338,6 +350,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"corre/Preview Content\"";
+				DEVELOPMENT_TEAM = 253T2DQ7XX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -366,6 +379,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"corre/Preview Content\"";
+				DEVELOPMENT_TEAM = 253T2DQ7XX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

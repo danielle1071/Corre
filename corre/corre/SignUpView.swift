@@ -69,12 +69,18 @@ struct SignUpView: View {
             })
             
             Spacer()
-            Button("already a user? sign-in", action:
-                    sessionManager.showLogin)
+            Button("already a user? sign-in", action: {
+                    sessionManager.showLogin()
+                    })
         }
         .padding()
     }
-    
+    /*
+    var body: some View {
+        Text("Hello, world!")
+            .padding()
+    }
+     */
 }
 
 
