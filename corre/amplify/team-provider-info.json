@@ -13,12 +13,7 @@
     },
     "categories": {
       "auth": {
-        "corre065ecec1": {
-          "userPoolId": "us-east-1_tW0zBr0ob",
-          "userPoolName": "correPool",
-          "webClientId": "67p225alcmjhgt6s17k5c37s9q",
-          "nativeClientId": "67p225alcmjhgt6s17k5c37s9q"
-        },
+        
         "corre7fe20cbc": {
           "userPoolId": "us-east-1_tW0zBr0ob",
           "userPoolName": "correPool",
