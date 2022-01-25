@@ -1,6 +1,6 @@
 {
   "auth": {
-    "corre065ecec1": {
+    "corre7fe20cbc": {
       "service": "Cognito",
       "serviceType": "imported",
       "providerPlugin": "awscloudformation",
