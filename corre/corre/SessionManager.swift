@@ -89,7 +89,7 @@ final class SessionManger: ObservableObject {
                 case .done:
                     print("Finished sign up!")
                 case .confirmUser(.some(_), let details):
-                    print(details!)
+                    print(details)
                     DispatchQueue.main.async {
                        self?.authState = .confirmCode(username: username)
                     }
