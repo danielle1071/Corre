@@ -13,36 +13,7 @@
     },
     "categories": {
       "auth": {
-        "corre7fe20cbc": {
-          "userPoolId": "us-east-1_tW0zBr0ob",
-          "userPoolName": "correPool",
-          "webClientId": "67p225alcmjhgt6s17k5c37s9q",
-          "nativeClientId": "67p225alcmjhgt6s17k5c37s9q",
-          "identityPoolId": "us-east-1:5c8b90ef-560e-4054-ac17-c8bd5fffaac1",
-          "identityPoolName": "CorreIdentityPool",
-          "allowUnauthenticatedIdentities": true,
-          "authRoleArn": "arn:aws:iam::499601096215:role/Cognito_CorreIdentityPoolAuth_Role",
-          "authRoleName": "Cognito_CorreIdentityPoolAuth_Role",
-          "unauthRoleArn": "arn:aws:iam::499601096215:role/Cognito_CorreIdentityPoolUnauth_Role",
-          "unauthRoleName": "Cognito_CorreIdentityPoolUnauth_Role"
-        }
-      }
-    }
-  },
-  "testing": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-corre-testing-165408-authRole",
-      "UnauthRoleArn": "arn:aws:iam::499601096215:role/amplify-corre-testing-165408-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::499601096215:role/amplify-corre-testing-165408-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-corre-testing-165408-deployment",
-      "UnauthRoleName": "amplify-corre-testing-165408-unauthRole",
-      "StackName": "amplify-corre-testing-165408",
-      "StackId": "arn:aws:cloudformation:us-east-1:499601096215:stack/amplify-corre-testing-165408/7db5bad0-7ef2-11ec-bcc3-0a44ff51e4cf",
-      "AmplifyAppId": "dnvcdpk71i13v"
-    },
-    "categories": {
-      "auth": {
+        
         "corre7fe20cbc": {
           "userPoolId": "us-east-1_tW0zBr0ob",
           "userPoolName": "correPool",
