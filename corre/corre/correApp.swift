@@ -10,6 +10,8 @@ import SwiftUI
 import Amplify
 import AWSCognitoAuthPlugin
 import AWSAPIPlugin
+import AWSLocationGeoPlugin
+
 
 @main
 struct correApp: App {
@@ -41,6 +43,9 @@ struct correApp: App {
             case .session(let user):
                 SessionView(user: user)
                    .environmentObject(sessionManager)
+            case .startRun(let user):
+                StartRunView(user: user)
+                   .environmentObject(sessionManager)
             }
             
         }
@@ -49,6 +54,7 @@ struct correApp: App {
     private func configureAmplify() {
         do {
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
+            try Amplify.add(plugin: AWSLocationGeoPlugin())
             try Amplify.configure()
             print("SUCCESS! APLIFY CONFIGURED!")
         } catch {

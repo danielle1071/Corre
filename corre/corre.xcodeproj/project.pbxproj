@@ -26,6 +26,9 @@
 		4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCB2793140D00FDCF6E /* awsconfiguration.json */; };
 		C0D1D47BCA36C82E45CDC20F /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */; };
 		E4B3EDF3439FB6B8094E621C /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */; };
+		F25AEF0B27A7464E00CAA822 /* AmplifyMapLibreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = F25AEF0A27A7464E00CAA822 /* AmplifyMapLibreAdapter */; };
+		F25AEF0D27A7464E00CAA822 /* AmplifyMapLibreUI in Frameworks */ = {isa = PBXBuildFile; productRef = F25AEF0C27A7464E00CAA822 /* AmplifyMapLibreUI */; };
+		F25AEF0F27A7600900CAA822 /* StartRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25AEF0E27A7600900CAA822 /* StartRunView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,7 @@
 		4C792CCB2793140D00FDCF6E /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		F25AEF0E27A7600900CAA822 /* StartRunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRunView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +55,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F25AEF0B27A7464E00CAA822 /* AmplifyMapLibreAdapter in Frameworks */,
 				4C0E53BC27712CA4001BEA58 /* AWSDataStorePlugin in Frameworks */,
 				4C0E53B827712CA4001BEA58 /* AWSAPIPlugin in Frameworks */,
 				4C0E53BE27712CA4001BEA58 /* AWSLocationGeoPlugin in Frameworks */,
 				4C0E53C227712CA4001BEA58 /* Amplify in Frameworks */,
+				F25AEF0D27A7464E00CAA822 /* AmplifyMapLibreUI in Frameworks */,
 				4C0E53BA27712CA4001BEA58 /* AWSCognitoAuthPlugin in Frameworks */,
 				4C0E53C027712CA4001BEA58 /* AWSPluginsCore in Frameworks */,
 			);
@@ -92,6 +98,7 @@
 				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
 				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
 				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
+				F25AEF0E27A7600900CAA822 /* StartRunView.swift */,
 				4C0E53C927712DBE001BEA58 /* LoginView.swift */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
 				4C0E53AA2770FE70001BEA58 /* Preview Content */,
@@ -120,9 +127,6 @@
 			children = (
 				EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */,
 				65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */,
-				4C792CCB2793140D00FDCF6E /* awsconfiguration.json */,
-				4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */,
-
 			);
 			name = AmplifyConfig;
 			sourceTree = "<group>";
@@ -150,6 +154,8 @@
 				4C0E53BD27712CA4001BEA58 /* AWSLocationGeoPlugin */,
 				4C0E53BF27712CA4001BEA58 /* AWSPluginsCore */,
 				4C0E53C127712CA4001BEA58 /* Amplify */,
+				F25AEF0A27A7464E00CAA822 /* AmplifyMapLibreAdapter */,
+				F25AEF0C27A7464E00CAA822 /* AmplifyMapLibreUI */,
 			);
 			productName = corre;
 			productReference = 4C0E53A12770FE6F001BEA58 /* corre.app */;
@@ -181,6 +187,7 @@
 			mainGroup = 4C0E53982770FE6F001BEA58;
 			packageReferences = (
 				4C0E53B627712CA4001BEA58 /* XCRemoteSwiftPackageReference "amplify-ios" */,
+				F25AEF0927A7464E00CAA822 /* XCRemoteSwiftPackageReference "amplify-ios-maplibre" */,
 			);
 			productRefGroup = 4C0E53A22770FE6F001BEA58 /* Products */;
 			projectDirPath = "";
@@ -215,6 +222,7 @@
 				4C0E53CA27712DBE001BEA58 /* LoginView.swift in Sources */,
 				4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */,
 				4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */,
+				F25AEF0F27A7600900CAA822 /* StartRunView.swift in Sources */,
 				4C0E53C827712DAA001BEA58 /* SessionView.swift in Sources */,
 				4C0E53C427712D5A001BEA58 /* SignUpView.swift in Sources */,
 				4C0E53C627712D7B001BEA58 /* SessionManager.swift in Sources */,
@@ -435,6 +443,14 @@
 				kind = branch;
 			};
 		};
+		F25AEF0927A7464E00CAA822 /* XCRemoteSwiftPackageReference "amplify-ios-maplibre" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-ios-maplibre";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -467,6 +483,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4C0E53B627712CA4001BEA58 /* XCRemoteSwiftPackageReference "amplify-ios" */;
 			productName = Amplify;
+		};
+		F25AEF0A27A7464E00CAA822 /* AmplifyMapLibreAdapter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F25AEF0927A7464E00CAA822 /* XCRemoteSwiftPackageReference "amplify-ios-maplibre" */;
+			productName = AmplifyMapLibreAdapter;
+		};
+		F25AEF0C27A7464E00CAA822 /* AmplifyMapLibreUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F25AEF0927A7464E00CAA822 /* XCRemoteSwiftPackageReference "amplify-ios-maplibre" */;
+			productName = AmplifyMapLibreUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

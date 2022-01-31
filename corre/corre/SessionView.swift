@@ -7,18 +7,17 @@
 //  This file is based on the youtube tutorial: https://www.youtube.com/watch?v=wSHnmtnzbfs
 //
 
+import AmplifyMapLibreUI
 import Foundation
 import SwiftUI
 import Amplify
 
 struct SessionView: View {
-    
-    
     @EnvironmentObject var sessionManager: SessionManger
-    
+
     let user: AuthUser
-    
-    var body: some View {
+
+      var body: some View {
         VStack {
             Spacer()
             Text("WooHoo! You have signed in to the up-and-coming Corre Application! 🤯")
@@ -26,14 +25,21 @@ struct SessionView: View {
                 .multilineTextAlignment(.center)
             
             Spacer()
+            Button("Start Run", action: {
+                sessionManager.startRun()
+            })
+            
+            Spacer()
             Button("Sign Out", action: {
                 sessionManager.signOut()
-                
+
             })
         }
-    }
+   }
+
+
     
-    
+
 }
 
 struct SessionView_Previews: PreviewProvider {
