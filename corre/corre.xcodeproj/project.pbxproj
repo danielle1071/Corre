@@ -126,7 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */,
-				65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */,
+				65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */
 			);
 			name = AmplifyConfig;
 			sourceTree = "<group>";
