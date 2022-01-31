@@ -13,7 +13,6 @@
     },
     "categories": {
       "auth": {
-        
         "corre7fe20cbc": {
           "userPoolId": "us-east-1_tW0zBr0ob",
           "userPoolName": "correPool",
