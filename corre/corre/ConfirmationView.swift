@@ -6,8 +6,8 @@
 //
 //  Edited by Lauren Wright on 1/26/2022
 //  Added UI
-//  Need to figure out if this is a pop up or
-//  full screen
+//  Changed on 1/31/22 by LW
+//
 //
 //  This file is based on the youtube tutorial: https://www.youtube.com/watch?v=wSHnmtnzbfs
 //
@@ -27,19 +27,28 @@ struct ConfirmationView: View {
     
     var body: some View {
         
+        
         VStack {
+            
+            Image("CreamLogo")
+                .resizable()
+                .frame(width: 250.0, height: 250.0)
+                .scaledToFit()
+            
+
             Text("Username: \(username)")
                 .font(.system(size: 23.0))
                 .foregroundColor(CustomColor.primarycolor)
             
             TextField("Confirmation Code", text:
                         $confirmationCode)
+                .keyboardType(.decimalPad)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .frame(height: 40)
                 .padding([.horizontal], 20)
                 .cornerRadius(16)
                 .shadow(radius: 2.0)
-            
+                .padding()
             Button("Confirm", action: {
                 sessionManager.confirm(
                     username: username,
@@ -51,12 +60,14 @@ struct ConfirmationView: View {
                 .padding(.horizontal, 100)
                 .background(CustomColor.primarycolor)
                 .cornerRadius(20)
-            .padding()
+            
             Button("Didn't get it? Retry", action: {
                     Amplify.Auth.resendSignUpCode(for: username)
                     })
             .padding()
             }
+
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(CustomColor.backcolor.edgesIgnoringSafeArea(.all))
             
         }
