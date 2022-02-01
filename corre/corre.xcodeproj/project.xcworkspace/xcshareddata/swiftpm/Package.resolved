@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "AmplifyMapLibreAdapter",
+        "repositoryURL": "https://github.com/aws-amplify/amplify-ios-maplibre",
+        "state": {
+          "branch": "main",
+          "revision": "176416a11dcbb4ca16c183b0ce438e66f58ef892",
+          "version": null
+        }
+      },
+      {
         "package": "AppSyncRealTimeClient",
         "repositoryURL": "https://github.com/aws-amplify/aws-appsync-realtime-client-ios.git",
         "state": {
@@ -26,6 +35,15 @@
           "branch": null,
           "revision": "de0dd3f85aa9e661ed9e45569122f9a7c7f9ef5c",
           "version": "2.26.6"
+        }
+      },
+      {
+        "package": "MapLibre GL Native",
+        "repositoryURL": "https://github.com/maplibre/maplibre-gl-native-distribution",
+        "state": {
+          "branch": null,
+          "revision": "d524c18d8c572db72c753f88492c36b9749725e1",
+          "version": "5.12.0"
         }
       },
       {

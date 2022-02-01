@@ -7,15 +7,21 @@
 //  This file is based on the youtube tutorial: https://www.youtube.com/watch?v=wSHnmtnzbfs
 //
 
-import Foundation
+
 import Amplify
+import AmplifyMapLibreUI
+import AWSMobileClientXCF
 import Combine
+import CoreLocation
+import Foundation
+import SwiftUI
 
 enum AuthState {
     case signUp
     case login
     case confirmCode(username: String)
     case session(user: AuthUser)
+    case startRun(user: AuthUser)
 }
 
 final class SessionManger: ObservableObject {
@@ -28,6 +34,7 @@ final class SessionManger: ObservableObject {
         var country: String
     }
     
+    
     func getCurrentAuthUser() {
         
         // some duck tape and glue :)
@@ -39,6 +46,15 @@ final class SessionManger: ObservableObject {
             authState = .session(user: user)
         } else {
             authState = .login
+        }
+    }
+    
+    func startRun() {
+        if let user = Amplify.Auth.getCurrentUser() {
+            authState = .startRun(user: user)
+        }
+        else {
+            print("Error on user")
         }
     }
     
@@ -170,9 +186,6 @@ final class SessionManger: ObservableObject {
         }
     }
     
-    
-        
-
     func signOut() {
         _ = Amplify.Auth.signOut {
             [weak self] result in
@@ -186,6 +199,5 @@ final class SessionManger: ObservableObject {
             }
         }
     }
-    
 }
 
