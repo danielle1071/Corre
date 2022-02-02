@@ -1,0 +1,89 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-corre-dev-134932-authRole",
+      "UnauthRoleArn": "arn:aws:iam::499601096215:role/amplify-corre-dev-134932-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::499601096215:role/amplify-corre-dev-134932-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-corre-dev-134932-deployment",
+      "UnauthRoleName": "amplify-corre-dev-134932-unauthRole",
+      "StackName": "amplify-corre-dev-134932",
+      "StackId": "arn:aws:cloudformation:us-east-1:499601096215:stack/amplify-corre-dev-134932/96c99e50-61c5-11ec-abf6-0ef913a177ab",
+      "AmplifyAppId": "dnvcdpk71i13v"
+    }
+  },
+  "auth": {
+    "corre7fe20cbc": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "UserPoolId": "us-east-1_tW0zBr0ob",
+        "UserPoolName": "correPool",
+        "AppClientID": "67p225alcmjhgt6s17k5c37s9q",
+        "AppClientIDWeb": "67p225alcmjhgt6s17k5c37s9q",
+        "IdentityPoolId": "us-east-1:5c8b90ef-560e-4054-ac17-c8bd5fffaac1",
+        "IdentityPoolName": "CorreIdentityPool",
+        "CreatedSNSRole": "arn:aws:iam::499601096215:role/service-role/correPool-SMS-Role"
+      },
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL",
+          "BIRTHDATE",
+          "PHONE_NUMBER"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS"
+          ]
+        },
+        "mfaConfiguration": "OPTIONAL",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "lastPushTimeStamp": "2022-01-25T20:30:56.580Z"
+    }
+  },
+  "geo": {
+    "correMap": {
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Map",
+      "mapStyle": "VectorEsriNavigation",
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "corre7fe20cbc",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-corre-dev-134932-deployment/amplify-cfn-templates/geo/correMap-cloudformation-template.json",
+        "logicalId": "geocorreMap"
+      },
+      "lastPushTimeStamp": "2022-01-30T22:28:50.515Z",
+      "output": {
+        "Style": "VectorEsriNavigation",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:geo:us-east-1:499601096215:map/correMap-dev",
+        "Name": "correMap-dev"
+      },
+      "lastPushDirHash": "pswuJTDHG7Kb9IZ6toeyfhOzhKA="
+    }
+  }
+}
