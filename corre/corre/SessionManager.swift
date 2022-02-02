@@ -49,6 +49,7 @@ final class SessionManger: ObservableObject {
         }
     }
     
+    // MARK: startRun
     func startRun() {
         if let user = Amplify.Auth.getCurrentUser() {
             authState = .startRun(user: user)
