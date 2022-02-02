@@ -76,7 +76,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-corre-dev-134932-deployment/amplify-cfn-templates/geo/correMap-cloudformation-template.json",
         "logicalId": "geocorreMap"
       },
-      "lastPushTimeStamp": "2022-01-30T22:28:50.515Z",
+      "lastPushTimeStamp": "2022-02-02T22:15:33.264Z",
       "output": {
         "Style": "VectorEsriNavigation",
         "Region": "us-east-1",
