@@ -22,6 +22,7 @@ struct correApp: App {
         } else {
             configureAmplify()
             sessionManager.getCurrentAuthUser()
+            
         }
     }
     
@@ -41,6 +42,9 @@ struct correApp: App {
             case .session(let user):
                 SessionView(user: user)
                    .environmentObject(sessionManager)
+            case .landing:
+                LandingView()
+                    .environmentObject(sessionManager)
             }
             
         }

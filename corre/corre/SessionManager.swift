@@ -16,6 +16,7 @@ enum AuthState {
     case login
     case confirmCode(username: String)
     case session(user: AuthUser)
+    case landing
 }
 
 final class SessionManger: ObservableObject {
@@ -38,7 +39,7 @@ final class SessionManger: ObservableObject {
             print("This is user: ", user)
             authState = .session(user: user)
         } else {
-            authState = .login
+            authState = .landing
         }
     }
     
