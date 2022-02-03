@@ -7,23 +7,5 @@
       "dependsOn": [],
       "customAuth": false
     }
-  },
-  "geo": {
-    "correMap": {
-      "isDefault": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorEsriNavigation",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "corre7fe20cbc",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    }
   }
 }
