@@ -67,6 +67,7 @@ struct SignUpView: View {
                 TextField("First Name", text: $givenName)
                 TextField("Last Name", text: $familyName)
                 //TextField("Birthday (YYYY-MM-DD)", text: $dateOfBirth)
+                HStack(alignment: .bottom){
                 DatePicker(
                         "Birthday",
                         selection: $birthDate,
@@ -74,6 +75,11 @@ struct SignUpView: View {
                     )
                     .colorInvert()
                     .colorMultiply(Color.blue)
+                    .font(.system(size: 15.0))
+                    
+                Spacer(minLength: 165)
+                        
+                }
                 
                 Picker(selection: $gender, label: Text("Gender")) {
                         Text("Gender").tag(1)
@@ -81,6 +87,7 @@ struct SignUpView: View {
                         Text("Female").tag(3)
                         Text("Other").tag(4)
                     }
+                .frame(width: 350, height: 60, alignment: .leading)
             
             }
                 .textFieldStyle(RoundedBorderTextFieldStyle())

@@ -25,6 +25,7 @@
 		4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */; };
 		4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCB2793140D00FDCF6E /* awsconfiguration.json */; };
 		C0D1D47BCA36C82E45CDC20F /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */; };
+		D9C2B62327AB1AFB0058365E /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C2B62227AB1AFB0058365E /* LandingView.swift */; };
 		E4B3EDF3439FB6B8094E621C /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		4C792CCB2793140D00FDCF6E /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		D9C2B62227AB1AFB0058365E /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
+				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
 				4C0E53A62770FE6F001BEA58 /* ContentView.swift */,
 				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
 				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
@@ -120,8 +123,6 @@
 			children = (
 				EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */,
 				65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */,
-				4C792CCB2793140D00FDCF6E /* awsconfiguration.json */,
-				4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */,
 			);
 			name = AmplifyConfig;
 			sourceTree = "<group>";
@@ -215,6 +216,7 @@
 				4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */,
 				4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */,
 				4C0E53C827712DAA001BEA58 /* SessionView.swift in Sources */,
+				D9C2B62327AB1AFB0058365E /* LandingView.swift in Sources */,
 				4C0E53C427712D5A001BEA58 /* SignUpView.swift in Sources */,
 				4C0E53C627712D7B001BEA58 /* SessionManager.swift in Sources */,
 				4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */,
@@ -352,7 +354,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"corre/Preview Content\"";
-				DEVELOPMENT_TEAM = 253T2DQ7XX;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -381,7 +383,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"corre/Preview Content\"";
-				DEVELOPMENT_TEAM = 253T2DQ7XX;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
