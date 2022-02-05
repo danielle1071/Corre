@@ -41,6 +41,9 @@ final class SessionManger: ObservableObject {
         }
         else if let user = Amplify.Auth.getCurrentUser() {
             print("This is user: ", user)
+            if databaseManager.currentUser.isEmpty {
+                databaseManager.getUserProfile(user: user)
+            }
             authState = .session(user: user)
         } else {
             authState = .landing
@@ -161,7 +164,8 @@ final class SessionManger: ObservableObject {
                         }
                     case .done:
                         print("Inside done")
-                        print(Amplify.Auth.fetchUserAttributes())
+                        
+                        //print(Amplify.Auth.fetchUserAttributes())
                         DispatchQueue.main.async {
                             self?.getCurrentAuthUser()
                         }

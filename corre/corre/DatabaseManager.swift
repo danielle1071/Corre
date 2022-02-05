@@ -14,10 +14,44 @@ class DatabaseManager: ObservableObject {
     
     @Published var currentUser = [User]()
     
-    func getUserProfile (sub: String) {
+    func getUserProfile (user: AuthUser) {
         
         let usrKey = User.keys
-        Amplify.DataStore.query(User.self, where: usrKey.sub == sub) { result in
+        Amplify.DataStore.query(User.self, where: usrKey.sub == user.userId) { result in
+            print("OUTSIDE THE SWITCH")
+            switch(result) {
+            case .success(let items):
+                for item in items {
+                    print("CHECK THIS @@@")
+                    print("User ID: \(item.id)")
+                    self.currentUser.append(item)
+                }
+                if items.isEmpty {
+                    createUserRecord(user: user)
+                    print("Record created for: \(user)")
+                    getUserProfile(user: user)
+                }
+            case .failure(let error):
+                print("Could not query DataStore: \(error)")
+            }
+        }
+        /*
+        let usrKey = User.keys
+        let sink = Amplify.DataStore.query(User.self, where: usrKey.sub == sub).sink {
+            if case let .failure(error) = $0 {
+                print("Error on query() for type Post - \(error.localizedDescription)")
+            }
+        }
+        receiveValue: { result in
+            print("Users Found: \(result)")
+            self.currentUser = result
+        }
+         */
+    }
+    func getUserProfile (username: String) {
+        
+        let usrKey = User.keys
+        Amplify.DataStore.query(User.self, where: usrKey.username == username) { result in
             print("OUTSIDE THE SWITCH")
             switch(result) {
             case .success(let items):
@@ -67,7 +101,6 @@ class DatabaseManager: ObservableObject {
         Amplify.DataStore.save(newUser) { result in
             switch result {
             case .success(_):
-
                 print("Saved")
             case .failure(let error):
                 print(error.localizedDescription)
