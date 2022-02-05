@@ -11,6 +11,7 @@ import Amplify
 import AWSCognitoAuthPlugin
 import AWSAPIPlugin
 import AWSLocationGeoPlugin
+import AWSDataStorePlugin
 
 @main
 struct correApp: App {
@@ -23,7 +24,14 @@ struct correApp: App {
         } else {
             configureAmplify()
             sessionManager.getCurrentAuthUser()
-            
+            Amplify.DataStore.start { (result) in
+                switch(result) {
+                case .success:
+                    print("DataStore started")
+                case .failure(let error):
+                    print("Error starting DataStore:\(error)")
+                }
+            }
         }
     }
     
@@ -55,6 +63,8 @@ struct correApp: App {
         do {
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
             try Amplify.add(plugin: AWSLocationGeoPlugin())
+            try Amplify.add(plugin: AWSDataStorePlugin(modelRegistration: AmplifyModels()))
+            try Amplify.add(plugin: AWSAPIPlugin())
             try Amplify.configure()
             print("SUCCESS! APLIFY CONFIGURED!")
         } catch {

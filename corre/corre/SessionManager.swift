@@ -10,6 +10,7 @@
 import Foundation
 import Amplify
 import Combine
+import SwiftUI
 
 enum AuthState {
     case signUp
@@ -20,7 +21,10 @@ enum AuthState {
 }
 
 final class SessionManger: ObservableObject {
+    
     @Published var authState: AuthState = .login
+    var databaseManager = DatabaseManager()
+    
     
     struct Address: Codable {
         var locality: String
@@ -157,7 +161,7 @@ final class SessionManger: ObservableObject {
                         }
                     case .done:
                         print("Inside done")
-                    print(Amplify.Auth.fetchUserAttributes())
+                        print(Amplify.Auth.fetchUserAttributes())
                         DispatchQueue.main.async {
                             self?.getCurrentAuthUser()
                         }
