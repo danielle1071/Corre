@@ -13,6 +13,7 @@ extension EmergencyContact {
     case appUser
     case emergencyContactUserId
     case userID
+    case emergencyContactAppUsername
     case createdAt
     case updatedAt
   }
@@ -39,9 +40,10 @@ extension EmergencyContact {
       .field(emergencyContact.lastName, is: .optional, ofType: .string),
       .field(emergencyContact.email, is: .required, ofType: .string),
       .field(emergencyContact.phoneNumber, is: .required, ofType: .string),
-      .field(emergencyContact.appUser, is: .optional, ofType: .string),
+      .field(emergencyContact.appUser, is: .optional, ofType: .bool),
       .field(emergencyContact.emergencyContactUserId, is: .optional, ofType: .string),
       .field(emergencyContact.userID, is: .required, ofType: .string),
+      .field(emergencyContact.emergencyContactAppUsername, is: .optional, ofType: .string),
       .field(emergencyContact.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(emergencyContact.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
     )

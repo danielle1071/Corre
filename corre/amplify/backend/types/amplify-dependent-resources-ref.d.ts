@@ -6,5 +6,11 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "Arn": "string"
         }
+    },
+    "api": {
+        "corre": {
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
+        }
     }
 }
