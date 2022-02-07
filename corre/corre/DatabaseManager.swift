@@ -24,6 +24,7 @@ class DatabaseManager: ObservableObject {
                 for item in items {
                     print("CHECK THIS @@@")
                     print("User ID: \(item.id)")
+                    print("This is the item: \(item)")
                     self.currentUser.append(item)
                 }
                 if items.isEmpty {
@@ -51,10 +52,12 @@ class DatabaseManager: ObservableObject {
     func getUserProfile (username: String) {
         
         let usrKey = User.keys
+        
         Amplify.DataStore.query(User.self, where: usrKey.username == username) { result in
             print("OUTSIDE THE SWITCH")
             switch(result) {
             case .success(let items):
+                
                 for item in items {
                     print("CHECK THIS @@@")
                     print("User ID: \(item.id)")
@@ -109,6 +112,20 @@ class DatabaseManager: ObservableObject {
         
     }
 
-
+    func clearLocalDataOnSignOut() {
+        let isSignedOut = HubFilters.forEventName(HubPayload.EventName.Auth.signedOut)
+        _ = Amplify.Hub.listen(to: .auth, isIncluded: isSignedOut) { _ in
+            Amplify.DataStore.clear() { result in
+                switch result {
+                case .success:
+                    // any time the data gets cleared, we also need to clear it from the
+                    self.currentUser.removeAll()
+                    print("Local data cleared successfully.")
+                case .failure(let error):
+                    print("Local data not cleared \(error)")
+                }
+            }
+        }
+    }
 
 }

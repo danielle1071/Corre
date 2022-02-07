@@ -23,8 +23,7 @@ enum AuthState {
 final class SessionManger: ObservableObject {
     
     @Published var authState: AuthState = .login
-    var databaseManager = DatabaseManager()
-    
+    @Published var databaseManager: DatabaseManager = DatabaseManager()
     
     struct Address: Codable {
         var locality: String
@@ -41,8 +40,9 @@ final class SessionManger: ObservableObject {
         }
         else if let user = Amplify.Auth.getCurrentUser() {
             print("This is user: ", user)
-            if databaseManager.currentUser.isEmpty {
-                databaseManager.getUserProfile(user: user)
+            if self.databaseManager.currentUser.isEmpty {
+                print("database current user loaded is empty")
+                self.databaseManager.getUserProfile(user: user)
             }
             authState = .session(user: user)
         } else {
@@ -187,6 +187,7 @@ final class SessionManger: ObservableObject {
             [weak self] result in
             switch result {
             case .success:
+                self!.databaseManager.clearLocalDataOnSignOut()
                 DispatchQueue.main.async {
                     self?.getCurrentAuthUser()
                 }
