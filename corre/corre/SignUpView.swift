@@ -29,7 +29,8 @@ struct SignUpView: View {
     @EnvironmentObject var sessionManager: SessionManger
     
     @State private var birthDate = Date()
-
+    let dateFormatter = DateFormatter()
+    
         
     @State var givenName = ""
     @State var familyName = ""
@@ -111,8 +112,16 @@ struct SignUpView: View {
             Spacer()
                 .frame(height: 30)
             
-            
+            /*
+            Button("Print BirthDate", action: {
+                dateFormatter.dateFormat = "YYYY-MM-dd"
+                dateOfBirth = dateFormatter.string(from: birthDate)
+                print(dateOfBirth)
+            })
+            */
             Button("Create Account", action: {
+                dateFormatter.dateFormat = "YYYY-MM-dd"
+                dateOfBirth = dateFormatter.string(from: birthDate)
                 sessionManager.signUp(
                     username: username,
                     email: email,
@@ -120,7 +129,7 @@ struct SignUpView: View {
                     password: password,
                     givenName: givenName,
                     familyName: familyName,
-                    dateOfBirth: (birthDate.formatted(date: .long, time: .omitted)),
+                    dateOfBirth: dateOfBirth,
                     locality: locality,
                     region: region,
                     postal_code: postal_code,
