@@ -112,12 +112,13 @@ struct SignUpView: View {
             Spacer()
                 .frame(height: 30)
             
+            /*
             Button("Print BirthDate", action: {
                 dateFormatter.dateFormat = "YYYY-MM-dd"
                 dateOfBirth = dateFormatter.string(from: birthDate)
                 print(dateOfBirth)
             })
-            
+            */
             Button("Create Account", action: {
                 dateFormatter.dateFormat = "YYYY-MM-dd"
                 dateOfBirth = dateFormatter.string(from: birthDate)
