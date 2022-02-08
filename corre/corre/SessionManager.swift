@@ -17,6 +17,9 @@ enum AuthState {
     case confirmCode(username: String)
     case session(user: AuthUser)
     case landing
+    case running
+    case profile
+    case emergencyContact
 }
 
 final class SessionManger: ObservableObject {
@@ -171,9 +174,19 @@ final class SessionManger: ObservableObject {
         }
     }
     
+    func showRunning() {
+        authState = .running
+    }
     
-        
-
+    func showProfile() {
+        authState = .profile
+    }
+    
+    func showEmergencyContact() {
+        authState = .emergencyContact
+    }
+    
+    
     func signOut() {
         _ = Amplify.Auth.signOut {
             [weak self] result in
@@ -187,6 +200,7 @@ final class SessionManger: ObservableObject {
             }
         }
     }
+    
     
 }
 

@@ -46,6 +46,15 @@ struct correApp: App {
             case .landing:
                 LandingView()
                     .environmentObject(sessionManager)
+            case .running:
+                RunningView()
+                    .environmentObject(sessionManager)
+            case .profile:
+                ProfileView()
+                    .environmentObject(sessionManager)
+            case .emergencyContact:
+                EmergContactView()
+                    .environmentObject(sessionManager)
             }
             
         }
