@@ -1,0 +1,39 @@
+enum RunningStatus {
+  RUNNING
+  NOTRUNNING
+  PAUSED
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  sub: String!
+  username: String!
+  bio: String
+  totalDistance: Float
+  runningStatus: RunningStatus
+  friends: [ID]
+  blockedUsers: [ID]
+  EmergencyContacts: [EmergencyContact] @connection(keyName: "byUser", fields: ["id"])
+  Runs: [Run] @connection(keyName: "byUser", fields: ["id"])
+}
+
+type EmergencyContact @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: AWSEmail!
+  phoneNumber: AWSPhone!
+  appUser: Boolean
+  emergencyContactUserId: String
+  userID: ID!
+  emergencyContactAppUsername: String
+}
+
+type Run @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  distance: String
+  time: String
+  averageSpeed: String
+  userID: ID!
+}
+ 

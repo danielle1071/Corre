@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2971D63A5BBF77E2136689 /* Run+Schema.swift */; };
 		4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6136F27B1DE4E0018F678 /* RunningView.swift */; };
 		4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137127B1DEC90018F678 /* ProfileView.swift */; };
 		4AB6137427B1DEDE0018F678 /* EmergContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137327B1DEDE0018F678 /* EmergContactView.swift */; };
-		2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2971D63A5BBF77E2136689 /* Run+Schema.swift */; };
 		4C0E11F227AE0F1200F239AA /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */; };
 		4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53A42770FE6F001BEA58 /* correApp.swift */; };
 		4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53A62770FE6F001BEA58 /* ContentView.swift */; };
@@ -44,12 +44,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4AB6136F27B1DE4E0018F678 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
-		4AB6137127B1DEC90018F678 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		4AB6137327B1DEDE0018F678 /* EmergContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactView.swift; sourceTree = "<group>"; };
 		0CD0D90BC7F5625BEA15C4CB /* User+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "User+Schema.swift"; path = "amplify/generated/models/User+Schema.swift"; sourceTree = "<group>"; };
 		1E0BAF37876727B72DDD7B54 /* Run.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Run.swift; path = amplify/generated/models/Run.swift; sourceTree = "<group>"; };
 		33A46E3CE696CF2816B06B2A /* EmergencyContact+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "EmergencyContact+Schema.swift"; path = "amplify/generated/models/EmergencyContact+Schema.swift"; sourceTree = "<group>"; };
+		4AB6136F27B1DE4E0018F678 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
+		4AB6137127B1DEC90018F678 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		4AB6137327B1DEDE0018F678 /* EmergContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactView.swift; sourceTree = "<group>"; };
 		4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		4C0E53A12770FE6F001BEA58 /* corre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = corre.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C0E53A42770FE6F001BEA58 /* correApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = correApp.swift; sourceTree = "<group>"; };
