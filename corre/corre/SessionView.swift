@@ -20,16 +20,63 @@ struct SessionView: View {
     
     var body: some View {
         VStack {
-            Spacer()
+        
             Text("WooHoo! You have signed in to the up-and-coming Corre Application! 🤯")
-                .font(.largeTitle)
+                .font(.title2)
                 .multilineTextAlignment(.center)
             
             Spacer()
+            Button("Run", action: {
+                sessionManager.showRunning()
+            }).padding()
+                .padding(.horizontal, 108)
+                .foregroundColor(CustomColor.primarycolor)
+                .background(CustomColor.backcolor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                )
+            Spacer()
+            Button("Profile", action: {
+                sessionManager.showProfile()
+            }).padding()
+                .padding(.horizontal, 108)
+                .foregroundColor(CustomColor.primarycolor)
+                .background(CustomColor.backcolor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                )
+            
+            
+            Spacer()
+            Button("Emergency Contacts", action: {
+                sessionManager.showEmergencyContact()
+            }).padding()
+                .padding(.horizontal, 50)
+                .foregroundColor(CustomColor.primarycolor)
+                .background(CustomColor.backcolor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                )
+            
+        
+            Spacer()
             Button("Sign Out", action: {
                 sessionManager.signOut()
-                
-            })
+            }).padding()
+                .padding(.horizontal, 100)
+                .foregroundColor(CustomColor.primarycolor)
+                .background(CustomColor.backcolor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                )
+            
+            
+            
+            Spacer()
         }
     }
     
