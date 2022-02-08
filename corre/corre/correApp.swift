@@ -70,6 +70,9 @@ struct correApp: App {
             case .emergencyContact:
                 EmergContactView()
                     .environmentObject(sessionManager)
+            case .startRun:
+                RunningView()
+                    .environmentObject(sessionManager)
             }
             
         }
@@ -82,7 +85,7 @@ struct correApp: App {
             try Amplify.add(plugin: AWSDataStorePlugin(modelRegistration: AmplifyModels()))
             try Amplify.add(plugin: AWSAPIPlugin())
             try Amplify.configure()
-            print("SUCCESS! APLIFY CONFIGURED!")
+            print("SUCCESS! AMPLIFY CONFIGURED!")
         } catch {
             print("SAD 😢 --- could not initialize Amplify", error)
         }

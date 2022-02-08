@@ -9,6 +9,7 @@ import SwiftUI
 import Foundation
 import Amplify
 import Combine
+import AmplifyMapLibreUI
 
 
 struct RunningView: View {
@@ -16,6 +17,9 @@ struct RunningView: View {
     @EnvironmentObject var sessionManager: SessionManger
     
     var body: some View {
+        
+        AMLMapView()
+            .edgesIgnoringSafeArea(.all)
         
         Spacer()
      
