@@ -11,20 +11,50 @@ import Foundation
 import SwiftUI
 import Amplify
 
+struct ExampleSheet: View {
+    @Environment(\.presentationMode) var presentationMode
+    @State var addedContact = false
+    @State var ecFirst = ""
+    @State var ecLast = ""
+    @State var ecEmail = ""
+    @State var ecPhone = ""
+
+    var body: some View {
+        VStack {
+            
+            Text("Add an emergency contact to start running safely!")
+                .font(.system(size: 20.0))
+                .foregroundColor(CustomColor.primarycolor)
+                .opacity(0.5)
+           
+                
+
+
+            
+            
+            Button("Dismiss", action: close)
+        }
+        .interactiveDismissDisabled()
+        .background(
+            Image("newContactBackground"))
+    }
+
+    func close() {
+        presentationMode.wrappedValue.dismiss()
+    }
+}
+
 struct SessionView: View {
     
     
     @EnvironmentObject var sessionManager: SessionManger
+    @State private var showingSheet = false
     
     let user: AuthUser
     
     var body: some View {
         VStack {
         
-            Text("WooHoo! You have signed in to the up-and-coming Corre Application! 🤯")
-                .font(.title2)
-                .multilineTextAlignment(.center)
-            
             Spacer()
             Button("Run", action: {
                 sessionManager.showRunning()
@@ -48,8 +78,17 @@ struct SessionView: View {
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
             
-            
             Spacer()
+            
+            Button("Show Sheet") {
+                        showingSheet.toggle()
+                    }
+                    .sheet(isPresented: $showingSheet, content: ExampleSheet.init)
+                    .padding()
+                        .padding(.horizontal, 50)
+                        .foregroundColor(CustomColor.primarycolor)
+                        
+            
             Button("Emergency Contacts", action: {
                 sessionManager.showEmergencyContact()
             }).padding()
@@ -61,7 +100,7 @@ struct SessionView: View {
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
             
-        
+    
             Spacer()
             Button("Sign Out", action: {
                 sessionManager.signOut()
@@ -80,8 +119,9 @@ struct SessionView: View {
         }
     }
     
-    
 }
+
+
 
 struct SessionView_Previews: PreviewProvider {
     

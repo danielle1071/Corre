@@ -13,17 +13,17 @@ import Amplify
 struct EmergContactView: View {
     
     @EnvironmentObject var sessionManager: SessionManger
+    @State var addedContact = false
+    @State var ecFirst = ""
+    @State var ecLast = ""
+    @State var ecEmail = ""
+    @State var ecPhone = ""
     
     var body: some View {
-        
-        Spacer()
+    
         
         Text("Hello! This is the Emergency Contact view🚨🚨🚨").font(.largeTitle)
-        Spacer()
-        
-        Button("Sign Out", action: {
-            sessionManager.signOut()
-        })
+
         
     }
 }
