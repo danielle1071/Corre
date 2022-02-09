@@ -15,6 +15,7 @@ import Amplify
 
 struct ExampleSheet: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var sessionManager: SessionManger
     @State var addedContact = false
     @State var ecFirst = ""
     @State var ecLast = "" 
@@ -22,35 +23,72 @@ struct ExampleSheet: View {
     @State var ecPhone = ""
         
     var body: some View {
-        VStack {
+        
+        GeometryReader { geometry in
+            VStack {
             
-            Text("Add your first emergency contact to start running safely!")
+            Text("Start running safely.")
                 .font(.custom("Proxima Nova Rg Regular", size: 20))
                 .multilineTextAlignment(.center)
                 .foregroundColor(CustomColor.primarycolor)
                 .opacity(0.5)
-                .padding([.horizontal], 25)
-            
-            Group {
-                TextField("First Name", text: $ecFirst)
-                TextField("Last Name", text: $ecLast)
-                TextField("E-mail", text: $ecEmail)
-                TextField("Phone Number", text: $ecPhone)
-            }
-                .padding(15)
-                .padding([.horizontal], 25)
+                .padding([.horizontal], geometry.size.width * 0.09)
+                .padding([.top], geometry.size.height * 0.32)
+                .padding([.bottom], geometry.size.height * 0.02)
                 
-
-                .overlay(RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray, lineWidth: 1)
-                            .padding([.horizontal], 25)
-                )
+            VStack (alignment: .center) {
+                Spacer()
+                    .frame(height: geometry.size.height * 0.03)
+                
+                VStack (alignment: .center, spacing: 20){
+                    Group {
+                            TextField("First Name", text: $ecFirst)
+                            TextField("Last Name", text: $ecLast)
+                            TextField("E-mail", text: $ecEmail)
+                            TextField("Phone Number", text: $ecPhone)
+                    }
+                    .padding(geometry.size.height * 0.02)
+                    .padding([.horizontal], geometry.size.width * 0.08)
+                    .background(Color("backgroundColor"))
+                    .overlay(RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color("lightGray"), lineWidth: 1)
+                                .padding([.horizontal], geometry.size.width * 0.05)
+                    )
+                }
+                
+                Spacer()
+                    .frame(height: geometry.size.height * 0.02)
+                Button("Create", action: {
+                    sessionManager.showEmergencyContact()
+                })
+                    .font(.custom("Proxima Nova Rg Regular", size: 20))
+                    .padding([.horizontal], geometry.size.width * 0.32)
+                    .padding([.vertical], geometry.size.height * 0.02)
+                    .foregroundColor(Color.white)
+                    .background(Color("primaryColor"))
+                    .cornerRadius(14)
+                   
+                Spacer()
+                    .frame(height: geometry.size.height * 0.03)
             
-
+            }
             
+                    .background(Color("backgroundColor"))
+                    .cornerRadius(10)
+                    .frame(width: geometry.size.width * 0.90,
+                           height: geometry.size.height * 0.50)
+                    .background(Color.gray
+                                            .opacity(0.08)
+                                            .shadow(color: .gray, radius: 6, x: 0, y: 4)
+                                            .blur(radius: 8, opaque: false)
+                    )
+                
+                Spacer()
+                    .frame(height: geometry.size.height * 0.04)
             
             Button("Dismiss", action: close)
-                .font(.custom("Proxima Nova Rg Regular", size: 20))
+                .font(.custom("Varela Round Regular", size: 20))
+            }.frame(maxWidth: .infinity, maxHeight: .infinity)
             
         }
         .interactiveDismissDisabled()
@@ -59,6 +97,8 @@ struct ExampleSheet: View {
                 .scaledToFit()
         )
     }
+        
+        
 
     func close() {
         presentationMode.wrappedValue.dismiss()
@@ -101,19 +141,34 @@ struct SessionView: View {
             
             Spacer()
             
-            Button("Show Sheet") {
-                        showingSheet.toggle()
-                    }
-                    .sheet(isPresented: $showingSheet, content: ExampleSheet.init)
-                    .padding()
-                        .padding(.horizontal, 50)
-                        .foregroundColor(CustomColor.primarycolor)
-                        
+//            Button("Show Sheet") {
+//                        showingSheet.toggle()
+//                    }
+//                    .sheet(isPresented: $showingSheet, content: ExampleSheet.init)
+//                    .padding()
+//                        .padding(.horizontal, 50)
+//                        .foregroundColor(CustomColor.primarycolor)
+//
             
-            Button("Emergency Contacts", action: {
-                sessionManager.showEmergencyContact()
-            }).padding()
-                .padding(.horizontal, 50)
+//            Button("Emergency Contacts", action: {
+//                sessionManager.showEmergencyContact()
+//            }).padding()
+//                .padding(.horizontal, 50)
+//                .foregroundColor(CustomColor.primarycolor)
+//                .background(CustomColor.backcolor)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 20)
+//                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+//                )
+            
+            Button("Emergency Contacts") {
+                showingSheet.toggle()
+            }
+                .sheet(isPresented: $showingSheet, content: ExampleSheet.init)
+                .padding()
+                    .padding(.horizontal, 50)
+                    .foregroundColor(CustomColor.primarycolor)
+                .padding(.horizontal, 10)
                 .foregroundColor(CustomColor.primarycolor)
                 .background(CustomColor.backcolor)
                 .overlay(
@@ -121,6 +176,8 @@ struct SessionView: View {
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
             
+    
+
     
             Spacer()
             Button("Sign Out", action: {

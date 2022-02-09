@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "newContactBackground.png",
+      "filename" : "EmergencyContactLogo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "newContactBackground@2x.png",
+      "filename" : "EmergencyContactLogo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "newContactBackground@3x.png",
+      "filename" : "EmergencyContactLogo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
