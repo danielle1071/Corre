@@ -16,23 +16,47 @@ struct RunningView: View {
     
     @EnvironmentObject var sessionManager: SessionManger
     
+    @State var mapState = AMLMapViewState()
+    @StateObject var locationService = LocationManager()
+    @State var tokens: Set<AnyCancellable> = .init()
+    
     var body: some View {
         
-        AMLMapView()
-            .edgesIgnoringSafeArea(.all)
+        VStack {
+            
+            Button("Back", action: {
+                sessionManager.showSession()
+            })
+            
+            Spacer()
+            
+            AMLMapView(mapState: mapState)
+                .showUserLocation(true)
+                .edgesIgnoringSafeArea(.all)
+            
+            
+            Spacer()
+            Text("🏃‍♀️ view")
+            Spacer()
+            
+            Button("Sign Out", action: {
+                sessionManager.signOut()
+            })
+        }
+        .onAppear(perform: getCurrentUserLocation)
         
-        Spacer()
-     
-        Text("Hello! This is the running view 🏃‍♀️🏃‍♀️🏃‍♀️🏃‍♀️").font(.largeTitle)
-        
-        Spacer()
-        
-        Button("Sign Out", action: {
-            sessionManager.signOut()
-        })
         
         
-        
+    }
+    
+    func getCurrentUserLocation() {
+        locationService.coordinatesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { coordinates in
+                print("User's Coordinates: ", coordinates)
+                self.mapState.center = coordinates
+            }
+            .store(in: &tokens)
     }
 }
 

@@ -54,6 +54,14 @@ final class SessionManger: ObservableObject {
         }
     }
     
+    func showSession() {
+        if let user = Amplify.Auth.getCurrentUser() {
+            authState = .session(user: user)
+        } else {
+            authState = .landing
+        }
+    }
+    
     func showSignUp() {
         authState = .signUp
     }
