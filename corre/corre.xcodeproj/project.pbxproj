@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2971D63A5BBF77E2136689 /* Run+Schema.swift */; };
 		4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6136F27B1DE4E0018F678 /* RunningView.swift */; };
 		4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137127B1DEC90018F678 /* ProfileView.swift */; };
 		4AB6137427B1DEDE0018F678 /* EmergContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137327B1DEDE0018F678 /* EmergContactView.swift */; };
-		2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2971D63A5BBF77E2136689 /* Run+Schema.swift */; };
 		4C0E11F227AE0F1200F239AA /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */; };
 		4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53A42770FE6F001BEA58 /* correApp.swift */; };
 		4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53A62770FE6F001BEA58 /* ContentView.swift */; };
@@ -37,6 +37,10 @@
 		CA1CA2E226D406648AF9BA56 /* User+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0D90BC7F5625BEA15C4CB /* User+Schema.swift */; };
 		D8FE2AF2C7A9E668FC727AE6 /* RunningStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3D37405B55ABBE3C01EC0E /* RunningStatus.swift */; };
 		D9C2B62327AB1AFB0058365E /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C2B62227AB1AFB0058365E /* LandingView.swift */; };
+		DA21725227B3637000530D38 /* EditContactPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA21725127B3637000530D38 /* EditContactPage.swift */; };
+		DA21725527B3638C00530D38 /* Profile_Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA21725327B3638C00530D38 /* Profile_Page.swift */; };
+		DA21725627B3638C00530D38 /* ViewEC_Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA21725427B3638C00530D38 /* ViewEC_Page.swift */; };
+		DA21725827B3640300530D38 /* RunningMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA21725727B3640300530D38 /* RunningMap.swift */; };
 		E4B3EDF3439FB6B8094E621C /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */; };
 		ED51C2ACBC4CC71DEE5ED476 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0BAF37876727B72DDD7B54 /* Run.swift */; };
 		F22DB80327AC518200678872 /* AmplifyMapLibreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = F22DB80227AC518200678872 /* AmplifyMapLibreAdapter */; };
@@ -44,12 +48,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4AB6136F27B1DE4E0018F678 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
-		4AB6137127B1DEC90018F678 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		4AB6137327B1DEDE0018F678 /* EmergContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactView.swift; sourceTree = "<group>"; };
 		0CD0D90BC7F5625BEA15C4CB /* User+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "User+Schema.swift"; path = "amplify/generated/models/User+Schema.swift"; sourceTree = "<group>"; };
 		1E0BAF37876727B72DDD7B54 /* Run.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Run.swift; path = amplify/generated/models/Run.swift; sourceTree = "<group>"; };
 		33A46E3CE696CF2816B06B2A /* EmergencyContact+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "EmergencyContact+Schema.swift"; path = "amplify/generated/models/EmergencyContact+Schema.swift"; sourceTree = "<group>"; };
+		4AB6136F27B1DE4E0018F678 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
+		4AB6137127B1DEC90018F678 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		4AB6137327B1DEDE0018F678 /* EmergContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactView.swift; sourceTree = "<group>"; };
 		4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		4C0E53A12770FE6F001BEA58 /* corre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = corre.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C0E53A42770FE6F001BEA58 /* correApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = correApp.swift; sourceTree = "<group>"; };
@@ -71,6 +75,10 @@
 		98FF9B6EA18ABE91D94C4F50 /* EmergencyContact.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = EmergencyContact.swift; path = amplify/generated/models/EmergencyContact.swift; sourceTree = "<group>"; };
 		A138062271A31EB801DD8CF0 /* User.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = User.swift; path = amplify/generated/models/User.swift; sourceTree = "<group>"; };
 		D9C2B62227AB1AFB0058365E /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		DA21725127B3637000530D38 /* EditContactPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditContactPage.swift; sourceTree = "<group>"; };
+		DA21725327B3638C00530D38 /* Profile_Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile_Page.swift; sourceTree = "<group>"; };
+		DA21725427B3638C00530D38 /* ViewEC_Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEC_Page.swift; sourceTree = "<group>"; };
+		DA21725727B3640300530D38 /* RunningMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningMap.swift; sourceTree = "<group>"; };
 		EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +144,10 @@
 				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
 				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
 				4C0E53A62770FE6F001BEA58 /* ContentView.swift */,
+				DA21725127B3637000530D38 /* EditContactPage.swift */,
+				DA21725327B3638C00530D38 /* Profile_Page.swift */,
+				DA21725427B3638C00530D38 /* ViewEC_Page.swift */,
+				DA21725727B3640300530D38 /* RunningMap.swift */,
 				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
 				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
 				4C0E53C927712DBE001BEA58 /* LoginView.swift */,
@@ -264,6 +276,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C0E53CA27712DBE001BEA58 /* LoginView.swift in Sources */,
+				DA21725227B3637000530D38 /* EditContactPage.swift in Sources */,
+				DA21725527B3638C00530D38 /* Profile_Page.swift in Sources */,
+				DA21725627B3638C00530D38 /* ViewEC_Page.swift in Sources */,
 				4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */,
 				4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */,
 				4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */,
@@ -278,6 +293,7 @@
 				A3348095665A8CC53DC55054 /* AmplifyModels.swift in Sources */,
 				624B4EF640BB351DC532D4AE /* EmergencyContact+Schema.swift in Sources */,
 				7D0D95D1C4E60294E010D151 /* EmergencyContact.swift in Sources */,
+				DA21725827B3640300530D38 /* RunningMap.swift in Sources */,
 				2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */,
 				ED51C2ACBC4CC71DEE5ED476 /* Run.swift in Sources */,
 				D8FE2AF2C7A9E668FC727AE6 /* RunningStatus.swift in Sources */,
