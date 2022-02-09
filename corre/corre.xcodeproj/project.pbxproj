@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2971D63A5BBF77E2136689 /* Run+Schema.swift */; };
+		4A2FA86527B33AE700B55D53 /* ProximaNova.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FA86427B33AE700B55D53 /* ProximaNova.ttf */; };
 		4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6136F27B1DE4E0018F678 /* RunningView.swift */; };
 		4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137127B1DEC90018F678 /* ProfileView.swift */; };
 		4AB6137427B1DEDE0018F678 /* EmergContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137327B1DEDE0018F678 /* EmergContactView.swift */; };
@@ -46,6 +47,8 @@
 		0CD0D90BC7F5625BEA15C4CB /* User+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "User+Schema.swift"; path = "amplify/generated/models/User+Schema.swift"; sourceTree = "<group>"; };
 		1E0BAF37876727B72DDD7B54 /* Run.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Run.swift; path = amplify/generated/models/Run.swift; sourceTree = "<group>"; };
 		33A46E3CE696CF2816B06B2A /* EmergencyContact+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "EmergencyContact+Schema.swift"; path = "amplify/generated/models/EmergencyContact+Schema.swift"; sourceTree = "<group>"; };
+		4A2FA86027B337DF00B55D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4A2FA86427B33AE700B55D53 /* ProximaNova.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ProximaNova.ttf; path = ../../../../../Downloads/ProximaNova.ttf; sourceTree = "<group>"; };
 		4AB6136F27B1DE4E0018F678 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
 		4AB6137127B1DEC90018F678 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4AB6137327B1DEDE0018F678 /* EmergContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactView.swift; sourceTree = "<group>"; };
@@ -130,6 +133,8 @@
 		4C0E53A32770FE6F001BEA58 /* corre */ = {
 			isa = PBXGroup;
 			children = (
+				4A2FA86027B337DF00B55D53 /* Info.plist */,
+				4A2FA86427B33AE700B55D53 /* ProximaNova.ttf */,
 				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
 				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
 				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
@@ -237,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C0E53A92770FE70001BEA58 /* Assets.xcassets in Resources */,
+				4A2FA86527B33AE700B55D53 /* ProximaNova.ttf in Resources */,
 				4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */,
 				4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */,
 				C0D1D47BCA36C82E45CDC20F /* awsconfiguration.json in Resources */,
@@ -404,10 +410,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"corre/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = corre/;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = corre/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -433,10 +440,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"corre/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = corre/;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = corre/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

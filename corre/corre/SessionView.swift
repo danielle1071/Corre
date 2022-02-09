@@ -11,32 +11,53 @@ import Foundation
 import SwiftUI
 import Amplify
 
+
+
 struct ExampleSheet: View {
     @Environment(\.presentationMode) var presentationMode
     @State var addedContact = false
     @State var ecFirst = ""
-    @State var ecLast = ""
+    @State var ecLast = "" 
     @State var ecEmail = ""
     @State var ecPhone = ""
-
+        
     var body: some View {
         VStack {
             
-            Text("Add an emergency contact to start running safely!")
-                .font(.system(size: 20.0))
+            Text("Add your first emergency contact to start running safely!")
+                .font(.custom("Proxima Nova Rg Regular", size: 20))
+                .multilineTextAlignment(.center)
                 .foregroundColor(CustomColor.primarycolor)
                 .opacity(0.5)
-           
+                .padding([.horizontal], 25)
+            
+            Group {
+                TextField("First Name", text: $ecFirst)
+                TextField("Last Name", text: $ecLast)
+                TextField("E-mail", text: $ecEmail)
+                TextField("Phone Number", text: $ecPhone)
+            }
+                .padding(15)
+                .padding([.horizontal], 25)
                 
 
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 1)
+                            .padding([.horizontal], 25)
+                )
+            
 
             
             
             Button("Dismiss", action: close)
+                .font(.custom("Proxima Nova Rg Regular", size: 20))
+            
         }
         .interactiveDismissDisabled()
         .background(
-            Image("newContactBackground"))
+            Image("newContactBackground")
+                .scaledToFit()
+        )
     }
 
     func close() {
