@@ -20,6 +20,9 @@ struct RunningView: View {
     @StateObject var locationService = LocationManager()
     @State var tokens: Set<AnyCancellable> = .init()
     
+    // is this needed? = step 3 from Set up Core Location services - Tracker Documentation
+    // let locationManager = LocationManager()
+    
     var body: some View {
         
         VStack {

@@ -28,26 +28,63 @@ final class LocationManager: NSObject,
         requestLocation()
     }
     
+    // MARK: startRun
     func startRun() {
         DispatchQueue.main.async {
             self.sessionManager.authState = .startRun
         }
     }
     
+    // MARK: requestLocation
     func requestLocation() {
         locationManager.delegate = self
+        
+        // tracking implementation:
+        locationManager.requestWhenInUseAuthorization()
+        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestLocation()
     }
     
+    // MARK: locationManagerDidChangeAuthorization
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse:
+            print("locationManangerDidChangeAuthorization: Received authorization of user location, requesting for location")
+            locationManager.startUpdatingLocation()
+        default:
+            print("locationManangerDidChangeAuthorization: Failed to authorize")
+        }
+    }
+    
+    
+    
+    // MARK: locationManager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         manager.stopUpdatingLocation()
+        
+        // tracking implementations:
+        print("locationManager - got locations: \(locations) ")
+        
         coordinatesPublisher.send(location.coordinate)
     }
     
+    // MARK: locationManager - Error
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+        // tracking implementations:
+        if let clErr = error as? CLError {
+            switch clErr {
+            case CLError.locationUnknown:
+                print("clError: location unknown")
+            case CLError.denied:
+                print("clError: denied")
+            default:
+                print("clError: default - other Core Location error")
+            }
+        } else {
+            print ("else-clError: (other) ", error.localizedDescription)
+        }
     }
 }
 
