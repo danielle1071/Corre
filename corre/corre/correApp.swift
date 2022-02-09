@@ -70,9 +70,10 @@ struct correApp: App {
             case .emergencyContact:
                 EmergContactView()
                     .environmentObject(sessionManager)
-            case .startRun:
-                RunningView()
-                    .environmentObject(sessionManager)
+                
+            //            case .startRun:
+            //                RunningView()
+            //                    .environmentObject(sessionManager)
             }
             
         }

@@ -9,31 +9,45 @@ import Foundation
 import Amplify
 import AmplifyMapLibreUI
 import AWSMobileClientXCF
+import AWSLocationXCF
 import Combine
 import CoreLocation
 import SwiftUI
 
 final class LocationManager: NSObject,
                              ObservableObject,
-                             CLLocationManagerDelegate {
+                             CLLocationManagerDelegate,
+                             AWSLocationTrackerDelegate {
     
-    @Published var sessionManager = SessionManger()
+    // MARK: deleteThis
+    // @Published var sessionManager = SessionManger()
+    // var sessionMananger: SessionManger
     
     var coordinatesPublisher = PassthroughSubject<CLLocationCoordinate2D, Never>()
     
     var locationManager: CLLocationManager = .init()
+    
+    // tracking implementation:
+    let locationTracker = AWSLocationTracker(trackerName: "correTracker",
+                                             region: AWSRegionType.USEast1,
+                                             credentialsProvider: AWSMobileClient.default())
     
     override init() {
         super.init()
         requestLocation()
     }
     
-    // MARK: startRun
-    func startRun() {
-        DispatchQueue.main.async {
-            self.sessionManager.authState = .startRun
-        }
+    // MARK: current user: get username test
+    func test(id: String) {
+        print("You got here ### :  \(id)")
     }
+    
+    // MARK: startRun - need to remove!
+    //    func startRun() {
+    //        DispatchQueue.main.async {
+    //            self.sessionMananger.authState = .startRun
+    //        }
+    //    }
     
     // MARK: requestLocation
     func requestLocation() {
@@ -56,8 +70,6 @@ final class LocationManager: NSObject,
             print("locationManangerDidChangeAuthorization: Failed to authorize")
         }
     }
-    
-    
     
     // MARK: locationManager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

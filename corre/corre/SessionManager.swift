@@ -21,7 +21,7 @@ enum AuthState {
     case running
     case profile
     case emergencyContact
-    case startRun
+    // case startRun
 }
 
 final class SessionManger: ObservableObject {
