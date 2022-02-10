@@ -10,16 +10,23 @@
 import Foundation
 import Amplify
 import Combine
+import SwiftUI
 
 enum AuthState {
     case signUp
     case login
     case confirmCode(username: String)
     case session(user: AuthUser)
+    case landing
+    case running
+    case profile
+    case emergencyContact
 }
 
 final class SessionManger: ObservableObject {
+    
     @Published var authState: AuthState = .login
+    @Published var databaseManager: DatabaseManager = DatabaseManager()
     
     struct Address: Codable {
         var locality: String
@@ -36,9 +43,13 @@ final class SessionManger: ObservableObject {
         }
         else if let user = Amplify.Auth.getCurrentUser() {
             print("This is user: ", user)
+            if self.databaseManager.currentUser.isEmpty {
+                print("database current user loaded is empty")
+                self.databaseManager.getUserProfile(user: user)
+            }
             authState = .session(user: user)
         } else {
-            authState = .login
+            authState = .landing
         }
     }
     
@@ -156,7 +167,8 @@ final class SessionManger: ObservableObject {
                         }
                     case .done:
                         print("Inside done")
-                    print(Amplify.Auth.fetchUserAttributes())
+                        
+                        //print(Amplify.Auth.fetchUserAttributes())
                         DispatchQueue.main.async {
                             self?.getCurrentAuthUser()
                         }
@@ -170,14 +182,25 @@ final class SessionManger: ObservableObject {
         }
     }
     
+    func showRunning() {
+        authState = .running
+    }
     
-        
-
+    func showProfile() {
+        authState = .profile
+    }
+    
+    func showEmergencyContact() {
+        authState = .emergencyContact
+    }
+    
+    
     func signOut() {
         _ = Amplify.Auth.signOut {
             [weak self] result in
             switch result {
             case .success:
+                self!.databaseManager.clearLocalDataOnSignOut()
                 DispatchQueue.main.async {
                     self?.getCurrentAuthUser()
                 }
@@ -186,6 +209,7 @@ final class SessionManger: ObservableObject {
             }
         }
     }
+    
     
 }
 
