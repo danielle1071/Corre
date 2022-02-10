@@ -21,6 +21,8 @@ enum AuthState {
     case running
     case profile
     case emergencyContact
+    
+    // MARK: deleteThis
     // case startRun
 }
 
