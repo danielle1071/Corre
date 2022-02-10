@@ -85,7 +85,7 @@ struct RunningMap: View {
        
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct RunningMap_Previews: PreviewProvider {
     static var previews: some View {
         RunningMap()
     }

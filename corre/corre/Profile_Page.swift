@@ -105,7 +105,7 @@ VStack{
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct Profile_Page_Previews: PreviewProvider {
     static var previews: some View {
         Profile_Page()
     }
