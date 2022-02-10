@@ -70,7 +70,8 @@ struct correApp: App {
             case .emergencyContact:
                 EmergContactView()
                     .environmentObject(sessionManager)
-                
+            
+            // MARK: deleteThis
             //            case .startRun:
             //                RunningView()
             //                    .environmentObject(sessionManager)
