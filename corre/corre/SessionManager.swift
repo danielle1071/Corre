@@ -21,6 +21,7 @@ enum AuthState {
     case running
     case profile
     case emergencyContact
+    // case startRun
 }
 
 final class SessionManger: ObservableObject {
@@ -47,6 +48,14 @@ final class SessionManger: ObservableObject {
                 print("database current user loaded is empty")
                 self.databaseManager.getUserProfile(user: user)
             }
+            authState = .session(user: user)
+        } else {
+            authState = .landing
+        }
+    }
+    
+    func showSession() {
+        if let user = Amplify.Auth.getCurrentUser() {
             authState = .session(user: user)
         } else {
             authState = .landing
