@@ -1,20 +1,17 @@
 //
-//  EmergContactView.swift
-//  corre
-//  Skeleton
-//  Created by Mariana Botero on 2/7/22.
-//
-//  SwiftUIView.swift
+//  EditContactView.swift
 //  Profile-page
 //
 //  Created by Danielle Nau on 2/8/22.
 //
-//  Adapted by Lucas Morehouse on 2/10/22.
-//
 
 import SwiftUI
 
-struct EmergContactView: View {
+struct EditContactView: View {
+    @State var ecFirst: String = ""
+    @State var ecLast: String = ""
+    @State var ecEmail: String = ""
+    @State var ecPhone: String = ""
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -26,6 +23,7 @@ struct EmergContactView: View {
 
     var body: some View {
         VStack{
+
             Button (action: {}){
             HStack{
                 Image(systemName: "arrow.left")
@@ -39,43 +37,37 @@ struct EmergContactView: View {
             }
 
 
-
-
             Image("CreamLogo")
             .resizable()
             .frame(width: 125.0, height: 125.0)
             .scaledToFit()
 
-            Button (action: {}){
-                HStack{
-                    Text("Jane Doe")
-                        .foregroundColor(Color("primaryColor"))
-                    Spacer()
-                    Image(systemName: "arrow.right")
-                        .foregroundColor(Color("primaryColor"))
-                }
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-
-
+            VStack{
+                Group {
+                TextField("First Name", text: $ecFirst)
+                TextField("Last Name", text: $ecLast)
+                TextField("E-mail", text: $ecEmail)
+                TextField("Phone Number", text: $ecPhone)
+                    }
+                    .padding(15)
+                    .padding([.horizontal], 25)
+                    .overlay(RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray, lineWidth: 1)
+                    .padding([.horizontal], 25))
             }
-
-
-            Divider()
-            .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
-
-
+            Button (action: {}){
+            Text("Save Changes")
+                .foregroundColor(Color("primaryColor"))
+            }
             Spacer()
 
-        }
+    }
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
 
-
-    }
-
 }
-
-struct EmergContactView_Previews: PreviewProvider {
+}
+struct EditContactView_Previews: PreviewProvider {
     static var previews: some View {
-        EmergContactView()
+        EditContactView()
     }
 }
