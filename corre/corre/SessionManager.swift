@@ -20,7 +20,7 @@ enum AuthState {
     case landing
     case running
     case profile
-    case emergencyContact
+    case emergencyContact(user: AuthUser)
     
     // MARK: deleteThis
     // case startRun
@@ -28,6 +28,7 @@ enum AuthState {
 
 final class SessionManger: ObservableObject {
     
+    @Published var isSignedIn = false
     @Published var authState: AuthState = .login
     @Published var databaseManager: DatabaseManager = DatabaseManager()
     
@@ -202,7 +203,11 @@ final class SessionManger: ObservableObject {
     }
     
     func showEmergencyContact() {
-        authState = .emergencyContact
+        if let user = Amplify.Auth.getCurrentUser() {
+            authState = .emergencyContact(user: user)
+        } else {
+            authState = .landing
+        }
     }
     
     

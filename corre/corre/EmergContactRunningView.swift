@@ -1,4 +1,10 @@
 //
+//  EmergContactRunningView.swift
+//  corre
+//
+//  Created by Jon Abrigo on 2/13/22.
+//
+//
 //  EmergContactView.swift
 //  corre
 //  Skeleton
@@ -23,7 +29,7 @@ import Amplify
 import Combine
 import AmplifyMapLibreUI
 
-struct EmergContactView: View {
+struct EmergContactRunnningView: View {
     
     @EnvironmentObject var sessionManager: SessionManger
     @StateObject var locationService = LocationManager()

@@ -21,9 +21,9 @@ struct SessionView: View {
     var body: some View {
         VStack {
         
-            Text("WooHoo! You have signed in to the up-and-coming Corre Application! 🤯")
-                .font(.title2)
-                .multilineTextAlignment(.center)
+//            Text("WooHoo! You have signed in to the up-and-coming Corre Application! 🤯")
+//                .font(.title2)
+//                .multilineTextAlignment(.center)
             
             Spacer()
             Button("Run", action: {
@@ -74,8 +74,7 @@ struct SessionView: View {
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
             
-            
-            
+    
             Spacer()
         }
     }

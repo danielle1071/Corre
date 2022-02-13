@@ -83,14 +83,15 @@ final class LocationManager: NSObject,
                     // Sets the custom ID chosen to identify this device
                     // on the chosen tracker resource.
                     customDeviceId: userName,
+                    // customDeviceId: Amplify.Auth.getCurrentUser()?.userId,
                     
                     // Sets the frequency in seconds to get the
                     // current device location.
-                    retrieveLocationFrequency: TimeInterval(30),
+                    retrieveLocationFrequency: TimeInterval(10),
                     
                     // Sets the frequency in seconds to publish a batch
                     // of locations to Amazon Location Service.
-                    emitLocationFrequency: TimeInterval(120)),
+                    emitLocationFrequency: TimeInterval(20)),
                 
                 // listener: onTrackingEvent(event: result))
                 listener: onTrackingEvent)
@@ -180,5 +181,4 @@ final class LocationManager: NSObject,
         }
     }
 }
-
 

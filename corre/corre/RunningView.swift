@@ -19,8 +19,6 @@ struct RunningView: View {
     @State var tokens: Set<AnyCancellable> = .init()
     @State var mapState = AMLMapViewState()
     
-    @State var busyWaiting: Bool = true
-    
     var body: some View {
         
         VStack {

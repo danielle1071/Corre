@@ -27,6 +27,9 @@ struct correApp: App {
         } else {
             configureAmplify()
             
+            // MARK: tracking test
+            // sessionManager.observedAuthEvents()
+            
             Amplify.DataStore.start { (result) in
                 switch(result) {
                 case .success:
@@ -67,14 +70,9 @@ struct correApp: App {
             case .profile:
                 ProfileView()
                     .environmentObject(sessionManager)
-            case .emergencyContact:
-                EmergContactView()
+            case .emergencyContact(let user):
+                EmergContactView(user: user)
                     .environmentObject(sessionManager)
-            
-            // MARK: deleteThis
-            //            case .startRun:
-            //                RunningView()
-            //                    .environmentObject(sessionManager)
             }
             
         }
