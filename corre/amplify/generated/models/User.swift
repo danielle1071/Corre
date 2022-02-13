@@ -13,6 +13,8 @@ public struct User: Model {
   public var blockedUsers: [String?]?
   public var EmergencyContacts: List<EmergencyContact>?
   public var Runs: List<Run>?
+  public var firstName: String?
+  public var lastName: String?
   public var createdAt: Temporal.DateTime?
   public var updatedAt: Temporal.DateTime?
   
@@ -25,7 +27,9 @@ public struct User: Model {
       friends: [String?]? = nil,
       blockedUsers: [String?]? = nil,
       EmergencyContacts: List<EmergencyContact>? = [],
-      Runs: List<Run>? = []) {
+      Runs: List<Run>? = [],
+      firstName: String? = nil,
+      lastName: String? = nil) {
     self.init(id: id,
       sub: sub,
       username: username,
@@ -36,6 +40,8 @@ public struct User: Model {
       blockedUsers: blockedUsers,
       EmergencyContacts: EmergencyContacts,
       Runs: Runs,
+      firstName: firstName,
+      lastName: lastName,
       createdAt: nil,
       updatedAt: nil)
   }
@@ -49,6 +55,8 @@ public struct User: Model {
       blockedUsers: [String?]? = nil,
       EmergencyContacts: List<EmergencyContact>? = [],
       Runs: List<Run>? = [],
+      firstName: String? = nil,
+      lastName: String? = nil,
       createdAt: Temporal.DateTime? = nil,
       updatedAt: Temporal.DateTime? = nil) {
       self.id = id
@@ -61,6 +69,8 @@ public struct User: Model {
       self.blockedUsers = blockedUsers
       self.EmergencyContacts = EmergencyContacts
       self.Runs = Runs
+      self.firstName = firstName
+      self.lastName = lastName
       self.createdAt = createdAt
       self.updatedAt = updatedAt
   }

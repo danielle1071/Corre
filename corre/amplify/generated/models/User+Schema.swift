@@ -15,6 +15,8 @@ extension User {
     case blockedUsers
     case EmergencyContacts
     case Runs
+    case firstName
+    case lastName
     case createdAt
     case updatedAt
   }
@@ -42,6 +44,8 @@ extension User {
       .field(user.blockedUsers, is: .optional, ofType: .embeddedCollection(of: String.self)),
       .hasMany(user.EmergencyContacts, is: .optional, ofType: EmergencyContact.self, associatedWith: EmergencyContact.keys.userID),
       .hasMany(user.Runs, is: .optional, ofType: Run.self, associatedWith: Run.keys.userID),
+      .field(user.firstName, is: .optional, ofType: .string),
+      .field(user.lastName, is: .optional, ofType: .string),
       .field(user.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(user.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
     )
