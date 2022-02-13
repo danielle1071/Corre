@@ -12,6 +12,7 @@
 //  Created by Danielle Nau on 2/3/22.
 //
 //  Modified by Lucas Morehouse on 2/10/22.
+//  Modified by Lucas Morehouse on 2/12/22.
 
 import SwiftUI
 import PhotosUI
@@ -20,6 +21,9 @@ struct ProfileView: View {
 
     @State private var image = UIImage()
     @State private var showSheet = false
+    
+    @EnvironmentObject var sessionManager: SessionManger
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -29,87 +33,95 @@ struct ProfileView: View {
         static let lblue = Color("lightBlue")
     }
     var body: some View {
-VStack{
-    HStack{
-    Image(systemName: "arrow.left")
-            .foregroundColor(Color("primaryColor"))
+        VStack {
+            HStack{
+                Button(
+                    action: {
+                        sessionManager.showSession()
+                    },
+                    label: {
+                        Image(systemName: "arrow.left")
+                        .foregroundColor(Color("primaryColor"))})
 
-        Text("Profile Page")
-            .foregroundColor(Color("primaryColor"))
+                Text("Profile Page")
+                    .foregroundColor(Color("primaryColor"))
 
-            Spacer()
+                    Spacer()
+                    }
+            .padding()
+
+            VStack{
+
+            Image(uiImage: self.image)
+                    .resizable()
+                    .cornerRadius(50)
+                    .padding(.all, 4)
+                    .frame(width: 100, height: 100)
+                    .background(Color.black.opacity(0.2))
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(Circle())
+                    .padding(8)
+
+
+            Text("Change photo")
+                    .font(.headline)
+                    .frame(width: 150.0, height: 50)
+                    .background(Color("primaryColor"))
+                    .clipShape(Capsule())
+                    .foregroundColor(.white)
+                    .onTapGesture {
+                        showSheet = true
+                    }
             }
-    .padding()
+            .padding(/*@START_MENU_TOKEN@*/.bottom/*@END_MENU_TOKEN@*/)
+            .sheet(isPresented: $showSheet) {
+                    ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
+        }
 
         VStack{
+            HStack{
+                Text("Name:")
+                    .foregroundColor(Color("primaryColor"))
+                Spacer()
+            }
+                Divider()
+            HStack{
+                Text("Username: \(sessionManager.databaseManager.currentUser[0].username)")
+                    .foregroundColor(Color("primaryColor"))
+                Spacer()
+            }
+                Divider()
+            HStack{
+                Text("Total Distance: \(sessionManager.databaseManager.currentUser[0].totalDistance ?? 0.0)")
+                    .foregroundColor(Color("primaryColor"))
+                Spacer()
+            }
+                Divider()
+            HStack{
+                Text("Total Runs: \(sessionManager.databaseManager.currentUser[0].Runs?.count ?? 0)")
+                    .foregroundColor(Color("primaryColor"))
+                Spacer()
+            }
+                Divider()
 
-        Image(uiImage: self.image)
-                .resizable()
-                .cornerRadius(50)
-                .padding(.all, 4)
-                .frame(width: 100, height: 100)
-                .background(Color.black.opacity(0.2))
-                .aspectRatio(contentMode: .fill)
-                .clipShape(Circle())
-                .padding(8)
-
-
-        Text("Change photo")
-                .font(.headline)
-                .frame(width: 150.0, height: 50)
-                .background(Color("primaryColor"))
-                .clipShape(Capsule())
-                .foregroundColor(.white)
-                .onTapGesture {
-                    showSheet = true
-                }
+            HStack{
+                Text("Bio: \(sessionManager.databaseManager.currentUser[0].bio ?? "")")
+                    .foregroundColor(Color("primaryColor"))
+                Spacer()
+            }
         }
-        .padding(/*@START_MENU_TOKEN@*/.bottom/*@END_MENU_TOKEN@*/)
-        .sheet(isPresented: $showSheet) {
-                ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
-    }
+        .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
-
-
-    VStack{
-    HStack{
-        Text("Name:")
-            .foregroundColor(Color("primaryColor"))
         Spacer()
-    }
-        Divider()
-    HStack{
-        Text("Username:")
-            .foregroundColor(Color("primaryColor"))
-        Spacer()
-    }
-        Divider()
-    HStack{
-        Text("Total Distance:")
-            .foregroundColor(Color("primaryColor"))
-        Spacer()
-    }
-        Divider()
-    HStack{
-        Text("Total Runs:")
-            .foregroundColor(Color("primaryColor"))
-        Spacer()
-    }
-        Divider()
-
-    HStack{
-        Text("Bio:")
-            .foregroundColor(Color("primaryColor"))
-        Spacer()
-    }
-    }
-    .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
-
-    Spacer()
 
 
         }
-.background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+        .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+        .onAppear(perform: {
+            if sessionManager.databaseManager.currentUser.isEmpty {
+                sessionManager.getCurrentAuthUser()
+            }
+        })
     }
 }
 

@@ -5,6 +5,9 @@
 //  Created by Lucas Morehouse on 2/4/22.
 //
 
+//MARK: Need to add function to get user attributes to find first and last name of from the user pool
+//MARK: to add to the user record in the database 
+
 import Foundation
 import Combine
 import Amplify
@@ -13,6 +16,8 @@ import AWSDataStorePlugin
 class DatabaseManager: ObservableObject {
     
     @Published var currentUser = [User]()
+    
+    @Published var emergencyContacts = [EmergencyContact]()
     
     func getUserProfile (user: AuthUser) {
         
@@ -94,7 +99,26 @@ class DatabaseManager: ObservableObject {
         let runningStatus: RunningStatus = RunningStatus.notrunning
         let createdAt = Temporal.DateTime(Date())
         let updatedAt = createdAt
+        var firstName = ""
+        var lastName = ""
         
+        Amplify.Auth.fetchUserAttributes() { result in
+            switch result {
+            case .success(let attributes):
+                for attribute in attributes {
+                    if attribute.key == AuthUserAttributeKey.name {
+                        firstName = attribute.value
+                    } else if attribute.key == AuthUserAttributeKey.familyName {
+                        lastName = attribute.value
+                    }
+                }
+                print("User attributes - \(attributes)")
+                print("Name: \(firstName) \(lastName)")
+            case .failure(let error):
+                print("Fetching user attributes failed with error \(error)")
+            }
+        }
+
         print("Inside the createUserRecordFunction")
         
         let newUser = User(sub: sub, username: userName, bio: bio, totalDistance: totalDistance, runningStatus: runningStatus, friends: friends, blockedUsers: blockedUsers, createdAt: createdAt, updatedAt: updatedAt)
@@ -123,6 +147,30 @@ class DatabaseManager: ObservableObject {
                     print("Local data cleared successfully.")
                 case .failure(let error):
                     print("Local data not cleared \(error)")
+                }
+            }
+        }
+    }
+    
+    func getEmergencyContacts() {
+        if self.currentUser.isEmpty {
+            if let user = Amplify.Auth.getCurrentUser() {
+                getUserProfile(user: user)
+            }
+        } else {
+            let emergencyKeys = EmergencyContact.keys
+            print("inside emergency contacts database call")
+            Amplify.DataStore.query(EmergencyContact.self, where: emergencyKeys.userID == currentUser[0].id) { result in
+                print("OUTSIDE THE SWITCH OF GET EMERGENCY CONTACT")
+                switch(result) {
+                case .success(let items):
+                    for item in items {
+                        print("CHECK THIS ^^^^^")
+                        print("Emergency Contact: \(item.email)")
+                        self.emergencyContacts.append(item)
+                    }
+                case .failure(let error):
+                    print("Could not query DataStore: \(error)")
                 }
             }
         }
