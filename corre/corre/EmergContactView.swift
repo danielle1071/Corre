@@ -15,6 +15,9 @@
 import SwiftUI
 
 struct EmergContactView: View {
+    
+    @EnvironmentObject var sessionManager: SessionManger
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -26,7 +29,7 @@ struct EmergContactView: View {
 
     var body: some View {
         VStack{
-            Button (action: {}){
+            Button (action: {sessionManager.showSession()}){
             HStack{
                 Image(systemName: "arrow.left")
                     .foregroundColor(Color("primaryColor"))
@@ -68,7 +71,17 @@ struct EmergContactView: View {
 
         }
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
-
+        .onAppear(perform: {
+            if sessionManager.databaseManager.emergencyContacts.isEmpty {
+                if sessionManager.databaseManager.currentUser.isEmpty {
+                    print("Error, current user empty")
+                    sessionManager.showSession()
+                } else {
+                    sessionManager.databaseManager.getEmergencyContacts()
+                    print("This is the emergency contacs: \(sessionManager.databaseManager.emergencyContacts)")
+                }
+            }
+        })
 
     }
 

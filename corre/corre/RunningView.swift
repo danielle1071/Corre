@@ -21,32 +21,74 @@ struct RunningView: View {
     
     @State var busyWaiting: Bool = true
     
+    struct CusColor {
+        static let backcolor =
+            Color("backgroundColor")
+
+        static let primarycolor = Color("primaryColor")
+
+        static let lblue = Color("lightBlue")
+    }
+    
     var body: some View {
         
         VStack {
             
             // MARK: change this to stop run!
-            Button("Back", action: {
+            HStack{
+                Button("Back", action: {
                 sessionManager.showSession()
                 
                 // stops tracker resources
                 locationService.stopTracking()
             })
-            
+                Button(action:{
+                }, label: {
+                    Text("Pause Run")
+                        .fontWeight(.bold)
+                        .frame(width: /*@START_MENU_TOKEN@*/200.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/50.0/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(Color.white)
+                        .background(CusColor.primarycolor)
+                        .clipShape(Capsule())
+                })
+            }
             Spacer()
             
             AMLMapView(mapState: mapState)
                 .showUserLocation(true)
                 .edgesIgnoringSafeArea(.all)
             
+            HStack{
+                Text("Time Elapsed: 00:00:00")
+            }
+            .padding(/*@START_MENU_TOKEN@*/.trailing, 9.0/*@END_MENU_TOKEN@*/)
+            .foregroundColor(Color("primaryColor"))
             
             Spacer()
             Text("🏃‍♀️ view")
             Spacer()
-            
-            Button("Sign Out", action: {
-                sessionManager.signOut()
-            })
+            HStack {
+                Button(action:{}, label: {
+                    Text("SOS")
+                        .fontWeight(.bold)
+                        .frame(width: /*@START_MENU_TOKEN@*/200.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/50.0/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(Color.white)
+                        .background(Color.red)
+                        .clipShape(Capsule())
+                })
+           
+                Button(action: {
+                    sessionManager.signOut()
+                }, label: {
+                    Text("Sign Out")
+                        .fontWeight(.bold)
+                        .frame(width: /*@START_MENU_TOKEN@*/200.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/50.0/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(Color.white)
+                        .background(CusColor.primarycolor)
+                        .clipShape(Capsule())
+                })
+                
+            } .padding(5.0)
         }
         .onAppear(perform: getCurrentUserLocation)
     }

@@ -51,14 +51,7 @@ struct RunningMapView: View {
                   Spacer()
 
                 VStack(alignment: .center){
-                    Button(action:{}, label: {
-                        Text("SOS")
-                            .fontWeight(.bold)
-                            .frame(width: /*@START_MENU_TOKEN@*/200.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/50.0/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(Color.white)
-                            .background(Color.red)
-                            .clipShape(Capsule())
-                    })
+                    
 
                     Button(action:{
                     }, label: {
