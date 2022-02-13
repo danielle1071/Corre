@@ -49,15 +49,18 @@ struct SignUpView: View {
     var body: some View {
         VStack{
             
+            Text("Sign Up")
+                .font(.system(size: 30.0))
+                .foregroundColor(CustomColor.primarycolor)
+            
             Image("CreamLogo")
                 .resizable()
-                .frame(width: 76.0, height: 76.0)
+                .frame(width: 150.0, height: 150.0)
                 .scaledToFit()
 
+            Spacer()
+                .frame(height: 10)
             
-            Text("Sign Up")
-                .font(.system(size: 20.0))
-                .foregroundColor(CustomColor.primarycolor)
             Group {
                 
                 TextField("Username", text: $username)
@@ -68,6 +71,7 @@ struct SignUpView: View {
                 TextField("First Name", text: $givenName)
                 TextField("Last Name", text: $familyName)
                 //TextField("Birthday (YYYY-MM-DD)", text: $dateOfBirth)
+                
                 HStack(alignment: .bottom){
                 DatePicker(
                         "Birthday",
@@ -78,7 +82,7 @@ struct SignUpView: View {
                     .colorMultiply(Color.blue)
                     .font(.system(size: 15.0))
                     
-                Spacer(minLength: 165)
+                Spacer(minLength: 100)
                         
                 }
                 
@@ -88,7 +92,7 @@ struct SignUpView: View {
                         Text("Female").tag(3)
                         Text("Other").tag(4)
                     }
-                .frame(width: 350, height: 60, alignment: .leading)
+                .frame(width: 310, height: 60, alignment: .leading)
             
             }
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -97,12 +101,12 @@ struct SignUpView: View {
                 .cornerRadius(16)
                 .shadow(radius: 2.0)
             
-            Group {
+            /*Group {
                 TextField("City", text: $locality)
                 TextField("State", text: $region)
                 TextField("Country", text: $country)
                 TextField("Zip Code (#####)", text: $postal_code)
-            }
+            }*/
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .frame(height: 40)
                 .padding([.horizontal], 20)
@@ -146,6 +150,8 @@ struct SignUpView: View {
             
             VStack{
             
+            Spacer()
+                    .frame(height: 15)
             
             Button("Already have an account? Sign in", action: {
                     sessionManager.showLogin()
@@ -153,7 +159,7 @@ struct SignUpView: View {
                     .font(.system(size: 15.0))
 
             }
-        }
+        } .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
     }
     
