@@ -17,6 +17,7 @@ extension User {
     case Runs
     case firstName
     case lastName
+    case email
     case createdAt
     case updatedAt
   }
@@ -46,6 +47,7 @@ extension User {
       .hasMany(user.Runs, is: .optional, ofType: Run.self, associatedWith: Run.keys.userID),
       .field(user.firstName, is: .optional, ofType: .string),
       .field(user.lastName, is: .optional, ofType: .string),
+      .field(user.email, is: .optional, ofType: .string),
       .field(user.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(user.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
     )
