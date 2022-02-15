@@ -15,7 +15,7 @@ struct SessionView: View {
     
     
     @EnvironmentObject var sessionManager: SessionManger
-    
+    @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
     let user: AuthUser
     
     var body: some View {
@@ -24,7 +24,8 @@ struct SessionView: View {
 //            Text("WooHoo! You have signed in to the up-and-coming Corre Application! 🤯")
 //                .font(.title2)
 //                .multilineTextAlignment(.center)
-            Button("TrackRunner", action: sessionManager.showTrack)
+            //MARK: NEED TO UPDATE THE USER TRACKING ID --- CURRENTLY HARD CODED FOR TESTING!
+            Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
             Spacer()
             Button("Run", action: {
                 sessionManager.showRunning()

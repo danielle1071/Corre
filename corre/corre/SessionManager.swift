@@ -21,7 +21,7 @@ enum AuthState {
     case running
     case profile
     case emergencyContact(user: AuthUser)
-    case trackRunner
+    case trackRunner(userTrackingID: String)
     // MARK: deleteThis
     // case startRun
 }
@@ -73,8 +73,8 @@ final class SessionManger: ObservableObject {
         authState = .login
     }
     
-    func showTrack() {
-        authState = .trackRunner
+    func showTrack(userTrackingID: String) {
+        authState = .trackRunner(userTrackingID: userTrackingID)
     }
     
     func signUp(username: String, email: String, phone: String, password: String,

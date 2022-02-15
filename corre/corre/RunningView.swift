@@ -40,6 +40,7 @@ struct RunningView: View {
             // MARK: change this to stop run!
             HStack{
                 Button("Back", action: {
+                sessionManager.databaseManager.setRunStatus(status: .notrunning)
                 sessionManager.showSession()
                 
                 // stops tracker resources
@@ -101,7 +102,7 @@ struct RunningView: View {
                 sessionManager.showSession()
             } else {
                 print("inside the on appear else block running view")
-                sessionManager.databaseManager.startRunStatus()
+                sessionManager.databaseManager.setRunStatus(status: .running)
             }
             
         })
