@@ -21,10 +21,10 @@ struct SessionView: View {
     var body: some View {
         VStack {
         
-            Text("WooHoo! You have signed in to the up-and-coming Corre Application! 🤯")
-                .font(.title2)
-                .multilineTextAlignment(.center)
-            
+//            Text("WooHoo! You have signed in to the up-and-coming Corre Application! 🤯")
+//                .font(.title2)
+//                .multilineTextAlignment(.center)
+            Button("TrackRunner", action: sessionManager.showTrack)
             Spacer()
             Button("Run", action: {
                 sessionManager.showRunning()
@@ -74,12 +74,13 @@ struct SessionView: View {
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
             
-            
-            
-            Spacer()
-        }
-    }
     
+            Spacer()
+        }.onAppear(perform: {
+            sessionManager.databaseManager.createDeviceRecord()
+        })
+        
+    }
     
 }
 

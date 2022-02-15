@@ -86,26 +86,26 @@ struct ProfileView: View {
             }
                 Divider()
             HStack{
-                Text("Username: \(sessionManager.databaseManager.currentUser[0].username)")
+                Text("Username: PLACEHOLDER")
                     .foregroundColor(Color("primaryColor"))
                 Spacer()
             }
                 Divider()
             HStack{
-                Text("Total Distance: \(sessionManager.databaseManager.currentUser[0].totalDistance ?? 0.0)")
+                Text("Total Distance: \(sessionManager.databaseManager.currentUser?.totalDistance ?? 0.0)")
                     .foregroundColor(Color("primaryColor"))
                 Spacer()
             }
                 Divider()
             HStack{
-                Text("Total Runs: \(sessionManager.databaseManager.currentUser[0].Runs?.count ?? 0)")
+                Text("Total Runs: \(sessionManager.databaseManager.currentUser?.Runs?.count ?? 0)")
                     .foregroundColor(Color("primaryColor"))
                 Spacer()
             }
                 Divider()
 
             HStack{
-                Text("Bio: \(sessionManager.databaseManager.currentUser[0].bio ?? "")")
+                Text("Bio: \(sessionManager.databaseManager.currentUser?.bio ?? "")")
                     .foregroundColor(Color("primaryColor"))
                 Spacer()
             }
@@ -118,7 +118,7 @@ struct ProfileView: View {
         }
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
         .onAppear(perform: {
-            if sessionManager.databaseManager.currentUser.isEmpty {
+            if sessionManager.databaseManager.currentUser == nil {
                 sessionManager.getCurrentAuthUser()
             }
         })

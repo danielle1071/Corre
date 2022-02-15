@@ -29,6 +29,7 @@
 		4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */; };
 		4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */; };
 		4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCB2793140D00FDCF6E /* awsconfiguration.json */; };
+		4CAE029227B9BFD8007AF11C /* TrackRunnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */; };
 		4CCF2A8727B59D7800C4E71D /* EditContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF2A8627B59D7800C4E71D /* EditContactView.swift */; };
 		4CCF2A8927B59F0000C4E71D /* RunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */; };
 		5D5114BD97B104304ED9FA70 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C77E37DADE8162B9959BC11 /* Device.swift */; };
@@ -47,6 +48,8 @@
 		ED51C2ACBC4CC71DEE5ED476 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0BAF37876727B72DDD7B54 /* Run.swift */; };
 		F22DB80327AC518200678872 /* AmplifyMapLibreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = F22DB80227AC518200678872 /* AmplifyMapLibreAdapter */; };
 		F22DB80527AC518200678872 /* AmplifyMapLibreUI in Frameworks */ = {isa = PBXBuildFile; productRef = F22DB80427AC518200678872 /* AmplifyMapLibreUI */; };
+		F2D7AF2227B879F6007C246A /* User+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D7AF2127B879F6007C246A /* User+Extensions.swift */; };
+		F2D7AF2427B95423007C246A /* EmergContactRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */; };
 		F2F0DC1D27B20DD4003E65E8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,20 +74,23 @@
 		4C792CC62793136A00FDCF6E /* InterfaceBuilderKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilderKit.framework; path = Library/Frameworks/InterfaceBuilderKit.framework; sourceTree = DEVELOPER_DIR; };
 		4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		4C792CCB2793140D00FDCF6E /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRunnerView.swift; sourceTree = "<group>"; };
 		4CCF2A8627B59D7800C4E71D /* EditContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactView.swift; sourceTree = "<group>"; };
 		4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningMapView.swift; sourceTree = "<group>"; };
 		4E3D37405B55ABBE3C01EC0E /* RunningStatus.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = RunningStatus.swift; path = amplify/generated/models/RunningStatus.swift; sourceTree = "<group>"; };
-		5C77E37DADE8162B9959BC11 /* Device.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = Device.swift; path = amplify/generated/models/Device.swift; sourceTree = "<group>"; };
+		5C77E37DADE8162B9959BC11 /* Device.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Device.swift; path = amplify/generated/models/Device.swift; sourceTree = "<group>"; };
 		65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		7857C52B62AD14CC96973B46 /* AmplifyModels.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = AmplifyModels.swift; path = amplify/generated/models/AmplifyModels.swift; sourceTree = "<group>"; };
 		7C2971D63A5BBF77E2136689 /* Run+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Run+Schema.swift"; path = "amplify/generated/models/Run+Schema.swift"; sourceTree = "<group>"; };
 		98FF9B6EA18ABE91D94C4F50 /* EmergencyContact.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = EmergencyContact.swift; path = amplify/generated/models/EmergencyContact.swift; sourceTree = "<group>"; };
 		A138062271A31EB801DD8CF0 /* User.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = User.swift; path = amplify/generated/models/User.swift; sourceTree = "<group>"; };
-		C1F00FC9B777E02D0BF8435B /* Device+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = "Device+Schema.swift"; path = "amplify/generated/models/Device+Schema.swift"; sourceTree = "<group>"; };
+		C1F00FC9B777E02D0BF8435B /* Device+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Device+Schema.swift"; path = "amplify/generated/models/Device+Schema.swift"; sourceTree = "<group>"; };
 		D9BE965127AF4B8A00ED177A /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		D9BE965327B2E60C00ED177A /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		D9C2B62227AB1AFB0058365E /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		F2D7AF2127B879F6007C246A /* User+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Extensions.swift"; sourceTree = "<group>"; };
+		F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactRunningView.swift; sourceTree = "<group>"; };
 		F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				D9BE965127AF4B8A00ED177A /* FriendView.swift */,
+				F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */,
 				D9BE965327B2E60C00ED177A /* DataStore.swift */,
 				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
 				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
@@ -160,6 +167,7 @@
 				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
 				4C0E53C927712DBE001BEA58 /* LoginView.swift */,
 				4AB6136F27B1DE4E0018F678 /* RunningView.swift */,
+				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
 				4AB6137127B1DEC90018F678 /* ProfileView.swift */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
 				4C0E53AA2770FE70001BEA58 /* Preview Content */,
@@ -167,6 +175,7 @@
 				F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */,
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
+				F2D7AF2127B879F6007C246A /* User+Extensions.swift */,
 			);
 			path = corre;
 			sourceTree = "<group>";
@@ -192,8 +201,6 @@
 			children = (
 				EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */,
 				65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */,
-				4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */,
-				4C792CCB2793140D00FDCF6E /* awsconfiguration.json */,
 			);
 			name = AmplifyConfig;
 			sourceTree = "<group>";
@@ -286,11 +293,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2D7AF2227B879F6007C246A /* User+Extensions.swift in Sources */,
 				4CCF2A8927B59F0000C4E71D /* RunningMapView.swift in Sources */,
 				4C0E53CA27712DBE001BEA58 /* LoginView.swift in Sources */,
 				4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */,
 				4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */,
 				4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */,
+				4CAE029227B9BFD8007AF11C /* TrackRunnerView.swift in Sources */,
 				4C0E53C827712DAA001BEA58 /* SessionView.swift in Sources */,
 				4CCF2A8727B59D7800C4E71D /* EditContactView.swift in Sources */,
 				4AB6137427B1DEDE0018F678 /* EmergContactView.swift in Sources */,
@@ -304,6 +313,7 @@
 				4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */,
 				A3348095665A8CC53DC55054 /* AmplifyModels.swift in Sources */,
 				624B4EF640BB351DC532D4AE /* EmergencyContact+Schema.swift in Sources */,
+				F2D7AF2427B95423007C246A /* EmergContactRunningView.swift in Sources */,
 				7D0D95D1C4E60294E010D151 /* EmergencyContact.swift in Sources */,
 				2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */,
 				ED51C2ACBC4CC71DEE5ED476 /* Run.swift in Sources */,
@@ -461,7 +471,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -491,7 +501,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

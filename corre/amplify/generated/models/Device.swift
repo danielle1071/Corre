@@ -4,15 +4,15 @@ import Foundation
 
 public struct Device: Model {
   public let id: String
-  public var xCord: String?
-  public var yCord: String?
+  public var xCord: Double?
+  public var yCord: Double?
   public var userDeviceID: String?
   public var createdAt: Temporal.DateTime?
   public var updatedAt: Temporal.DateTime?
   
   public init(id: String = UUID().uuidString,
-      xCord: String? = nil,
-      yCord: String? = nil,
+      xCord: Double? = nil,
+      yCord: Double? = nil,
       userDeviceID: String? = nil) {
     self.init(id: id,
       xCord: xCord,
@@ -22,8 +22,8 @@ public struct Device: Model {
       updatedAt: nil)
   }
   internal init(id: String = UUID().uuidString,
-      xCord: String? = nil,
-      yCord: String? = nil,
+      xCord: Double? = nil,
+      yCord: Double? = nil,
       userDeviceID: String? = nil,
       createdAt: Temporal.DateTime? = nil,
       updatedAt: Temporal.DateTime? = nil) {

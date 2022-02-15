@@ -19,7 +19,9 @@ struct RunningView: View {
     @State var tokens: Set<AnyCancellable> = .init()
     @State var mapState = AMLMapViewState()
     
-    @State var busyWaiting: Bool = true
+//<<<<<<< HEAD
+//=======
+//    @State var busyWaiting: Bool = true
     
     struct CusColor {
         static let backcolor =
@@ -30,6 +32,7 @@ struct RunningView: View {
         static let lblue = Color("lightBlue")
     }
     
+//>>>>>>> 8d637eb231977b632cc5e55feb18cb9de61b328d
     var body: some View {
         
         VStack {
@@ -90,7 +93,18 @@ struct RunningView: View {
                 
             } .padding(5.0)
         }
-        .onAppear(perform: getCurrentUserLocation)
+        .onAppear(perform: {
+            locationService.setSessionManager(sessionManager: sessionManager)
+            getCurrentUserLocation()
+            if sessionManager.databaseManager.currentUser == nil {
+                print("Error, no user loaded --- Running View")
+                sessionManager.showSession()
+            } else {
+                print("inside the on appear else block running view")
+                sessionManager.databaseManager.startRunStatus()
+            }
+            
+        })
     }
     
     // MARK: deleteThis
@@ -99,22 +113,24 @@ struct RunningView: View {
 
     func getCurrentUserLocation() {
         
-        if sessionManager.databaseManager.currentUser.isEmpty {
+        if sessionManager.databaseManager.currentUser == nil { 
             print("getCurrentUserLocation - userName: nil")
             
             // MARK: need to transition to error page not session page
             sessionManager.showSession()
         }
         
-        locationService.storeUsername(id: sessionManager.databaseManager.currentUser[0].username)
+        locationService.storeUsername(id: sessionManager.databaseManager.currentUser?.username ?? "ERROR")
         
         locationService.coordinatesPublisher
             .receive(on: DispatchQueue.main)
             .sink { coordinates in
                 print("getCurrentUserLocation - user's Coordinates: ", coordinates)
                 self.mapState.center = coordinates
+                print("After the map!")
             }
             .store(in: &tokens)
+        print("After the .store")
         
     }
 }

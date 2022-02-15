@@ -27,8 +27,8 @@ extension Device {
     
     model.fields(
       .id(),
-      .field(device.xCord, is: .optional, ofType: .string),
-      .field(device.yCord, is: .optional, ofType: .string),
+      .field(device.xCord, is: .optional, ofType: .double),
+      .field(device.yCord, is: .optional, ofType: .double),
       .field(device.userDeviceID, is: .optional, ofType: .string),
       .field(device.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(device.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)

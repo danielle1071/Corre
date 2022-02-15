@@ -27,19 +27,41 @@ final class LocationManager: NSObject,
     var coordinatesPublisher = PassthroughSubject<CLLocationCoordinate2D, Never>()
     
     var locationManager: CLLocationManager = .init()
-    
+    var sessionManager: SessionManger?
     // tracking implementation:
     let locationTracker = AWSLocationTracker(trackerName: "correTracker",
                                              region: AWSRegionType.USEast1,
                                              credentialsProvider: AWSMobileClient.default())
-    
-    @EnvironmentObject var sessionManager: SessionManger
+    var device: Device?
+    // @EnvironmentObject var sessionManager: SessionManger
     
     private var userName: String?
     
     override init() {
         super.init()
         requestLocation()
+    }
+    
+    func setSessionManager(sessionManager: SessionManger) {
+        self.sessionManager = sessionManager
+        print("success! Set the session manager correctly!")
+        print("Current user in the location manager: \(sessionManager.databaseManager.currentUser)")
+
+
+        if self.sessionManager == nil {
+            print("FATAL ERROR IN LOCATION MANAGER --- SESSION MANAGER = NIL")
+            return
+        }
+
+        if self.sessionManager!.databaseManager.currentUser == nil {
+            print("ERROR: NO CURRENT USER LOADED --- LOCATION MANAGER")
+            return
+        }
+
+        let userDeviceID = self.sessionManager!.databaseManager.currentUser?.id
+        self.device = self.sessionManager?.databaseManager.findDeviceRecord(userDeviceID: userDeviceID!)
+        print("This is the device in the location manager: \(self.device)")
+
     }
     
     // MARK: deleteThis
@@ -83,14 +105,15 @@ final class LocationManager: NSObject,
                     // Sets the custom ID chosen to identify this device
                     // on the chosen tracker resource.
                     customDeviceId: userName,
+                    // customDeviceId: Amplify.Auth.getCurrentUser()?.userId,
                     
                     // Sets the frequency in seconds to get the
                     // current device location.
-                    retrieveLocationFrequency: TimeInterval(30),
+                    retrieveLocationFrequency: TimeInterval(10),
                     
                     // Sets the frequency in seconds to publish a batch
                     // of locations to Amazon Location Service.
-                    emitLocationFrequency: TimeInterval(120)),
+                    emitLocationFrequency: TimeInterval(20)),
                 
                 // listener: onTrackingEvent(event: result))
                 listener: onTrackingEvent)
@@ -148,12 +171,19 @@ final class LocationManager: NSObject,
     
     // MARK: locationManager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        print("Checking this device: \(self.device)")
         guard let location = locations.last else { return }
         manager.stopUpdatingLocation()
         
         // tracking implementations:
         print("locationManager - got locations: \(locations) ")
-        
+        print("This is the location xCord: \(location.coordinate.latitude)")
+        print("This is the location yCord: \(location.coordinate.longitude)")
+        sessionManager!.databaseManager.updateDeviceLocation(
+                                                            device: device!,
+                                                            xCord: location.coordinate.latitude,
+                                                            yCord: location.coordinate.longitude
+                                                            )
         // When Corre retrieves location updates, pass the data for location tracking to
         // update the tracker
         locationTracker.interceptLocationsRetrieved(locations)
@@ -180,5 +210,4 @@ final class LocationManager: NSObject,
         }
     }
 }
-
 

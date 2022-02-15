@@ -20,14 +20,15 @@ enum AuthState {
     case landing
     case running
     case profile
-    case emergencyContact
-    
+    case emergencyContact(user: AuthUser)
+    case trackRunner
     // MARK: deleteThis
     // case startRun
 }
 
 final class SessionManger: ObservableObject {
     
+    @Published var isSignedIn = false
     @Published var authState: AuthState = .login
     @Published var databaseManager: DatabaseManager = DatabaseManager()
     
@@ -46,7 +47,7 @@ final class SessionManger: ObservableObject {
         }
         else if let user = Amplify.Auth.getCurrentUser() {
             print("This is user: ", user)
-            if self.databaseManager.currentUser.isEmpty {
+            if self.databaseManager.currentUser == nil {
                 print("database current user loaded is empty")
                 self.databaseManager.getUserProfile(user: user)
             }
@@ -72,6 +73,9 @@ final class SessionManger: ObservableObject {
         authState = .login
     }
     
+    func showTrack() {
+        authState = .trackRunner
+    }
     
     func signUp(username: String, email: String, phone: String, password: String,
                 givenName: String,
@@ -202,7 +206,11 @@ final class SessionManger: ObservableObject {
     }
     
     func showEmergencyContact() {
-        authState = .emergencyContact
+        if let user = Amplify.Auth.getCurrentUser() {
+            authState = .emergencyContact(user: user)
+        } else {
+            authState = .landing
+        }
     }
     
     
