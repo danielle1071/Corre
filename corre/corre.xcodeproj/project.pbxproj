@@ -29,6 +29,7 @@
 		4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */; };
 		4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */; };
 		4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCB2793140D00FDCF6E /* awsconfiguration.json */; };
+		4C99015B27BC071C00FE5D2B /* TrackerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99015A27BC071C00FE5D2B /* TrackerManager.swift */; };
 		4CAE029227B9BFD8007AF11C /* TrackRunnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */; };
 		4CCF2A8727B59D7800C4E71D /* EditContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF2A8627B59D7800C4E71D /* EditContactView.swift */; };
 		4CCF2A8927B59F0000C4E71D /* RunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */; };
@@ -74,6 +75,7 @@
 		4C792CC62793136A00FDCF6E /* InterfaceBuilderKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilderKit.framework; path = Library/Frameworks/InterfaceBuilderKit.framework; sourceTree = DEVELOPER_DIR; };
 		4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		4C792CCB2793140D00FDCF6E /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		4C99015A27BC071C00FE5D2B /* TrackerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerManager.swift; sourceTree = "<group>"; };
 		4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRunnerView.swift; sourceTree = "<group>"; };
 		4CCF2A8627B59D7800C4E71D /* EditContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactView.swift; sourceTree = "<group>"; };
 		4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningMapView.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
 				F2D7AF2127B879F6007C246A /* User+Extensions.swift */,
+				4C99015A27BC071C00FE5D2B /* TrackerManager.swift */,
 			);
 			path = corre;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C99015B27BC071C00FE5D2B /* TrackerManager.swift in Sources */,
 				F2D7AF2227B879F6007C246A /* User+Extensions.swift in Sources */,
 				4CCF2A8927B59F0000C4E71D /* RunningMapView.swift in Sources */,
 				4C0E53CA27712DBE001BEA58 /* LoginView.swift in Sources */,

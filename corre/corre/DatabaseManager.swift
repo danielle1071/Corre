@@ -65,6 +65,26 @@ class DatabaseManager: ObservableObject {
         }
          */
     }
+    
+    func getUserProfile (userID: String) -> User? {
+        var retVal: User?
+        Amplify.DataStore.query(User.self, byId: userID) { result in
+            switch result {
+            case .success(let item):
+                if result == nil {
+                    print("No user found in the getUserProfile(By user ID)")
+                } else {
+                    print("Found the user! : \(result)")
+                }
+                retVal = item
+            case .failure(let error):
+                print("Error on query() for type Users - \(error.localizedDescription)")
+                retVal = nil
+            }
+        }
+        return retVal
+    }
+    
     func getUserProfile (username: String) {
 //        DispatchQueue.main.async {
             let usrKey = User.keys
@@ -173,13 +193,13 @@ class DatabaseManager: ObservableObject {
         }
     }
     
-    func startRunStatus() {
+    func setRunStatus(status: RunningStatus) {
         if currentUser == nil {
             print("Error --- can't update running status, currentUser is empty")
             return
         } else {
             var user = currentUser
-            user?.runningStatus = .running
+            user?.runningStatus = status
             Amplify.DataStore.save(user!) { result in
                 switch result {
                 case .success(_):
@@ -190,6 +210,8 @@ class DatabaseManager: ObservableObject {
             }
         }
     }
+    
+    
     
     func createUserRecord(user: AuthUser) {
         

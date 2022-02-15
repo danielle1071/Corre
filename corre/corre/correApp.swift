@@ -73,8 +73,8 @@ struct correApp: App {
             case .emergencyContact(let user):
                 EmergContactView(/*user: user*/)
                     .environmentObject(sessionManager)
-            case .trackRunner:
-                TrackRunnerView()
+            case .trackRunner(let userTrackingID):
+                TrackRunnerView(userTrackingID: userTrackingID)
                     .environmentObject(sessionManager)
             }
             

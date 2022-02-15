@@ -15,22 +15,36 @@ struct TrackRunnerView: View {
     
     
     @EnvironmentObject var sessionManager: SessionManger
-    
-    //MARK: have the map view live while the user that is beign tracked has a running status of !NOTRUNNING
+    @StateObject var trackingManager = TrackerManager()
+    var userTrackingID: String
+    @State var mapState = AMLMapViewState()
+    @State var tokens: Set<AnyCancellable> = .init()
     
     var body: some View {
-        
-        VStack {
-            Button("Back", action: sessionManager.showSession)
-            
-        }
-        
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+        TimelineView(.periodic(from: .now, by: 1.0)) {_ in
+            VStack {
+                Button("Back", action: sessionManager.showSession)
 
-struct TrackRunnerView_Previews: PreviewProvider {
-    static var previews: some View {
-        TrackRunnerView()
+                Text("xCord: \(trackingManager.xCord)")
+                Text("yCord: \(trackingManager.yCord)")
+                
+                Button("track!", action: {
+                    trackingManager.startTracking()
+                })
+                
+                Text("Tracking : \(trackingManager.tString)")
+
+                
+            }
+        }.onAppear(perform: {
+            trackingManager.setSessionManager(sessionManager: sessionManager)
+            trackingManager.setTrackingID(userTrackID: userTrackingID)
+        })
+    }
+
+    struct TrackRunnerView_Previews: PreviewProvider {
+        static var previews: some View {
+            Text("Hello World!")
+        }
     }
 }
