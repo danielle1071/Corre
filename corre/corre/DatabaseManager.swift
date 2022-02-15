@@ -14,7 +14,7 @@ import Combine
 import Amplify
 import AWSDataStorePlugin
 
-class DatabaseManager {
+class DatabaseManager: ObservableObject {
     
     @Published var currentUser:User?
     
