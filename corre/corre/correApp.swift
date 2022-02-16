@@ -5,6 +5,7 @@
 //  Build Target: iOS 15.0
 //  Created by Lucas Morehouse on 11/13/21.
 //
+// Edited by Mariana Botero on 02/9/21
 
 import SwiftUI
 import Amplify
@@ -69,6 +70,11 @@ struct correApp: App {
                     .environmentObject(sessionManager)
             case .profile:
                 ProfileView()
+            case .navigation:
+                NavigationView()
+                    .environmentObject(sessionManager)
+            case .friend:
+                FriendView()
                     .environmentObject(sessionManager)
             case .emergencyContact(let user):
                 EmergContactView(/*user: user*/)

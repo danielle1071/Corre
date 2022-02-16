@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2971D63A5BBF77E2136689 /* Run+Schema.swift */; };
+		4AA1C17727BCCB560094E7E8 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA1C17627BCCB560094E7E8 /* NavigationView.swift */; };
 		4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6136F27B1DE4E0018F678 /* RunningView.swift */; };
 		4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137127B1DEC90018F678 /* ProfileView.swift */; };
 		4AB6137427B1DEDE0018F678 /* EmergContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137327B1DEDE0018F678 /* EmergContactView.swift */; };
@@ -58,6 +59,7 @@
 		0CD0D90BC7F5625BEA15C4CB /* User+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "User+Schema.swift"; path = "amplify/generated/models/User+Schema.swift"; sourceTree = "<group>"; };
 		1E0BAF37876727B72DDD7B54 /* Run.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Run.swift; path = amplify/generated/models/Run.swift; sourceTree = "<group>"; };
 		33A46E3CE696CF2816B06B2A /* EmergencyContact+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "EmergencyContact+Schema.swift"; path = "amplify/generated/models/EmergencyContact+Schema.swift"; sourceTree = "<group>"; };
+		4AA1C17627BCCB560094E7E8 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		4AB6136F27B1DE4E0018F678 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
 		4AB6137127B1DEC90018F678 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4AB6137327B1DEDE0018F678 /* EmergContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactView.swift; sourceTree = "<group>"; };
@@ -156,10 +158,11 @@
 		4C0E53A32770FE6F001BEA58 /* corre */ = {
 			isa = PBXGroup;
 			children = (
+				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
+				4AA1C17627BCCB560094E7E8 /* NavigationView.swift */,
 				D9BE965127AF4B8A00ED177A /* FriendView.swift */,
 				F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */,
 				D9BE965327B2E60C00ED177A /* DataStore.swift */,
-				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
 				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
 				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
 				4C0E53A62770FE6F001BEA58 /* ContentView.swift */,
@@ -322,6 +325,7 @@
 				2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */,
 				ED51C2ACBC4CC71DEE5ED476 /* Run.swift in Sources */,
 				F2F0DC1D27B20DD4003E65E8 /* LocationManager.swift in Sources */,
+				4AA1C17727BCCB560094E7E8 /* NavigationView.swift in Sources */,
 				D8FE2AF2C7A9E668FC727AE6 /* RunningStatus.swift in Sources */,
 				CA1CA2E226D406648AF9BA56 /* User+Schema.swift in Sources */,
 				BB7E0C06641036A59DD65E49 /* User.swift in Sources */,

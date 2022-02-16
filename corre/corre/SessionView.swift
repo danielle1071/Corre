@@ -6,6 +6,7 @@
 //
 //  This file is based on the youtube tutorial: https://www.youtube.com/watch?v=wSHnmtnzbfs
 //
+// Edited by Mariana Botero on 02/9/21
 
 import Foundation
 import SwiftUI

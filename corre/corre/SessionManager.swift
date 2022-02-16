@@ -6,6 +6,7 @@
 //
 //  This file is based on the youtube tutorial: https://www.youtube.com/watch?v=wSHnmtnzbfs
 //
+// Edited by Mariana Botero on 02/9/21
 
 import Foundation
 import Amplify
@@ -24,6 +25,8 @@ enum AuthState {
     case trackRunner(userTrackingID: String)
     // MARK: deleteThis
     // case startRun
+    case navigation
+    case friend
 }
 
 final class SessionManger: ObservableObject {
@@ -203,6 +206,14 @@ final class SessionManger: ObservableObject {
     
     func showProfile() {
         authState = .profile
+    }
+    
+    func showNavigation() {
+        authState = .navigation
+    }
+    
+    func showFriend() {
+        authState = .friend
     }
     
     func showEmergencyContact() {
