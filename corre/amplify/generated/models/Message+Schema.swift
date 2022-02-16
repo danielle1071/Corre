@@ -31,7 +31,7 @@ extension Message {
       .field(message.senderId, is: .required, ofType: .string),
       .field(message.receiverId, is: .required, ofType: .string),
       .field(message.body, is: .required, ofType: .string),
-      .field(message.creationDate, is: .required, ofType: .dateTime),
+      .field(message.creationDate, is: .required, ofType: .int),
       .field(message.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(message.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
     )

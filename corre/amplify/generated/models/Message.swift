@@ -7,7 +7,7 @@ public struct Message: Model {
   public var senderId: String
   public var receiverId: String
   public var body: String
-  public var creationDate: Temporal.DateTime
+  public var creationDate: Int
   public var createdAt: Temporal.DateTime?
   public var updatedAt: Temporal.DateTime?
   
@@ -15,7 +15,7 @@ public struct Message: Model {
       senderId: String,
       receiverId: String,
       body: String,
-      creationDate: Temporal.DateTime) {
+      creationDate: Int) {
     self.init(id: id,
       senderId: senderId,
       receiverId: receiverId,
@@ -28,7 +28,7 @@ public struct Message: Model {
       senderId: String,
       receiverId: String,
       body: String,
-      creationDate: Temporal.DateTime,
+      creationDate: Int,
       createdAt: Temporal.DateTime? = nil,
       updatedAt: Temporal.DateTime? = nil) {
       self.id = id
