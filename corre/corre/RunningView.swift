@@ -19,10 +19,6 @@ struct RunningView: View {
     @State var tokens: Set<AnyCancellable> = .init()
     @State var mapState = AMLMapViewState()
     
-//<<<<<<< HEAD
-//=======
-//    @State var busyWaiting: Bool = true
-    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -32,30 +28,33 @@ struct RunningView: View {
         static let lblue = Color("lightBlue")
     }
     
-//>>>>>>> 8d637eb231977b632cc5e55feb18cb9de61b328d
+
     var body: some View {
+        Spacer()
         
         VStack {
-            
             // MARK: change this to stop run!
             HStack{
-                Button("Back", action: {
+                Button(action: {
                 sessionManager.databaseManager.setRunStatus(status: .notrunning)
                 sessionManager.showSession()
                 
                 // stops tracker resources
                 locationService.stopTracking()
+            }, label: {
+                Text("Back")
+                    .fontWeight(.bold)
+                    .frame(width: 150.0, height: 40.0)
+                    .foregroundColor(Color.white)
+                    .background(CusColor.primarycolor)
+                    .clipShape(Capsule())
             })
-                Button(action:{
-                }, label: {
-                    Text("Pause Run")
-                        .fontWeight(.bold)
-                        .frame(width: /*@START_MENU_TOKEN@*/200.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/50.0/*@END_MENU_TOKEN@*/)
-                        .foregroundColor(Color.white)
-                        .background(CusColor.primarycolor)
-                        .clipShape(Capsule())
-                })
+                
+                
+                
             }
+            
+            Spacer()
             Spacer()
             
             AMLMapView(mapState: mapState)
@@ -69,28 +68,38 @@ struct RunningView: View {
             .foregroundColor(Color("primaryColor"))
             
             Spacer()
-            Text("🏃‍♀️ view")
             Spacer()
+            
             HStack {
                 Button(action:{}, label: {
                     Text("SOS")
                         .fontWeight(.bold)
-                        .frame(width: /*@START_MENU_TOKEN@*/200.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/50.0/*@END_MENU_TOKEN@*/)
+                        .frame(width: 150.0, height: 40.0)
                         .foregroundColor(Color.white)
                         .background(Color.red)
                         .clipShape(Capsule())
                 })
-           
-                Button(action: {
-                    sessionManager.signOut()
+                
+                Button(action:{
                 }, label: {
-                    Text("Sign Out")
+                    Text("Pause Run")
                         .fontWeight(.bold)
-                        .frame(width: /*@START_MENU_TOKEN@*/200.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/50.0/*@END_MENU_TOKEN@*/)
+                        .frame(width: 150.0, height: 40.0)
                         .foregroundColor(Color.white)
                         .background(CusColor.primarycolor)
                         .clipShape(Capsule())
                 })
+           
+//                Button(action: {
+//                    sessionManager.signOut()
+//                }, label: {
+//                    Text("Sign Out")
+//                        .fontWeight(.bold)
+//                        .frame(width: 150.0, height: 40.0)
+//                        .foregroundColor(Color.white)
+//                        .background(CusColor.primarycolor)
+//                        .clipShape(Capsule())
+//                })
                 
             } .padding(5.0)
         }
@@ -128,7 +137,7 @@ struct RunningView: View {
             .sink { coordinates in
                 print("getCurrentUserLocation - user's Coordinates: ", coordinates)
                 self.mapState.center = coordinates
-                print("After the map!")
+                print("getCurrentUserLocation - after the map!")
             }
             .store(in: &tokens)
         print("After the .store")

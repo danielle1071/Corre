@@ -12,11 +12,6 @@
 //  Adapted by Lucas Morehouse on 2/10/22.
 //
 
-//import Foundation
-//import SwiftUI
-//import Amplify
-//import Combine
-
 import SwiftUI
 import Foundation
 import Amplify
@@ -26,6 +21,81 @@ import AmplifyMapLibreUI
 struct EmergContactView: View {
     
     @EnvironmentObject var sessionManager: SessionManger
+    
+    struct CusColor {
+        static let backcolor =
+            Color("backgroundColor")
+
+        static let primarycolor = Color("primaryColor")
+
+        static let lblue = Color("lightBlue")
+    }
+
+    var body: some View {
+        
+        // MARK: this needs to be a tab.. placeholder
+        Button("Track Contacts View", action: {
+            sessionManager.showTrackContacts()
+        }).padding()
+            .padding(.horizontal, 108)
+            .foregroundColor(CustomColor.primarycolor)
+            .background(CustomColor.backcolor)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                .stroke(CustomColor.primarycolor, lineWidth: 2))
+        
+        VStack{
+ 
+            Button (action: {sessionManager.showSession()}){
+            HStack{
+                Image(systemName: "arrow.left")
+                    .foregroundColor(Color("primaryColor"))
+                Text("Emergency Contacts")
+                    .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
+                    .foregroundColor(Color("primaryColor"))
+                Spacer()
+            }
+            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            }
+
+            Image("CreamLogo")
+            .resizable()
+            .frame(width: 125.0, height: 125.0)
+            .scaledToFit()
+
+            Button (action: {}){
+                HStack{
+                    Text("Jane Doe")
+                        .foregroundColor(Color("primaryColor"))
+                    Spacer()
+                    Image(systemName: "arrow.right")
+                        .foregroundColor(Color("primaryColor"))
+                }
+                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+
+
+            }
+
+            Divider()
+            .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
+
+        }
+        
+        .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+        .onAppear(perform: {
+            if sessionManager.databaseManager.emergencyContacts.isEmpty {
+                if sessionManager.databaseManager.currentUser == nil {
+                    print("Error, current user empty")
+                    sessionManager.showSession()
+                } else {
+                    sessionManager.databaseManager.getEmergencyContacts()
+                    print("This is the emergency contacs: \(sessionManager.databaseManager.emergencyContacts)")
+                }
+            }
+        })
+    }
+}
+
 //<<<<<<< HEAD
 //    @StateObject var locationService = LocationManager()
 //    @State var tokens: Set<AnyCancellable> = .init()
@@ -46,56 +116,6 @@ struct EmergContactView: View {
 //            })
 //
 //=======
-    
-    struct CusColor {
-        static let backcolor =
-            Color("backgroundColor")
-
-        static let primarycolor = Color("primaryColor")
-
-        static let lblue = Color("lightBlue")
-    }
-
-    var body: some View {
-        VStack{
-            Button (action: {sessionManager.showSession()}){
-            HStack{
-                Image(systemName: "arrow.left")
-                    .foregroundColor(Color("primaryColor"))
-                Text("Emergency Contacts")
-                    .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(Color("primaryColor"))
-                Spacer()
-            }
-            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            }
-
-
-
-
-            Image("CreamLogo")
-            .resizable()
-            .frame(width: 125.0, height: 125.0)
-            .scaledToFit()
-
-            Button (action: {}){
-                HStack{
-                    Text("Jane Doe")
-                        .foregroundColor(Color("primaryColor"))
-                    Spacer()
-                    Image(systemName: "arrow.right")
-                        .foregroundColor(Color("primaryColor"))
-                }
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-
-
-            }
-
-
-            Divider()
-            .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
-
-
 //>>>>>>> 8d637eb231977b632cc5e55feb18cb9de61b328d
 //            Spacer()
 //
@@ -116,9 +136,6 @@ struct EmergContactView: View {
 //        .onAppear(perform: getRunnerLocation)
 //    }
 //
-//    // MARK: deleteThis
-//    // User's Coordinates:  CLLocationCoordinate2D(latitude: 35.7020691, longitude: 139.7753269)
-//    // locationManager - got locations: [<+35.70206910,+139.77532690> +/- 5.00m (speed -1.00 mps / course -1.00) @ 2/9/22, 1:27:34 AM Eastern Standard Time]
 //
 //    func getRunnerLocation() {
 //
@@ -133,24 +150,7 @@ struct EmergContactView: View {
 //            .store(in: &tokens)
 //
 //=======
-        }
-        .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
-        .onAppear(perform: {
-            if sessionManager.databaseManager.emergencyContacts.isEmpty {
-                if sessionManager.databaseManager.currentUser == nil {
-                    print("Error, current user empty")
-                    sessionManager.showSession()
-                } else {
-                    sessionManager.databaseManager.getEmergencyContacts()
-                    print("This is the emergency contacs: \(sessionManager.databaseManager.emergencyContacts)")
-                }
-            }
-        })
-
 //>>>>>>> 8d637eb231977b632cc5e55feb18cb9de61b328d
-    }
-    
-    
 //    @EnvironmentObject var sessionManager: SessionManger
 //    @State var postsSubscription: AnyCancellable?
 //    @State var users = [User]()
@@ -223,9 +223,6 @@ struct EmergContactView: View {
 //            queryUsers()
 //        }
 //    }
-
-}
-
 //struct EmergContactView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        EmergContactView(user: AuthUser.self as! AuthUser)
