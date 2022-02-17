@@ -68,11 +68,10 @@ struct TrackContactsView: View {
 
         }
     }
-}
-
-struct TrackContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        TrackContactsView()
+    
+    struct TrackContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            TrackContactsView()
+        }
     }
 }
-
