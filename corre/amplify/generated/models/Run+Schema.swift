@@ -32,9 +32,9 @@ extension Run {
     
     model.fields(
       .id(),
-      .field(run.distance, is: .optional, ofType: .string),
+      .field(run.distance, is: .required, ofType: .double),
       .field(run.time, is: .optional, ofType: .string),
-      .field(run.averageSpeed, is: .optional, ofType: .string),
+      .field(run.averageSpeed, is: .optional, ofType: .double),
       .field(run.userID, is: .required, ofType: .string),
       .field(run.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(run.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
