@@ -269,6 +269,7 @@ class DatabaseManager: ObservableObject {
                 switch result {
                 case .success:
                     // any time the data gets cleared, we also need to clear it from the
+                    self.setRunStatus(status: .notrunning)
                     self.currentUser = nil
                     self.emergencyContacts.removeAll()
                     self.deviceTracking = nil
