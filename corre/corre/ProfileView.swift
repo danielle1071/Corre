@@ -80,13 +80,13 @@ struct ProfileView: View {
 
         VStack{
             HStack{
-                Text("Name:")
+                Text("Name: \(sessionManager.databaseManager.currentUser?.firstName ?? "") \(sessionManager.databaseManager.currentUser?.lastName ?? "")")
                     .foregroundColor(Color("primaryColor"))
                 Spacer()
             }
                 Divider()
             HStack{
-                Text("Username: PLACEHOLDER")
+                Text("Username: \(sessionManager.databaseManager.currentUser?.username ?? "Runner")")
                     .foregroundColor(Color("primaryColor"))
                 Spacer()
             }
