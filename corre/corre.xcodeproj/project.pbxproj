@@ -51,7 +51,7 @@
 		ED51C2ACBC4CC71DEE5ED476 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0BAF37876727B72DDD7B54 /* Run.swift */; };
 		F22DB80327AC518200678872 /* AmplifyMapLibreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = F22DB80227AC518200678872 /* AmplifyMapLibreAdapter */; };
 		F22DB80527AC518200678872 /* AmplifyMapLibreUI in Frameworks */ = {isa = PBXBuildFile; productRef = F22DB80427AC518200678872 /* AmplifyMapLibreUI */; };
-		F2D7AF2227B879F6007C246A /* User+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D7AF2127B879F6007C246A /* User+Extensions.swift */; };
+		F2A1714C27BDB1C900DFA288 /* TrackContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */; };
 		F2D7AF2427B95423007C246A /* EmergContactRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */; };
 		F2F0DC1D27B20DD4003E65E8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
@@ -94,8 +94,12 @@
 		D9BE965327B2E60C00ED177A /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		D9C2B62227AB1AFB0058365E /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+
+		F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackContactsView.swift; sourceTree = "<group>"; };
+
 		F0C7A474AA58645C6841624F /* Message.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = Message.swift; path = amplify/generated/models/Message.swift; sourceTree = "<group>"; };
 		F2D7AF2127B879F6007C246A /* User+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Extensions.swift"; sourceTree = "<group>"; };
+
 		F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactRunningView.swift; sourceTree = "<group>"; };
 		F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,29 +166,29 @@
 		4C0E53A32770FE6F001BEA58 /* corre */ = {
 			isa = PBXGroup;
 			children = (
+				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
+				4C0E53C927712DBE001BEA58 /* LoginView.swift */,
+				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
+				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
+				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
 				D9BE965127AF4B8A00ED177A /* FriendView.swift */,
 				F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */,
+				4AB6137327B1DEDE0018F678 /* EmergContactView.swift */,
+				4AB6137127B1DEC90018F678 /* ProfileView.swift */,
 				D9BE965327B2E60C00ED177A /* DataStore.swift */,
 				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
 				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
-				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
 				4C0E53A62770FE6F001BEA58 /* ContentView.swift */,
-				4AB6137327B1DEDE0018F678 /* EmergContactView.swift */,
-				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
-				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
-				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
-				4C0E53C927712DBE001BEA58 /* LoginView.swift */,
+				F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */,
 				4AB6136F27B1DE4E0018F678 /* RunningView.swift */,
+				4C99015A27BC071C00FE5D2B /* TrackerManager.swift */,
+				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
 				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
-				4AB6137127B1DEC90018F678 /* ProfileView.swift */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
 				4C0E53AA2770FE70001BEA58 /* Preview Content */,
 				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
-				F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */,
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
-				F2D7AF2127B879F6007C246A /* User+Extensions.swift */,
-				4C99015A27BC071C00FE5D2B /* TrackerManager.swift */,
 			);
 			path = corre;
 			sourceTree = "<group>";
@@ -305,12 +309,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C99015B27BC071C00FE5D2B /* TrackerManager.swift in Sources */,
-				F2D7AF2227B879F6007C246A /* User+Extensions.swift in Sources */,
 				4CCF2A8927B59F0000C4E71D /* RunningMapView.swift in Sources */,
 				4C0E53CA27712DBE001BEA58 /* LoginView.swift in Sources */,
 				4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */,
 				4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */,
 				4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */,
+				F2A1714C27BDB1C900DFA288 /* TrackContactsView.swift in Sources */,
 				4CAE029227B9BFD8007AF11C /* TrackRunnerView.swift in Sources */,
 				4C0E53C827712DAA001BEA58 /* SessionView.swift in Sources */,
 				4CCF2A8727B59D7800C4E71D /* EditContactView.swift in Sources */,
@@ -485,7 +489,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre1;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -515,7 +519,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre1;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
