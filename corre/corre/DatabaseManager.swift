@@ -318,5 +318,23 @@ class DatabaseManager: ObservableObject {
             }
         }
     }
+    
+    func addEmergencyContact(contact: EmergencyContact) {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                getUserProfile(user: user)
+            }
+        } else {
+            let newEmergencyContact = contact
+            Amplify.DataStore.save(newEmergencyContact) { result in
+                switch result {
+                case .success(_):
+                    print("Saved new emergency contact")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
 
 }
