@@ -21,6 +21,11 @@ import AmplifyMapLibreUI
 struct EmergContactView: View {
     
     @EnvironmentObject var sessionManager: SessionManger
+    @State var addedContact = false
+    @State var ecFirst = ""
+    @State var ecLast = ""
+    @State var ecEmail = ""
+    @State var ecPhone = ""
     
     struct CusColor {
         static let backcolor =
