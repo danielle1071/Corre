@@ -21,9 +21,8 @@ enum AuthState {
     case running
     case profile
     case emergencyContact(user: AuthUser)
+    case trackContacts
     case trackRunner(userTrackingID: String)
-    // MARK: deleteThis
-    // case startRun
 }
 
 final class SessionManger: ObservableObject {
@@ -39,6 +38,7 @@ final class SessionManger: ObservableObject {
         var country: String
     }
     
+    // MARK: getCurrentAuthUser
     func getCurrentAuthUser() {
         
         // some duck tape and glue :)
@@ -57,26 +57,12 @@ final class SessionManger: ObservableObject {
         }
     }
     
-    func showSession() {
-        if let user = Amplify.Auth.getCurrentUser() {
-            authState = .session(user: user)
-        } else {
-            authState = .landing
-        }
-    }
-    
+    // MARK: showSignUp
     func showSignUp() {
         authState = .signUp
     }
     
-    func showLogin() {
-        authState = .login
-    }
-    
-    func showTrack(userTrackingID: String) {
-        authState = .trackRunner(userTrackingID: userTrackingID)
-    }
-    
+    // MARK: signUp
     func signUp(username: String, email: String, phone: String, password: String,
                 givenName: String,
                 familyName: String,
@@ -128,6 +114,7 @@ final class SessionManger: ObservableObject {
         }
     }
     
+    // MARK: confirm
     func confirm(username: String, code: String) {
         _ = Amplify.Auth.confirmSignUp(
             for: username,
@@ -152,6 +139,12 @@ final class SessionManger: ObservableObject {
         }
     }
     
+    // MARK: showLogin
+    func showLogin() {
+        authState = .login
+    }
+    
+    // MARK: login
     func login(username: String, password: String) {
         _ = Amplify.Auth.signIn(
             username: username,
@@ -197,23 +190,7 @@ final class SessionManger: ObservableObject {
         }
     }
     
-    func showRunning() {
-        authState = .running
-    }
-    
-    func showProfile() {
-        authState = .profile
-    }
-    
-    func showEmergencyContact() {
-        if let user = Amplify.Auth.getCurrentUser() {
-            authState = .emergencyContact(user: user)
-        } else {
-            authState = .landing
-        }
-    }
-    
-    
+    // MARK: signOut
     func signOut() {
         _ = Amplify.Auth.signOut {
             [weak self] result in
@@ -228,6 +205,46 @@ final class SessionManger: ObservableObject {
             }
         }
     }
+    
+    // MARK: showSession
+    func showSession() {
+        if let user = Amplify.Auth.getCurrentUser() {
+            authState = .session(user: user)
+        } else {
+            authState = .landing
+        }
+    }
+    
+    // MARK: showRunning
+    func showRunning() {
+        authState = .running
+    }
+    
+    // MARK: showTrackContacts
+    func showTrackContacts() {
+        authState = .trackContacts
+    }
+    
+    // MARK: showTrack
+    func showTrack(userTrackingID: String) {
+        authState = .trackRunner(userTrackingID: userTrackingID)
+    }
+    
+    // MARK: showProfile
+    func showProfile() {
+        authState = .profile
+    }
+    
+    // MARK: showEmergencyContact
+    func showEmergencyContact() {
+        if let user = Amplify.Auth.getCurrentUser() {
+            authState = .emergencyContact(user: user)
+        } else {
+            authState = .landing
+        }
+    }
+    
+    
     
     
 }
