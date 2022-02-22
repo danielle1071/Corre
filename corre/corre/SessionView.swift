@@ -109,13 +109,28 @@ struct SessionView: View {
     
     
     @EnvironmentObject var sessionManager: SessionManger
+
     @State private var showingSheet = false
     
+
+    @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
+
     let user: AuthUser
     
     var body: some View {
         VStack {
         
+
+            // Text("WooHoo! You have signed in to the up-and-coming Corre Application! 🤯")
+            //    .font(.title2)
+            //    .multilineTextAlignment(.center)
+            
+            
+            // MARK: NEED TO UPDATE THE USER TRACKING ID --- CURRENTLY HARD CODED FOR TESTING!
+            Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
+            
+            
+
             Spacer()
             Button("Run", action: {
                 sessionManager.showRunning()
@@ -127,6 +142,8 @@ struct SessionView: View {
                     RoundedRectangle(cornerRadius: 20)
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
+            
+            
             Spacer()
             Button("Profile", action: {
                 sessionManager.showProfile()
@@ -191,10 +208,12 @@ struct SessionView: View {
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
             
-            
-            
+    
             Spacer()
-        }
+        }.onAppear(perform: {
+            sessionManager.databaseManager.createDeviceRecord()
+        })
+        
     }
     
 }

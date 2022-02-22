@@ -15,6 +15,7 @@ struct LandingView: View {
     var body: some View{
         
         VStack{
+            // Text("HERE: \(sessionManager.databaseManager.currentUser)")
             Text("Corre")
                 .font(.system(size: 36.0))
                 .foregroundColor(CustomColor.primarycolor)
@@ -62,6 +63,9 @@ struct LandingView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(CustomColor.backcolor.edgesIgnoringSafeArea(.all))
+        .onAppear(perform: {
+            print("LANDING PAGE: \(sessionManager.databaseManager.currentUser)")
+        })
         
     }
 }

@@ -27,6 +27,9 @@ struct correApp: App {
         } else {
             configureAmplify()
             
+            // MARK: tracking test
+            // sessionManager.observedAuthEvents()
+            
             Amplify.DataStore.start { (result) in
                 switch(result) {
                 case .success:
@@ -67,8 +70,15 @@ struct correApp: App {
             case .profile:
                 ProfileView()
                     .environmentObject(sessionManager)
-            case .emergencyContact:
-                EmergContactView()
+            // Note: let User: was causing EXC_I386_GPFLT error through trackContacts
+            case .emergencyContact(_):
+                EmergContactView(/*user: user*/)
+                    .environmentObject(sessionManager)
+            case .trackRunner(let userTrackingID):
+                TrackRunnerView(userTrackingID: userTrackingID)
+                    .environmentObject(sessionManager)
+            case .trackContacts:
+                TrackContactsView()
                     .environmentObject(sessionManager)
             }
             
@@ -82,7 +92,7 @@ struct correApp: App {
             try Amplify.add(plugin: AWSDataStorePlugin(modelRegistration: AmplifyModels()))
             try Amplify.add(plugin: AWSAPIPlugin())
             try Amplify.configure()
-            print("SUCCESS! APLIFY CONFIGURED!")
+            print("SUCCESS! AMPLIFY CONFIGURED!")
         } catch {
             print("SAD 😢 --- could not initialize Amplify", error)
         }
