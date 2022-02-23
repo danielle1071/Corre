@@ -115,7 +115,10 @@ struct SessionView: View {
 
     @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
 
-   
+
+
+    //@State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
+
     let user: AuthUser
     
     var body: some View {
