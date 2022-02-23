@@ -70,9 +70,9 @@ struct correApp: App {
                     .environmentObject(sessionManager)
             case .profile:
                 ProfileView()
-            case .navigation:
-                NavigationView()
-                    .environmentObject(sessionManager)
+//            case .navigation:
+//                NavBarView()
+//                    .environmentObject(sessionManager)
             case .friend:
                 FriendView()
                     .environmentObject(sessionManager)
@@ -81,6 +81,9 @@ struct correApp: App {
                     .environmentObject(sessionManager)
             case .trackRunner(let userTrackingID):
                 TrackRunnerView(userTrackingID: userTrackingID)
+                    .environmentObject(sessionManager)
+            case .navbar:
+                NavBarView()
                     .environmentObject(sessionManager)
             }
             

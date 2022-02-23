@@ -25,7 +25,7 @@ enum AuthState {
     case trackRunner(userTrackingID: String)
     // MARK: deleteThis
     // case startRun
-    case navigation
+    case navbar
     case friend
 }
 
@@ -208,8 +208,8 @@ final class SessionManger: ObservableObject {
         authState = .profile
     }
     
-    func showNavigation() {
-        authState = .navigation
+    func showNavBar() {
+        authState = .navbar
     }
     
     func showFriend() {

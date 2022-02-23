@@ -1,5 +1,5 @@
 //
-//  NavigationView.swift
+//  NavBarView.swift
 //  corre
 //
 //  Created by Mariana Botero on 2/15/22.
@@ -10,7 +10,7 @@ import SwiftUI
 import Amplify
 
 
-struct NavigationView: View {
+struct NavBarView: View {
 
     @EnvironmentObject var sessionManager: SessionManger
 
@@ -18,11 +18,11 @@ struct NavigationView: View {
     var body: some View {
         
         TabView {
-                SessionView()
-                    .tabItem {
-                        Image(systemName: "heart.fill")
-                        Text("sesh")
-                }
+//                SessionView()
+//                    .tabItem {
+//                        Image(systemName: "heart.fill")
+//                        Text("sesh")
+//                }
                 RunningView()
                     .tabItem {
                         Image(systemName: "heart.fill")
@@ -47,8 +47,8 @@ struct NavigationView: View {
     }
 }
 
-struct NavigationView_Previews: PreviewProvider {
+struct NavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView()
+        NavBarView()
     }
 }
