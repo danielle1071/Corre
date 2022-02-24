@@ -49,7 +49,14 @@ final class SessionManger: ObservableObject {
             print("This is user: ", user)
             if self.databaseManager.currentUser == nil {
                 print("database current user loaded is empty")
-                self.databaseManager.getUserProfile(user: user)
+                Task() {
+                    do {
+                        try await self.databaseManager.getUserProfile(user: user)
+                        try await self.databaseManager.createDeviceRecord()
+                    } catch {
+                        print("ERROR IN GET CURRENT AUTH USER")
+                    }
+                }
             }
             authState = .session(user: user)
         } else {

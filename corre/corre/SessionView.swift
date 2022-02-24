@@ -118,10 +118,11 @@ struct SessionView: View {
             
     
             Spacer()
-        }.onAppear(perform: {
-            sessionManager.databaseManager.createDeviceRecord()
-        })
-        
+        }
+//        .onAppear(perform: {
+//            sessionManager.databaseManager.createDeviceRecord()
+//        })
+
     }
     
 }
