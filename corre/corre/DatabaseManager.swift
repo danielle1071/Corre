@@ -121,6 +121,7 @@ class DatabaseManager: ObservableObject {
     func createDeviceRecord() {
         if currentUser == nil {
             print("No user loaded - can't create device record")
+            
             return
         }
         let deviceKeys = Device.keys
