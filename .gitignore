@@ -112,3 +112,4 @@ amplifytools.xcconfig
 #amplify-do-not-edit-end
 
 *cli.json
+*.DS_Store
