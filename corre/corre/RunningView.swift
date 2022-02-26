@@ -27,7 +27,8 @@ struct RunningView: View {
 
         static let lblue = Color("lightBlue")
     }
-    
+    // example phone number. Refer to SOS button
+    var phoneNumber = "718-555-5555"
 
     var body: some View {
         Spacer()
@@ -71,7 +72,13 @@ struct RunningView: View {
             Spacer()
             
             HStack {
-                Button(action:{}, label: {
+               // call emergency contact with example phone number
+                Button(action:{
+                    let phone = "tel://"
+                                    let phoneNumberformatted = phone + phoneNumber
+                                    guard let url = URL(string: phoneNumberformatted) else { return }
+                                    UIApplication.shared.open(url)
+                }, label: {
                     Text("SOS")
                         .fontWeight(.bold)
                         .frame(width: 150.0, height: 40.0)
