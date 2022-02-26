@@ -22,6 +22,8 @@ class DatabaseManager: ObservableObject {
     
     @Published var deviceTracking:Device?
     
+    var subscriptions = Set<AnyCancellable>()
+    
     func getUserProfile (user: AuthUser) async {
         
         let usrKey = User.keys
@@ -318,11 +320,9 @@ class DatabaseManager: ObservableObject {
                 print("OUTSIDE THE SWITCH OF GET EMERGENCY CONTACT")
                 switch(result) {
                 case .success(let items):
-                    for item in items {
-                        print("CHECK THIS ^^^^^")
-                        print("Emergency Contact: \(item.email)")
-                        self.emergencyContacts.append(item)
-                    }
+                    print("CHECK THIS ^^^^^")
+                    self.emergencyContacts = items
+                    
                 case .failure(let error):
                     print("Could not query DataStore: \(error)")
                 }
@@ -337,7 +337,9 @@ class DatabaseManager: ObservableObject {
             switch result {
             case .success(_):
                 print("Saved")
-                print(self.emergencyContacts.append(contact))
+                DispatchQueue.main.async {
+                    print(self.emergencyContacts.append(contact))
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }

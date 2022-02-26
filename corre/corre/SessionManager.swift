@@ -29,7 +29,7 @@ final class SessionManger: ObservableObject {
     
     @Published var isSignedIn = false
     @Published var authState: AuthState = .login
-    @Published var databaseManager: DatabaseManager = DatabaseManager()
+    @ObservedObject var databaseManager: DatabaseManager = DatabaseManager()
     
     struct Address: Codable {
         var locality: String
@@ -53,7 +53,9 @@ final class SessionManger: ObservableObject {
                         do {
                             try await self.databaseManager.getUserProfile(user: user)
                             try await self.databaseManager.createDeviceRecord()
-                            try await self.databaseManager.getEmergencyContacts()
+                            if self.databaseManager.emergencyContacts.isEmpty {
+                                try await self.databaseManager.getEmergencyContacts()
+                            }
                         } catch {
                             print("ERROR IN GET CURRENT AUTH USER")
                         }

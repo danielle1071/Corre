@@ -103,39 +103,13 @@ struct EmergContactView: View {
                                 print("Tapped A Contact")
                     
                 })
+               
             }
-                
-            
-//            Button (action: {}){
-//                HStack{
-//                    Text("Jane Doe")
-//                        .foregroundColor(Color("primaryColor"))
-//                    Spacer()
-//                    Image(systemName: "arrow.right")
-//                        .foregroundColor(Color("primaryColor"))
-//                }
-//                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-//
-//
-//            }
-
             Divider()
             .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
 
         }
-        
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
-        .onAppear(perform: {
-//            if sessionManager.databaseManager.emergencyContacts.isEmpty {
-//                if sessionManager.databaseManager.currentUser == nil {
-//                    print("Error, current user empty")
-//                    sessionManager.showSession()
-//                } else {
-//                    sessionManager.databaseManager.getEmergencyContacts()
-//                    print("This is the emergency contacs: \(sessionManager.databaseManager.emergencyContacts)")
-//                }
-//            }
-        })
     }
     
     struct EmergencyContactRow: View {
@@ -147,139 +121,6 @@ struct EmergContactView: View {
         }
     }
 }
-
-//<<<<<<< HEAD
-//    @StateObject var locationService = LocationManager()
-//    @State var tokens: Set<AnyCancellable> = .init()
-//    @State var mapState = AMLMapViewState()
-//
-//    let user: AuthUser
-//
-//    var body: some View {
-//
-//        VStack {
-//
-//            // MARK: change this to stop run!
-//            Button("Back", action: {
-//                sessionManager.showSession()
-//
-//                // stops tracker resources
-//                locationService.stopTracking()
-//            })
-//
-//=======
-//>>>>>>> 8d637eb231977b632cc5e55feb18cb9de61b328d
-//            Spacer()
-//
-//            AMLMapView(mapState: mapState)
-//                .showUserLocation(true)
-//                .edgesIgnoringSafeArea(.all)
-//
-//
-//            Spacer()
-//            Text("Tracking view")
-//            Spacer()
-//
-//            Button("Sign Out", action: {
-//                sessionManager.signOut()
-//            })
-//        }
-//<<<<<<< HEAD
-//        .onAppear(perform: getRunnerLocation)
-//    }
-//
-//
-//    func getRunnerLocation() {
-//
-//        locationService.storeUsername(id: "Database")
-//
-//        locationService.coordinatesPublisher
-//            .receive(on: DispatchQueue.main)
-//            .sink { coordinates in
-//                print("getCurrentUserLocation - user's Coordinates: ", coordinates)
-//                self.mapState.center = coordinates
-//            }
-//            .store(in: &tokens)
-//
-//=======
-//>>>>>>> 8d637eb231977b632cc5e55feb18cb9de61b328d
-//    @EnvironmentObject var sessionManager: SessionManger
-//    @State var postsSubscription: AnyCancellable?
-//    @State var users = [User]()
-//    let user: AuthUser
-//
-//    var body: some View {
-//        VStack {
-//
-//            // MARK: change this to stop run!
-//            Button("Back", action: {
-//                sessionManager.showSession()
-//            })
-//
-//            List {
-//                ForEach(users) { user in
-//                    VStack {
-//                        Spacer()
-//                        HStack {
-//                            Spacer()
-//                            Text(user.username)
-//
-//                            Spacer()
-//                        }
-//                        .frame(
-//                            minWidth: 0,
-//                            maxWidth: .infinity,
-//                            minHeight: 180,
-//                            maxHeight: 180,
-//                            alignment: .center
-//                        )
-//
-//                        Spacer()
-//                    }
-//                }
-//            }
-//            Spacer()
-//
-//        }.onAppear {
-//            observeUsers()
-//            queryUsers()
-//        }
-//    }
-//
-//
-//    func queryUsers() {
-//
-//        let u = User.keys
-//        Amplify.DataStore.query(User.self) {
-//            result in
-//            switch result {
-//            case let .success(users):
-//                self.users = users
-//            case let .failure(error):
-//                print(error)
-//            }
-//        }
-//    }
-//
-//    func observeUsers() {
-//
-//        postsSubscription = Amplify.DataStore.publisher(for: User.self)
-//            .sink {
-//                if case let .failure(error) = $0 {
-//                    print("%%% Subscription received error - \(error.localizedDescription)")
-//                }
-//            }
-//        receiveValue: { changes in
-//            // handle incoming changes
-//            print("%%% Subscription received mutation: \(changes)")
-//            queryUsers()
-//        }
-//    }
-//struct EmergContactView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EmergContactView(user: AuthUser.self as! AuthUser)
-//    }
-//}
 
 
 struct AddEmergencyContact: View {
@@ -330,14 +171,14 @@ struct AddEmergencyContact: View {
                 Button("Create", action: {
                     
                     
-//                    sessionManager
-//                        .databaseManager
-//                        .createEmergencyContactRecord(
-//                            firstName: ecFirst,
-//                            lastName: ecLast,
-//                            searchVal: ecEmail,
-//                            phoneNumber: ecPhone
-//                        )
+                    sessionManager
+                        .databaseManager
+                        .createEmergencyContactRecord(
+                            firstName: ecFirst,
+                            lastName: ecLast,
+                            searchVal: ecEmail,
+                            phoneNumber: ecPhone
+                        )
                     close()
                 })
                     .font(.custom("Proxima Nova Rg Regular", size: 20))
