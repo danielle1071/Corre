@@ -69,9 +69,9 @@
 		F22DB80327AC518200678872 /* AmplifyMapLibreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = F22DB80227AC518200678872 /* AmplifyMapLibreAdapter */; };
 		F22DB80527AC518200678872 /* AmplifyMapLibreUI in Frameworks */ = {isa = PBXBuildFile; productRef = F22DB80427AC518200678872 /* AmplifyMapLibreUI */; };
 		F2A1714C27BDB1C900DFA288 /* TrackContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */; };
-		F2D7AF2427B95423007C246A /* EmergContactRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */; };
 		F2F0DC1D27B20DD4003E65E8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
+
 
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +129,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
+
 
 
 /* Begin PBXFileReference section */
@@ -196,6 +197,7 @@
 		F2D7AF2127B879F6007C246A /* User+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Extensions.swift"; sourceTree = "<group>"; };
 
 		F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactRunningView.swift; sourceTree = "<group>"; };
+
 		F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FF7A7BF119B388DEACB526FE /* NotificationType.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = NotificationType.swift; path = amplify/generated/models/NotificationType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -303,7 +305,6 @@
 				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
 				D9BE965127AF4B8A00ED177A /* FriendView.swift */,
 				D94A595827C4540D001CA61C /* Error1View.swift */,
-				F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */,
 				4AB6137327B1DEDE0018F678 /* EmergContactView.swift */,
 				4AB6137127B1DEC90018F678 /* ProfileView.swift */,
 				D9BE965327B2E60C00ED177A /* DataStore.swift */,
@@ -316,7 +317,9 @@
 				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
 				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
+
 				4C0E53AA2770FE70001BEA58,
+
 				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
@@ -623,7 +626,6 @@
 				4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */,
 				A3348095665A8CC53DC55054 /* AmplifyModels.swift in Sources */,
 				624B4EF640BB351DC532D4AE /* EmergencyContact+Schema.swift in Sources */,
-				F2D7AF2427B95423007C246A /* EmergContactRunningView.swift in Sources */,
 				7D0D95D1C4E60294E010D151 /* EmergencyContact.swift in Sources */,
 				2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */,
 				ED51C2ACBC4CC71DEE5ED476 /* Run.swift in Sources */,
@@ -839,7 +841,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre;
+				PRODUCT_BUNDLE_IDENTIFIER = org.correDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -870,7 +872,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre;
+				PRODUCT_BUNDLE_IDENTIFIER = org.correDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
