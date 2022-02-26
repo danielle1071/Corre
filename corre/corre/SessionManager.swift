@@ -23,6 +23,8 @@ enum AuthState {
     case emergencyContact(user: AuthUser)
     case trackContacts
     case trackRunner(userTrackingID: String)
+    case notification
+    case friendView
 }
 
 final class SessionManger: ObservableObject {
@@ -251,8 +253,15 @@ final class SessionManger: ObservableObject {
         }
     }
     
+    // MARK: showFriendView
+    func showFriendView() {
+        authState = .friendView
+    }
     
-    
+    // MARK: showNotificationView
+    func showNotificationView() {
+        authState = .notification
+    }
     
 }
 

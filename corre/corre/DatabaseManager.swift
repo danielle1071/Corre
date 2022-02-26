@@ -22,6 +22,8 @@ class DatabaseManager: ObservableObject {
     
     @Published var deviceTracking:Device?
     
+    @Published var notifications = [Notification]()
+    
     func getUserProfile (user: AuthUser) {
         
         let usrKey = User.keys
@@ -320,4 +322,23 @@ class DatabaseManager: ObservableObject {
         }
     }
 
+    func getNotifications() {
+        print("STARTING THE GET NOTIFICATION FUNCTION")
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                getUserProfile(user: user)
+            }
+        } else {
+            let keys = Notification.keys
+            Amplify.DataStore.query(Notification.self, where: keys.receiverId == currentUser!.id) { result in
+                switch(result) {
+                case .success(let items):
+                    print("*()*()*")
+                    self.notifications = items
+                case .failure(let error):
+                    print("Could not query DataStore: \(error)")
+                }
+            }
+        }
+    }
 }
