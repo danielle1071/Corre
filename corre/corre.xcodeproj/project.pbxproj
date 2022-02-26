@@ -52,14 +52,86 @@
 		D9BE965227AF4B8A00ED177A /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BE965127AF4B8A00ED177A /* FriendView.swift */; };
 		D9BE965427B2E60C00ED177A /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BE965327B2E60C00ED177A /* DataStore.swift */; };
 		D9C2B62327AB1AFB0058365E /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C2B62227AB1AFB0058365E /* LandingView.swift */; };
+		D9F4612827CAED030014E5EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9F4612727CAED030014E5EC /* Assets.xcassets */; };
+		D9F4612E27CAED030014E5EC /* correWatch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D9F4612D27CAED030014E5EC /* correWatch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D9F4613327CAED030014E5EC /* correApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4613227CAED030014E5EC /* correApp.swift */; };
+		D9F4613527CAED030014E5EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4613427CAED030014E5EC /* ContentView.swift */; };
+		D9F4613727CAED030014E5EC /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4613627CAED030014E5EC /* NotificationController.swift */; };
+		D9F4613927CAED030014E5EC /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4613827CAED030014E5EC /* NotificationView.swift */; };
+		D9F4613B27CAED030014E5EC /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4613A27CAED030014E5EC /* ComplicationController.swift */; };
+		D9F4613D27CAED050014E5EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9F4613C27CAED050014E5EC /* Assets.xcassets */; };
+		D9F4614027CAED050014E5EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9F4613F27CAED050014E5EC /* Preview Assets.xcassets */; };
+		D9F4614C27CAED050014E5EC /* correWatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4614B27CAED050014E5EC /* correWatchTests.swift */; };
+		D9F4615627CAED050014E5EC /* correWatchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4615527CAED050014E5EC /* correWatchUITests.swift */; };
+		D9F4615827CAED050014E5EC /* correWatchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4615727CAED050014E5EC /* correWatchUITestsLaunchTests.swift */; };
+		D9F4615B27CAED050014E5EC /* correWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D9F4612527CAECFE0014E5EC /* correWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E4B3EDF3439FB6B8094E621C /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */; };
 		ED51C2ACBC4CC71DEE5ED476 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0BAF37876727B72DDD7B54 /* Run.swift */; };
 		F22DB80327AC518200678872 /* AmplifyMapLibreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = F22DB80227AC518200678872 /* AmplifyMapLibreAdapter */; };
 		F22DB80527AC518200678872 /* AmplifyMapLibreUI in Frameworks */ = {isa = PBXBuildFile; productRef = F22DB80427AC518200678872 /* AmplifyMapLibreUI */; };
 		F2A1714C27BDB1C900DFA288 /* TrackContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */; };
-		F2D7AF2427B95423007C246A /* EmergContactRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */; };
 		F2F0DC1D27B20DD4003E65E8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
+
+
+
+/* Begin PBXContainerItemProxy section */
+		D9F4612F27CAED030014E5EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C0E53992770FE6F001BEA58 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9F4612C27CAED030014E5EC;
+			remoteInfo = "correWatch WatchKit Extension";
+		};
+		D9F4614827CAED050014E5EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C0E53992770FE6F001BEA58 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9F4612C27CAED030014E5EC;
+			remoteInfo = "correWatch WatchKit Extension";
+		};
+		D9F4615227CAED050014E5EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C0E53992770FE6F001BEA58 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9F4612427CAECFE0014E5EC;
+			remoteInfo = correWatch;
+		};
+		D9F4615927CAED050014E5EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C0E53992770FE6F001BEA58 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9F4612427CAECFE0014E5EC;
+			remoteInfo = correWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D9F4615C27CAED050014E5EC /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				D9F4615B27CAED050014E5EC /* correWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F4615F27CAED050014E5EC /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D9F4612E27CAED030014E5EC /* correWatch WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+
 
 /* Begin PBXFileReference section */
 		0A7FC320847CC11E5CC09428 /* Message+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Message+Schema.swift"; path = "amplify/generated/models/Message+Schema.swift"; sourceTree = "<group>"; };
@@ -102,11 +174,33 @@
 		D9BE965127AF4B8A00ED177A /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		D9BE965327B2E60C00ED177A /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		D9C2B62227AB1AFB0058365E /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		D9F4612527CAECFE0014E5EC /* correWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = correWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9F4612727CAED030014E5EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D9F4612D27CAED030014E5EC /* correWatch WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "correWatch WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9F4613227CAED030014E5EC /* correApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = correApp.swift; sourceTree = "<group>"; };
+		D9F4613427CAED030014E5EC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D9F4613627CAED030014E5EC /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		D9F4613827CAED030014E5EC /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		D9F4613A27CAED030014E5EC /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		D9F4613C27CAED050014E5EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D9F4613F27CAED050014E5EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D9F4614127CAED050014E5EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9F4614227CAED050014E5EC /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		D9F4614727CAED050014E5EC /* correWatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = correWatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9F4614B27CAED050014E5EC /* correWatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = correWatchTests.swift; sourceTree = "<group>"; };
+		D9F4615127CAED050014E5EC /* correWatchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = correWatchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9F4615527CAED050014E5EC /* correWatchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = correWatchUITests.swift; sourceTree = "<group>"; };
+		D9F4615727CAED050014E5EC /* correWatchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = correWatchUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-		EC6DBF85CB4DAB8D5A6E2902 /* Notification.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Notification.swift; path = amplify/generated/models/Notification.swift; sourceTree = "<group>"; };
-		F0C7A474AA58645C6841624F /* Message.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Message.swift; path = amplify/generated/models/Message.swift; sourceTree = "<group>"; };
+
+		EC6DBF85CB4DAB8D5A6E2902 /* Notification.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = Notification.swift; path = amplify/generated/models/Notification.swift; sourceTree = "<group>"; };
+		F0C7A474AA58645C6841624F /* Message.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = Message.swift; path = amplify/generated/models/Message.swift; sourceTree = "<group>"; };
 		F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackContactsView.swift; sourceTree = "<group>"; };
+		F2D7AF2127B879F6007C246A /* User+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Extensions.swift"; sourceTree = "<group>"; };
+
+
 		F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactRunningView.swift; sourceTree = "<group>"; };
+
 		F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FF7A7BF119B388DEACB526FE /* NotificationType.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = NotificationType.swift; path = amplify/generated/models/NotificationType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +218,27 @@
 				F22DB80527AC518200678872 /* AmplifyMapLibreUI in Frameworks */,
 				4C0E53BA27712CA4001BEA58 /* AWSCognitoAuthPlugin in Frameworks */,
 				4C0E53C027712CA4001BEA58 /* AWSPluginsCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F4612A27CAED030014E5EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F4614427CAED050014E5EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F4614E27CAED050014E5EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +273,10 @@
 				4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */,
 				4C792CCB2793140D00FDCF6E /* awsconfiguration.json */,
 				4C0E53A32770FE6F001BEA58 /* corre */,
+				D9F4612627CAECFE0014E5EC /* correWatch */,
+				D9F4613127CAED030014E5EC /* correWatch WatchKit Extension */,
+				D9F4614A27CAED050014E5EC /* correWatchTests */,
+				D9F4615427CAED050014E5EC /* correWatchUITests */,
 				4C0E53A22770FE6F001BEA58 /* Products */,
 				766E70382FD1F00A29FA0F7B /* AmplifyConfig */,
 				4C792CC52793136A00FDCF6E /* Frameworks */,
@@ -169,6 +288,10 @@
 			isa = PBXGroup;
 			children = (
 				4C0E53A12770FE6F001BEA58 /* corre.app */,
+				D9F4612527CAECFE0014E5EC /* correWatch.app */,
+				D9F4612D27CAED030014E5EC /* correWatch WatchKit Extension.appex */,
+				D9F4614727CAED050014E5EC /* correWatchTests.xctest */,
+				D9F4615127CAED050014E5EC /* correWatchUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,7 +308,6 @@
 				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
 				D9BE965127AF4B8A00ED177A /* FriendView.swift */,
 				D94A595827C4540D001CA61C /* Error1View.swift */,
-				F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */,
 				4AB6137327B1DEDE0018F678 /* EmergContactView.swift */,
 				4AB6137127B1DEC90018F678 /* ProfileView.swift */,
 				D9BE965327B2E60C00ED177A /* DataStore.swift */,
@@ -198,6 +320,10 @@
 				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
 				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
+
+				4C0E53AA2770FE70001BEA58,
+
+
 				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
@@ -223,6 +349,55 @@
 			name = AmplifyConfig;
 			sourceTree = "<group>";
 		};
+		D9F4612627CAECFE0014E5EC /* correWatch */ = {
+			isa = PBXGroup;
+			children = (
+				D9F4612727CAED030014E5EC /* Assets.xcassets */,
+			);
+			path = correWatch;
+			sourceTree = "<group>";
+		};
+		D9F4613127CAED030014E5EC /* correWatch WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D9F4613227CAED030014E5EC /* correApp.swift */,
+				D9F4613427CAED030014E5EC /* ContentView.swift */,
+				D9F4613627CAED030014E5EC /* NotificationController.swift */,
+				D9F4613827CAED030014E5EC /* NotificationView.swift */,
+				D9F4613A27CAED030014E5EC /* ComplicationController.swift */,
+				D9F4613C27CAED050014E5EC /* Assets.xcassets */,
+				D9F4614127CAED050014E5EC /* Info.plist */,
+				D9F4614227CAED050014E5EC /* PushNotificationPayload.apns */,
+				D9F4613E27CAED050014E5EC /* Preview Content */,
+			);
+			path = "correWatch WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		D9F4613E27CAED050014E5EC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D9F4613F27CAED050014E5EC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D9F4614A27CAED050014E5EC /* correWatchTests */ = {
+			isa = PBXGroup;
+			children = (
+				D9F4614B27CAED050014E5EC /* correWatchTests.swift */,
+			);
+			path = correWatchTests;
+			sourceTree = "<group>";
+		};
+		D9F4615427CAED050014E5EC /* correWatchUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D9F4615527CAED050014E5EC /* correWatchUITests.swift */,
+				D9F4615727CAED050014E5EC /* correWatchUITestsLaunchTests.swift */,
+			);
+			path = correWatchUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -233,10 +408,12 @@
 				4C0E539D2770FE6F001BEA58 /* Sources */,
 				4C0E539E2770FE6F001BEA58 /* Frameworks */,
 				4C0E539F2770FE6F001BEA58 /* Resources */,
+				D9F4615C27CAED050014E5EC /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D9F4615A27CAED050014E5EC /* PBXTargetDependency */,
 			);
 			name = corre;
 			packageProductDependencies = (
@@ -253,6 +430,76 @@
 			productReference = 4C0E53A12770FE6F001BEA58 /* corre.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D9F4612427CAECFE0014E5EC /* correWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9F4616727CAED050014E5EC /* Build configuration list for PBXNativeTarget "correWatch" */;
+			buildPhases = (
+				D9F4612327CAECFE0014E5EC /* Resources */,
+				D9F4615F27CAED050014E5EC /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D9F4613027CAED030014E5EC /* PBXTargetDependency */,
+			);
+			name = correWatch;
+			productName = correWatch;
+			productReference = D9F4612527CAECFE0014E5EC /* correWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		D9F4612C27CAED030014E5EC /* correWatch WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9F4616627CAED050014E5EC /* Build configuration list for PBXNativeTarget "correWatch WatchKit Extension" */;
+			buildPhases = (
+				D9F4612927CAED030014E5EC /* Sources */,
+				D9F4612A27CAED030014E5EC /* Frameworks */,
+				D9F4612B27CAED030014E5EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "correWatch WatchKit Extension";
+			productName = "correWatch WatchKit Extension";
+			productReference = D9F4612D27CAED030014E5EC /* correWatch WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		D9F4614627CAED050014E5EC /* correWatchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9F4616827CAED050014E5EC /* Build configuration list for PBXNativeTarget "correWatchTests" */;
+			buildPhases = (
+				D9F4614327CAED050014E5EC /* Sources */,
+				D9F4614427CAED050014E5EC /* Frameworks */,
+				D9F4614527CAED050014E5EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D9F4614927CAED050014E5EC /* PBXTargetDependency */,
+			);
+			name = correWatchTests;
+			productName = correWatchTests;
+			productReference = D9F4614727CAED050014E5EC /* correWatchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D9F4615027CAED050014E5EC /* correWatchUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9F4616927CAED050014E5EC /* Build configuration list for PBXNativeTarget "correWatchUITests" */;
+			buildPhases = (
+				D9F4614D27CAED050014E5EC /* Sources */,
+				D9F4614E27CAED050014E5EC /* Frameworks */,
+				D9F4614F27CAED050014E5EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D9F4615327CAED050014E5EC /* PBXTargetDependency */,
+			);
+			name = correWatchUITests;
+			productName = correWatchUITests;
+			productReference = D9F4615127CAED050014E5EC /* correWatchUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -260,11 +507,25 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1310;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					4C0E53A02770FE6F001BEA58 = {
 						CreatedOnToolsVersion = 13.1;
+					};
+					D9F4612427CAECFE0014E5EC = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					D9F4612C27CAED030014E5EC = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					D9F4614627CAED050014E5EC = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = D9F4612C27CAED030014E5EC;
+					};
+					D9F4615027CAED050014E5EC = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = D9F4612427CAECFE0014E5EC;
 					};
 				};
 			};
@@ -286,6 +547,10 @@
 			projectRoot = "";
 			targets = (
 				4C0E53A02770FE6F001BEA58 /* corre */,
+				D9F4612427CAECFE0014E5EC /* correWatch */,
+				D9F4612C27CAED030014E5EC /* correWatch WatchKit Extension */,
+				D9F4614627CAED050014E5EC /* correWatchTests */,
+				D9F4615027CAED050014E5EC /* correWatchUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -301,6 +566,37 @@
 				4A2FA86727B359BF00B55D53 /* VarelaRound-Regular.ttf in Resources */,
 				C0D1D47BCA36C82E45CDC20F /* awsconfiguration.json in Resources */,
 				E4B3EDF3439FB6B8094E621C /* amplifyconfiguration.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F4612327CAECFE0014E5EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9F4612827CAED030014E5EC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F4612B27CAED030014E5EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9F4614027CAED050014E5EC /* Preview Assets.xcassets in Resources */,
+				D9F4613D27CAED050014E5EC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F4614527CAED050014E5EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F4614F27CAED050014E5EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,7 +630,6 @@
 				4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */,
 				A3348095665A8CC53DC55054 /* AmplifyModels.swift in Sources */,
 				624B4EF640BB351DC532D4AE /* EmergencyContact+Schema.swift in Sources */,
-				F2D7AF2427B95423007C246A /* EmergContactRunningView.swift in Sources */,
 				7D0D95D1C4E60294E010D151 /* EmergencyContact.swift in Sources */,
 				2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */,
 				ED51C2ACBC4CC71DEE5ED476 /* Run.swift in Sources */,
@@ -352,7 +647,59 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D9F4612927CAED030014E5EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9F4613727CAED030014E5EC /* NotificationController.swift in Sources */,
+				D9F4613527CAED030014E5EC /* ContentView.swift in Sources */,
+				D9F4613B27CAED030014E5EC /* ComplicationController.swift in Sources */,
+				D9F4613327CAED030014E5EC /* correApp.swift in Sources */,
+				D9F4613927CAED030014E5EC /* NotificationView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F4614327CAED050014E5EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9F4614C27CAED050014E5EC /* correWatchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9F4614D27CAED050014E5EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9F4615827CAED050014E5EC /* correWatchUITestsLaunchTests.swift in Sources */,
+				D9F4615627CAED050014E5EC /* correWatchUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D9F4613027CAED030014E5EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9F4612C27CAED030014E5EC /* correWatch WatchKit Extension */;
+			targetProxy = D9F4612F27CAED030014E5EC /* PBXContainerItemProxy */;
+		};
+		D9F4614927CAED050014E5EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9F4612C27CAED030014E5EC /* correWatch WatchKit Extension */;
+			targetProxy = D9F4614827CAED050014E5EC /* PBXContainerItemProxy */;
+		};
+		D9F4615327CAED050014E5EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9F4612427CAECFE0014E5EC /* correWatch */;
+			targetProxy = D9F4615227CAED050014E5EC /* PBXContainerItemProxy */;
+		};
+		D9F4615A27CAED050014E5EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9F4612427CAECFE0014E5EC /* correWatch */;
+			targetProxy = D9F4615927CAED050014E5EC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4C0E53AD2770FE70001BEA58 /* Debug */ = {
@@ -498,7 +845,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre;
+				PRODUCT_BUNDLE_IDENTIFIER = org.correDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -529,11 +876,199 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre;
+				PRODUCT_BUNDLE_IDENTIFIER = org.correDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D9F4615D27CAED050014E5EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_MODULE = correWatch_WatchKit_Extension;
+				INFOPLIST_KEY_CFBundleDisplayName = correWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = my.org.corre;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Debug;
+		};
+		D9F4615E27CAED050014E5EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_MODULE = correWatch_WatchKit_Extension;
+				INFOPLIST_KEY_CFBundleDisplayName = correWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = my.org.corre;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Release;
+		};
+		D9F4616027CAED050014E5EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"correWatch WatchKit Extension/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "correWatch WatchKit Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "correWatch WatchKit Extension";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Debug;
+		};
+		D9F4616127CAED050014E5EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"correWatch WatchKit Extension/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "correWatch WatchKit Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "correWatch WatchKit Extension";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Release;
+		};
+		D9F4616227CAED050014E5EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/correWatch WatchKit Extension.appex/correWatch WatchKit Extension";
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Debug;
+		};
+		D9F4616327CAED050014E5EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/correWatch WatchKit Extension.appex/correWatch WatchKit Extension";
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Release;
+		};
+		D9F4616427CAED050014E5EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = correWatch;
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
+			};
+			name = Debug;
+		};
+		D9F4616527CAED050014E5EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = correWatch;
+				WATCHOS_DEPLOYMENT_TARGET = 8.3;
 			};
 			name = Release;
 		};
@@ -554,6 +1089,42 @@
 			buildConfigurations = (
 				4C0E53B02770FE70001BEA58 /* Debug */,
 				4C0E53B12770FE70001BEA58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9F4616627CAED050014E5EC /* Build configuration list for PBXNativeTarget "correWatch WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9F4616027CAED050014E5EC /* Debug */,
+				D9F4616127CAED050014E5EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9F4616727CAED050014E5EC /* Build configuration list for PBXNativeTarget "correWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9F4615D27CAED050014E5EC /* Debug */,
+				D9F4615E27CAED050014E5EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9F4616827CAED050014E5EC /* Build configuration list for PBXNativeTarget "correWatchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9F4616227CAED050014E5EC /* Debug */,
+				D9F4616327CAED050014E5EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9F4616927CAED050014E5EC /* Build configuration list for PBXNativeTarget "correWatchUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9F4616427CAED050014E5EC /* Debug */,
+				D9F4616527CAED050014E5EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
