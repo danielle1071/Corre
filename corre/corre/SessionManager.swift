@@ -50,12 +50,13 @@ final class SessionManger: ObservableObject {
             if self.databaseManager.currentUser == nil {
                 print("database current user loaded is empty")
                 Task() {
-                    do {
-                        try await self.databaseManager.getUserProfile(user: user)
-                        try await self.databaseManager.createDeviceRecord()
-                    } catch {
-                        print("ERROR IN GET CURRENT AUTH USER")
-                    }
+                        do {
+                            try await self.databaseManager.getUserProfile(user: user)
+                            try await self.databaseManager.createDeviceRecord()
+                            try await self.databaseManager.getEmergencyContacts()
+                        } catch {
+                            print("ERROR IN GET CURRENT AUTH USER")
+                        }
                 }
             }
             authState = .session(user: user)
