@@ -22,12 +22,18 @@ class DatabaseManager: ObservableObject {
     
     @Published var deviceTracking:Device?
     
+
     @Published var notifications = [Notification]()
     
-    func getUserProfile (user: AuthUser) {
+
+
+    var subscriptions = Set<AnyCancellable>()
+    
+    func getUserProfile (user: AuthUser) async {
+
         
         let usrKey = User.keys
-        Amplify.DataStore.query(User.self, where: usrKey.sub == user.userId) { result in
+        await Amplify.DataStore.query(User.self, where: usrKey.sub == user.userId) { result in
             print("RESULT: \(result)")
             print("OUTSIDE THE SWITCH")
             switch(result) {
@@ -229,6 +235,7 @@ class DatabaseManager: ObservableObject {
         let updatedAt = createdAt
         var firstName = ""
         var lastName = ""
+        var email = "doNotEmail@ERROR.com".lowercased()
         
         Amplify.Auth.fetchUserAttributes() { result in
             switch result {
@@ -238,6 +245,8 @@ class DatabaseManager: ObservableObject {
                         firstName = attribute.value
                     } else if attribute.key == AuthUserAttributeKey.familyName {
                         lastName = attribute.value
+                    } else if attribute.key == AuthUserAttributeKey.email {
+                        email = attribute.value
                     }
                 }
                 print("User attributes - \(attributes)")
@@ -249,7 +258,7 @@ class DatabaseManager: ObservableObject {
 
         print("Inside the createUserRecordFunction")
         
-        let newUser = User(sub: sub, username: userName, bio: bio, totalDistance: totalDistance, runningStatus: runningStatus, friends: friends, blockedUsers: blockedUsers, createdAt: createdAt, updatedAt: updatedAt)
+        let newUser = User(sub: sub, username: userName, bio: bio, totalDistance: totalDistance, runningStatus: runningStatus, friends: friends, blockedUsers: blockedUsers, email: email, createdAt: createdAt, updatedAt: updatedAt)
         
         print(newUser)
         
@@ -301,7 +310,14 @@ class DatabaseManager: ObservableObject {
     func getEmergencyContacts() {
         if self.currentUser == nil {
             if let user = Amplify.Auth.getCurrentUser() {
-                getUserProfile(user: user)
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+                
             }
         } else {
             let emergencyKeys = EmergencyContact.keys
@@ -310,17 +326,16 @@ class DatabaseManager: ObservableObject {
                 print("OUTSIDE THE SWITCH OF GET EMERGENCY CONTACT")
                 switch(result) {
                 case .success(let items):
-                    for item in items {
-                        print("CHECK THIS ^^^^^")
-                        print("Emergency Contact: \(item.email)")
-                        self.emergencyContacts.append(item)
-                    }
+                    print("CHECK THIS ^^^^^")
+                    self.emergencyContacts = items
+                    
                 case .failure(let error):
                     print("Could not query DataStore: \(error)")
                 }
             }
         }
     }
+
 
     func getNotifications() {
         print("STARTING THE GET NOTIFICATION FUNCTION")
@@ -341,4 +356,108 @@ class DatabaseManager: ObservableObject {
             }
         }
     }
+
+    func createEmergencyContactRecord(contact: EmergencyContact) {
+        print("INSIDE THE CREATE EMERGENCY CONTACT RECORD!")
+        print("RECORD TRYING TO SAVE: \(contact)")
+        Amplify.DataStore.save(contact) { result in
+            switch result {
+            case .success(_):
+                print("Saved")
+                DispatchQueue.main.async {
+                    print(self.emergencyContacts.append(contact))
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func createEmergencyContactRecord ( firstName: String,
+                                        lastName: String,
+                                        searchVal: String,
+                                        phoneNumber: String ){
+        
+//        var user: User?
+//        var user1: User?
+        var userRecord: User?
+        Task() {
+                do {
+                    var user = try await getUserRecordEmailSearch(email: searchVal)
+//                    try await user1 = getUserRecordUsernameSearch(username: searchVal)
+                    if user == nil {
+                        user = try await getUserRecordUsernameSearch(username: searchVal)
+                    }
+                    if user == nil {
+                        let contact = EmergencyContact (firstName: firstName, lastName: lastName, email: searchVal, phoneNumber: phoneNumber, appUser: false, userID: currentUser?.id ?? "0000")
+                        print("THIS IS THE EMERGENCY CONTACT WHEN USER == NIL :  \(contact)")
+                        createEmergencyContactRecord(contact: contact)
+                    } else {
+                        let contact = EmergencyContact (firstName: firstName, lastName: lastName, email: user?.email ?? "ERROR@ERROR.com".lowercased(), phoneNumber: phoneNumber, appUser: true, emergencyContactUserId: user?.id ?? "0000", userID: currentUser?.id ?? "0000", emergencyContactAppUsername: user?.username ?? "ERROR")
+                        print("THIS IS THE EMERGENCY CONTACT WHEN USER != NIL : \(contact)")
+                        createEmergencyContactRecord(contact: contact)
+                    }
+                } catch {
+                    print("ERROR IN CREATE EMERGENCY CONTACT RECORD!")
+                }
+        }
+    }
+    
+    func getUserRecordEmailSearch (email: String) async -> User? {
+        let usrKey = User.keys
+        var retVal: User?
+        await Amplify.DataStore.query(User.self, where: usrKey.email == email.lowercased()) { result in
+            print("RESULT INSIDE GET USER RECORD FUNCTION WITH EMAIL: \(result)")
+            switch(result) {
+            case .success(let items):
+                if items.count > 1 {
+                    print("ERROR --- More than 1 user record exists when looking up with the email address, using first one found")
+                    retVal = items[0]
+                } else {
+                    for item in items {
+                        print("CHECK THIS ****")
+                        print("User ID: \(item.id)")
+                        print("This is the item: \(item)")
+                        retVal = item
+                    }
+                }
+                if items.isEmpty {
+                    print("NO USER RECORD FOUND WITH EMAIL LOOKUP")
+                }
+            case .failure(let error):
+                print("Could not query DataStore: \(error)")
+            }
+        }
+        return retVal
+    }
+    
+    func getUserRecordUsernameSearch (username: String) async -> User? {
+        let usrKey = User.keys
+        var retVal: User?
+        await Amplify.DataStore.query(User.self, where: usrKey.username == username.lowercased()) { result in
+            print("RESULT INSIDE GET USER RECORD FUNCTION WITH USERNAME: \(result)")
+            switch(result) {
+            case .success(let items):
+                if items.count > 1 {
+                    print("ERROR --- More than 1 user record exists when looking up with the email address, using first one found")
+                    retVal = items[0]
+                } else {
+                    for item in items {
+                        print("CHECK THIS $$$$$$")
+                        print("User ID: \(item.id)")
+                        print("This is the item: \(item)")
+                        retVal = item
+                    }
+                }
+                if items.isEmpty {
+                    print("NO USER RECORD FOUND WITH USERNAME LOOKUP")
+                }
+            case .failure(let error):
+                print("Could not query DataStore: \(error)")
+            }
+        }
+        return retVal
+    }
+    
+
 }
