@@ -37,11 +37,11 @@ struct SessionView: View {
             
             
             // MARK: NEED TO UPDATE THE USER TRACKING ID --- CURRENTLY HARD CODED FOR TESTING!
-            Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
+            //Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
             
             
 
-            Spacer()
+            //Spacer()
             Button("Run", action: {
                 sessionManager.showRunning()
             }).padding()
@@ -106,6 +106,18 @@ struct SessionView: View {
     
 
     
+            Spacer()
+            Button("Message (for test)", action: {
+                sessionManager.showMessage()
+            }).padding()
+                .padding(.horizontal, 70)
+                .foregroundColor(CustomColor.primarycolor)
+                .background(CustomColor.backcolor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                )
+            
             Spacer()
             Button("Sign Out", action: {
                 sessionManager.signOut()
