@@ -53,9 +53,9 @@ final class SessionManger: ObservableObject {
                         do {
                             try await self.databaseManager.getUserProfile(user: user)
                             try await self.databaseManager.createDeviceRecord()
-                            if self.databaseManager.emergencyContacts.isEmpty {
-                                try await self.databaseManager.getEmergencyContacts()
-                            }
+                            
+                            try await self.databaseManager.getEmergencyContacts()
+                            
                         } catch {
                             print("ERROR IN GET CURRENT AUTH USER")
                         }
