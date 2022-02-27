@@ -89,7 +89,11 @@ struct SessionView: View {
 //                )
             
             Button("Emergency Contacts") {
-                showingSheet.toggle()
+                if sessionManager.databaseManager.emergencyContacts.isEmpty {
+                    showingSheet.toggle()
+                } else {
+                    sessionManager.showEmergencyContact()
+                }
             }
                 .sheet(isPresented: $showingSheet, content: ExampleSheet.init)
                 .padding()
@@ -133,6 +137,17 @@ struct SessionView: View {
     
             Spacer()
         }
+        .onAppear(perform: {
+            if sessionManager.databaseManager.emergencyContacts.isEmpty {
+                if sessionManager.databaseManager.currentUser == nil {
+                    print("Error, current user empty")
+                    sessionManager.showSession()
+                } else {
+                    sessionManager.databaseManager.getEmergencyContacts()
+                    print("This is the emergency contacs: \(sessionManager.databaseManager.emergencyContacts)")
+                }
+            }
+        })
 //        .onAppear(perform: {
 //            sessionManager.databaseManager.createDeviceRecord()
 //        })
@@ -172,7 +187,7 @@ struct ExampleSheet: View {
                     Group {
                             TextField("First Name", text: $ecFirst)
                             TextField("Last Name", text: $ecLast)
-                            TextField("E-mail", text: $ecEmail)
+                            TextField("E-mail or Username", text: $ecEmail)
                             TextField("Phone Number", text: $ecPhone)
                     }
                     .padding(geometry.size.height * 0.02)
@@ -187,6 +202,16 @@ struct ExampleSheet: View {
                 Spacer()
                     .frame(height: geometry.size.height * 0.02)
                 Button("Create", action: {
+                    
+                    
+                    sessionManager
+                        .databaseManager
+                        .createEmergencyContactRecord(
+                            firstName: ecFirst,
+                            lastName: ecLast,
+                            searchVal: ecEmail,
+                            phoneNumber: ecPhone
+                        )
                     sessionManager.showEmergencyContact()
                 })
                     .font(.custom("Proxima Nova Rg Regular", size: 20))

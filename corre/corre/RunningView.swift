@@ -17,7 +17,7 @@ struct RunningView: View {
     @EnvironmentObject var sessionManager: SessionManger
     @StateObject var locationService = LocationManager()
     @State var tokens: Set<AnyCancellable> = .init()
-    @State var mapState = AMLMapViewState()
+    @State var mapState = AMLMapViewState(zoomLevel: 17)
     
     struct CusColor {
         static let backcolor =

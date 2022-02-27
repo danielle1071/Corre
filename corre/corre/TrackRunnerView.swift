@@ -20,7 +20,7 @@ struct TrackRunnerView: View {
     
     var userTrackingID: String
     
-    @State var mapState = AMLMapViewState()
+    @State var mapState = AMLMapViewState(zoomLevel: 17)
     @State var tokens: Set<AnyCancellable> = .init()
     @State var timer: Timer?
     
@@ -45,6 +45,7 @@ struct TrackRunnerView: View {
                     .frame(height: 30)
                 AMLMapView(mapState: mapState)
                     .edgesIgnoringSafeArea(.all)
+                    .overlay(Text("📍"), alignment: .center)
 
             }
             
@@ -57,10 +58,6 @@ struct TrackRunnerView: View {
         })
     
     }
-    
-    // User: backend - BBEE9936-B93A-45ED-9D41-454CC5A296AC
-    // 28.543021
-    // -81.173699
     
     func getRunnerLocation() {
             trackingManager.setSessionManager(sessionManager: sessionManager)

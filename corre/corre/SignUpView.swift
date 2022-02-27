@@ -128,7 +128,7 @@ struct SignUpView: View {
                 dateOfBirth = dateFormatter.string(from: birthDate)
                 sessionManager.signUp(
                     username: username,
-                    email: email,
+                    email: email.lowercased(),
                     phone: phone,
                     password: password,
                     givenName: givenName,
