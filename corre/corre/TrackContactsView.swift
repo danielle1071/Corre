@@ -33,7 +33,8 @@ struct TrackContactsView: View {
                 item in
                 RunnerRow(emergencyContact: item)
             }.onTapGesture {
-                sessionManager.showTrack(userTrackingID: )
+                print("Tapped the emergency contact")
+//                sessionManager.showTrack(userTrackingID: )
             }
             Button(action: {
                     sessionManager.showSession()
