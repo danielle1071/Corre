@@ -4,6 +4,7 @@
 //
 //  Created by Jon Abrigo on 2/16/22.
 //
+//  Updated by Lucas Morehouse on 2/26/22.
 
 import SwiftUI
 import Foundation
@@ -28,7 +29,12 @@ struct TrackContactsView: View {
     
     var body: some View {
         VStack {
-            
+            List(sessionManager.databaseManager.runners, id: \.id) {
+                item in
+                RunnerRow(emergencyContact: item)
+            }.onTapGesture {
+                sessionManager.showTrack(userTrackingID: )
+            }
             Button(action: {
                     sessionManager.showSession()
                 }, label: {
@@ -66,6 +72,17 @@ struct TrackContactsView: View {
                 })
             }
 
+        }
+        
+    }
+    
+    struct RunnerRow: View {
+        @EnvironmentObject var sessionManager: SessionManger
+        var emergencyContact: EmergencyContact
+        
+        var body: some View {
+            
+            Text("\(sessionManager.databaseManager.getUserProfile(userID: emergencyContact.userID)?.username ?? "ERROR") ")
         }
     }
     

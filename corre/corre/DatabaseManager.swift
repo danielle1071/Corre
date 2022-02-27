@@ -22,6 +22,8 @@ class DatabaseManager: ObservableObject {
     
     @Published var deviceTracking:Device?
     
+    @Published var runners = [EmergencyContact]()
+    
     var subscriptions = Set<AnyCancellable>()
     
     func getUserProfile (user: AuthUser) async {
@@ -430,6 +432,32 @@ class DatabaseManager: ObservableObject {
             }
         }
         return retVal
+    }
+    
+    func getRunnerRecords() {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        } else {
+            let keys = EmergencyContact.keys
+            Amplify.DataStore.query(EmergencyContact.self, where: keys.emergencyContactUserId == currentUser?.id) { result in
+                switch(result) {
+                case .success(let items):
+                    print("INSIDE THE GET RUNNER RECORDS FUNCTION")
+                    self.runners = items
+                case .failure(let error):
+                    print("Could not query DataStore: \(error)")
+                }
+            }
+        }
+        
     }
     
 }
