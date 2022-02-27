@@ -73,8 +73,6 @@
 		F2F0DC1D27B20DD4003E65E8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
-
-
 /* Begin PBXContainerItemProxy section */
 		D9F4612F27CAED030014E5EC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -130,8 +128,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
-
-
 
 /* Begin PBXFileReference section */
 		0A7FC320847CC11E5CC09428 /* Message+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Message+Schema.swift"; path = "amplify/generated/models/Message+Schema.swift"; sourceTree = "<group>"; };
@@ -192,10 +188,10 @@
 		D9F4615527CAED050014E5EC /* correWatchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = correWatchUITests.swift; sourceTree = "<group>"; };
 		D9F4615727CAED050014E5EC /* correWatchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = correWatchUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-
-		EC6DBF85CB4DAB8D5A6E2902 /* Notification.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = Notification.swift; path = amplify/generated/models/Notification.swift; sourceTree = "<group>"; };
-		F0C7A474AA58645C6841624F /* Message.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = Message.swift; path = amplify/generated/models/Message.swift; sourceTree = "<group>"; };
+		EC6DBF85CB4DAB8D5A6E2902 /* Notification.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Notification.swift; path = amplify/generated/models/Notification.swift; sourceTree = "<group>"; };
+		F0C7A474AA58645C6841624F /* Message.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Message.swift; path = amplify/generated/models/Message.swift; sourceTree = "<group>"; };
 		F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackContactsView.swift; sourceTree = "<group>"; };
+
 		F2D7AF2127B879F6007C246A /* User+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Extensions.swift"; sourceTree = "<group>"; };
 
 
@@ -321,7 +317,9 @@
 				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
 
+
 				4C0E53AA2770FE70001BEA58,
+
 
 
 				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
@@ -845,7 +843,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.correDev;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -876,7 +874,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.correDev;
+				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
