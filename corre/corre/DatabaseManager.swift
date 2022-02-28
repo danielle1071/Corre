@@ -337,11 +337,17 @@ class DatabaseManager: ObservableObject {
     }
 
 
-    func getNotifications() {
+    func getNotifications() async {
         print("STARTING THE GET NOTIFICATION FUNCTION")
         if self.currentUser == nil {
             if let user = Amplify.Auth.getCurrentUser() {
-                getUserProfile(user: user)
+                Task () {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print ("")
+                    }
+                }
             }
         } else {
             let keys = Notification.keys
