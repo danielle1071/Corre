@@ -32,10 +32,17 @@ struct TrackContactsView: View {
             List(sessionManager.databaseManager.runners, id: \.id) {
                 item in
                 RunnerRow(emergencyContact: item)
-            }.onTapGesture {
-                print("Tapped the emergency contact")
-//                sessionManager.showTrack(userTrackingID: )
+                    .onTapGesture(perform: {
+                        print("This is the item: \(item)")
+                        let runCheck = sessionManager.databaseManager.checkIfRunning(userID: item.userID)
+                        if runCheck {
+                            sessionManager.showTrack(userTrackingID: item.userID)
+                        } else {
+                            sessionManager.showSession()
+                        }
+                    })
             }
+            
             Button(action: {
                     sessionManager.showSession()
                 }, label: {

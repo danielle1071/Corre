@@ -460,4 +460,8 @@ class DatabaseManager: ObservableObject {
         
     }
     
+    func checkIfRunning(userID: String) -> Bool {
+        return (getUserProfile(userID: userID)?.runningStatus != RunningStatus.notrunning) && (getUserProfile(userID: userID)?.runningStatus != nil)
+    }
+    
 }
