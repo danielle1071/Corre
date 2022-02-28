@@ -35,26 +35,29 @@ struct MessagesView: View {
     
     var body: some View {
         VStack {
-            ScrollView {
-                LazyVStack {
-                    ForEach(messageManager.messages) {  message in
-                        MessageRow(
-                            message: message,
-                            isCurrentUser: message.senderId == sessionManager.databaseManager.currentUser?.username ?? "User not, found"
-                            /*
-                            senderUsername: message.senderId
-                             */
-                        )
+            Button("Back", action: sessionManager.showSession)
+            VStack {
+                ScrollView {
+                    LazyVStack {
+                        ForEach(messageManager.messages) {  message in
+                            MessageRow(
+                                message: message,
+                                isCurrentUser: message.senderId == sessionManager.databaseManager.currentUser?.username ?? "User not, found"
+                                /*
+                                senderUsername: message.senderId
+                                 */
+                            )
+                        }
                     }
                 }
-            }
 
-            HStack {
-                TextField("Enter message", text: $text)
-                Button("Send", action: didTapSend)
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.purple)
+                HStack {
+                    TextField("Enter message", text: $text)
+                    Button("Send", action: didTapSend)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.purple)
+                }
             }
         }
         .padding(.horizontal, 16)
