@@ -32,6 +32,8 @@
 		4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCB2793140D00FDCF6E /* awsconfiguration.json */; };
 		4C99015B27BC071C00FE5D2B /* TrackerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99015A27BC071C00FE5D2B /* TrackerManager.swift */; };
 		4CAE029227B9BFD8007AF11C /* TrackRunnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */; };
+		4CB74FCC27CD6B4A004476B7 /* PreRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB74FCB27CD6B4A004476B7 /* PreRunningView.swift */; };
+		4CB74FCE27CD6DFD004476B7 /* EmergencyContactRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB74FCD27CD6DFD004476B7 /* EmergencyContactRow.swift */; };
 		4CCF2A8727B59D7800C4E71D /* EditContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF2A8627B59D7800C4E71D /* EditContactView.swift */; };
 		4CCF2A8927B59F0000C4E71D /* RunningMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */; };
 		4CEEB63127CADF3100391A9E /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEEB63027CADF3100391A9E /* NotificationView.swift */; };
@@ -155,6 +157,8 @@
 		4C792CCB2793140D00FDCF6E /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		4C99015A27BC071C00FE5D2B /* TrackerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerManager.swift; sourceTree = "<group>"; };
 		4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRunnerView.swift; sourceTree = "<group>"; };
+		4CB74FCB27CD6B4A004476B7 /* PreRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRunningView.swift; sourceTree = "<group>"; };
+		4CB74FCD27CD6DFD004476B7 /* EmergencyContactRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContactRow.swift; sourceTree = "<group>"; };
 		4CCF2A8627B59D7800C4E71D /* EditContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactView.swift; sourceTree = "<group>"; };
 		4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningMapView.swift; sourceTree = "<group>"; };
 		4CEEB63027CADF3100391A9E /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -191,12 +195,6 @@
 		EC6DBF85CB4DAB8D5A6E2902 /* Notification.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Notification.swift; path = amplify/generated/models/Notification.swift; sourceTree = "<group>"; };
 		F0C7A474AA58645C6841624F /* Message.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Message.swift; path = amplify/generated/models/Message.swift; sourceTree = "<group>"; };
 		F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackContactsView.swift; sourceTree = "<group>"; };
-
-		F2D7AF2127B879F6007C246A /* User+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Extensions.swift"; sourceTree = "<group>"; };
-
-
-		F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactRunningView.swift; sourceTree = "<group>"; };
-
 		F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FF7A7BF119B388DEACB526FE /* NotificationType.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = NotificationType.swift; path = amplify/generated/models/NotificationType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -316,16 +314,12 @@
 				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
 				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
-
-
-				4C0E53AA2770FE70001BEA58,
-
-
-
 				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
 				4CEEB63027CADF3100391A9E /* NotificationView.swift */,
+				4CB74FCB27CD6B4A004476B7 /* PreRunningView.swift */,
+				4CB74FCD27CD6DFD004476B7 /* EmergencyContactRow.swift */,
 			);
 			path = corre;
 			sourceTree = "<group>";
@@ -619,7 +613,9 @@
 				4AB6137427B1DEDE0018F678 /* EmergContactView.swift in Sources */,
 				4C0E11F227AE0F1200F239AA /* DatabaseManager.swift in Sources */,
 				D9C2B62327AB1AFB0058365E /* LandingView.swift in Sources */,
+				4CB74FCC27CD6B4A004476B7 /* PreRunningView.swift in Sources */,
 				4C0E53C427712D5A001BEA58 /* SignUpView.swift in Sources */,
+				4CB74FCE27CD6DFD004476B7 /* EmergencyContactRow.swift in Sources */,
 				4C0E53C627712D7B001BEA58 /* SessionManager.swift in Sources */,
 				D9BE965227AF4B8A00ED177A /* FriendView.swift in Sources */,
 				4CEEB63127CADF3100391A9E /* NotificationView.swift in Sources */,

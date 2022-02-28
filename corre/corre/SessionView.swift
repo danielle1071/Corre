@@ -43,9 +43,16 @@ struct SessionView: View {
 
             Spacer()
             Button("Run", action: {
-                sessionManager.showRunning()
-            }).padding()
-                .padding(.horizontal, 108)
+                if sessionManager.databaseManager.emergencyContacts.isEmpty {
+                    showingSheet.toggle()
+                } else {
+                    sessionManager.showPreRunning()
+                }
+            }).sheet(isPresented: $showingSheet, content: ExampleSheet.init)
+                .padding()
+                    .padding(.horizontal, 50)
+                    .foregroundColor(CustomColor.primarycolor)
+                .padding(.horizontal, 10)
                 .foregroundColor(CustomColor.primarycolor)
                 .background(CustomColor.backcolor)
                 .overlay(

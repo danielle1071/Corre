@@ -64,8 +64,8 @@ struct correApp: App {
             case .landing:
                 LandingView()
                     .environmentObject(sessionManager)
-            case .running:
-                RunningView()
+            case .running(let phoneNumber):
+                RunningView(phoneNumber: phoneNumber)
                     .environmentObject(sessionManager)
             case .profile:
                 ProfileView()
@@ -85,6 +85,9 @@ struct correApp: App {
                     .environmentObject(sessionManager)
             case .friendView:
                 FriendView()
+                    .environmentObject(sessionManager)
+            case .preRun:
+                PreRunningView()
                     .environmentObject(sessionManager)
             }
             
