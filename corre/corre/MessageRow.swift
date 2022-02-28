@@ -62,6 +62,7 @@ struct MessageRow: View {
                     .foregroundColor(.blue)
 
                 VStack(alignment: .leading) {
+                    Text("\((sessionManager.databaseManager.getUserProfile(userID: message.senderId))?.username ?? "ERROR")")
                     Text("\(sessionManager.databaseManager.currentUser?.username ?? "Error: User not found")") //\(senderUsername)
                         .font(.headline)
 
