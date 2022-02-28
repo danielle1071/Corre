@@ -80,6 +80,12 @@ struct correApp: App {
             case .trackContacts:
                 TrackContactsView()
                     .environmentObject(sessionManager)
+            case .notification:
+                NotificationView()
+                    .environmentObject(sessionManager)
+            case .friendView:
+                FriendView()
+                    .environmentObject(sessionManager)
             }
             
         }
