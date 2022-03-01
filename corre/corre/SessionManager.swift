@@ -23,8 +23,12 @@ enum AuthState {
     case emergencyContact(user: AuthUser)
     case trackContacts
     case trackRunner(userTrackingID: String)
+
+    case messaging
+
     case notification
     case friendView
+
 }
 
 final class SessionManger: ObservableObject {
@@ -245,6 +249,10 @@ final class SessionManger: ObservableObject {
     // MARK: showProfile
     func showProfile() {
         authState = .profile
+    }
+    
+    func showMessage() {
+        authState = .messaging
     }
     
     // MARK: showEmergencyContact

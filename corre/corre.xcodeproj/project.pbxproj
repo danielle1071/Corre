@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0B1B62079EF12C81BD39060D /* Message+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FC320847CC11E5CC09428 /* Message+Schema.swift */; };
 		2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2971D63A5BBF77E2136689 /* Run+Schema.swift */; };
+		35C1A99027C9A6CE0032FD00 /* Message+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A98F27C9A6CE0032FD00 /* Message+Extensions.swift */; };
+		35C1A99227C9A7130032FD00 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99127C9A7130032FD00 /* MessageManager.swift */; };
+		35C1A99427C9A73E0032FD00 /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99327C9A73E0032FD00 /* MessageRow.swift */; };
+		35C1A99627C9A7880032FD00 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99527C9A7880032FD00 /* MessagesView.swift */; };
 		4A2FA86727B359BF00B55D53 /* VarelaRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */; };
 		4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6136F27B1DE4E0018F678 /* RunningView.swift */; };
 		4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137127B1DEC90018F678 /* ProfileView.swift */; };
@@ -135,6 +139,10 @@
 		0CD0D90BC7F5625BEA15C4CB /* User+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "User+Schema.swift"; path = "amplify/generated/models/User+Schema.swift"; sourceTree = "<group>"; };
 		1E0BAF37876727B72DDD7B54 /* Run.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Run.swift; path = amplify/generated/models/Run.swift; sourceTree = "<group>"; };
 		33A46E3CE696CF2816B06B2A /* EmergencyContact+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "EmergencyContact+Schema.swift"; path = "amplify/generated/models/EmergencyContact+Schema.swift"; sourceTree = "<group>"; };
+		35C1A98F27C9A6CE0032FD00 /* Message+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+Extensions.swift"; sourceTree = "<group>"; };
+		35C1A99127C9A7130032FD00 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		35C1A99327C9A73E0032FD00 /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
+		35C1A99527C9A7880032FD00 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		4A2FA86027B337DF00B55D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VarelaRound-Regular.ttf"; sourceTree = "<group>"; };
 		4AB6136F27B1DE4E0018F678 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
@@ -192,11 +200,11 @@
 		F0C7A474AA58645C6841624F /* Message.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Message.swift; path = amplify/generated/models/Message.swift; sourceTree = "<group>"; };
 		F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackContactsView.swift; sourceTree = "<group>"; };
 
-
 		F2D7AF2127B879F6007C246A /* User+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Extensions.swift"; sourceTree = "<group>"; };
 
 
 		F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactRunningView.swift; sourceTree = "<group>"; };
+
 
 
 		F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -320,6 +328,13 @@
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
 
 
+				35C1A98F27C9A6CE0032FD00 /* Message+Extensions.swift */,
+				35C1A99127C9A7130032FD00 /* MessageManager.swift */,
+				35C1A99327C9A73E0032FD00 /* MessageRow.swift */,
+				35C1A99527C9A7880032FD00 /* MessagesView.swift */,
+
+
+
 				4C0E53AA2770FE70001BEA58,
 
 
@@ -329,6 +344,7 @@
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
 				4CEEB63027CADF3100391A9E /* NotificationView.swift */,
+
 			);
 			path = corre;
 			sourceTree = "<group>";
@@ -614,6 +630,7 @@
 				4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */,
 				4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */,
 				4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */,
+				35C1A99227C9A7130032FD00 /* MessageManager.swift in Sources */,
 				D94A595927C4540D001CA61C /* Error1View.swift in Sources */,
 				F2A1714C27BDB1C900DFA288 /* TrackContactsView.swift in Sources */,
 				4CAE029227B9BFD8007AF11C /* TrackRunnerView.swift in Sources */,
@@ -625,12 +642,17 @@
 				4C0E53C427712D5A001BEA58 /* SignUpView.swift in Sources */,
 				4C0E53C627712D7B001BEA58 /* SessionManager.swift in Sources */,
 				D9BE965227AF4B8A00ED177A /* FriendView.swift in Sources */,
+
+				35C1A99027C9A6CE0032FD00 /* Message+Extensions.swift in Sources */,
+
 				4CEEB63127CADF3100391A9E /* NotificationView.swift in Sources */,
+
 				D9BE965427B2E60C00ED177A /* DataStore.swift in Sources */,
 				4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */,
 				4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */,
 				A3348095665A8CC53DC55054 /* AmplifyModels.swift in Sources */,
 				624B4EF640BB351DC532D4AE /* EmergencyContact+Schema.swift in Sources */,
+				35C1A99427C9A73E0032FD00 /* MessageRow.swift in Sources */,
 				7D0D95D1C4E60294E010D151 /* EmergencyContact.swift in Sources */,
 				2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */,
 				ED51C2ACBC4CC71DEE5ED476 /* Run.swift in Sources */,
@@ -638,6 +660,7 @@
 				D8FE2AF2C7A9E668FC727AE6 /* RunningStatus.swift in Sources */,
 				CA1CA2E226D406648AF9BA56 /* User+Schema.swift in Sources */,
 				BB7E0C06641036A59DD65E49 /* User.swift in Sources */,
+				35C1A99627C9A7880032FD00 /* MessagesView.swift in Sources */,
 				C8B91A8531BC4E40E8BA27FA /* Device+Schema.swift in Sources */,
 				5D5114BD97B104304ED9FA70 /* Device.swift in Sources */,
 				0B1B62079EF12C81BD39060D /* Message+Schema.swift in Sources */,
