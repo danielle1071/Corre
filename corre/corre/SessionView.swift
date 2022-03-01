@@ -147,6 +147,18 @@ struct SessionView: View {
 
     
             Spacer()
+            Button("Message (for test)", action: {
+                sessionManager.showMessage()
+            }).padding()
+                .padding(.horizontal, 70)
+                .foregroundColor(CustomColor.primarycolor)
+                .background(CustomColor.backcolor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                )
+            
+            Spacer()
             Button("Sign Out", action: {
                 sessionManager.signOut()
             }).padding()
