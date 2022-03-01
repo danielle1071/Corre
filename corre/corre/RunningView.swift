@@ -18,7 +18,7 @@ struct RunningView: View {
     @StateObject var locationService = LocationManager()
     @State var tokens: Set<AnyCancellable> = .init()
     @State var mapState = AMLMapViewState(zoomLevel: 17)
-    
+    @State var phoneNumber: String
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -27,12 +27,13 @@ struct RunningView: View {
 
         static let lblue = Color("lightBlue")
     }
+    // MARK: Phone Number
     // example phone number. Refer to SOS button
-    var phoneNumber = "718-555-5555"
+//    var phoneNumber = "718-555-5555"
 
     var body: some View {
         Spacer()
-        
+        Text("SOS Phone Number: \(phoneNumber)")
         VStack {
             // MARK: change this to stop run!
             HStack{
@@ -49,10 +50,7 @@ struct RunningView: View {
                     .foregroundColor(Color.white)
                     .background(CusColor.primarycolor)
                     .clipShape(Capsule())
-            })
-                
-                
-                
+                })
             }
             
             Spacer()
@@ -121,6 +119,7 @@ struct RunningView: View {
                 sessionManager.databaseManager.setRunStatus(status: .running)
             }
             
+            
         })
     }
     
@@ -154,6 +153,6 @@ struct RunningView: View {
 
 struct RunningView_Previews: PreviewProvider {
     static var previews: some View {
-        RunningView()
+        RunningView(phoneNumber: "+10000000000")
     }
 }

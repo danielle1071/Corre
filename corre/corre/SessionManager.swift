@@ -18,7 +18,7 @@ enum AuthState {
     case confirmCode(username: String)
     case session(user: AuthUser)
     case landing
-    case running
+    case running(phoneNumber: String)
     case profile
     case emergencyContact(user: AuthUser)
     case trackContacts
@@ -28,6 +28,10 @@ enum AuthState {
 
     case notification
     case friendView
+
+    case preRun
+
+
 
 }
 
@@ -232,8 +236,8 @@ final class SessionManger: ObservableObject {
     }
     
     // MARK: showRunning
-    func showRunning() {
-        authState = .running
+    func showRunning(phoneNumber: String) {
+        authState = .running(phoneNumber: phoneNumber)
     }
     
     // MARK: showTrackContacts
@@ -274,5 +278,8 @@ final class SessionManger: ObservableObject {
         authState = .notification
     }
     
+    func showPreRunning() {
+        authState = .preRun
+    }
 }
 

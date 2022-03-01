@@ -112,14 +112,14 @@ struct EmergContactView: View {
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
     }
     
-    struct EmergencyContactRow: View {
-        
-        var emergencyContact: EmergencyContact
-        
-        var body: some View {
-            Text("\(emergencyContact.firstName ?? "") \(emergencyContact.lastName ?? "")")
-        }
-    }
+//    struct EmergencyContactRow: View {
+//
+//        var emergencyContact: EmergencyContact
+//
+//        var body: some View {
+//            Text("\(emergencyContact.firstName ?? "") \(emergencyContact.lastName ?? "")")
+//        }
+//    }
 }
 
 
