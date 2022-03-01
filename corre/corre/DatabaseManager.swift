@@ -22,9 +22,20 @@ class DatabaseManager: ObservableObject {
     
     @Published var deviceTracking:Device?
     
+
+    @Published var runners = [EmergencyContact]()
+    
+
+
+    @Published var notifications = [Notification]()
+    
+
+
+
     var subscriptions = Set<AnyCancellable>()
     
     func getUserProfile (user: AuthUser) async {
+
         
         let usrKey = User.keys
         await Amplify.DataStore.query(User.self, where: usrKey.sub == user.userId) { result in
@@ -330,6 +341,33 @@ class DatabaseManager: ObservableObject {
         }
     }
 
+
+    func getNotifications() async {
+        print("STARTING THE GET NOTIFICATION FUNCTION")
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task () {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print ("")
+                    }
+                }
+            }
+        } else {
+            let keys = Notification.keys
+            Amplify.DataStore.query(Notification.self, where: keys.receiverId == currentUser!.id) { result in
+                switch(result) {
+                case .success(let items):
+                    print("*()*()*")
+                    self.notifications = items
+                case .failure(let error):
+                    print("Could not query DataStore: \(error)")
+                }
+            }
+        }
+    }
+
     func createEmergencyContactRecord(contact: EmergencyContact) {
         print("INSIDE THE CREATE EMERGENCY CONTACT RECORD!")
         print("RECORD TRYING TO SAVE: \(contact)")
@@ -432,4 +470,36 @@ class DatabaseManager: ObservableObject {
         return retVal
     }
     
+
+    func getRunnerRecords() {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        } else {
+            let keys = EmergencyContact.keys
+            Amplify.DataStore.query(EmergencyContact.self, where: keys.emergencyContactUserId == currentUser?.id) { result in
+                switch(result) {
+                case .success(let items):
+                    print("INSIDE THE GET RUNNER RECORDS FUNCTION")
+                    self.runners = items
+                case .failure(let error):
+                    print("Could not query DataStore: \(error)")
+                }
+            }
+        }
+        
+    }
+    
+    func checkIfRunning(userID: String) -> Bool {
+        return (getUserProfile(userID: userID)?.runningStatus != RunningStatus.notrunning) && (getUserProfile(userID: userID)?.runningStatus != nil)
+    }
+    
+
 }

@@ -16,6 +16,7 @@ import SwiftUI
 
 struct FriendView: View {
     
+    @EnvironmentObject var sessionManager: SessionManger
     @ObservedObject var friendStore = FriendStore()
     @State var newFriend: String = ""
     
@@ -33,6 +34,9 @@ struct FriendView: View {
     }
     
     var body: some View {
+        Button("Back") {
+            sessionManager.showSession()
+        }
         NavigationView{
             VStack{
                 searchBar.padding()

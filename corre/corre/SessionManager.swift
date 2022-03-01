@@ -23,7 +23,12 @@ enum AuthState {
     case emergencyContact(user: AuthUser)
     case trackContacts
     case trackRunner(userTrackingID: String)
+
     case messaging
+
+    case notification
+    case friendView
+
 }
 
 final class SessionManger: ObservableObject {
@@ -56,7 +61,7 @@ final class SessionManger: ObservableObject {
                             try await self.databaseManager.createDeviceRecord()
                             
                             try await self.databaseManager.getEmergencyContacts()
-                            
+                            try await self.databaseManager.getRunnerRecords()
                         } catch {
                             print("ERROR IN GET CURRENT AUTH USER")
                         }
@@ -259,8 +264,15 @@ final class SessionManger: ObservableObject {
         }
     }
     
+    // MARK: showFriendView
+    func showFriendView() {
+        authState = .friendView
+    }
     
-    
+    // MARK: showNotificationView
+    func showNotificationView() {
+        authState = .notification
+    }
     
 }
 

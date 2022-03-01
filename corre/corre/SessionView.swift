@@ -87,7 +87,36 @@ struct SessionView: View {
 //                    RoundedRectangle(cornerRadius: 20)
 //                    .stroke(CustomColor.primarycolor, lineWidth: 2)
 //                )
+//        MARK: INTERESTING TO KNOW THIS ⬇️
+//            Button("PRINT") {
+//                print("!@#$%^&*() \(sessionManager.databaseManager.currentUser?.EmergencyContacts!.elements)")
+//            }
+            Group {
+            Button("Friends", action: {
+                sessionManager.showFriendView()
+            }).padding()
+                .padding(.horizontal, 108)
+                .foregroundColor(CustomColor.primarycolor)
+                .background(CustomColor.backcolor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                )
             
+            Spacer()
+            Button("Notifications", action: {
+                sessionManager.showNotificationView()
+            }).padding()
+                .padding(.horizontal, 108)
+                .foregroundColor(CustomColor.primarycolor)
+                .background(CustomColor.backcolor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                )
+            
+            Spacer()
+            }
             Button("Emergency Contacts") {
                 if sessionManager.databaseManager.emergencyContacts.isEmpty {
                     showingSheet.toggle()
@@ -135,7 +164,7 @@ struct SessionView: View {
                 )
             
     
-            Spacer()
+            
         }
         .onAppear(perform: {
             if sessionManager.databaseManager.emergencyContacts.isEmpty {
