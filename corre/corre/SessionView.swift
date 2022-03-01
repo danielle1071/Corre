@@ -61,7 +61,7 @@ struct SessionView: View {
                 )
             
             
-            Spacer()
+//            Spacer()
             Button("Profile", action: {
                 sessionManager.showProfile()
             }).padding()
@@ -73,7 +73,7 @@ struct SessionView: View {
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
             
-            Spacer()
+//            Spacer()
             
 //            Button("Show Sheet") {
 //                        showingSheet.toggle()
