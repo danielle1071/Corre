@@ -10,8 +10,6 @@ import Foundation
 
 class MessageManager: ObservableObject {
     @Published var messages = [Message]()
-    @Published var sessionManager: SessionManger = SessionManger()
-    
     
     func send(_ message: Message) {
         Amplify.API.mutate(request: .create(message)) { mutationResult in
@@ -34,12 +32,15 @@ class MessageManager: ObservableObject {
             do {
                 let messages = try result.get().get()
 
+                
+                //DELETING ALL MESSAGES
                 /*
-                DELETING ALL MESSAGES
                 messages.forEach{ message in
-                    self?.delete(message)
+                    //self?.delete(message)
+                    self?.deleteMessages(message)
                 }
-                */
+                 */
+                
 
                 DispatchQueue.main.async {
                     self?.messages = messages.sorted(by: { $0.creationDate < $1.creationDate})

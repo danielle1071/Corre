@@ -13,27 +13,12 @@ import Amplify
 struct MessageRow: View {
 
     @ObservedObject var messageManager = MessageManager()
+    //@ObservedObject var sessionManager = SessionManger()
+    //SessionManager has to be an Environment object or it won't find currentUser
     @EnvironmentObject var sessionManager: SessionManger
-    //let currentUser = Amplify.Auth.getCurrentUser()
+    
     let message: Message
     let isCurrentUser: Bool
-    //let senderUsername: String
-    //let senderId: String
-    //let curId: String
-    
-    //check if currentUser is sender
-    /*
-    init(sessionManager: SessionManger, message: Message, senderUsername: String, isCurrentUser: Bool){
-        let curId = sessionManager.databaseManager.currentUser?.id
-        let senderId = message.senderId
-        if(senderId == curId) {
-            self.isCurrentUser = true
-        } else {
-            self.isCurrentUser = false
-            self.senderUsername = sessionManager.databaseManager.getUserProfile(userID: senderId)?.username ?? "Error: sender not found"
-        }
-    }
-     */
 
     let iconName = "questionmark"
     /*
@@ -63,7 +48,7 @@ struct MessageRow: View {
 
                 VStack(alignment: .leading) {
                     Text("\((sessionManager.databaseManager.getUserProfile(userID: message.senderId))?.username ?? "ERROR")")
-                    Text("\(sessionManager.databaseManager.currentUser?.username ?? "Error: User not found")") //\(senderUsername)
+                    Text("\(sessionManager.databaseManager.currentUser?.username ?? "Error: User not found")")
                         .font(.headline)
 
                     Text(message.body)

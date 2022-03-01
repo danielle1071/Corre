@@ -37,11 +37,11 @@ struct SessionView: View {
             
             
             // MARK: NEED TO UPDATE THE USER TRACKING ID --- CURRENTLY HARD CODED FOR TESTING!
-            //Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
+            Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
             
             
 
-            //Spacer()
+            Spacer()
             Button("Run", action: {
                 sessionManager.showRunning()
             }).padding()

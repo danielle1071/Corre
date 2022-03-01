@@ -14,18 +14,8 @@ struct MessagesView: View {
     @State var text = String()
     @ObservedObject var messageManager = MessageManager()
     @EnvironmentObject var sessionManager: SessionManger
-
-    
-
-    //let currentUser = Amplify.Auth.getCurrentUser()//"fabricio"//get username or user id
-    //now I have to get the user from database using authID
-    
-    //lazy var userDbId = messageManager.getUserInfo(sender: currentUser!)
-    //lazy var userDb = sessionManager.databaseManager.getUserProfile(userID: userDbId)
-    //lazy var username = userDb!.username
-
-    
-
+    //@ObservedObject var sessionManager = SessionManger()
+    //same ad MessageRow, if sessionManager is not an Environment Object, it will fail to send the username in the message
     
     init() {
         messageManager.getMessages()
@@ -43,9 +33,6 @@ struct MessagesView: View {
                             MessageRow(
                                 message: message,
                                 isCurrentUser: message.senderId == sessionManager.databaseManager.currentUser?.username ?? "User not, found"
-                                /*
-                                senderUsername: message.senderId
-                                 */
                             )
                         }
                     }
