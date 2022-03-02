@@ -48,6 +48,7 @@ struct correApp: App {
     var body: some Scene {
         
         WindowGroup {
+    
             switch sessionManager.authState {
             case .login:
                 LoginView()
@@ -58,6 +59,9 @@ struct correApp: App {
             case .confirmCode(let username):
                 ConfirmationView(username: username)
                     .environmentObject(sessionManager)
+            case .nav(let user):
+                NavBarView(user: user)
+                   .environmentObject(sessionManager)
             case .session(let user):
                 SessionView(user: user)
                    .environmentObject(sessionManager)

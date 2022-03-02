@@ -48,7 +48,7 @@ struct SessionView: View {
                 } else {
                     sessionManager.showPreRunning()
                 }
-            }).sheet(isPresented: $showingSheet, content: ExampleSheet.init)
+            }).sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
                 .padding()
                     .padding(.horizontal, 50)
                     .foregroundColor(CustomColor.primarycolor)
@@ -131,7 +131,7 @@ struct SessionView: View {
                     sessionManager.showEmergencyContact()
                 }
             }
-                .sheet(isPresented: $showingSheet, content: ExampleSheet.init)
+                .sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
                 .padding()
                     .padding(.horizontal, 50)
                     .foregroundColor(CustomColor.primarycolor)
@@ -142,10 +142,7 @@ struct SessionView: View {
                     RoundedRectangle(cornerRadius: 20)
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
-            
-    
 
-    
             Spacer()
             Button("Message (for test)", action: {
                 sessionManager.showMessage()
@@ -180,7 +177,7 @@ struct SessionView: View {
                     sessionManager.showSession()
                 } else {
                     sessionManager.databaseManager.getEmergencyContacts()
-                    print("This is the emergency contacs: \(sessionManager.databaseManager.emergencyContacts)")
+                    print("This is the emergency contacts: \(sessionManager.databaseManager.emergencyContacts)")
                 }
             }
         })
@@ -192,7 +189,7 @@ struct SessionView: View {
     
 }
 
-struct ExampleSheet: View {
+struct EmergencyPromptSheet: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var sessionManager: SessionManger
     @State var addedContact = false
@@ -296,7 +293,7 @@ struct ExampleSheet: View {
 
 
 struct SessionView_Previews: PreviewProvider {
-    
+    @EnvironmentObject var sessionManager: SessionManger
     private struct TestUser: AuthUser {
         let userId: String = "1"
         let username: String = "Test"

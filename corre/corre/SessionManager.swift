@@ -23,12 +23,10 @@ enum AuthState {
     case emergencyContact(user: AuthUser)
     case trackContacts
     case trackRunner(userTrackingID: String)
-
+    case nav(user: AuthUser)
     case messaging
-
     case notification
     case friendView
-
     case preRun
 
 
@@ -71,7 +69,7 @@ final class SessionManger: ObservableObject {
                         }
                 }
             }
-            authState = .session(user: user)
+            authState = .nav(user: user)
         } else {
             authState = .landing
         }
@@ -234,6 +232,17 @@ final class SessionManger: ObservableObject {
             authState = .landing
         }
     }
+    
+    
+    // MARK: MAY NEED FUNCTION FOR NAVBAR MB
+    func showNavBar() {
+        if let user = Amplify.Auth.getCurrentUser() {
+            authState = .nav(user: user)
+        } else {
+            authState = .landing
+        }
+    }
+
     
     // MARK: showRunning
     func showRunning(phoneNumber: String) {
