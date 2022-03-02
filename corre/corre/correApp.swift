@@ -5,6 +5,7 @@
 //  Build Target: iOS 15.0
 //  Created by Lucas Morehouse on 11/13/21.
 //
+// Modified by Mariana Botero on 03/01/2021
 
 import SwiftUI
 import Amplify
@@ -38,7 +39,6 @@ struct correApp: App {
                     print("Error starting DataStore:\(error)")
                 }
             }
-            
             sessionManager.getCurrentAuthUser()
             // print("Number of current users loaded: \(sessionManager.databaseManager.currentUser.count)")
             

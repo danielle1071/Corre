@@ -6,6 +6,7 @@
 //
 //  This file is based on the youtube tutorial: https://www.youtube.com/watch?v=wSHnmtnzbfs
 //
+// Modified by Mariana Botero on 03/01/2021
 
 import Foundation
 import Amplify
@@ -28,9 +29,6 @@ enum AuthState {
     case notification
     case friendView
     case preRun
-
-
-
 }
 
 final class SessionManger: ObservableObject {
@@ -153,7 +151,6 @@ final class SessionManger: ObservableObject {
                 print("failed to confirm code:", error)
                 
             }
-            
         }
     }
     
@@ -234,7 +231,7 @@ final class SessionManger: ObservableObject {
     }
     
     
-    // MARK: MAY NEED FUNCTION FOR NAVBAR MB
+    // MARK: showNavBar
     func showNavBar() {
         if let user = Amplify.Auth.getCurrentUser() {
             authState = .nav(user: user)

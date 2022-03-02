@@ -28,11 +28,8 @@ struct NavBarView: View {
     @State var ecEmail = ""
     @State var ecPhone = ""
     
-//    @State var phoneNumber: String
-    
     var body: some View {
-        
-        
+                
         TabView(selection: $selectedTab) {
             SessionView(user: user)
                 .onTapGesture {
@@ -40,12 +37,13 @@ struct NavBarView: View {
                 }
                 .tabItem {
                     Image(systemName: "house")
+                    Text("Home")
                 }.tag(0)
             
-//            PreRunningView()
             Text("")
                 .tabItem {
                     Image(systemName: "play")
+                    Text("Run")
                 }.tag(1)
                 .onTapGesture {
                     if sessionManager.databaseManager.emergencyContacts.isEmpty {
@@ -54,15 +52,15 @@ struct NavBarView: View {
                         PreRunningView()
                         self.selectedTab = 1
                     }
-
                 }
-            
+        
             FriendView()
                 .onTapGesture {
                     self.selectedTab = 2
                 }
                 .tabItem {
                     Image(systemName: "message")
+                    Text("Friends")
                 }.tag(2)
             ProfileView()
                 .onTapGesture {
@@ -70,6 +68,7 @@ struct NavBarView: View {
                 }
                 .tabItem {
                     Image(systemName: "person")
+                    Text("Profile")
                 }.tag(3)
             
         }
@@ -189,14 +188,11 @@ struct EmergencyPromptSheetNav: View {
         )
     }
 
-
-
     func close() {
         presentationMode.wrappedValue.dismiss()
         
     }
 }
-
 
     struct NavBarView_Previews: PreviewProvider {
         @EnvironmentObject var sessionManager: SessionManger
