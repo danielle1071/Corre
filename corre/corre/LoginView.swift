@@ -28,6 +28,7 @@ struct LoginView: View {
     
     @State var login = ""
     @State var password = ""
+    @State var invalidAttempts = 0
     
     var body: some View {
         VStack {
@@ -46,27 +47,51 @@ struct LoginView: View {
             
             Spacer()
                 .frame(height: 25)
-                
+            
             
             TextField("Username", text: $login)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .frame(height: 40)
-                .padding([.horizontal], 20)
                 .cornerRadius(16)
                 .shadow(radius: 2.0)
+                .padding([.horizontal], 20)
+            
     
             
             SecureField("Password", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .frame(height: 40)
-                .padding([.horizontal], 20)
                 .cornerRadius(16)
                 .shadow(radius: 2.0)
-                
+                .overlay(RoundedRectangle(cornerRadius: 16)
+                .stroke(lineWidth: 1)
+                .foregroundColor(invalidAttempts == 0 ? Color.clear : Color.red))
+                .padding([.horizontal], 20)
             
+            .modifier(ShakeEffect(animatableData: CGFloat(invalidAttempts)))
+            
+            // end animation
+            
+        
             Spacer()
                 .frame(height: 25)
-            Button("Login", action: {
+           
+            Button(action:
+                    {
+                withAnimation(.default) {
+                    self.invalidAttempts += 1
+                }
+            }, label: {
+                Text("Login")
+                    .padding()
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 100)
+                    .background(CustomColor.primarycolor)
+                    .cornerRadius(20)
+            })
+            
+            
+            /*Button("Login", action: {
                 sessionManager.login(
                     username: login,
                     password: password
@@ -75,7 +100,7 @@ struct LoginView: View {
                 .foregroundColor(.white)
                 .padding(.horizontal, 100)
                 .background(CustomColor.primarycolor)
-                .cornerRadius(20)
+                .cornerRadius(20)*/
                 
             
             Spacer()
@@ -87,6 +112,17 @@ struct LoginView: View {
         } .background(CustomColor.backcolor.edgesIgnoringSafeArea(.all))
     }
     
+}
+
+// animation for wrong password
+struct ShakeEffect : GeometryEffect{
+    var travelDistance : CGFloat = 6
+    var numOfShakes : CGFloat = 4
+    var animatableData: CGFloat
+    
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        ProjectionTransform(CGAffineTransform(translationX: travelDistance * sin(animatableData * .pi * numOfShakes), y: 0))
+    }
 }
 
 struct LoginView_Previews: PreviewProvider {

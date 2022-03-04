@@ -97,9 +97,9 @@ struct SignUpView: View {
             }
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .frame(height: 40)
-                .padding([.horizontal], 20)
                 .cornerRadius(16)
                 .shadow(radius: 2.0)
+                .padding([.horizontal], 38)
             
             /*Group {
                 TextField("City", text: $locality)
