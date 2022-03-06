@@ -506,6 +506,7 @@ class DatabaseManager: ObservableObject {
             switch result {
             case .success:
                 print("Emergency Contact deleted!")
+                self.getEmergencyContacts()
             case .failure(let error):
                 print("Error deleting Emergency Contact - \(error.localizedDescription)")
             }
