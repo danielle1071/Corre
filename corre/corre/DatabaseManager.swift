@@ -501,5 +501,18 @@ class DatabaseManager: ObservableObject {
         return (getUserProfile(userID: userID)?.runningStatus != RunningStatus.notrunning) && (getUserProfile(userID: userID)?.runningStatus != nil)
     }
     
-
+    func deleteEmergencyContact(contactId: String) {
+        Amplify.DataStore.delete(EmergencyContact.self, withId: contactId) { result in
+            switch result {
+            case .success:
+                print("Emergency Contact deleted!")
+            case .failure(let error):
+                print("Error deleting Emergency Contact - \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func updateEmergencyContact(contact: EmergencyContact) {
+        
+    }
 }
