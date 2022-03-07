@@ -92,6 +92,10 @@ struct correApp: App {
             case .preRun:
                 PreRunningView()
                     .environmentObject(sessionManager)
+            case .editEmergencyContact(let contact):
+                EmergencyContactEditView(contact: contact)
+                    .environmentObject(sessionManager)
+                
             }
             
         }

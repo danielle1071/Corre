@@ -97,12 +97,13 @@ struct EmergContactView: View {
             .frame(width: 125.0, height: 125.0)
             .scaledToFit()
 
-            VStack{
+            VStack {
                 List() {
                     ForEach ( sessionManager.databaseManager.emergencyContacts, id: \.id) { emergencyContact in
                     EmergencyContactRow(emergencyContact: emergencyContact)
                             .onTapGesture(perform: {
                                             print("Tapped A Contact: \(emergencyContact)")
+                                sessionManager.showEditContact(contact: emergencyContact)
                             })
                             
                     } .onDelete(perform: delete)

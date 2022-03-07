@@ -514,6 +514,15 @@ class DatabaseManager: ObservableObject {
     }
     
     func updateEmergencyContact(contact: EmergencyContact) {
-        
+        print("INSIDE THE UPDATE EMERGENCY CONTACT!")
+        Amplify.DataStore.save(contact) { result in
+            switch result {
+            case .success(_):
+                print("Updated the contact")
+                self.getEmergencyContacts()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
