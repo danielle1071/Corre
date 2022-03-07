@@ -45,6 +45,11 @@ struct EmergencyContactEditView: View {
                 contact.email = updateEmail
                 sessionManager.databaseManager.updateEmergencyContact(contact: contact)
             })
+            
+            Button("Delete Contact", action: {
+                sessionManager.databaseManager.deleteEmergencyContact(contactId: contact.id)
+                sessionManager.showSession()
+            })
         }.onAppear(perform: {
             self.updateFirstName = contact.firstName ?? ""
             self.updateLastName = contact.lastName ?? ""
