@@ -30,6 +30,8 @@ struct FriendView: View {
     }
     
     func addFriend(){
+        sessionManager.databaseManager.friendRequest(username: newFriend)
+        newFriend = ""
         friendStore.friends.append(Friend(id: String(friendStore.friends.count + 1), friendItem: newFriend))
     }
     
@@ -49,7 +51,12 @@ struct FriendView: View {
             }
         }
     
-    func delete(at offsets: IndexSet){
+    func delete(_ offsets: IndexSet){
+        offsets.forEach { index in
+            let friend = friendStore.friends[index]
+            print("Here is the friend being deleted: \(friend)")
+        }
+//        print(friendStore.friends[atOffset: offsets].friendItem)
         friendStore.friends.remove(atOffsets: offsets)
     }
 }
