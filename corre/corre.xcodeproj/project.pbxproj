@@ -14,6 +14,7 @@
 		35C1A99427C9A73E0032FD00 /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99327C9A73E0032FD00 /* MessageRow.swift */; };
 		35C1A99627C9A7880032FD00 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99527C9A7880032FD00 /* MessagesView.swift */; };
 		4A2FA86727B359BF00B55D53 /* VarelaRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */; };
+		4A4C1F4827CEE48900D95264 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C1F4727CEE48900D95264 /* NavBarView.swift */; };
 		4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6136F27B1DE4E0018F678 /* RunningView.swift */; };
 		4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137127B1DEC90018F678 /* ProfileView.swift */; };
 		4AB6137427B1DEDE0018F678 /* EmergContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137327B1DEDE0018F678 /* EmergContactView.swift */; };
@@ -147,6 +148,7 @@
 		35C1A99527C9A7880032FD00 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		4A2FA86027B337DF00B55D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VarelaRound-Regular.ttf"; sourceTree = "<group>"; };
+		4A4C1F4727CEE48900D95264 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
 		4AB6136F27B1DE4E0018F678 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
 		4AB6137127B1DEC90018F678 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4AB6137327B1DEDE0018F678 /* EmergContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactView.swift; sourceTree = "<group>"; };
@@ -203,16 +205,6 @@
 		EC6DBF85CB4DAB8D5A6E2902 /* Notification.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Notification.swift; path = amplify/generated/models/Notification.swift; sourceTree = "<group>"; };
 		F0C7A474AA58645C6841624F /* Message.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Message.swift; path = amplify/generated/models/Message.swift; sourceTree = "<group>"; };
 		F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackContactsView.swift; sourceTree = "<group>"; };
-
-
-		F2D7AF2127B879F6007C246A /* User+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Extensions.swift"; sourceTree = "<group>"; };
-
-
-		F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactRunningView.swift; sourceTree = "<group>"; };
-
-
-
-
 		F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FF7A7BF119B388DEACB526FE /* NotificationType.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = NotificationType.swift; path = amplify/generated/models/NotificationType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -313,7 +305,11 @@
 			children = (
 				4A2FA86027B337DF00B55D53 /* Info.plist */,
 				4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */,
+				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
 				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
+				4A4C1F4727CEE48900D95264 /* NavBarView.swift */,
+				4AB6136F27B1DE4E0018F678 /* RunningView.swift */,
+				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
 				4C0E53C927712DBE001BEA58 /* LoginView.swift */,
 				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
 				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
@@ -323,39 +319,22 @@
 				4AB6137327B1DEDE0018F678 /* EmergContactView.swift */,
 				4AB6137127B1DEC90018F678 /* ProfileView.swift */,
 				D9BE965327B2E60C00ED177A /* DataStore.swift */,
-				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
-				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
 				4C0E53A62770FE6F001BEA58 /* ContentView.swift */,
 				F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */,
-				4AB6136F27B1DE4E0018F678 /* RunningView.swift */,
 				4C99015A27BC071C00FE5D2B /* TrackerManager.swift */,
 				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
 				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
-
-
-
 				35C1A98F27C9A6CE0032FD00 /* Message+Extensions.swift */,
 				35C1A99127C9A7130032FD00 /* MessageManager.swift */,
 				35C1A99327C9A73E0032FD00 /* MessageRow.swift */,
 				35C1A99527C9A7880032FD00 /* MessagesView.swift */,
-
-
-
-				4C0E53AA2770FE70001BEA58,
-
-
-
-
-
 				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
 				4CEEB63027CADF3100391A9E /* NotificationView.swift */,
-
 				4CB74FCB27CD6B4A004476B7 /* PreRunningView.swift */,
 				4CB74FCD27CD6DFD004476B7 /* EmergencyContactRow.swift */,
-
 			);
 			path = corre;
 			sourceTree = "<group>";
@@ -651,15 +630,13 @@
 				4C0E11F227AE0F1200F239AA /* DatabaseManager.swift in Sources */,
 				D9C2B62327AB1AFB0058365E /* LandingView.swift in Sources */,
 				4CB74FCC27CD6B4A004476B7 /* PreRunningView.swift in Sources */,
+				4A4C1F4827CEE48900D95264 /* NavBarView.swift in Sources */,
 				4C0E53C427712D5A001BEA58 /* SignUpView.swift in Sources */,
 				4CB74FCE27CD6DFD004476B7 /* EmergencyContactRow.swift in Sources */,
 				4C0E53C627712D7B001BEA58 /* SessionManager.swift in Sources */,
 				D9BE965227AF4B8A00ED177A /* FriendView.swift in Sources */,
-
 				35C1A99027C9A6CE0032FD00 /* Message+Extensions.swift in Sources */,
-
 				4CEEB63127CADF3100391A9E /* NotificationView.swift in Sources */,
-
 				D9BE965427B2E60C00ED177A /* DataStore.swift in Sources */,
 				4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */,
 				4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */,
