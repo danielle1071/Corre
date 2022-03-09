@@ -554,4 +554,78 @@ class DatabaseManager: ObservableObject {
     func checkFriendRequestExist(username: String) -> Bool {
         return false
     }
+    
+    func addFriendToList(userId: String) {
+            var user1 = currentUser
+            var user2 = getUserProfile(userID: userId)
+            //currentUser?.friends?.append(user2?.id)
+            user1?.friends?.append(user2?.id)
+            user2?.friends?.append(user1?.id)
+            
+            Amplify.DataStore.save(user1!) { result in
+                switch result {
+                case .success(_):
+                    print("Saved")
+                    self.currentUser = user1
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            Amplify.DataStore.save(user2!) { result in
+                switch result {
+                case .success(_):
+                    print("Saved")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            
+        }
+    
+    func removeFriendFromArray(userId: String) {
+        var user1 = currentUser
+        var user2 = getUserProfile(userID: userId)
+        var flag1 = false
+        var flag2 = false
+        var index1 = 0
+        var index2 = 0
+        //used size because swift was causing problems with the for in loop -- we can refactor later on
+        var size1 = user1?.friends?.endIndex ?? -1
+        var size2 = user2?.friends?.endIndex ?? -1
+        size1 = size1 - 1 //endIndex returns 1+ the size, so we subtract 1
+        size2 = size2 - 1
+        //traverse array to find index of friend
+        if size1 == -2 {
+            //error getting size of array
+        }
+        for i in 0...size1 {
+            if user1?.friends?[i] == user2?.id {
+                flag1 = true
+                index1 = i
+                break
+            }
+        }
+        if flag1 == false {
+            //friend was not found
+        } else {
+            //remove from index and re-index array
+            user1?.friends?.remove(at: index1)
+        }
+        //removed from user1 list, now to user2...
+        if size2 == -2 {
+            //error getting size of array
+        }
+        for i in 0...size2 {
+            if user2?.friends?[i] == user1?.id {
+                flag2 = true
+                index2 = i
+                break
+            }
+        }
+        if flag2 == false {
+            //friend was not found
+        } else {
+            user2?.friends?.remove(at: index2)
+        }
+    }
 }
