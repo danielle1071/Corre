@@ -6,6 +6,7 @@
 //
 //  This file is based on the youtube tutorial: https://www.youtube.com/watch?v=wSHnmtnzbfs
 //
+// Modified by Mariana Botero on 03/01/2021
 
 import Foundation
 import Amplify
@@ -23,16 +24,11 @@ enum AuthState {
     case emergencyContact(user: AuthUser)
     case trackContacts
     case trackRunner(userTrackingID: String)
-
+    case nav(user: AuthUser)
     case messaging
-
     case notification
     case friendView
-
     case preRun
-
-
-
 }
 
 final class SessionManger: ObservableObject {
@@ -71,7 +67,7 @@ final class SessionManger: ObservableObject {
                         }
                 }
             }
-            authState = .session(user: user)
+            authState = .nav(user: user)
         } else {
             authState = .landing
         }
@@ -155,7 +151,6 @@ final class SessionManger: ObservableObject {
                 print("failed to confirm code:", error)
                 
             }
-            
         }
     }
     
@@ -234,6 +229,17 @@ final class SessionManger: ObservableObject {
             authState = .landing
         }
     }
+    
+    
+    // MARK: showNavBar
+    func showNavBar() {
+        if let user = Amplify.Auth.getCurrentUser() {
+            authState = .nav(user: user)
+        } else {
+            authState = .landing
+        }
+    }
+
     
     // MARK: showRunning
     func showRunning(phoneNumber: String) {
