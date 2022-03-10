@@ -6,6 +6,8 @@
 //
 //  This file is based on the youtube tutorial: https://www.youtube.com/watch?v=wSHnmtnzbfs
 //
+//  Modified by Mariana Botero on 02/07/2021
+//  Modified by Mariana Botero on 03/01/2021
 
 import Foundation
 import SwiftUI
@@ -14,51 +16,37 @@ import Amplify
 
 struct SessionView: View {
     
-    
     @EnvironmentObject var sessionManager: SessionManger
-
     @State private var showingSheet = false
-    
-
     @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
-
-
     // @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
-
     let user: AuthUser
     
     var body: some View {
         VStack {
         
-
-            // Text("WooHoo! You have signed in to the up-and-coming Corre Application! 🤯")
-            //    .font(.title2)
-            //    .multilineTextAlignment(.center)
-            
-            
+        
             // MARK: NEED TO UPDATE THE USER TRACKING ID --- CURRENTLY HARD CODED FOR TESTING!
             Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
-            
-            
 
             Spacer()
-            Button("Run", action: {
-                if sessionManager.databaseManager.emergencyContacts.isEmpty {
-                    showingSheet.toggle()
-                } else {
-                    sessionManager.showPreRunning()
-                }
-            }).sheet(isPresented: $showingSheet, content: ExampleSheet.init)
-                .padding()
-                    .padding(.horizontal, 50)
-                    .foregroundColor(CustomColor.primarycolor)
-                .padding(.horizontal, 10)
-                .foregroundColor(CustomColor.primarycolor)
-                .background(CustomColor.backcolor)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                    .stroke(CustomColor.primarycolor, lineWidth: 2)
-                )
+//            Button("Run", action: {
+//                if sessionManager.databaseManager.emergencyContacts.isEmpty {
+//                    showingSheet.toggle()
+//                } else {
+//                    sessionManager.showPreRunning()
+//                }
+//            }).sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
+//                .padding()
+//                    .padding(.horizontal, 50)
+//                    .foregroundColor(CustomColor.primarycolor)
+//                .padding(.horizontal, 10)
+//                .foregroundColor(CustomColor.primarycolor)
+//                .background(CustomColor.backcolor)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 20)
+//                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+//                )
             
             
 //            Spacer()
@@ -131,7 +119,7 @@ struct SessionView: View {
                     sessionManager.showEmergencyContact()
                 }
             }
-                .sheet(isPresented: $showingSheet, content: ExampleSheet.init)
+                .sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
                 .padding()
                     .padding(.horizontal, 50)
                     .foregroundColor(CustomColor.primarycolor)
@@ -142,11 +130,9 @@ struct SessionView: View {
                     RoundedRectangle(cornerRadius: 20)
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
-            
-    
 
-    
             Spacer()
+            
             Button("Message (for test)", action: {
                 sessionManager.showMessage()
             }).padding()
@@ -170,8 +156,6 @@ struct SessionView: View {
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
             
-    
-            
         }
         .onAppear(perform: {
             if sessionManager.databaseManager.emergencyContacts.isEmpty {
@@ -180,7 +164,7 @@ struct SessionView: View {
                     sessionManager.showSession()
                 } else {
                     sessionManager.databaseManager.getEmergencyContacts()
-                    print("This is the emergency contacs: \(sessionManager.databaseManager.emergencyContacts)")
+                    print("This is the emergency contacts: \(sessionManager.databaseManager.emergencyContacts)")
                 }
             }
         })
@@ -192,7 +176,7 @@ struct SessionView: View {
     
 }
 
-struct ExampleSheet: View {
+struct EmergencyPromptSheet: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var sessionManager: SessionManger
     @State var addedContact = false
@@ -200,12 +184,12 @@ struct ExampleSheet: View {
     @State var ecLast = ""
     @State var ecEmail = ""
     @State var ecPhone = ""
-        
+
     var body: some View {
-        
+
         GeometryReader { geometry in
             VStack {
-            
+
             Text("Start running safely.")
                 .font(.custom("Proxima Nova Rg Regular", size: 20))
                 .multilineTextAlignment(.center)
@@ -214,11 +198,11 @@ struct ExampleSheet: View {
                 .padding([.horizontal], geometry.size.width * 0.09)
                 .padding([.top], geometry.size.height * 0.32)
                 .padding([.bottom], geometry.size.height * 0.02)
-                
+
             VStack (alignment: .center) {
                 Spacer()
                     .frame(height: geometry.size.height * 0.03)
-                
+
                 VStack (alignment: .center, spacing: 20){
                     Group {
                             TextField("First Name", text: $ecFirst)
@@ -234,12 +218,12 @@ struct ExampleSheet: View {
                                 .padding([.horizontal], geometry.size.width * 0.05)
                     )
                 }
-                
+
                 Spacer()
                     .frame(height: geometry.size.height * 0.02)
                 Button("Create", action: {
-                    
-                    
+
+
                     sessionManager
                         .databaseManager
                         .createEmergencyContactRecord(
@@ -256,12 +240,12 @@ struct ExampleSheet: View {
                     .foregroundColor(Color.white)
                     .background(Color("primaryColor"))
                     .cornerRadius(14)
-                   
+
                 Spacer()
                     .frame(height: geometry.size.height * 0.03)
-            
+
             }
-            
+
                     .background(Color("backgroundColor"))
                     .cornerRadius(10)
                     .frame(width: geometry.size.width * 0.90,
@@ -271,14 +255,14 @@ struct ExampleSheet: View {
                                             .shadow(color: .gray, radius: 6, x: 0, y: 4)
                                             .blur(radius: 8, opaque: false)
                     )
-                
+
                 Spacer()
                     .frame(height: geometry.size.height * 0.04)
-            
+
             Button("Dismiss", action: close)
                 .font(.custom("Varela Round Regular", size: 20))
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
-            
+
         }
         .interactiveDismissDisabled()
         .background(
@@ -286,8 +270,7 @@ struct ExampleSheet: View {
                 .scaledToFit()
         )
     }
-        
-        
+
 
     func close() {
         presentationMode.wrappedValue.dismiss()
@@ -296,6 +279,7 @@ struct ExampleSheet: View {
 
 
 struct SessionView_Previews: PreviewProvider {
+    @EnvironmentObject var sessionManager: SessionManger
     
     private struct TestUser: AuthUser {
         let userId: String = "1"
