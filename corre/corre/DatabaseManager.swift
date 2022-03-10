@@ -555,6 +555,22 @@ class DatabaseManager: ObservableObject {
         return false
     }
     
+    func deleteNotificationRecord(notification: Notification) {
+        Amplify.DataStore.delete(notification) { result in
+            switch result {
+            case .success(_):
+                print("Deleted Notification Record")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func acceptedFriendRequest(notification: Notification, userId: String){
+        addFriendToList(userId: userId)
+        deleteNotificationRecord(notification: notification)
+    }
+    
     func addFriendToList(userId: String) {
             var user1 = currentUser
             var user2 = getUserProfile(userID: userId)
