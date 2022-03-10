@@ -20,6 +20,7 @@ struct FriendView: View {
     @ObservedObject var friendStore = FriendStore()
     @State var newFriend: String = ""
     
+    
     var searchBar: some View{
         HStack{
             TextField("Enter a new friend", text: self.$newFriend)
@@ -30,7 +31,9 @@ struct FriendView: View {
     }
     
     func addFriend(){
-        sessionManager.databaseManager.friendRequest(username: newFriend)
+        if !sessionManager.databaseManager.checkFriendRequestExist(username: newFriend) {
+            sessionManager.databaseManager.friendRequest(username: newFriend)
+        } else { print("Request already exists") }
         newFriend = ""
         friendStore.friends.append(Friend(id: String(friendStore.friends.count + 1), friendItem: newFriend))
     }
