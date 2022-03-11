@@ -618,32 +618,6 @@ class DatabaseManager: ObservableObject {
         deleteNotificationRecord(notification: notification)
     }
     
-    func addFriendToList(userId: String) {
-            var user1 = currentUser
-            var user2 = getUserProfile(userID: userId)
-            //currentUser?.friends?.append(user2?.id)
-            user1?.friends?.append(user2?.id)
-            user2?.friends?.append(user1?.id)
-            
-            Amplify.DataStore.save(user1!) { result in
-                switch result {
-                case .success(_):
-                    print("Saved")
-                    self.currentUser = user1
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            Amplify.DataStore.save(user2!) { result in
-                switch result {
-                case .success(_):
-                    print("Saved")
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            
-        }
     
     func checkAlreadyFriends(user: User) -> Bool {
         return false
