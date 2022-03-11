@@ -568,6 +568,7 @@ class DatabaseManager: ObservableObject {
         let receiver = getUserProfile(username: username)
         if receiver != nil {
             let notificationKeys = Notification.keys
+            // check if the current user has already sent a friend request
             Amplify.DataStore.query(Notification.self, where: notificationKeys.senderId == currentUser!.id && notificationKeys.receiverId == receiver!.id && notificationKeys.type == NotificationType.friendrequest) { result in
                 switch result {
                 case .success(let items):
@@ -576,29 +577,22 @@ class DatabaseManager: ObservableObject {
                     print(error.localizedDescription)
                 }
             }
+            // check if the current user has received a friend request
             Amplify.DataStore.query(Notification.self, where: notificationKeys.senderId == receiver!.id && notificationKeys.receiverId == currentUser!.id && notificationKeys.type == NotificationType.friendrequest) { result in
                 switch result {
                 case .success(let items):
                     if items.count == 1 {
                         // Treat as accept friend request!
                         addFriendToList(user1: receiver!, user2: currentUser!)
+                        deleteNotificationRecord(notification: items[0])
+                        retVal = false
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
-        // Need to query the notifications table
-        // then check if the notifications returned match
-        // then do the reverse
-        
-        // If I try to add you and I've already sent you a request
-        // disallow another duplicate request to be sent
-        // BUT
-        // If you've sent me a request and then I try to send  you
-        // a request... initiate the accept friend request function on
-        // that request
         }
-        return false
+        return retVal
     }
     
     
