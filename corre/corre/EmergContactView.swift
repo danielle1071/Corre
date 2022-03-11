@@ -22,6 +22,7 @@ struct EmergContactView: View {
     
     @State private var showingSheet = false
     @EnvironmentObject var sessionManager: SessionManger
+    @ObservedObject var contacts = EmergencyContactStore()
     @State var addedContact = false
     @State var ecFirst = ""
     @State var ecLast = ""
@@ -96,13 +97,20 @@ struct EmergContactView: View {
             .frame(width: 125.0, height: 125.0)
             .scaledToFit()
 
-            VStack{
-                List(sessionManager.databaseManager.emergencyContacts, id: \.id) { emergencyContact in
+            VStack {
+                List() {
+                    ForEach ( sessionManager.databaseManager.emergencyContacts, id: \.id) { emergencyContact in
                     EmergencyContactRow(emergencyContact: emergencyContact)
-                }.onTapGesture(perform: {
-                                print("Tapped A Contact")
+                            .onTapGesture(perform: {
+                                            print("Tapped A Contact: \(emergencyContact)")
+                                sessionManager.showEditContact(contact: emergencyContact)
+                            })
+                            
+                    } .onDelete(perform: delete)
+                }
                     
-                })
+                
+                    
                
             }
             Divider()
@@ -120,6 +128,16 @@ struct EmergContactView: View {
 //            Text("\(emergencyContact.firstName ?? "") \(emergencyContact.lastName ?? "")")
 //        }
 //    }
+    
+    func delete(_ indexSet: IndexSet) {
+        indexSet.forEach { index in
+            let contact = sessionManager.databaseManager.emergencyContacts[index]
+            print("This is the contact to delete \(contact)")
+            sessionManager.databaseManager.deleteEmergencyContact(contactId: contact.id)
+        }
+        
+//        print("This is the offsets: \(offsets)")
+    }
 }
 
 

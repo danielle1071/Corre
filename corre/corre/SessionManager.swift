@@ -29,6 +29,12 @@ enum AuthState {
     case notification
     case friendView
     case preRun
+
+
+    case editEmergencyContact(contact: EmergencyContact)
+
+
+
 }
 
 final class SessionManger: ObservableObject {
@@ -286,6 +292,10 @@ final class SessionManger: ObservableObject {
     
     func showPreRunning() {
         authState = .preRun
+    }
+    
+    func showEditContact(contact: EmergencyContact) {
+        authState = .editEmergencyContact(contact: contact)
     }
 }
 
