@@ -22,7 +22,7 @@ struct EmergContactView: View {
     
     @State private var showingSheet = false
     @EnvironmentObject var sessionManager: SessionManger
-    @ObservedObject var contacts = EmergencyContactStore()
+    // @ObservedObject var contacts = EmergencyContactStore()
     @State var addedContact = false
     @State var ecFirst = ""
     @State var ecLast = ""
