@@ -5,6 +5,7 @@
 //  Build Target: iOS 15.0
 //  Created by Lucas Morehouse on 11/13/21.
 //
+// Modified by Mariana Botero on 03/01/2021
 
 import SwiftUI
 import Amplify
@@ -38,7 +39,6 @@ struct correApp: App {
                     print("Error starting DataStore:\(error)")
                 }
             }
-            
             sessionManager.getCurrentAuthUser()
             // print("Number of current users loaded: \(sessionManager.databaseManager.currentUser.count)")
             
@@ -48,6 +48,7 @@ struct correApp: App {
     var body: some Scene {
         
         WindowGroup {
+    
             switch sessionManager.authState {
             case .login:
                 LoginView()
@@ -58,6 +59,9 @@ struct correApp: App {
             case .confirmCode(let username):
                 ConfirmationView(username: username)
                     .environmentObject(sessionManager)
+            case .nav(let user):
+                NavBarView(user: user)
+                   .environmentObject(sessionManager)
             case .session(let user):
                 SessionView(user: user)
                    .environmentObject(sessionManager)
@@ -92,9 +96,16 @@ struct correApp: App {
             case .preRun:
                 PreRunningView()
                     .environmentObject(sessionManager)
+
             case .pendingReqs(let requests):
                 SentFriendReqView(requests: requests)
                     .environmentObject(sessionManager)
+
+            case .editEmergencyContact(let contact):
+                EmergencyContactEditView(contact: contact)
+                    .environmentObject(sessionManager)
+                
+
             }
             
         }

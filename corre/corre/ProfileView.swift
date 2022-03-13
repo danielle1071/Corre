@@ -35,13 +35,7 @@ struct ProfileView: View {
     var body: some View {
         VStack {
             HStack{
-                Button(
-                    action: {
-                        sessionManager.showSession()
-                    },
-                    label: {
-                        Image(systemName: "arrow.left")
-                        .foregroundColor(Color("primaryColor"))})
+
 
                 Text("Profile Page")
                     .foregroundColor(Color("primaryColor"))

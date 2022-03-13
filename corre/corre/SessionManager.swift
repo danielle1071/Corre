@@ -6,6 +6,7 @@
 //
 //  This file is based on the youtube tutorial: https://www.youtube.com/watch?v=wSHnmtnzbfs
 //
+// Modified by Mariana Botero on 03/01/2021
 
 import Foundation
 import Amplify
@@ -23,16 +24,21 @@ enum AuthState {
     case emergencyContact(user: AuthUser)
     case trackContacts
     case trackRunner(userTrackingID: String)
-
+    case nav(user: AuthUser)
     case messaging
-
     case notification
     case friendView
-
     case preRun
 
 
+
     case pendingReqs(requests: [Notification])
+
+    case editEmergencyContact(contact: EmergencyContact)
+
+
+
+
 }
 
 final class SessionManger: ObservableObject {
@@ -71,7 +77,7 @@ final class SessionManger: ObservableObject {
                         }
                 }
             }
-            authState = .session(user: user)
+            authState = .nav(user: user)
         } else {
             authState = .landing
         }
@@ -155,7 +161,6 @@ final class SessionManger: ObservableObject {
                 print("failed to confirm code:", error)
                 
             }
-            
         }
     }
     
@@ -235,6 +240,17 @@ final class SessionManger: ObservableObject {
         }
     }
     
+    
+    // MARK: showNavBar
+    func showNavBar() {
+        if let user = Amplify.Auth.getCurrentUser() {
+            authState = .nav(user: user)
+        } else {
+            authState = .landing
+        }
+    }
+
+    
     // MARK: showRunning
     func showRunning(phoneNumber: String) {
         authState = .running(phoneNumber: phoneNumber)
@@ -290,9 +306,15 @@ final class SessionManger: ObservableObject {
         authState = .preRun
     }
     
+
     func showPendingRequests() {
         let listReqs = databaseManager.getFriendRequestsSent()
         authState = .pendingReqs(requests: listReqs)
+
+    }
+    func showEditContact(contact: EmergencyContact) {
+        authState = .editEmergencyContact(contact: contact)
+
     }
 }
 

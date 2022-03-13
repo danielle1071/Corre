@@ -53,9 +53,9 @@ struct FriendView: View {
     }
     
     var body: some View {
-        Button("Back") {
-            sessionManager.showSession()
-        }
+//        Button("Back") {
+//            sessionManager.showSession()
+//        }
         NavigationView{
             VStack{
                 searchBar.padding()
