@@ -32,6 +32,7 @@
 		4C0E53C827712DAA001BEA58 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53C727712DAA001BEA58 /* SessionView.swift */; };
 		4C0E53CA27712DBE001BEA58 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53C927712DBE001BEA58 /* LoginView.swift */; };
 		4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */; };
+		4C36609527DE7C1C00D0B210 /* SentFriendReqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */; };
 		4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */; };
 		4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCB2793140D00FDCF6E /* awsconfiguration.json */; };
 		4C99015B27BC071C00FE5D2B /* TrackerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99015A27BC071C00FE5D2B /* TrackerManager.swift */; };
@@ -160,6 +161,7 @@
 		4C0E53C727712DAA001BEA58 /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
 		4C0E53C927712DBE001BEA58 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentFriendReqView.swift; sourceTree = "<group>"; };
 		4C792CC62793136A00FDCF6E /* InterfaceBuilderKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilderKit.framework; path = Library/Frameworks/InterfaceBuilderKit.framework; sourceTree = DEVELOPER_DIR; };
 		4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		4C792CCB2793140D00FDCF6E /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
@@ -203,16 +205,6 @@
 		EC6DBF85CB4DAB8D5A6E2902 /* Notification.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Notification.swift; path = amplify/generated/models/Notification.swift; sourceTree = "<group>"; };
 		F0C7A474AA58645C6841624F /* Message.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Message.swift; path = amplify/generated/models/Message.swift; sourceTree = "<group>"; };
 		F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackContactsView.swift; sourceTree = "<group>"; };
-
-
-		F2D7AF2127B879F6007C246A /* User+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Extensions.swift"; sourceTree = "<group>"; };
-
-
-		F2D7AF2327B95423007C246A /* EmergContactRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactRunningView.swift; sourceTree = "<group>"; };
-
-
-
-
 		F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FF7A7BF119B388DEACB526FE /* NotificationType.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = NotificationType.swift; path = amplify/generated/models/NotificationType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -314,6 +306,7 @@
 				4A2FA86027B337DF00B55D53 /* Info.plist */,
 				4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */,
 				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
+				4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */,
 				4C0E53C927712DBE001BEA58 /* LoginView.swift */,
 				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
 				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
@@ -332,30 +325,16 @@
 				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
 				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
-
-
-
 				35C1A98F27C9A6CE0032FD00 /* Message+Extensions.swift */,
 				35C1A99127C9A7130032FD00 /* MessageManager.swift */,
 				35C1A99327C9A73E0032FD00 /* MessageRow.swift */,
 				35C1A99527C9A7880032FD00 /* MessagesView.swift */,
-
-
-
-				4C0E53AA2770FE70001BEA58,
-
-
-
-
-
 				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
 				4CEEB63027CADF3100391A9E /* NotificationView.swift */,
-
 				4CB74FCB27CD6B4A004476B7 /* PreRunningView.swift */,
 				4CB74FCD27CD6DFD004476B7 /* EmergencyContactRow.swift */,
-
 			);
 			path = corre;
 			sourceTree = "<group>";
@@ -655,11 +634,8 @@
 				4CB74FCE27CD6DFD004476B7 /* EmergencyContactRow.swift in Sources */,
 				4C0E53C627712D7B001BEA58 /* SessionManager.swift in Sources */,
 				D9BE965227AF4B8A00ED177A /* FriendView.swift in Sources */,
-
 				35C1A99027C9A6CE0032FD00 /* Message+Extensions.swift in Sources */,
-
 				4CEEB63127CADF3100391A9E /* NotificationView.swift in Sources */,
-
 				D9BE965427B2E60C00ED177A /* DataStore.swift in Sources */,
 				4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */,
 				4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */,
@@ -669,6 +645,7 @@
 				7D0D95D1C4E60294E010D151 /* EmergencyContact.swift in Sources */,
 				2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */,
 				ED51C2ACBC4CC71DEE5ED476 /* Run.swift in Sources */,
+				4C36609527DE7C1C00D0B210 /* SentFriendReqView.swift in Sources */,
 				F2F0DC1D27B20DD4003E65E8 /* LocationManager.swift in Sources */,
 				D8FE2AF2C7A9E668FC727AE6 /* RunningStatus.swift in Sources */,
 				CA1CA2E226D406648AF9BA56 /* User+Schema.swift in Sources */,

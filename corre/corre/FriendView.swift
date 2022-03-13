@@ -29,6 +29,9 @@ struct FriendView: View {
                 Label("Add", systemImage: "plus")
             
             })
+                Button ("Pending", action: {
+                    sessionManager.showPendingRequests()
+                })
             }
             VStack {
                 Text("")

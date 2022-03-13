@@ -637,30 +637,38 @@ class DatabaseManager: ObservableObject {
                 }
             }
         }
-        var user1 = currentUser
+        var user1 = self.currentUser
         var user2 = getUserProfile(userID: userId)
-        //currentUser?.friends?.append(user2?.id)
-        user1?.friends?.append(user2?.id)
-        user2?.friends?.append(user1?.id)
-        
-        Amplify.DataStore.save(user1!) { result in
-            switch result {
-            case .success(_):
-                print("Saved")
-                self.currentUser = user1
-            case .failure(let error):
-                print(error.localizedDescription)
+        if user2 != nil {
+            if user1!.friends == nil {
+                user1!.friends = [String?]()
             }
-        }
-        Amplify.DataStore.save(user2!) { result in
-            switch result {
-            case .success(_):
-                print("Saved")
-            case .failure(let error):
-                print(error.localizedDescription)
+            if user2!.friends == nil {
+                user2!.friends = [String?]()
             }
-        }
             
+            //currentUser?.friends?.append(user2?.id)
+            user1?.friends?.append(user2?.id)
+            user2?.friends?.append(user1?.id)
+            
+            Amplify.DataStore.save(user1!) { result in
+                switch result {
+                case .success(_):
+                    print("Saved")
+                    self.currentUser = user1
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            Amplify.DataStore.save(user2!) { result in
+                switch result {
+                case .success(_):
+                    print("Saved")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
     
     func removeFriendFromArray(userId: String) {
@@ -710,9 +718,6 @@ class DatabaseManager: ObservableObject {
         }
     }
     
-    func cancelFriendRequest(notificationID: String) {
-        
-    }
     
     func blockUser(username: String) {
         
@@ -751,5 +756,31 @@ class DatabaseManager: ObservableObject {
     
     func getFriends() {
             
+    }
+    
+    func getFriendRequestsSent() -> [Notification] {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        }
+        var requests = [Notification]()
+        let notificationKeys = Notification.keys
+        Amplify.DataStore.query(Notification.self, where: notificationKeys.senderId == currentUser!.id && notificationKeys.type == NotificationType.friendrequest) { result in
+            switch (result) {
+            case .success (let items):
+                requests = items
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        print("THIS IS REQUESTS: \(requests)")
+        return requests
     }
 }

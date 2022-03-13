@@ -92,6 +92,9 @@ struct correApp: App {
             case .preRun:
                 PreRunningView()
                     .environmentObject(sessionManager)
+            case .pendingReqs(let requests):
+                SentFriendReqView(requests: requests)
+                    .environmentObject(sessionManager)
             }
             
         }

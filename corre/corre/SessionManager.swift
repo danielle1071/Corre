@@ -32,7 +32,7 @@ enum AuthState {
     case preRun
 
 
-
+    case pendingReqs(requests: [Notification])
 }
 
 final class SessionManger: ObservableObject {
@@ -289,5 +289,12 @@ final class SessionManger: ObservableObject {
     func showPreRunning() {
         authState = .preRun
     }
+    
+    func showPendingRequests() {
+        let listReqs = databaseManager.getFriendRequestsSent()
+        authState = .pendingReqs(requests: listReqs)
+    }
 }
 
+// Need to build a list of friend users
+// Need to build a list of friend requests sent
