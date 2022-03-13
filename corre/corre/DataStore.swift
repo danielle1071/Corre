@@ -4,6 +4,8 @@
 //
 //  Created by Lauren Wright on 2/8/22.
 //  for friend view
+//
+//  Modified by Lucas Morehouse on 3.6.22
 
 import Foundation
 import SwiftUI
@@ -16,4 +18,13 @@ struct Friend: Identifiable{
 
 class FriendStore: ObservableObject{
     @Published var friends = [Friend]()
+}
+
+struct emergContact: Identifiable {
+    var id = String()
+    var emergencyContact: EmergencyContact
+}
+
+class EmergencyContactStore: ObservableObject {
+    @Published var emergencyContacts = [emergContact]()
 }

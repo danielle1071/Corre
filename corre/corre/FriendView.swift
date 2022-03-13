@@ -20,16 +20,38 @@ struct FriendView: View {
     @ObservedObject var friendStore = FriendStore()
     @State var newFriend: String = ""
     
-    var searchBar: some View{
-        HStack{
+    
+    var searchBar: some View {
+        VStack {
+            Button("Back") {
+                sessionManager.showSession()
+            }
+            HStack{
             TextField("Enter a new friend", text: self.$newFriend)
             Button(action: self.addFriend, label: {
                 Label("Add", systemImage: "plus")
+            
             })
+                Button ("Pending", action: {
+                    sessionManager.showPendingRequests()
+                })
+            }
+            VStack {
+                List(sessionManager.databaseManager.friends, id: \.id) { friend in
+                    
+                        Text("\(friend.username)")
+                    
+                }
+                
+            }
         }
     }
     
     func addFriend(){
+        if !sessionManager.databaseManager.checkFriendRequestExist(username: newFriend.lowercased()) {
+            sessionManager.databaseManager.friendRequest(username: newFriend.lowercased())
+        } else { print("Request already exists") }
+        newFriend = ""
         friendStore.friends.append(Friend(id: String(friendStore.friends.count + 1), friendItem: newFriend))
     }
     
@@ -49,7 +71,12 @@ struct FriendView: View {
             }
         }
     
-    func delete(at offsets: IndexSet){
+    func delete(_ offsets: IndexSet){
+        offsets.forEach { index in
+            let friend = friendStore.friends[index]
+            print("Here is the friend being deleted: \(friend)")
+        }
+//        print(friendStore.friends[atOffset: offsets].friendItem)
         friendStore.friends.remove(atOffsets: offsets)
     }
 }

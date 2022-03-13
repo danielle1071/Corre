@@ -30,7 +30,7 @@ class DatabaseManager: ObservableObject {
     @Published var notifications = [Notification]()
     
 
-
+    @Published var friends = [User]()
 
     var subscriptions = Set<AnyCancellable>()
     
@@ -98,37 +98,58 @@ class DatabaseManager: ObservableObject {
         return retVal
     }
     
-    func getUserProfile (username: String) {
-//        DispatchQueue.main.async {
-            let usrKey = User.keys
-            
-            Amplify.DataStore.query(User.self, where: usrKey.username == username) { result in
-                print("OUTSIDE THE SWITCH")
-                switch(result) {
-                case .success(let items):
-                    //MARK: Need to update
-                    for item in items {
-                        print("CHECK THIS @@@")
-                        print("User ID: \(item.id)")
-                        self.currentUser = item
-                    }
-                case .failure(let error):
-                    print("Could not query DataStore: \(error)")
+//    func getUserProfile (username: String) {
+////        DispatchQueue.main.async {
+//            let usrKey = User.keys
+//
+//            Amplify.DataStore.query(User.self, where: usrKey.username == username) { result in
+//                print("OUTSIDE THE SWITCH")
+//                switch(result) {
+//                case .success(let items):
+//                    //MARK: Need to update
+//                    for item in items {
+//                        print("CHECK THIS @@@")
+//                        print("User ID: \(item.id)")
+//                        self.currentUser = item
+//                    }
+//                case .failure(let error):
+//                    print("Could not query DataStore: \(error)")
+//                }
+//            }
+//            /*
+//            let usrKey = User.keys
+//            let sink = Amplify.DataStore.query(User.self, where: usrKey.sub == sub).sink {
+//                if case let .failure(error) = $0 {
+//                    print("Error on query() for type Post - \(error.localizedDescription)")
+//                }
+//            }
+//            receiveValue: { result in
+//                print("Users Found: \(result)")
+//                self.currentUser = result
+//            }
+//             */
+////        }
+//    }
+    
+    func getUserProfile(username: String) -> User? {
+        var returnVal: User? = nil
+        let keys = User.keys
+        Amplify.DataStore.query(User.self, where: keys.username == username) { result in
+            switch(result) {
+            case .success(let items):
+                if items.count > 1 {
+                    print("More than 1 user found")
                 }
-            }
-            /*
-            let usrKey = User.keys
-            let sink = Amplify.DataStore.query(User.self, where: usrKey.sub == sub).sink {
-                if case let .failure(error) = $0 {
-                    print("Error on query() for type Post - \(error.localizedDescription)")
+                if items.count < 1 {
+                    print("No record found")
+                } else {
+                    returnVal = items[0]
                 }
+            case .failure(let error):
+                print("Could not query DataStore: \(error)")
             }
-            receiveValue: { result in
-                print("Users Found: \(result)")
-                self.currentUser = result
-            }
-             */
-//        }
+        }
+        return returnVal
     }
     
     func createDeviceRecord() {
@@ -501,6 +522,293 @@ class DatabaseManager: ObservableObject {
         return (getUserProfile(userID: userID)?.runningStatus != RunningStatus.notrunning) && (getUserProfile(userID: userID)?.runningStatus != nil)
     }
     
+
+    func friendRequest(username: String) {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        }
+        let receiver = getUserProfile(username: username)
+        if receiver != nil && !checkAlreadyFriends(user: receiver!, currentID: currentUser!.id) && !checkBlocked(user: receiver!, currentID: currentUser!.id) {
+            let notification = Notification(senderId: self.currentUser!.id, receiverId: receiver!.id, type: NotificationType.friendrequest)
+            createNotificationRecord(notification: notification)
+        }
+    }
+    
+    func createNotificationRecord(notification: Notification) {
+        Amplify.DataStore.save(notification) { result in
+            switch result {
+            case .success(_):
+                print("Saved Notification Record")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func checkFriendRequestExist(username: String) -> Bool {
+        var retVal = false
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        }
+        let receiver = getUserProfile(username: username)
+        if receiver != nil {
+            let notificationKeys = Notification.keys
+            // check if the current user has already sent a friend request
+            Amplify.DataStore.query(Notification.self, where: notificationKeys.senderId == currentUser!.id && notificationKeys.receiverId == receiver!.id && notificationKeys.type == NotificationType.friendrequest) { result in
+                switch result {
+                case .success(let items):
+                    retVal = items.count > 0
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            // check if the current user has received a friend request
+            Amplify.DataStore.query(Notification.self, where: notificationKeys.senderId == receiver!.id && notificationKeys.receiverId == currentUser!.id && notificationKeys.type == NotificationType.friendrequest) { result in
+                switch result {
+                case .success(let items):
+                    if items.count == 1 {
+                        // Treat as accept friend request!
+                        addFriendToList(user1: receiver!, user2: currentUser!)
+                        deleteNotificationRecord(notification: items[0])
+                        retVal = false
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        return retVal
+    }
+    
+    
+    func deleteNotificationRecord(notification: Notification) {
+        Amplify.DataStore.delete(notification) { result in
+            switch result {
+            case .success(_):
+                print("Deleted Notification Record")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func acceptedFriendRequest(notification: Notification, userId: String){
+        addFriendToList(userId: userId)
+        deleteNotificationRecord(notification: notification)
+    }
+    
+    
+    func checkAlreadyFriends(user: User, currentID: String) -> Bool {
+        let friendList = user.friends
+        return friendList?.contains(currentID) ?? false
+    }
+    
+    func checkBlocked(user: User, currentID: String) -> Bool {
+        let blockedList = user.blockedUsers
+        return blockedList?.contains(currentID) ?? false
+    }
+    
+    //MARK: Need to add an array initialization here for the friends
+    //MARK: Array if it is nil -LM
+    func addFriendToList(userId: String) {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        }
+        var user1 = self.currentUser
+        var user2 = getUserProfile(userID: userId)
+        if user2 != nil {
+            if user1!.friends == nil {
+                user1!.friends = [String?]()
+            }
+            if user2!.friends == nil {
+                user2!.friends = [String?]()
+            }
+            
+            //currentUser?.friends?.append(user2?.id)
+            user1?.friends?.append(user2?.id)
+            user2?.friends?.append(user1?.id)
+            
+            Amplify.DataStore.save(user1!) { result in
+                switch result {
+                case .success(_):
+                    print("Saved")
+                    self.currentUser = user1
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            Amplify.DataStore.save(user2!) { result in
+                switch result {
+                case .success(_):
+                    print("Saved")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func removeFriendFromArray(userId: String) {
+        var user1 = currentUser
+        var user2 = getUserProfile(userID: userId)
+        var flag1 = false
+        var flag2 = false
+        var index1 = 0
+        var index2 = 0
+        //used size because swift was causing problems with the for in loop -- we can refactor later on
+        var size1 = user1?.friends?.endIndex ?? -1
+        var size2 = user2?.friends?.endIndex ?? -1
+        size1 = size1 - 1 //endIndex returns 1+ the size, so we subtract 1
+        size2 = size2 - 1
+        //traverse array to find index of friend
+        if size1 == -2 {
+            //error getting size of array
+        }
+        for i in 0...size1 {
+            if user1?.friends?[i] == user2?.id {
+                flag1 = true
+                index1 = i
+                break
+            }
+        }
+        if flag1 == false {
+            //friend was not found
+        } else {
+            //remove from index and re-index array
+            user1?.friends?.remove(at: index1)
+        }
+        //removed from user1 list, now to user2...
+        if size2 == -2 {
+            //error getting size of array
+        }
+        for i in 0...size2 {
+            if user2?.friends?[i] == user1?.id {
+                flag2 = true
+                index2 = i
+                break
+            }
+        }
+        if flag2 == false {
+            //friend was not found
+        } else {
+            user2?.friends?.remove(at: index2)
+        }
+    }
+    
+    
+    func blockUser(username: String) {
+        //TODO: Create function to allow a user to block another user
+    }
+    
+    func addFriendToList(user1: User, user2: User) {
+        var user1Updated = user1
+        var user2Updated = user2
+        
+        if user1Updated.friends == nil {
+            user1Updated.friends = [String?]()
+        }
+        if user2Updated.friends == nil {
+            user2Updated.friends = [String?]()
+        }
+        user1Updated.friends!.append(user2.id)
+        user2Updated.friends!.append(user1.id)
+        Amplify.DataStore.save(user1Updated) { result in
+            switch (result) {
+            case .success(_):
+                print("Saved friend in add friend to list - user1")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        Amplify.DataStore.save(user2Updated) { result in
+            switch (result) {
+            case .success(_):
+                print("Saved friend in add friend to list - user2")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
+    func getFriends() {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        }
+        
+        let count = currentUser!.friends?.count ?? 0
+        print("This is count: \(count)")
+        let usrKeys = User.keys
+        var retArr = [User]()
+        for index in 0...count {
+            if index < count {
+                print("This is index: \(index)")
+                if let frien = self.getUserProfile(userID: self.currentUser!.friends![index]!) {
+                    retArr.append(frien)
+                }
+            }
+        }
+        self.friends = retArr
+    }
+    
+    func getFriendRequestsSent() -> [Notification] {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        }
+        var requests = [Notification]()
+        let notificationKeys = Notification.keys
+        Amplify.DataStore.query(Notification.self, where: notificationKeys.senderId == currentUser!.id && notificationKeys.type == NotificationType.friendrequest) { result in
+            switch (result) {
+            case .success (let items):
+                requests = items
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        print("THIS IS REQUESTS: \(requests)")
+        return requests
+    }
+  
     func deleteEmergencyContact(contactId: String) {
         Amplify.DataStore.delete(EmergencyContact.self, withId: contactId) { result in
             switch result {
@@ -520,9 +828,11 @@ class DatabaseManager: ObservableObject {
             case .success(_):
                 print("Updated the contact")
                 self.getEmergencyContacts()
+
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
+      
 }

@@ -31,7 +31,11 @@ enum AuthState {
     case preRun
 
 
+
+    case pendingReqs(requests: [Notification])
+
     case editEmergencyContact(contact: EmergencyContact)
+
 
 
 
@@ -282,11 +286,19 @@ final class SessionManger: ObservableObject {
     
     // MARK: showFriendView
     func showFriendView() {
+        databaseManager.getFriends()
         authState = .friendView
     }
     
     // MARK: showNotificationView
     func showNotificationView() {
+        Task () {
+            do {
+                await databaseManager.getNotifications()
+            } catch {
+                print("ERROR IN SHOW SESSION")
+            }
+        }
         authState = .notification
     }
     
@@ -294,8 +306,17 @@ final class SessionManger: ObservableObject {
         authState = .preRun
     }
     
+
+    func showPendingRequests() {
+        let listReqs = databaseManager.getFriendRequestsSent()
+        authState = .pendingReqs(requests: listReqs)
+
+    }
     func showEditContact(contact: EmergencyContact) {
         authState = .editEmergencyContact(contact: contact)
+
     }
 }
 
+// Need to build a list of friend users
+// Need to build a list of friend requests sent
