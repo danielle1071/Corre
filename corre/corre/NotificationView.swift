@@ -24,6 +24,7 @@ struct NotificationView: View {
                 print("Tapped A Notification")
 
             })
+                
         }
     }
     
@@ -47,6 +48,7 @@ struct NotificationView: View {
                     }
                     Text("Sender: \(notification.senderId)")
                 }
+                
             }
         }
 }

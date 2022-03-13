@@ -535,7 +535,7 @@ class DatabaseManager: ObservableObject {
             }
         }
         let receiver = getUserProfile(username: username)
-        if receiver != nil && !checkAlreadyFriends(user: receiver!) && !checkBlocked(user: receiver!, currentID: currentUser!.id) {
+        if receiver != nil && !checkAlreadyFriends(user: receiver!, currentID: currentUser!.id) && !checkBlocked(user: receiver!, currentID: currentUser!.id) {
             let notification = Notification(senderId: self.currentUser!.id, receiverId: receiver!.id, type: NotificationType.friendrequest)
             createNotificationRecord(notification: notification)
         }
@@ -613,12 +613,14 @@ class DatabaseManager: ObservableObject {
     }
     
     
-    func checkAlreadyFriends(user: User) -> Bool {
-        return false
+    func checkAlreadyFriends(user: User, currentID: String) -> Bool {
+        let friendList = user.friends
+        return friendList?.contains(currentID) ?? false
     }
     
     func checkBlocked(user: User, currentID: String) -> Bool {
-        return false
+        let blockedList = user.blockedUsers
+        return blockedList?.contains(currentID) ?? false
     }
     
     //MARK: Need to add an array initialization here for the friends

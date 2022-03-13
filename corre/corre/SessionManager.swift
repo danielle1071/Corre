@@ -230,6 +230,13 @@ final class SessionManger: ObservableObject {
     func showSession() {
         if let user = Amplify.Auth.getCurrentUser() {
             authState = .session(user: user)
+            Task () {
+                do {
+                    await databaseManager.getNotifications()
+                } catch {
+                    print("ERROR IN SHOW SESSION")
+                }
+            }
         } else {
             authState = .landing
         }
