@@ -230,13 +230,6 @@ final class SessionManger: ObservableObject {
     func showSession() {
         if let user = Amplify.Auth.getCurrentUser() {
             authState = .session(user: user)
-            Task () {
-                do {
-                    await databaseManager.getNotifications()
-                } catch {
-                    print("ERROR IN SHOW SESSION")
-                }
-            }
         } else {
             authState = .landing
         }
@@ -277,11 +270,19 @@ final class SessionManger: ObservableObject {
     
     // MARK: showFriendView
     func showFriendView() {
+        databaseManager.getFriends()
         authState = .friendView
     }
     
     // MARK: showNotificationView
     func showNotificationView() {
+        Task () {
+            do {
+                await databaseManager.getNotifications()
+            } catch {
+                print("ERROR IN SHOW SESSION")
+            }
+        }
         authState = .notification
     }
     

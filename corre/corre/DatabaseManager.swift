@@ -30,7 +30,7 @@ class DatabaseManager: ObservableObject {
     @Published var notifications = [Notification]()
     
 
-
+    @Published var friends = [User]()
 
     var subscriptions = Set<AnyCancellable>()
     
@@ -747,5 +747,9 @@ class DatabaseManager: ObservableObject {
             }
         }
         
+    }
+    
+    func getFriends() {
+            
     }
 }

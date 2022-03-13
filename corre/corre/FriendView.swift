@@ -21,12 +21,19 @@ struct FriendView: View {
     @State var newFriend: String = ""
     
     
-    var searchBar: some View{
-        HStack{
+    var searchBar: some View {
+        VStack {
+            HStack{
             TextField("Enter a new friend", text: self.$newFriend)
             Button(action: self.addFriend, label: {
                 Label("Add", systemImage: "plus")
+            
             })
+            }
+            VStack {
+                Text("")
+                
+            }
         }
     }
     
