@@ -34,7 +34,11 @@ struct FriendView: View {
                 })
             }
             VStack {
-                Text("")
+                List(sessionManager.databaseManager.friends, id: \.id) { friend in
+                    
+                        Text("\(friend.username)")
+                    
+                }
                 
             }
         }

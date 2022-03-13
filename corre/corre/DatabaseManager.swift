@@ -755,7 +755,31 @@ class DatabaseManager: ObservableObject {
     }
     
     func getFriends() {
-            
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        }
+        
+        let count = currentUser!.friends?.count ?? 0
+        print("This is count: \(count)")
+        let usrKeys = User.keys
+        var retArr = [User]()
+        for index in 0...count {
+            if index < count {
+                print("This is index: \(index)")
+                if let frien = self.getUserProfile(userID: self.currentUser!.friends![index]!) {
+                    retArr.append(frien)
+                }
+            }
+        }
+        self.friends = retArr
     }
     
     func getFriendRequestsSent() -> [Notification] {
