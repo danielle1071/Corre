@@ -23,6 +23,9 @@ struct FriendView: View {
     
     var searchBar: some View {
         VStack {
+            Button("Back") {
+                sessionManager.showSession()
+            }
             HStack{
             TextField("Enter a new friend", text: self.$newFriend)
             Button(action: self.addFriend, label: {
