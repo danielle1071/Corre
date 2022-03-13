@@ -18,6 +18,8 @@ struct CustomColor {
         Color("backgroundColor")
     
     static let primarycolor = Color("primaryColor")
+    
+    static let red = Color("red")
 }
 
 struct LoginView: View {
