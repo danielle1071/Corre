@@ -721,7 +721,7 @@ class DatabaseManager: ObservableObject {
     
     
     func blockUser(username: String) {
-        
+        //TODO: Create function to allow a user to block another user
     }
     
     func addFriendToList(user1: User, user2: User) {
