@@ -78,6 +78,10 @@ struct LoginView: View {
            
             Button(action:
                     {
+                sessionManager.login(
+                    username: login,
+                    password: password
+                )
                 withAnimation(.default) {
                     self.invalidAttempts += 1
                 }
