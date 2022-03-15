@@ -43,9 +43,17 @@ struct TrackRunnerView: View {
                 
                 Spacer()
                     .frame(height: 30)
-                AMLMapView(mapState: mapState)
-                    .edgesIgnoringSafeArea(.all)
-                    .overlay(Text("📍"), alignment: .center)
+                ZStack {
+                    // AMLMapView(mapState: mapState)
+                    //    .edgesIgnoringSafeArea(.all)
+                    //    .overlay(Text("📍"), alignment: .center)
+                    AMLMapView(mapState: mapState)
+                        .overlay(Text("📍"), alignment: .center)
+                        .frame(width: /*@START_MENU_TOKEN@*/350.0/*@END_MENU_TOKEN@*/, height: 550)
+                        .cornerRadius(20)
+                        .edgesIgnoringSafeArea(.all)
+                        .shadow(radius: 2)
+                }
 
             }
             
