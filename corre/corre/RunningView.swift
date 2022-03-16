@@ -19,6 +19,7 @@ struct RunningView: View {
     @State var tokens: Set<AnyCancellable> = .init()
     @State var mapState = AMLMapViewState(zoomLevel: 17)
     @State var phoneNumber: String
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -27,13 +28,24 @@ struct RunningView: View {
 
         static let lblue = Color("lightBlue")
     }
+    
     // MARK: Phone Number
     // example phone number. Refer to SOS button
-//    var phoneNumber = "718-555-5555"
+    //    var phoneNumber = "718-555-5555"
+    
+    @GestureState var highlight = false
+    var longPress: some Gesture {
+                LongPressGesture(minimumDuration: 3)
+                    .updating($highlight) { currentstate, gestureState, transaction in
+                        transaction.animation = Animation.easeInOut(duration: 2.0)
+                        gestureState = currentstate
+                    }
+            }
 
     var body: some View {
-        Spacer()
-        Text("SOS Phone Number: \(phoneNumber)")
+        // MARK: remove after testing
+        // Text("SOS Phone Number: \(phoneNumber)")
+        
         VStack {
             // MARK: change this to stop run!
             HStack{
@@ -44,33 +56,42 @@ struct RunningView: View {
                 // stops tracker resources
                 locationService.stopTracking()
             }, label: {
+                Image(systemName: "arrow.left")
+                    .renderingMode(.original)
+                    .edgesIgnoringSafeArea(.all)
+                    .foregroundColor(Color("primaryColor"))
                 Text("Back")
-                    .fontWeight(.bold)
-                    .frame(width: 150.0, height: 40.0)
-                    .foregroundColor(Color.white)
-                    .background(CusColor.primarycolor)
-                    .clipShape(Capsule())
+                    .foregroundColor(Color("primaryColor"))
+//                Text("Back")
+//                    .fontWeight(.bold)
+//                    .frame(width: 150.0, height: 40.0)
+//                    .foregroundColor(Color.white)
+//                    .background(CusColor.primarycolor)
+//                    .clipShape(Capsule())
                 })
+                
+                Spacer()
+                HStack{
+                    Text("Time Elapsed: 00:00:00")
+                }
+                .padding(/*@START_MENU_TOKEN@*/.trailing, 9.0/*@END_MENU_TOKEN@*/)
+                .foregroundColor(Color("primaryColor"))
             }
+            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
-            Spacer()
-            Spacer()
-            
-            AMLMapView(mapState: mapState)
-                .showUserLocation(true)
-                .edgesIgnoringSafeArea(.all)
-            
-            HStack{
-                Text("Time Elapsed: 00:00:00")
+            ZStack {
+                AMLMapView(mapState: mapState)
+                    .showUserLocation(true)
+                    .frame(width: /*@START_MENU_TOKEN@*/350.0/*@END_MENU_TOKEN@*/, height: 550)
+                    .cornerRadius(20)
+                    .edgesIgnoringSafeArea(.all)
+                    .shadow(radius: 2)
             }
-            .padding(/*@START_MENU_TOKEN@*/.trailing, 9.0/*@END_MENU_TOKEN@*/)
-            .foregroundColor(Color("primaryColor"))
-            
-            Spacer()
             Spacer()
             
-            HStack {
-               // call emergency contact with example phone number
+        
+            HStack(spacing: 30)  {
+                // call emergency contact with example phone number
                 Button(action:{
                     let phone = "tel://"
                                     let phoneNumberformatted = phone + phoneNumber
@@ -79,20 +100,22 @@ struct RunningView: View {
                 }, label: {
                     Text("SOS")
                         .fontWeight(.bold)
-                        .frame(width: 150.0, height: 40.0)
+                        .frame(width: 160.0, height: 60.0)
                         .foregroundColor(Color.white)
                         .background(Color.red)
-                        .clipShape(Capsule())
+                        .clipShape(RoundedRectangle(cornerRadius: 25.0,
+                                                    style: .circular))
                 })
                 
                 Button(action:{
                 }, label: {
                     Text("Pause Run")
                         .fontWeight(.bold)
-                        .frame(width: 150.0, height: 40.0)
+                        .frame(width: 160.0, height: 60.0)
                         .foregroundColor(Color.white)
                         .background(CusColor.primarycolor)
-                        .clipShape(Capsule())
+                        .clipShape(RoundedRectangle(cornerRadius: 25.0,
+                                                    style: .circular))
                 })
            
 //                Button(action: {
@@ -106,8 +129,24 @@ struct RunningView: View {
 //                        .clipShape(Capsule())
 //                })
                 
-            } .padding(5.0)
+            }
+            .padding(5.0)
+            Spacer()
+            
+            Button(action:{
+            }, label: {
+                Text("Stop Run")
+                    .fontWeight(.bold)
+                    .frame(width: 350.0, height: 60.0)
+                    .foregroundColor(Color.white)
+                    .background(self.highlight ? Color.red : CusColor.primarycolor)
+                    .clipShape(RoundedRectangle(cornerRadius: 25.0,
+                                                style: .circular))
+                    .gesture(longPress)
+            })
+            
         }
+        .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
         .onAppear(perform: {
             locationService.setSessionManager(sessionManager: sessionManager)
             getCurrentUserLocation()

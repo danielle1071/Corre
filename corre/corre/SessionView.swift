@@ -30,36 +30,36 @@ struct SessionView: View {
             Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
 
             Spacer()
-//            Button("Run", action: {
-//                if sessionManager.databaseManager.emergencyContacts.isEmpty {
-//                    showingSheet.toggle()
-//                } else {
-//                    sessionManager.showPreRunning()
-//                }
-//            }).sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
-//                .padding()
-//                    .padding(.horizontal, 50)
-//                    .foregroundColor(CustomColor.primarycolor)
-//                .padding(.horizontal, 10)
-//                .foregroundColor(CustomColor.primarycolor)
-//                .background(CustomColor.backcolor)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 20)
-//                    .stroke(CustomColor.primarycolor, lineWidth: 2)
-//                )
-            
-            
-//            Spacer()
-            Button("Profile", action: {
-                sessionManager.showProfile()
-            }).padding()
-                .padding(.horizontal, 108)
+            Button("Run", action: {
+                if sessionManager.databaseManager.emergencyContacts.isEmpty {
+                    showingSheet.toggle()
+                } else {
+                    sessionManager.showPreRunning()
+                }
+            }).sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
+                .padding()
+                    .padding(.horizontal, 50)
+                    .foregroundColor(CustomColor.primarycolor)
+                .padding(.horizontal, 10)
                 .foregroundColor(CustomColor.primarycolor)
                 .background(CustomColor.backcolor)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
+            
+            
+//            Spacer()
+//            Button("Profile", action: {
+//                sessionManager.showProfile()
+//            }).padding()
+//                .padding(.horizontal, 108)
+//                .foregroundColor(CustomColor.primarycolor)
+//                .background(CustomColor.backcolor)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 20)
+//                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+//                )
             
 //            Spacer()
             
