@@ -48,28 +48,36 @@ struct SignUpView: View {
     
     var body: some View {
         VStack{
+            Image("CreamLogo")
+                .resizable()
+                .frame(width: 100.0, height: 100.0)
+                .scaledToFit()
             
             Text("Sign Up")
                 .font(.system(size: 30.0))
                 .foregroundColor(CustomColor.primarycolor)
-            
-            Image("CreamLogo")
-                .resizable()
-                .frame(width: 150.0, height: 150.0)
-                .scaledToFit()
-
-            Spacer()
-                .frame(height: 10)
-            
+          
             Group {
                 
                 TextField("Username", text: $username)
+                    .shadow(radius: 2.0)
+        
+                Text("Password must have 1 uppercase, 1 lowercase, 1 number, 1 special character, and a length of 8")
+                    .font(.system(size: 10.0))
+                    .foregroundColor(Color.red)
+
                 SecureField("Password", text: $password)
-            
+                    .shadow(radius: 2.0)
+                SecureField("Re-type Password", text: $password)
+                    .shadow(radius: 2.0)
                 TextField("Email", text: $email)
+                    .shadow(radius: 2.0)
                 TextField("Phone Number (+1##########)", text: $phone)
+                    .shadow(radius: 2.0)
                 TextField("First Name", text: $givenName)
+                    .shadow(radius: 2.0)
                 TextField("Last Name", text: $familyName)
+                    .shadow(radius: 2.0)
                 //TextField("Birthday (YYYY-MM-DD)", text: $dateOfBirth)
                 
                 HStack(alignment: .bottom){
@@ -98,7 +106,6 @@ struct SignUpView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .frame(height: 40)
                 .cornerRadius(16)
-                .shadow(radius: 2.0)
                 .padding([.horizontal], 38)
             
             /*Group {
