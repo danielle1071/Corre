@@ -58,9 +58,12 @@ struct EmergencyContactEditView: View {
             TextField("\(contact.email)", text: $updateEmail)
             TextField("\(contact.phoneNumber)", text: $updatePhone)
             
-            }.font(.system(size: 20.0))
-                .foregroundColor(CustomColor.primarycolor)
+            }.foregroundColor(CustomColor.primarycolor)
+                .background(Color.white)
                 .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/,30)
+                .shadow(radius: 2.0)
+                .font(.system(size: 20.0))
+                
                 
             
             Spacer()
