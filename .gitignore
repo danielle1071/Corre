@@ -114,5 +114,4 @@ amplifytools.xcconfig
 *cli.json
 *.DS_Store
 corre/.DS_Store
-corre/.DS_Store
-corre/corre.xcodeproj/project.pbxproj
+
