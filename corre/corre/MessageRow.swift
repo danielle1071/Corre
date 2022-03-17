@@ -38,8 +38,17 @@ struct MessageRow: View {
             return .green
         }
     }
-
+    struct CusColor {
+        static let backcolor =
+            Color("backgroundColor")
+        
+        static let primarycolor = Color("primaryColor")
+        
+        static let lblue = Color("lightBlue")
+    }
     var body: some View {
+        ZStack{
+            CusColor.backcolor.edgesIgnoringSafeArea(.all)
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
                 Image(systemName: "\(iconName).circle.fill")
@@ -48,18 +57,25 @@ struct MessageRow: View {
 
                 VStack(alignment: .leading) {
                     Text("\((sessionManager.databaseManager.getUserProfile(userID: message.senderId))?.username ?? "ERROR")")
+                        .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                        .foregroundColor(Color("primaryColor"))
                     Text("\(sessionManager.databaseManager.currentUser?.username ?? "Error: User not found")")
-                        .font(.headline)
+                        .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                        .foregroundColor(Color("primaryColor"))
 
                     Text(message.body)
-                        .font(.body)
+                        .font(Font.custom("Proxima Nova Rg Regular", size: 15))
+                        .foregroundColor(Color("primaryColor"))
+                        
                 }
             }
             .padding(.horizontal, 16)
 
             Divider().padding(.leading, 16)
         }
+        .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
     }
+}
 }
 
 /*
