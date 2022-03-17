@@ -14,6 +14,7 @@ import CoreLocation
 
 struct TrackRunnerView: View {
     
+    // test2
     
     @EnvironmentObject var sessionManager: SessionManger
     @StateObject var trackingManager = TrackerManager()
