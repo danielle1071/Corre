@@ -22,10 +22,23 @@ struct MessagesView: View {
         messageManager.observeMessages()
         
     }
-    
+    struct CusColor {
+        static let backcolor =
+            Color("backgroundColor")
+        
+        static let primarycolor = Color("primaryColor")
+        
+        static let lblue = Color("lightBlue")
+    }
     var body: some View {
         VStack {
+            HStack{
             Button("Back", action: sessionManager.showSession)
+                    .padding()
+                    .foregroundColor(Color("primaryColor"))
+                    .font(Font.custom("Proxima Nova Rg Regular", size: 18))
+                Spacer()
+            }
             VStack {
                 ScrollView {
                     LazyVStack {
@@ -39,15 +52,27 @@ struct MessagesView: View {
                 }
 
                 HStack {
-                    TextField("Enter message", text: $text)
-                    Button("Send", action: didTapSend)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.purple)
+                    TextField("Enter message...", text: $text)
+                        .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                        .padding(15)
+                        .padding([.horizontal], 25)
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray, lineWidth: 1)
+                        .padding([.horizontal], 25))
+                    Button (action: didTapSend ){
+                    Image(systemName: "arrow.up.circle.fill")
+                        .resizable()
+                        .foregroundColor(Color("primaryColor"))
+                        .frame(width: 35.0, height: 35.0)
+                        .scaledToFit()
+                    }
+                        .padding(.trailing, 20.0)
+                        
                 }
             }
         }
-        .padding(.horizontal, 16)
+        .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+        //.padding(.horizontal, 16)
     }
 
     func didTapSend() {
