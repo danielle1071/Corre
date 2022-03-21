@@ -83,7 +83,7 @@ struct EmergencyContactEditView: View {
                 
             Button("Delete Contact", action: {
                 sessionManager.databaseManager.deleteEmergencyContact(contactId: contact.id)
-                sessionManager.showSession()
+                sessionManager.showNavBar()
             }).font(.system(size: 20.0))
                     .foregroundColor(CustomColor.red)
                 

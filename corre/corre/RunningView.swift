@@ -38,7 +38,7 @@ struct RunningView: View {
         LongPressGesture(minimumDuration: 3)
             .onEnded { _ in
                 sessionManager.databaseManager.setRunStatus(status: .notrunning)
-                sessionManager.showSession()
+                sessionManager.showNavBar()
 
                 // stops tracker resources
                 locationService.stopTracking()

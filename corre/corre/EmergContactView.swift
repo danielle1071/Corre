@@ -43,7 +43,7 @@ struct EmergContactView: View {
         VStack{
             HStack{
                 Button(action: {
-                    sessionManager.showSession()
+                    sessionManager.showNavBar()
                 }, label: {
                     Image(systemName: "arrow.left")
                         .renderingMode(.original)
@@ -241,6 +241,6 @@ struct AddEmergencyContact: View {
         presentationMode.wrappedValue.dismiss()
         
         // MARK: fix this later..
-        sessionManager.showSession()
+        sessionManager.showNavBar()
     }
 }
