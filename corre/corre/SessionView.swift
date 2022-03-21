@@ -19,7 +19,7 @@ struct SessionView: View {
     @EnvironmentObject var sessionManager: SessionManger
     
     @State private var showingSheet = false
-    @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
+//    @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
     
     // @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
     let user: AuthUser
@@ -31,7 +31,7 @@ struct SessionView: View {
 
         
             // MARK: NEED TO UPDATE THE USER TRACKING ID --- CURRENTLY HARD CODED FOR TESTING!
-            Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
+//            Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
 
             Spacer()
             Button("Run", action: {
@@ -80,7 +80,7 @@ struct SessionView: View {
                     HStack {
                        
                             // MARK: Header Name Line
-                            Text("Hi $Name")
+                        Text("Hi \(sessionManager.databaseManager.currentUser?.username ?? "Name")")
                                 .font(.custom("Varela Round Regular", size: 40))
                                 .foregroundColor(Color("primaryColor"))
                                 .frame(maxWidth: .infinity, alignment: .leading)
