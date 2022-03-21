@@ -14,7 +14,6 @@
 		35C1A99427C9A73E0032FD00 /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99327C9A73E0032FD00 /* MessageRow.swift */; };
 		35C1A99627C9A7880032FD00 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99527C9A7880032FD00 /* MessagesView.swift */; };
 		4A19986727E16780001822E5 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A19986627E16780001822E5 /* LaunchView.swift */; };
-		4A1EE55B27E1781E0032138E /* animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EE55A27E1781E0032138E /* animation.gif */; };
 		4A1EE56127E1AA3B0032138E /* ProximaNova.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */; };
 		4A1EE56227E1AA3B0032138E /* ProximaNova.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */; };
 		4A2FA86727B359BF00B55D53 /* VarelaRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */; };
@@ -39,6 +38,7 @@
 		4C0E53CA27712DBE001BEA58 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53C927712DBE001BEA58 /* LoginView.swift */; };
 		4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */; };
 		4C36609527DE7C1C00D0B210 /* SentFriendReqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */; };
+		4C505BD427E8C8FD00815E85 /* animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4C505BD327E8C8FD00815E85 /* animation.gif */; };
 		4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */; };
 		4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCB2793140D00FDCF6E /* awsconfiguration.json */; };
 		4C99015B27BC071C00FE5D2B /* TrackerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99015A27BC071C00FE5D2B /* TrackerManager.swift */; };
@@ -158,7 +158,6 @@
 		35C1A99327C9A73E0032FD00 /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
 		35C1A99527C9A7880032FD00 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		4A19986627E16780001822E5 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
-		4A1EE55A27E1781E0032138E /* animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = animation.gif; path = ../../../../animation.gif; sourceTree = "<group>"; };
 		4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ProximaNova.ttf; sourceTree = "<group>"; };
 		4A2FA86027B337DF00B55D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VarelaRound-Regular.ttf"; sourceTree = "<group>"; };
@@ -177,6 +176,7 @@
 		4C0E53C927712DBE001BEA58 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentFriendReqView.swift; sourceTree = "<group>"; };
+		4C505BD327E8C8FD00815E85 /* animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = animation.gif; sourceTree = "<group>"; };
 		4C792CC62793136A00FDCF6E /* InterfaceBuilderKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilderKit.framework; path = Library/Frameworks/InterfaceBuilderKit.framework; sourceTree = DEVELOPER_DIR; };
 		4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		4C792CCB2793140D00FDCF6E /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
@@ -349,8 +349,8 @@
 				4C99015A27BC071C00FE5D2B /* TrackerManager.swift */,
 				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
 				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
-				4A1EE55A27E1781E0032138E /* animation.gif */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
+				4C505BD327E8C8FD00815E85 /* animation.gif */,
 				35C1A98F27C9A6CE0032FD00 /* Message+Extensions.swift */,
 				35C1A99127C9A7130032FD00 /* MessageManager.swift */,
 				35C1A99327C9A73E0032FD00 /* MessageRow.swift */,
@@ -601,7 +601,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C0E53A92770FE70001BEA58 /* Assets.xcassets in Resources */,
-				4A1EE55B27E1781E0032138E /* animation.gif in Resources */,
+				4C505BD427E8C8FD00815E85 /* animation.gif in Resources */,
 				4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */,
 				4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */,
 				4A2FA86727B359BF00B55D53 /* VarelaRound-Regular.ttf in Resources */,
