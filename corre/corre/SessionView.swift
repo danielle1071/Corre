@@ -21,7 +21,9 @@ struct SessionView: View {
     @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
     // @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
     let user: AuthUser
-    
+    @State var test = ""
+    @State var userExist = false
+    @State var invalidAttempts = 0
     var body: some View {
         VStack {
         
@@ -87,6 +89,20 @@ struct SessionView: View {
 //                print("!@#$%^&*() \(sessionManager.databaseManager.currentUser?.EmergencyContacts!.elements)")
 //            }
             Group {
+                
+                TextField("Here", text: $test)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(height: 40)
+                    .cornerRadius(16)
+                    .shadow(radius: 2.0)
+                    .padding([.horizontal], 20)
+                if userExist {
+                    Text("🤡🤡🤡🤡🤡🤡")
+                }
+                Button("Click This", action: {
+                    userExist = !userExist
+                })
+                
             Button("Friends", action: {
                 sessionManager.showFriendView()
             }).padding()

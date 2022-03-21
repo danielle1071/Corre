@@ -9,6 +9,9 @@
 //
 //  This file is based on the youtube tutorial: https://www.youtube.com/watch?v=wSHnmtnzbfs
 //
+//  Edited by Lucas Morehouse on 3/21/22
+//  
+
 
 import Foundation
 import SwiftUI
@@ -27,7 +30,7 @@ struct SignUpView: View {
     }
     
     @EnvironmentObject var sessionManager: SessionManger
-    
+    @State var userExist = false
     @State private var birthDate = Date()
     let dateFormatter = DateFormatter()
     
@@ -44,6 +47,7 @@ struct SignUpView: View {
     @State var region = ""
     @State var postal_code = ""
     @State var country = ""
+    @State var reTypePassword = ""
    
     
     var body: some View {
@@ -65,20 +69,36 @@ struct SignUpView: View {
                 Text("Password must have 1 uppercase, 1 lowercase, 1 number, 1 special character, and a length of 8")
                     .font(.system(size: 10.0))
                     .foregroundColor(Color.red)
-
-                SecureField("Password", text: $password)
-                    .shadow(radius: 2.0)
-                SecureField("Re-type Password", text: $password)
-                    .shadow(radius: 2.0)
+                Group {
+                    SecureField("Password", text: $password)
+                        .shadow(radius: 2.0)
+                    SecureField("Re-type Password", text: $reTypePassword)
+                        .shadow(radius: 2.0)
+                    if password == reTypePassword {
+                        Text("password match")
+                            .font(.system(size: 10.0))
+                            .foregroundColor(Color.green)
+                    } else {
+                        Text("passwords do not match")
+                            .font(.system(size: 10.0))
+                            .foregroundColor(Color.red)
+                    }
+                }
                 TextField("Email", text: $email)
                     .shadow(radius: 2.0)
+                    
+                if userExist {
+                    Text("user exists with that email")
+                        .font(.system(size: 10.0))
+                        .foregroundColor(Color.red)
+                }
+                
                 TextField("Phone Number (+1##########)", text: $phone)
                     .shadow(radius: 2.0)
                 TextField("First Name", text: $givenName)
                     .shadow(radius: 2.0)
                 TextField("Last Name", text: $familyName)
                     .shadow(radius: 2.0)
-                //TextField("Birthday (YYYY-MM-DD)", text: $dateOfBirth)
                 
                 HStack(alignment: .bottom){
                 DatePicker(
@@ -108,45 +128,40 @@ struct SignUpView: View {
                 .cornerRadius(16)
                 .padding([.horizontal], 38)
             
-            /*Group {
-                TextField("City", text: $locality)
-                TextField("State", text: $region)
-                TextField("Country", text: $country)
-                TextField("Zip Code (#####)", text: $postal_code)
-            }*/
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .frame(height: 40)
-                .padding([.horizontal], 20)
-                .cornerRadius(16)
-                .shadow(radius: 2.0)
             
             Spacer()
                 .frame(height: 30)
             
-            /*
-            Button("Print BirthDate", action: {
-                dateFormatter.dateFormat = "YYYY-MM-dd"
-                dateOfBirth = dateFormatter.string(from: birthDate)
-                print(dateOfBirth)
-            })
-            */
             Button("Create Account", action: {
-                dateFormatter.dateFormat = "YYYY-MM-dd"
-                dateOfBirth = dateFormatter.string(from: birthDate)
-                sessionManager.signUp(
-                    username: username,
-                    email: email.lowercased(),
-                    phone: phone,
-                    password: password,
-                    givenName: givenName,
-                    familyName: familyName,
-                    dateOfBirth: dateOfBirth,
-                    locality: locality,
-                    region: region,
-                    postal_code: postal_code,
-                    country: country,
-                    gender: gender
-                )
+                if email != "" {
+                
+                    userExist = sessionManager.databaseManager.checkUserExists(email: email)
+                    print("Here is the result \(userExist)")
+                    if !userExist {
+                        print("User doesn't exist!")
+                    }
+                    
+                    if !userExist {
+                        if (password == reTypePassword) {
+                            dateFormatter.dateFormat = "YYYY-MM-dd"
+                            dateOfBirth = dateFormatter.string(from: birthDate)
+                            sessionManager.signUp(
+                                username: username,
+                                email: email.lowercased(),
+                                phone: phone,
+                                password: password,
+                                givenName: givenName,
+                                familyName: familyName,
+                                dateOfBirth: dateOfBirth,
+                                locality: locality,
+                                region: region,
+                                postal_code: postal_code,
+                                country: country,
+                                gender: gender
+                            )
+                        }
+                    }
+                }
             })
                 .padding()
                 .foregroundColor(.white)
@@ -168,6 +183,22 @@ struct SignUpView: View {
             }
         } .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+    }
+    
+    func registerNew() {
+        self.checkUsr{ () -> () in
+            self.anotherFunction()
+        }
+    }
+    
+    func checkUsr(handleComplete: ( () -> () )) {
+        userExist = sessionManager.databaseManager.checkUserExists(email: email)
+        print("Inside checkUsr with result \(userExist)")
+        handleComplete()
+    }
+    
+    func anotherFunction() {
+        print("This is where I would do the next check \(userExist)")
     }
     
 }

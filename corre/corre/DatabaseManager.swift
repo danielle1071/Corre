@@ -835,4 +835,34 @@ class DatabaseManager: ObservableObject {
         }
     }
       
+    func checkUserExists(email: String) -> Bool {
+        var retVal = false
+        Amplify.DataStore.query(User.self, where: User.keys.email == email.lowercased()) { result in
+            switch result {
+            case .success(let items):
+                retVal = items.count > 0
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        Amplify.DataStore.clear() { result in
+            switch result {
+            case .success:
+                print("inside check usr exist")
+                Amplify.DataStore.start(){ result in
+                    switch result {
+                    case .success:
+                        print("inside check usr exist")
+                        
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        print("Finishing checkUserExists and exiting with \(retVal)")
+        return retVal
+    }
 }
