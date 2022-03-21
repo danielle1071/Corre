@@ -52,27 +52,42 @@ struct SignUpView: View {
     
     var body: some View {
         VStack{
+            
+            HStack{
             Image("CreamLogo")
                 .resizable()
-                .frame(width: 100.0, height: 100.0)
+                .frame(width: 50.0, height: 50.0)
                 .scaledToFit()
             
             Text("Sign Up")
                 .font(.system(size: 30.0))
                 .foregroundColor(CustomColor.primarycolor)
-          
+            }
             Group {
                 
                 TextField("Username", text: $username)
-                    .shadow(radius: 2.0)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(height: 40)
+                    .cornerRadius(16)
+                    .padding([.horizontal], 38)
+                    .shadow(radius: 1.0)
         
                 Text("Password must have 1 uppercase, 1 lowercase, 1 number, 1 special character, and a length of 8")
                     .font(.system(size: 10.0))
                     .foregroundColor(Color.red)
+                    .padding([.horizontal], 38)
                 Group {
                     SecureField("Password", text: $password)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(height: 40)
+                        .cornerRadius(16)
+                        .padding([.horizontal], 38)
                         .shadow(radius: 2.0)
                     SecureField("Re-type Password", text: $reTypePassword)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(height: 40)
+                        .cornerRadius(16)
+                        .padding([.horizontal], 38)
                         .shadow(radius: 2.0)
                     if password == reTypePassword {
                         Text("password match")
@@ -85,6 +100,10 @@ struct SignUpView: View {
                     }
                 }
                 TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(height: 40)
+                    .cornerRadius(16)
+                    .padding([.horizontal], 38)
                     .shadow(radius: 2.0)
                     
                 if userExist {
@@ -94,10 +113,22 @@ struct SignUpView: View {
                 }
                 
                 TextField("Phone Number (+1##########)", text: $phone)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(height: 40)
+                    .cornerRadius(16)
+                    .padding([.horizontal], 38)
                     .shadow(radius: 2.0)
                 TextField("First Name", text: $givenName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(height: 40)
+                    .cornerRadius(16)
+                    .padding([.horizontal], 38)
                     .shadow(radius: 2.0)
                 TextField("Last Name", text: $familyName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(height: 40)
+                    .cornerRadius(16)
+                    .padding([.horizontal], 38)
                     .shadow(radius: 2.0)
                 
                 HStack(alignment: .bottom){
@@ -106,6 +137,7 @@ struct SignUpView: View {
                         selection: $birthDate,
                         displayedComponents: [.date]
                     )
+                    .padding([.horizontal], 38)
                     .colorInvert()
                     .colorMultiply(Color.blue)
                     .font(.system(size: 15.0))
@@ -123,10 +155,7 @@ struct SignUpView: View {
                 .frame(width: 310, height: 60, alignment: .leading)
             
             }
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .frame(height: 40)
-                .cornerRadius(16)
-                .padding([.horizontal], 38)
+                
             
             
             Spacer()
