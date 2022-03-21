@@ -22,6 +22,7 @@ struct EmergContactView: View {
     
     @State private var showingSheet = false
     @EnvironmentObject var sessionManager: SessionManger
+    @State var contacts: [EmergencyContact]
     // @ObservedObject var contacts = EmergencyContactStore()
     @State var addedContact = false
     @State var ecFirst = ""
@@ -56,7 +57,10 @@ struct EmergContactView: View {
                 }
                 .padding(.horizontal)
                 Spacer()
-                Button (action: {showingSheet.toggle()}){
+                Button (action: {showingSheet.toggle()
+                    sessionManager.databaseManager.getEmergencyContacts()
+                    contacts = sessionManager.databaseManager.emergencyContacts
+                }){
                 VStack {
                     Image(systemName: "plus")
                         .foregroundColor(Color("primaryColor"))
@@ -68,7 +72,7 @@ struct EmergContactView: View {
             }
             VStack {
                 List() {
-                    ForEach ( sessionManager.databaseManager.emergencyContacts, id: \.id) { emergencyContact in
+                    ForEach ( contacts, id: \.id) { emergencyContact in
                     EmergencyContactRow(emergencyContact: emergencyContact)
                             .onTapGesture(perform: {
                                             print("Tapped A Contact: \(emergencyContact)")
@@ -114,7 +118,8 @@ struct EmergContactView: View {
             print("This is the contact to delete \(contact)")
             sessionManager.databaseManager.deleteEmergencyContact(contactId: contact.id)
         }
-        
+        sessionManager.databaseManager.getEmergencyContacts()
+        contacts = sessionManager.databaseManager.emergencyContacts
 //        print("This is the offsets: \(offsets)")
     }
 }

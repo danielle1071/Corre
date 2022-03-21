@@ -100,7 +100,8 @@ struct FriendView: View {
                     
                 
                 HStack {
-                    List(sessionManager.databaseManager.friends, id: \.id) { friend in
+                    List{
+                        ForEach(sessionManager.databaseManager.friends, id: \.id) { friend in
                         
                             Text("\(friend.username)")
                             .listRowBackground(Color("orange"))
@@ -109,7 +110,8 @@ struct FriendView: View {
                        
                            
                     }
-                    
+                    .onDelete(perform: self.delete)
+                    }
                 }
                 //searchBar.padding()
                 List{
