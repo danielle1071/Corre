@@ -69,7 +69,7 @@ struct FriendView: View {
             sessionManager.databaseManager.friendRequest(username: newFriend.lowercased())
         } else { print("Request already exists") }
         newFriend = ""
-        friendStore.friends.append(Friend(id: String(friendStore.friends.count + 1), friendItem: newFriend))
+        //friendStore.friends.append(Friend(id: String(friendStore.friends.count + 1), friendItem: newFriend))
     }
     struct CusColor {
         static let backcolor =
@@ -91,19 +91,42 @@ struct FriendView: View {
     }
     var body: some View {
         NavigationView{
-            ZStack{
-                CusColor.backcolor.edgesIgnoringSafeArea(.all)
-           
-            VStack{
-                TextField("Enter a new friend", text: self.$newFriend)
-                    .padding()
-                    
-                
-                HStack {
-                    List(sessionManager.databaseManager.friends, id: \.id) { friend in
+                    ZStack{
+                        CusColor.backcolor.edgesIgnoringSafeArea(.all)
+                   
+                    VStack{
                         
-                            Text("\(friend.username)")
-                            .listRowBackground(Color("orange"))
+                        Image("CreamLogo")
+                            .resizable()
+                            .frame(width: 100.0, height: 100.0)
+                            .scaledToFit()
+                        
+                        HStack{
+                            TextField("Enter a new friend", text: self.$newFriend)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(height: 40)
+                                .padding()
+                                .cornerRadius(16)
+                                .shadow(radius: 2.0)
+                                
+                            Button(action: self.addFriend, label: {
+                                Label("Add", systemImage: "plus")
+                                    .foregroundColor(Color("primaryColor"))
+                                    .font(Font.custom("VarelaRound-Regular", size: 18))
+                                    .padding()
+                            
+                            })
+                            
+                        
+                        }
+                        
+                            
+                        
+                        HStack {
+                            List(sessionManager.databaseManager.friends, id: \.id) { friend in
+                                
+                                    Text("\(friend.username)")
+                                    .listRowBackground(Color("backgroundColor"))
                             .foregroundColor(Color("primaryColor"))
                             .font(Font.custom("VarelaRound-Regular", size: 20))
                        
@@ -128,12 +151,7 @@ struct FriendView: View {
                                     .foregroundColor(Color("primaryColor"))
                                     .font(Font.custom("VarelaRound-Regular", size: 18))
                             
-                            Button(action: self.addFriend, label: {
-                                Label("Add", systemImage: "plus")
-                                    .foregroundColor(Color("primaryColor"))
-                                    .font(Font.custom("VarelaRound-Regular", size: 18))
                             
-                            })
 
                                   }
                     }
