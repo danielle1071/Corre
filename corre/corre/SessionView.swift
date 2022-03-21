@@ -113,7 +113,7 @@ struct SessionView: View {
                     // MARK: Track Runner Button
                     HStack (spacing: 20.0)
                     {
-                        Button(action: {sessionManager.showTrack(userTrackingID: userId)
+                        Button(action: {sessionManager.showTrackContacts()
                         })
                         {
                             Image("track")
