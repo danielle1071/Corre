@@ -22,14 +22,21 @@ struct SessionView: View {
     // @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
     let user: AuthUser
     
+    struct CusColor {
+        static let backcolor =
+            Color("backgroundColor")
+
+        static let primarycolor = Color("primaryColor")
+
+        static let lblue = Color("lightBlue")
+    }
+    
     var body: some View {
         VStack {
-        
-        
             // MARK: NEED TO UPDATE THE USER TRACKING ID --- CURRENTLY HARD CODED FOR TESTING!
-            Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
-
-            Spacer()
+            // Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
+            
+            // MARK: Start Run
             Button("Run", action: {
                 if sessionManager.databaseManager.emergencyContacts.isEmpty {
                     showingSheet.toggle()
@@ -38,15 +45,13 @@ struct SessionView: View {
                 }
             }).sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
                 .padding()
-                    .padding(.horizontal, 50)
+                    .padding(.horizontal, 108)
                     .foregroundColor(CustomColor.primarycolor)
-                .padding(.horizontal, 10)
-                .foregroundColor(CustomColor.primarycolor)
-                .background(CustomColor.backcolor)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                    .stroke(CustomColor.primarycolor, lineWidth: 2)
-                )
+                    .background(CustomColor.backcolor)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                        .stroke(CustomColor.primarycolor, lineWidth: 2)
+                    )
             
             
 //            Spacer()
@@ -86,7 +91,8 @@ struct SessionView: View {
 //            Button("PRINT") {
 //                print("!@#$%^&*() \(sessionManager.databaseManager.currentUser?.EmergencyContacts!.elements)")
 //            }
-            Group {
+    
+            // MARK: Friends
             Button("Friends", action: {
                 sessionManager.showFriendView()
             }).padding()
@@ -98,7 +104,7 @@ struct SessionView: View {
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
             
-            Spacer()
+            // MARK: Notifications
             Button("Notifications", action: {
                 sessionManager.showNotificationView()
             }).padding()
@@ -110,8 +116,9 @@ struct SessionView: View {
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
             
-            Spacer()
-            }
+            
+            
+            // MARK: Emergency Contacts
             Button("Emergency Contacts") {
                 if sessionManager.databaseManager.emergencyContacts.isEmpty {
                     showingSheet.toggle()
@@ -121,22 +128,20 @@ struct SessionView: View {
             }
                 .sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
                 .padding()
-                    .padding(.horizontal, 50)
+                    .padding(.horizontal, 108)
                     .foregroundColor(CustomColor.primarycolor)
-                .padding(.horizontal, 10)
-                .foregroundColor(CustomColor.primarycolor)
-                .background(CustomColor.backcolor)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                    .stroke(CustomColor.primarycolor, lineWidth: 2)
-                )
+                    .background(CustomColor.backcolor)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                        .stroke(CustomColor.primarycolor, lineWidth: 2)
+                    )
 
-            Spacer()
-            
-            Button("Message (for test)", action: {
+
+            // MARK: Messaging
+            Button("Message [Beta]", action: {
                 sessionManager.showMessage()
             }).padding()
-                .padding(.horizontal, 70)
+                .padding(.horizontal, 108)
                 .foregroundColor(CustomColor.primarycolor)
                 .background(CustomColor.backcolor)
                 .overlay(
@@ -144,11 +149,11 @@ struct SessionView: View {
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
             
-            Spacer()
+            // MARK: Sign Out
             Button("Sign Out", action: {
                 sessionManager.signOut()
             }).padding()
-                .padding(.horizontal, 100)
+                .padding(.horizontal, 108)
                 .foregroundColor(CustomColor.primarycolor)
                 .background(CustomColor.backcolor)
                 .overlay(
@@ -168,10 +173,6 @@ struct SessionView: View {
                 }
             }
         })
-//        .onAppear(perform: {
-//            sessionManager.databaseManager.createDeviceRecord()
-//        })
-
     }
     
 }

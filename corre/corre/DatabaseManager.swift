@@ -17,26 +17,16 @@ import AWSDataStorePlugin
 class DatabaseManager: ObservableObject {
     
     @Published var currentUser:User?
-    
     @Published var emergencyContacts = [EmergencyContact]()
-    
     @Published var deviceTracking:Device?
-    
-
     @Published var runners = [EmergencyContact]()
-    
-
-
     @Published var notifications = [Notification]()
-    
-
     @Published var friends = [User]()
 
     var subscriptions = Set<AnyCancellable>()
     
     func getUserProfile (user: AuthUser) async {
 
-        
         let usrKey = User.keys
         await Amplify.DataStore.query(User.self, where: usrKey.sub == user.userId) { result in
             print("RESULT: \(result)")

@@ -39,63 +39,55 @@ struct EmergContactView: View {
     }
 
     var body: some View {
-        
-        // MARK: this needs to be a tab.. placeholder
-        Button("Track Contacts View", action: {
-            sessionManager.showTrackContacts()
-        }).padding()
-            .padding(.horizontal, 108)
-            .foregroundColor(CustomColor.primarycolor)
-            .background(CustomColor.backcolor)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                .stroke(CustomColor.primarycolor, lineWidth: 2))
-        
+
         VStack{
- 
-            HStack(alignment: .bottom){
-                Button (action: {sessionManager.showSession()}){
-                HStack{
+            HStack{
+                Button(action: {
+                    sessionManager.showSession()
+                }, label: {
                     Image(systemName: "arrow.left")
+                        .renderingMode(.original)
+                        .edgesIgnoringSafeArea(.all)
                         .foregroundColor(Color("primaryColor"))
-                    Text("Emergency Contacts")
-                        .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
+                    Text("Back")
                         .foregroundColor(Color("primaryColor"))
-                    Spacer()
-                }
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                }
-                
+                })
                 Spacer()
-                Spacer()
+                .foregroundColor(Color("primaryColor"))
                 
-                Button (action: {showingSheet.toggle()}){
-                HStack {
-                    Image(systemName: "plus")
-                        .foregroundColor(Color("primaryColor"))
-                    
-                    Spacer()
-                }
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                Button (action: {
+                    showingSheet.toggle()
+                }){
+                    HStack {
+                        Image(systemName: "plus")
+                            .foregroundColor(Color("primaryColor"))
+                        Text("Add Emergency Contact")
+                            .foregroundColor(Color("primaryColor"))
+                    }
+
                 }
                 .sheet(isPresented: $showingSheet, content: AddEmergencyContact.init)
-                    .padding()
-                        .padding(.horizontal, 50)
-                        .foregroundColor(CustomColor.primarycolor)
-                    .padding(.horizontal, 10)
-                    .foregroundColor(CustomColor.primarycolor)
-                    .background(CustomColor.backcolor)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                        .stroke(CustomColor.primarycolor, lineWidth: 2)
-                    )
-                
-                
+//                        .padding()
+//                        .padding(.horizontal, 10)
+//                        .foregroundColor(CustomColor.primarycolor)
+//                        .padding(.horizontal, 10)
+//                    .foregroundColor(CustomColor.primarycolor)
+//                    .background(CustomColor.backcolor)
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 20)
+//                        .stroke(CustomColor.primarycolor, lineWidth: 2)
+//                    )
             }
+            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            
+            
             Image("CreamLogo")
             .resizable()
             .frame(width: 125.0, height: 125.0)
             .scaledToFit()
+            
+            Text("Emergency Contacts")
+                .multilineTextAlignment(.center)
 
             VStack {
                 List() {
@@ -108,16 +100,22 @@ struct EmergContactView: View {
                             
                     } .onDelete(perform: delete)
                 }
-                    
-                
-                    
-               
             }
             Divider()
             .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
 
         }
-        .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+        
+        
+        // MARK: this needs to be a tab.. placeholder
+        Button("Track Contacts View", action: {
+            sessionManager.showTrackContacts()
+        }).padding()
+            .padding(.horizontal, 50)
+            .foregroundColor(CustomColor.primarycolor)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                .stroke(CustomColor.primarycolor, lineWidth: 2))
     }
     
 //    struct EmergencyContactRow: View {
@@ -136,7 +134,7 @@ struct EmergContactView: View {
             sessionManager.databaseManager.deleteEmergencyContact(contactId: contact.id)
         }
         
-//        print("This is the offsets: \(offsets)")
+        // print("This is the offsets: \(offsets)")
     }
 }
 
@@ -187,8 +185,6 @@ struct AddEmergencyContact: View {
                 Spacer()
                     .frame(height: geometry.size.height * 0.02)
                 Button("Create", action: {
-                    
-                    
                     sessionManager
                         .databaseManager
                         .createEmergencyContactRecord(
@@ -224,7 +220,7 @@ struct AddEmergencyContact: View {
                 Spacer()
                     .frame(height: geometry.size.height * 0.04)
             
-            Button("Dismiss", action: close)
+            Button("Dismiss", action: softClose)
                 .font(.custom("Varela Round Regular", size: 20))
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
             
@@ -235,10 +231,16 @@ struct AddEmergencyContact: View {
                 .scaledToFit()
         )
     }
-        
+    
+    func softClose() {
+        presentationMode.wrappedValue.dismiss()
+    }
         
 
     func close() {
         presentationMode.wrappedValue.dismiss()
+        
+        // MARK: fix this later..
+        sessionManager.showSession()
     }
 }

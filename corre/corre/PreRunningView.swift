@@ -27,19 +27,33 @@ struct PreRunningView: View {
         // MARK: this needs to be a tab.. placeholder
         
         VStack{
-            Text("Choose The Emergency Contact To Call If SOS")
-//            HStack(alignment: .bottom){
-        
-                
+            HStack{
+                Button(action: {
+                sessionManager.showSession()
+            }, label: {
+                Image(systemName: "arrow.left")
+                    .renderingMode(.original)
+                    .edgesIgnoringSafeArea(.all)
+                    .foregroundColor(Color("primaryColor"))
+                Text("Back")
+                    .foregroundColor(Color("primaryColor"))
+                })
                 Spacer()
-                Spacer()
                 
-                
+            }
+            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            
             Image("CreamLogo")
             .resizable()
             .frame(width: 125.0, height: 125.0)
             .scaledToFit()
-
+            
+            Text("Who would you like to call in case of an Emergency?")
+                .multilineTextAlignment(.center)
+            
+            Spacer()
+            Spacer()
+                
             VStack{
                 List(sessionManager.databaseManager.emergencyContacts, id: \.id) { emergencyContact in
                     EmergencyContactRow(emergencyContact: emergencyContact)
@@ -47,13 +61,11 @@ struct PreRunningView: View {
                             sessionManager.showRunning(phoneNumber: emergencyContact.phoneNumber)
                         })
                 }
-               
             }
+            
             Divider()
             .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
-
             }
-            .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
 //        }
     }
 }

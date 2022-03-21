@@ -317,48 +317,39 @@
 			children = (
 				4A2FA86027B337DF00B55D53 /* Info.plist */,
 				4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */,
-				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
+				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
 				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
-
-				4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */,
-
-
-				4CA7D06427D5191F006B246C /* EmergencyContactEditView.swift */,
-
-				4A4C1F4727CEE48900D95264 /* NavBarView.swift */,
-				4AB6136F27B1DE4E0018F678 /* RunningView.swift */,
-				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
-
-
-				4C0E53C927712DBE001BEA58 /* LoginView.swift */,
 				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
+				4C0E53C927712DBE001BEA58 /* LoginView.swift */,
 				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
-				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
-				D9BE965127AF4B8A00ED177A /* FriendView.swift */,
-				D94A595827C4540D001CA61C /* Error1View.swift */,
-				4AB6137327B1DEDE0018F678 /* EmergContactView.swift */,
-				4AB6137127B1DEC90018F678 /* ProfileView.swift */,
-				D9BE965327B2E60C00ED177A /* DataStore.swift */,
-				4C0E53A62770FE6F001BEA58 /* ContentView.swift */,
+				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
+				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
 				F2F0DC1C27B20DD4003E65E8 /* LocationManager.swift */,
 				4C99015A27BC071C00FE5D2B /* TrackerManager.swift */,
-				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
-				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
-				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
+				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
+				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
+				4A4C1F4727CEE48900D95264 /* NavBarView.swift */,
+				4CB74FCB27CD6B4A004476B7 /* PreRunningView.swift */,
+				4AB6136F27B1DE4E0018F678 /* RunningView.swift */,
+				D9BE965127AF4B8A00ED177A /* FriendView.swift */,
+				4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */,
+				4CEEB63027CADF3100391A9E /* NotificationView.swift */,
+				4AB6137127B1DEC90018F678 /* ProfileView.swift */,
+				D9BE965327B2E60C00ED177A /* DataStore.swift */,
+				D94A595827C4540D001CA61C /* Error1View.swift */,
 				35C1A98F27C9A6CE0032FD00 /* Message+Extensions.swift */,
 				35C1A99127C9A7130032FD00 /* MessageManager.swift */,
 				35C1A99327C9A73E0032FD00 /* MessageRow.swift */,
 				35C1A99527C9A7880032FD00 /* MessagesView.swift */,
-				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
-				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
-				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
-				4CEEB63027CADF3100391A9E /* NotificationView.swift */,
-
-				DAD8F61F27CFEFF800E63D67 /* UINotificationView.swift */,
-
-
-				4CB74FCB27CD6B4A004476B7 /* PreRunningView.swift */,
+				4AB6137327B1DEDE0018F678 /* EmergContactView.swift */,
+				4CA7D06427D5191F006B246C /* EmergencyContactEditView.swift */,
 				4CB74FCD27CD6DFD004476B7 /* EmergencyContactRow.swift */,
+				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
+				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
+				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
+				DAD8F61F27CFEFF800E63D67 /* UINotificationView.swift */,
+				4C0E53A62770FE6F001BEA58 /* ContentView.swift */,
+				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
 			);
 			path = corre;
 			sourceTree = "<group>";
@@ -990,6 +981,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"correWatch WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "correWatch WatchKit Extension/Info.plist";
@@ -1020,6 +1012,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"correWatch WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "correWatch WatchKit Extension/Info.plist";
@@ -1050,6 +1043,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchTests;
@@ -1070,6 +1064,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchTests;
@@ -1088,6 +1083,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchUITests;
@@ -1106,6 +1102,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchUITests;
