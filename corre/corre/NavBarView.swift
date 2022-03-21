@@ -54,13 +54,13 @@ struct NavBarView: View {
                     }
                 }
         
-            FriendView()
+            MessagesView()
                 .onTapGesture {
                     self.selectedTab = 2
                 }
                 .tabItem {
                     Image(systemName: "message")
-                    Text("Friends")
+                    Text("Messages")
                 }.tag(2)
             ProfileView()
                 .onTapGesture {
