@@ -29,28 +29,43 @@ struct TrackRunnerView: View {
         TimelineView(.periodic(from: .now, by: 1.0)) {_ in
             
             VStack {
-                Button("Back", action: sessionManager.showSession)
                 
-                Text("xCord: \(trackingManager.xCord)")
-                Text("yCord: \(trackingManager.yCord)")
-                Button("track!", action: {
-                    // trackingManager.startTracking()
-                    // getRunnerLocation()
-                    // runnerX = trackingManager.xCord
-                    // runnerY = trackingManager.yCord
-                })
-                Text("Tracking : \(trackingManager.tString)")
+                HStack{
+                    Button(action: {
+                    sessionManager.showTrackContacts()
+                }, label: {
+                    Image(systemName: "arrow.left")
+                        .renderingMode(.original)
+                        .edgesIgnoringSafeArea(.all)
+                        .foregroundColor(Color("primaryColor"))
+                    Text("Back")
+                        .foregroundColor(Color("primaryColor"))
+                    })
+                    Spacer()
+                    
+                }
+                .padding(.all)
                 
+                // for testing
+//                Text("xCord: \(trackingManager.xCord)")
+//                Text("yCord: \(trackingManager.yCord)")
+//                Button("track!", action: {
+//                    // trackingManager.startTracking()
+//                    // getRunnerLocation()
+//                    // runnerX = trackingManager.xCord
+//                    // runnerY = trackingManager.yCord
+//                })
+//                Text("Tracking : \(trackingManager.tString)")
+//                Spacer()
+//                    .frame(height: 30)
                 
-                Spacer()
-                    .frame(height: 30)
                 ZStack {
                     // AMLMapView(mapState: mapState)
                     //    .edgesIgnoringSafeArea(.all)
                     //    .overlay(Text("📍"), alignment: .center)
                     AMLMapView(mapState: mapState)
                         .overlay(Text("📍"), alignment: .center)
-                        .frame(width: /*@START_MENU_TOKEN@*/350.0/*@END_MENU_TOKEN@*/, height: 550)
+                        .frame(width: /*@START_MENU_TOKEN@*/350.0/*@END_MENU_TOKEN@*/, height: 700)
                         .cornerRadius(20)
                         .edgesIgnoringSafeArea(.all)
                         .shadow(radius: 2)
@@ -78,6 +93,9 @@ struct TrackRunnerView: View {
                     if !trackingManager.tracking {
                         print("NOT TRACKING! --- TrackRunnerView")
                         self.timer?.invalidate()
+                        
+                        // MARK: front-end needs transition page to tell the user has stopped running
+                        sessionManager.showTrackContacts()
                     }
                 
                 print("getRunnerLocation - trackingManager latitude: ", trackingManager.xCord)
@@ -94,6 +112,8 @@ struct TrackRunnerView: View {
 
                 })
             print("No More Coordinate Updates")
+        
+            
 
         }
 
