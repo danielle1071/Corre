@@ -41,62 +41,31 @@ struct EmergContactView: View {
     var body: some View {
         
         // MARK: this needs to be a tab.. placeholder
-        Button("Track Contacts View", action: {
-            sessionManager.showTrackContacts()
-        }).padding()
-            .padding(.horizontal, 108)
-            .foregroundColor(CustomColor.primarycolor)
-            .background(CustomColor.backcolor)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                .stroke(CustomColor.primarycolor, lineWidth: 2))
-        
         VStack{
- 
-            HStack(alignment: .bottom){
+            HStack(/*alignment: .bottom*/){
                 Button (action: {sessionManager.showSession()}){
                 HStack{
                     Image(systemName: "arrow.left")
                         .foregroundColor(Color("primaryColor"))
                     Text("Emergency Contacts")
+                        .font(.custom("Proxima Nova Rg Regular", size: 18))
                         .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
                         .foregroundColor(Color("primaryColor"))
-                    Spacer()
+                   // Spacer()
                 }
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 }
-                
+                .padding(.horizontal)
                 Spacer()
-                Spacer()
-                
                 Button (action: {showingSheet.toggle()}){
-                HStack {
+                VStack {
                     Image(systemName: "plus")
                         .foregroundColor(Color("primaryColor"))
-                    
-                    Spacer()
                 }
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .padding(.horizontal)
                 }
                 .sheet(isPresented: $showingSheet, content: AddEmergencyContact.init)
                     .padding()
-                        .padding(.horizontal, 50)
-                        .foregroundColor(CustomColor.primarycolor)
-                    .padding(.horizontal, 10)
-                    .foregroundColor(CustomColor.primarycolor)
-                    .background(CustomColor.backcolor)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                        .stroke(CustomColor.primarycolor, lineWidth: 2)
-                    )
-                
-                
             }
-            Image("CreamLogo")
-            .resizable()
-            .frame(width: 125.0, height: 125.0)
-            .scaledToFit()
-
             VStack {
                 List() {
                     ForEach ( sessionManager.databaseManager.emergencyContacts, id: \.id) { emergencyContact in
@@ -108,15 +77,25 @@ struct EmergContactView: View {
                             
                     } .onDelete(perform: delete)
                 }
-                    
-                
-                    
-               
+                Button("Track Contacts View", action: {
+                        sessionManager.showTrackContacts()
+                    })
+                    .padding()
+                    .foregroundColor(Color("primaryColor"))
+                    .font(.custom("Proxima Nova Rg Regular", size: 18))
             }
-            Divider()
-            .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
-
-        }
+                
+           
+            
+            /*
+            Image("CreamLogo")
+            .resizable()
+            .frame(width: 125.0, height: 125.0)
+            .scaledToFit()
+             */
+            Spacer()
+            }
+            
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
     }
     

@@ -22,10 +22,14 @@ struct FriendView: View {
     
     
     var searchBar: some View {
+      
         VStack {
+           /*
             Button("Back") {
                 sessionManager.showSession()
             }
+            */
+            /*
             HStack{
             TextField("Enter a new friend", text: self.$newFriend)
             Button(action: self.addFriend, label: {
@@ -36,16 +40,29 @@ struct FriendView: View {
                     sessionManager.showPendingRequests()
                 })
             }
+            
+            */
+            //.background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+           /*
             VStack {
                 List(sessionManager.databaseManager.friends, id: \.id) { friend in
                     
                         Text("\(friend.username)")
+                        .foregroundColor(Color("primaryColor"))
+                        .font(Font.custom("VarelaRound-Regular", size: 20))
                     
                 }
                 
+                
             }
+           */
         }
+       
+        
+        
+    
     }
+    
     
     func addFriend(){
         if !sessionManager.databaseManager.checkFriendRequestExist(username: newFriend.lowercased()) {
@@ -54,22 +71,80 @@ struct FriendView: View {
         newFriend = ""
         friendStore.friends.append(Friend(id: String(friendStore.friends.count + 1), friendItem: newFriend))
     }
+    struct CusColor {
+        static let backcolor =
+            Color("backgroundColor")
+        
+        static let primarycolor = Color("primaryColor")
+        
+        static let lblue = Color("lightBlue")
+    }
     
+    init() {
+
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "primaryColor") ?? .red]
+        
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont(name: "VarelaRound-Regular", size: 30.0)!, .foregroundColor: UIColor(named: "primaryColor") ?? .red]
+        UITableView.appearance().backgroundColor = UIColor.clear
+        
+           
+    }
     var body: some View {
-//        Button("Back") {
-//            sessionManager.showSession()
-//        }
         NavigationView{
+            ZStack{
+                CusColor.backcolor.edgesIgnoringSafeArea(.all)
+           
             VStack{
-                searchBar.padding()
+                TextField("Enter a new friend", text: self.$newFriend)
+                    .padding()
+                    
+                
+                HStack {
+                    List(sessionManager.databaseManager.friends, id: \.id) { friend in
+                        
+                            Text("\(friend.username)")
+                            .listRowBackground(Color("orange"))
+                            .foregroundColor(Color("primaryColor"))
+                            .font(Font.custom("VarelaRound-Regular", size: 20))
+                       
+                           
+                    }
+                    
+                }
+                //searchBar.padding()
                 List{
                     ForEach(self.friendStore.friends){ task in Text(task.friendItem)
                     } .onDelete(perform: self.delete)
                 } .navigationBarTitle("Friends")
+                    .toolbar{
+                        ToolbarItem(placement: .navigation) { // 3
+                                    Button("Back") {sessionManager.showSession() }
+                                    .foregroundColor(Color("primaryColor"))
+                                    .font(Font.custom("VarelaRound-Regular", size: 18))
+                                  }
+                        ToolbarItem(placement: .navigationBarTrailing) { // 3
+                            Button ("Pending") {
+                                sessionManager.showPendingRequests()}
+                                    .foregroundColor(Color("primaryColor"))
+                                    .font(Font.custom("VarelaRound-Regular", size: 18))
+                            
+                            Button(action: self.addFriend, label: {
+                                Label("Add", systemImage: "plus")
+                                    .foregroundColor(Color("primaryColor"))
+                                    .font(Font.custom("VarelaRound-Regular", size: 18))
+                            
+                            })
+
+                                  }
+                    }
+                
                 .navigationBarItems(trailing:EditButton())
                 }
+            
             }
         }
+        
+    }
     
     func delete(_ offsets: IndexSet){
         offsets.forEach { index in

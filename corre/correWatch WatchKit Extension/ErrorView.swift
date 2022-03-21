@@ -1,13 +1,13 @@
 //
-//  LandingPageView.swift
+//  ErrorView.swift
 //  correWatch WatchKit Extension
 //
-//  Created by Danielle Nau on 3/2/22.
+//  Created by Danielle Nau on 3/15/22.
 //
 
 import SwiftUI
 
-struct LandingPageView: View {
+struct ErrorView: View {
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -17,16 +17,17 @@ struct LandingPageView: View {
         static let lblue = Color("lightBlue")
     }
     var body: some View {
+      
         ZStack{
             CusColor.backcolor
                          .ignoresSafeArea()
         VStack{
             
-        Text("Corre")
+        Text("Oops!")
         .foregroundColor(Color("primaryColor"))
-        .font(.custom("Proxima Nova Rg Regular", size: 30))
-            Text("We're always with you")
-                .font(.custom("Proxima Nova Rg Regular", size: 15))
+        .font(.system(size: 30.0))
+            Text("Log in needed to start a run!")
+                .font(.system(size: 12.0))
                 .foregroundColor(CusColor.primarycolor)
             
             
@@ -40,11 +41,15 @@ struct LandingPageView: View {
         }
        
     }
+    
+    
     }
-}
 
-struct LandingPageView_Previews: PreviewProvider {
+    }
+
+
+struct ErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        LandingPageView()
+        ErrorView()
     }
 }

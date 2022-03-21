@@ -79,6 +79,8 @@
 		D9F4615627CAED050014E5EC /* correWatchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4615527CAED050014E5EC /* correWatchUITests.swift */; };
 		D9F4615827CAED050014E5EC /* correWatchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F4615727CAED050014E5EC /* correWatchUITestsLaunchTests.swift */; };
 		D9F4615B27CAED050014E5EC /* correWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D9F4612527CAECFE0014E5EC /* correWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DA05349727E16F62000FA50B /* SelectContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05349627E16F62000FA50B /* SelectContactView.swift */; };
+		DA05349927E16FE3000FA50B /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05349827E16FE3000FA50B /* ErrorView.swift */; };
 		DA921C2427CFF57200A4AE50 /* LandingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA921C2327CFF57200A4AE50 /* LandingPageView.swift */; };
 		DA921C2627CFF5CE00A4AE50 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA921C2527CFF5CE00A4AE50 /* DashboardView.swift */; };
 		DA921C2827CFF62200A4AE50 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA921C2727CFF62200A4AE50 /* RunningView.swift */; };
@@ -217,6 +219,8 @@
 		D9F4615127CAED050014E5EC /* correWatchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = correWatchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F4615527CAED050014E5EC /* correWatchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = correWatchUITests.swift; sourceTree = "<group>"; };
 		D9F4615727CAED050014E5EC /* correWatchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = correWatchUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DA05349627E16F62000FA50B /* SelectContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactView.swift; sourceTree = "<group>"; };
+		DA05349827E16FE3000FA50B /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		DA921C2327CFF57200A4AE50 /* LandingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageView.swift; sourceTree = "<group>"; };
 		DA921C2527CFF5CE00A4AE50 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		DA921C2727CFF62200A4AE50 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
@@ -329,7 +333,9 @@
 				4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */,
 				4A19986627E16780001822E5 /* LaunchView.swift */,
 				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
+
 				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
+
 				4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */,
 				4CA7D06427D5191F006B246C /* EmergencyContactEditView.swift */,
 				4A4C1F4727CEE48900D95264 /* NavBarView.swift */,
@@ -401,6 +407,8 @@
 				DA921C2327CFF57200A4AE50 /* LandingPageView.swift */,
 				DA921C2527CFF5CE00A4AE50 /* DashboardView.swift */,
 				DA921C2727CFF62200A4AE50 /* RunningView.swift */,
+				DA05349627E16F62000FA50B /* SelectContactView.swift */,
+				DA05349827E16FE3000FA50B /* ErrorView.swift */,
 				D9F4613A27CAED030014E5EC /* ComplicationController.swift */,
 				D9F4613C27CAED050014E5EC /* Assets.xcassets */,
 				D9F4614127CAED050014E5EC /* Info.plist */,
@@ -710,9 +718,11 @@
 				DA921C2427CFF57200A4AE50 /* LandingPageView.swift in Sources */,
 				D9F4613527CAED030014E5EC /* ContentView.swift in Sources */,
 				DA921C2627CFF5CE00A4AE50 /* DashboardView.swift in Sources */,
+				DA05349927E16FE3000FA50B /* ErrorView.swift in Sources */,
 				D9F4613B27CAED030014E5EC /* ComplicationController.swift in Sources */,
 				D9F4613327CAED030014E5EC /* correApp.swift in Sources */,
 				D9F4613927CAED030014E5EC /* NotificationView.swift in Sources */,
+				DA05349727E16F62000FA50B /* SelectContactView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
