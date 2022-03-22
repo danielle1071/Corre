@@ -34,6 +34,8 @@ class DatabaseManager: ObservableObject {
 
     var subscriptions = Set<AnyCancellable>()
     
+    var updateEmail = ""
+    
     func getUserProfile (user: AuthUser) async {
 
         
@@ -53,6 +55,9 @@ class DatabaseManager: ObservableObject {
                         print("This is the item: \(item)")
                         self.currentUser = item
                     }
+                    if self.currentUser!.email == nil || self.currentUser!.email! == "donotemail@error.com" {
+                        fixProfileEmail()
+                    }
                 }
                 if items.isEmpty {
                     print("NO USER RECORD FOUND")
@@ -65,18 +70,7 @@ class DatabaseManager: ObservableObject {
                 print("Could not query DataStore: \(error)")
             }
         }
-        /*
-        let usrKey = User.keys
-        let sink = Amplify.DataStore.query(User.self, where: usrKey.sub == sub).sink {
-            if case let .failure(error) = $0 {
-                print("Error on query() for type Post - \(error.localizedDescription)")
-            }
-        }
-        receiveValue: { result in
-            print("Users Found: \(result)")
-            self.currentUser = result
-        }
-         */
+        
     }
     
     func getUserProfile (userID: String) -> User? {
@@ -98,38 +92,6 @@ class DatabaseManager: ObservableObject {
         return retVal
     }
     
-//    func getUserProfile (username: String) {
-////        DispatchQueue.main.async {
-//            let usrKey = User.keys
-//
-//            Amplify.DataStore.query(User.self, where: usrKey.username == username) { result in
-//                print("OUTSIDE THE SWITCH")
-//                switch(result) {
-//                case .success(let items):
-//                    //MARK: Need to update
-//                    for item in items {
-//                        print("CHECK THIS @@@")
-//                        print("User ID: \(item.id)")
-//                        self.currentUser = item
-//                    }
-//                case .failure(let error):
-//                    print("Could not query DataStore: \(error)")
-//                }
-//            }
-//            /*
-//            let usrKey = User.keys
-//            let sink = Amplify.DataStore.query(User.self, where: usrKey.sub == sub).sink {
-//                if case let .failure(error) = $0 {
-//                    print("Error on query() for type Post - \(error.localizedDescription)")
-//                }
-//            }
-//            receiveValue: { result in
-//                print("Users Found: \(result)")
-//                self.currentUser = result
-//            }
-//             */
-////        }
-//    }
     
     func getUserProfile(username: String) -> User? {
         var returnVal: User? = nil
@@ -185,11 +147,6 @@ class DatabaseManager: ObservableObject {
         print("End of create device record function")
     }
     
-//    func createDeviceRecord (userDeviceID: String) {
-//
-//        let device = Device(userDeviceID: userDeviceID)
-//
-//    }
 
     func findDeviceRecord (userDeviceID: String) -> Device? {
         
@@ -864,5 +821,46 @@ class DatabaseManager: ObservableObject {
         }
         print("Finishing checkUserExists and exiting with \(retVal)")
         return retVal
+    }
+    
+    func fixProfileEmail() {
+        
+        var updateUsr = currentUser!
+        
+        Amplify.Auth.fetchUserAttributes() { result in
+            switch result {
+            case .success(let attributes):
+                for attribute in attributes {
+                    if attribute.key == AuthUserAttributeKey.name {
+                        print("FirstName : \(attribute.value)")
+                    } else if attribute.key == AuthUserAttributeKey.familyName {
+                        print("LastName : \(attribute.value)")
+                    } else if attribute.key == AuthUserAttributeKey.email {
+                        print("Email : \(attribute.value)")
+                        updateUsr.email = attribute.value
+                        print("This is the updated value \(updateUsr.email)")
+                        self.updateUserProfile(updatedUser: updateUsr)
+                    }
+                }
+                print("User attributes - \(attributes)")
+                
+            case .failure(let error):
+                print("Fetching user attributes failed with error \(error)")
+            }
+        }
+        
+    }
+    
+    func updateUserProfile(updatedUser: User) {
+        Amplify.DataStore.save(updatedUser) { result in
+            switch (result) {
+            case .success(let result):
+                print("Result: \(result)")
+                print("Profile updated \(updatedUser)")
+                self.currentUser = self.getUserProfile(userID: updatedUser.id)!
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
