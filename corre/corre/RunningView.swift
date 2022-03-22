@@ -35,12 +35,20 @@ struct RunningView: View {
     
     @GestureState var highlight = false
     var longPress: some Gesture {
-                LongPressGesture(minimumDuration: 3)
-                    .updating($highlight) { currentstate, gestureState, transaction in
-                        transaction.animation = Animation.easeInOut(duration: 2.0)
-                        gestureState = currentstate
-                    }
+        LongPressGesture(minimumDuration: 3)
+            .onEnded { _ in
+                sessionManager.databaseManager.setRunStatus(status: .notrunning)
+                sessionManager.showNavBar()
+
+                // stops tracker resources
+                locationService.stopTracking()
             }
+            .updating($highlight) {
+                currentstate, gestureState, transaction in
+                transaction.animation = Animation.easeInOut(duration: 3.0)
+                gestureState = currentstate
+            }
+    }
 
     var body: some View {
         // MARK: remove after testing
@@ -51,7 +59,7 @@ struct RunningView: View {
             HStack{
                 Button(action: {
                 sessionManager.databaseManager.setRunStatus(status: .notrunning)
-                sessionManager.showSession()
+                sessionManager.showPreRunning()
                 
                 // stops tracker resources
                 locationService.stopTracking()
@@ -61,13 +69,8 @@ struct RunningView: View {
                     .edgesIgnoringSafeArea(.all)
                     .foregroundColor(Color("primaryColor"))
                 Text("Back")
+                    .font(.custom("Varela Round Regular", size: 18))
                     .foregroundColor(Color("primaryColor"))
-//                Text("Back")
-//                    .fontWeight(.bold)
-//                    .frame(width: 150.0, height: 40.0)
-//                    .foregroundColor(Color.white)
-//                    .background(CusColor.primarycolor)
-//                    .clipShape(Capsule())
                 })
                 
                 Spacer()
@@ -117,18 +120,6 @@ struct RunningView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 25.0,
                                                     style: .circular))
                 })
-           
-//                Button(action: {
-//                    sessionManager.signOut()
-//                }, label: {
-//                    Text("Sign Out")
-//                        .fontWeight(.bold)
-//                        .frame(width: 150.0, height: 40.0)
-//                        .foregroundColor(Color.white)
-//                        .background(CusColor.primarycolor)
-//                        .clipShape(Capsule())
-//                })
-                
             }
             .padding(5.0)
             Spacer()
@@ -161,14 +152,10 @@ struct RunningView: View {
             
         })
     }
-    
-    // MARK: deleteThis
-    // User's Coordinates:  CLLocationCoordinate2D(latitude: 35.7020691, longitude: 139.7753269)
-    // locationManager - got locations: [<+35.70206910,+139.77532690> +/- 5.00m (speed -1.00 mps / course -1.00) @ 2/9/22, 1:27:34 AM Eastern Standard Time]
 
     func getCurrentUserLocation() {
         
-        if sessionManager.databaseManager.currentUser == nil { 
+        if sessionManager.databaseManager.currentUser == nil {
             print("getCurrentUserLocation - userName: nil")
             
             // MARK: need to transition to error page not session page

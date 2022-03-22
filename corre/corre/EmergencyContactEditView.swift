@@ -83,7 +83,7 @@ struct EmergencyContactEditView: View {
                 
             Button("Delete Contact", action: {
                 sessionManager.databaseManager.deleteEmergencyContact(contactId: contact.id)
-                sessionManager.showSession()
+                sessionManager.showEmergencyContact()
             }).font(.system(size: 20.0))
                     .foregroundColor(CustomColor.red)
                 
@@ -103,12 +103,19 @@ struct EmergencyContactEditView: View {
 }
 
 struct EmergencyContactEditView_Previews: PreviewProvider {
-    
+    static var previews: some View {
+
+    let previewContact = EmergencyContact(
+            id: "000",
+            firstName: "L",
+            lastName: "Dawg",
+            email: "TEST@EMAIL.EDU",
+            phoneNumber: "+14078231000",
+            appUser: true,
+            emergencyContactUserId: "0001",
+            userID: "0002",
+            emergencyContactAppUsername: "ldawg")
     
-    
-    static var previews: some View {
-        let previewContact = EmergencyContact(id: "000", firstName: "L", lastName: "Dawg", email: "TEST@EMAIL.EDU", phoneNumber: "+14078231000", appUser: true, emergencyContactUserId: "0001", userID: "0002", emergencyContactAppUsername: "ldawg")
-        EmergencyContactEditView(contact: previewContact)
-        
-    }
+        EmergencyContactEditView(contact: previewContact)
+    }
 }
