@@ -234,26 +234,28 @@ class DatabaseManager: ObservableObject {
                 }
                 print("User attributes - \(attributes)")
                 print("Name: \(firstName) \(lastName)")
+                let newUser = User(sub: sub, username: userName, bio: bio, totalDistance: totalDistance, runningStatus: runningStatus, friends: friends, blockedUsers: blockedUsers, email: email, createdAt: createdAt, updatedAt: updatedAt)
+                
+                print(newUser)
+                
+                Amplify.DataStore.save(newUser) { result in
+                    switch result {
+                    case .success(_):
+                        print("Saved new user record!")
+                        self.currentUser = newUser
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+                
             case .failure(let error):
                 print("Fetching user attributes failed with error \(error)")
             }
         }
 
-        print("Inside the createUserRecordFunction")
+        print("Finished the createUserRecordFunction")
         
-        let newUser = User(sub: sub, username: userName, bio: bio, totalDistance: totalDistance, runningStatus: runningStatus, friends: friends, blockedUsers: blockedUsers, email: email, createdAt: createdAt, updatedAt: updatedAt)
         
-        print(newUser)
-        
-        Amplify.DataStore.save(newUser) { result in
-            switch result {
-            case .success(_):
-                print("Saved")
-                self.currentUser = newUser
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
         
     }
 
