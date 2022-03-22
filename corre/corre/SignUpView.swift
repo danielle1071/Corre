@@ -214,21 +214,6 @@ struct SignUpView: View {
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
     }
     
-    func registerNew() {
-        self.checkUsr{ () -> () in
-            self.anotherFunction()
-        }
-    }
-    
-    func checkUsr(handleComplete: ( () -> () )) {
-        userExist = sessionManager.databaseManager.checkUserExists(email: email)
-        print("Inside checkUsr with result \(userExist)")
-        handleComplete()
-    }
-    
-    func anotherFunction() {
-        print("This is where I would do the next check \(userExist)")
-    }
     
 }
 
