@@ -20,7 +20,7 @@ enum AuthState {
     case session(user: AuthUser)
     case landing
     case running(phoneNumber: String)
-    case profile
+    case profile(currentUsr: User)
     case emergencyContact(user: AuthUser)
     case trackContacts
     case trackRunner(userTrackingID: String)
@@ -35,7 +35,7 @@ enum AuthState {
     case pendingReqs(requests: [Notification])
 
     case editEmergencyContact(contact: EmergencyContact)
-
+    case errV
 
 
 
@@ -270,9 +270,12 @@ final class SessionManger: ObservableObject {
     
     // MARK: showProfile
     func showProfile() {
-        authState = .profile
+        if databaseManager.currentUser != nil {
+            authState = .profile(currentUsr: databaseManager.currentUser!)
+        } else {
+            authState = .errV
+        }
     }
-    
     func showMessage() {
         authState = .messaging
     }
