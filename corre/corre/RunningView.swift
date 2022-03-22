@@ -13,6 +13,45 @@ import AmplifyMapLibreUI
 
 
 struct RunningView: View {
+    // For timer
+    func startTimer(){
+        timerIsPaused = false
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ tempTimer in
+          if self.seconds == 59 {
+            self.seconds = 0
+            if self.minutes == 59 {
+              self.minutes = 0
+              self.hours = self.hours + 1
+            } else {
+              self.minutes = self.minutes + 1
+            }
+          } else {
+            self.seconds = self.seconds + 1
+          }
+        }
+      }
+    func stopTimer(){
+       timerIsPaused = true
+       timer?.invalidate()
+       timer = nil
+     }
+     
+     func restartTimer(){
+       hours = 0
+       minutes = 0
+       seconds = 0
+     }
+    @State var hours: Int = 0
+      @State var minutes: Int = 0
+      @State var seconds: Int = 0
+      @State var timerIsPaused: Bool = true
+    @State var timer: Timer? = nil
+    @State private var showingPopover = false
+    @State private var showingPopover_1 = false
+    @State private var timeRemaining = 100
+    let timer_1 = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    //
+//
     
     @EnvironmentObject var sessionManager: SessionManger
     @StateObject var locationService = LocationManager()
@@ -72,10 +111,91 @@ struct RunningView: View {
                     .font(.custom("Varela Round Regular", size: 18))
                     .foregroundColor(Color("primaryColor"))
                 })
+                // Pop ups for check in and run stats
+                //
+                Button (action: {showingPopover = true}){
+                    
+                    HStack{
+                        Image(systemName: "info.circle.fill")
+                            .foregroundColor(Color("primaryColor"))
+                    }
+                }
+                .popover(isPresented: $showingPopover) {
+                    ZStack{
+                        CusColor.backcolor.edgesIgnoringSafeArea(.all)
+                    VStack{
+                    Text("Running Statistics")
+                                .font(.headline)
+                                .padding()
+                    Text("Distance: 0")
+                    Text("Current pace: 0")
+                    Spacer()
+                    }
+                    
+                        }
+                }
                 
+                
+                Button (action: {showingPopover_1 = true}){
+                    
+                    HStack{
+                        Image(systemName: "exclamationmark.circle.fill")
+                            .foregroundColor(Color.red)
+                    }
+                }
+                .popover(isPresented: $showingPopover_1) {
+                    
+                    ZStack{
+                        CusColor.backcolor.edgesIgnoringSafeArea(.all)
+              
+                    VStack{
+                            Text("Check In")
+                                .font(.headline)
+                                .padding()
+                    
+                    Text("Are you ok?")
+                        // just an example
+                    Text("Reason: idle for too long")
+                    Text("Time remaining to respond: \(timeRemaining) seconds")
+                            .onReceive(timer_1) { time in
+                                if timeRemaining > 0 {
+                                    timeRemaining -= 1
+                                }
+                            }
+                        HStack{
+                            Button(action:{
+                                self.showingPopover_1 = false
+                                
+                                timer_1.upstream.connect().cancel()
+                            
+                            }, label: {
+                                Text("Yes")
+                                    .fontWeight(.bold)
+                                    .frame(width: 150, height: /*@START_MENU_TOKEN@*/50.0/*@END_MENU_TOKEN@*/)
+                                    .foregroundColor(Color.white)
+                                    .background(CusColor.primarycolor)
+                                    .clipShape(Capsule())
+                            })
+                            Button(action:{
+                            }, label: {
+                                Text("SOS")
+                                    .fontWeight(.bold)
+                                    .frame(width: 150, height: /*@START_MENU_TOKEN@*/50.0/*@END_MENU_TOKEN@*/)
+                                    .foregroundColor(Color.white)
+                                    .background(Color.red)
+                                    .clipShape(Capsule())
+                            })
+                        
+                        
+                        }
+                    Spacer()
+                        }
+                }
+                }
+                //
                 Spacer()
                 HStack{
-                    Text("Time Elapsed: 00:00:00")
+                    Text("Time Elapsed: \(hours):\(minutes):\(seconds)")
                 }
                 .padding(/*@START_MENU_TOKEN@*/.trailing, 9.0/*@END_MENU_TOKEN@*/)
                 .foregroundColor(Color("primaryColor"))
@@ -89,6 +209,8 @@ struct RunningView: View {
                     .cornerRadius(20)
                     .edgesIgnoringSafeArea(.all)
                     .shadow(radius: 2)
+                // start timer when maps appear
+                    .onAppear(perform: {self.startTimer()})
             }
             Spacer()
             
@@ -111,6 +233,8 @@ struct RunningView: View {
                 })
                 
                 Button(action:{
+                    // stops timer
+                    self.stopTimer()
                 }, label: {
                     Text("Pause Run")
                         .fontWeight(.bold)
@@ -123,8 +247,9 @@ struct RunningView: View {
             }
             .padding(5.0)
             Spacer()
-            
-            Button(action:{
+            // resets timer to zero
+            // since there is no start run button just change action to self.restartTimer() for testing purposes
+            Button(action:{ self.restartTimer()
             }, label: {
                 Text("Stop Run")
                     .fontWeight(.bold)
