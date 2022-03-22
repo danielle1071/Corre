@@ -13,11 +13,15 @@
 		35C1A99227C9A7130032FD00 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99127C9A7130032FD00 /* MessageManager.swift */; };
 		35C1A99427C9A73E0032FD00 /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99327C9A73E0032FD00 /* MessageRow.swift */; };
 		35C1A99627C9A7880032FD00 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99527C9A7880032FD00 /* MessagesView.swift */; };
+		4A19986727E16780001822E5 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A19986627E16780001822E5 /* LaunchView.swift */; };
+		4A1EE56127E1AA3B0032138E /* ProximaNova.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */; };
+		4A1EE56227E1AA3B0032138E /* ProximaNova.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */; };
 		4A2FA86727B359BF00B55D53 /* VarelaRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */; };
 		4A4C1F4827CEE48900D95264 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C1F4727CEE48900D95264 /* NavBarView.swift */; };
 		4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6136F27B1DE4E0018F678 /* RunningView.swift */; };
 		4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137127B1DEC90018F678 /* ProfileView.swift */; };
 		4AB6137427B1DEDE0018F678 /* EmergContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137327B1DEDE0018F678 /* EmergContactView.swift */; };
+		4AFB47AB27E16B4D00F7AF3A /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4AFB47AA27E16B4D00F7AF3A /* SDWebImageSwiftUI */; };
 		4C0E11F227AE0F1200F239AA /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */; };
 		4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53A42770FE6F001BEA58 /* correApp.swift */; };
 		4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53A62770FE6F001BEA58 /* ContentView.swift */; };
@@ -34,6 +38,7 @@
 		4C0E53CA27712DBE001BEA58 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53C927712DBE001BEA58 /* LoginView.swift */; };
 		4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */; };
 		4C36609527DE7C1C00D0B210 /* SentFriendReqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */; };
+		4C505BD427E8C8FD00815E85 /* animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4C505BD327E8C8FD00815E85 /* animation.gif */; };
 		4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */; };
 		4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCB2793140D00FDCF6E /* awsconfiguration.json */; };
 		4C99015B27BC071C00FE5D2B /* TrackerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99015A27BC071C00FE5D2B /* TrackerManager.swift */; };
@@ -154,6 +159,8 @@
 		35C1A99127C9A7130032FD00 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		35C1A99327C9A73E0032FD00 /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
 		35C1A99527C9A7880032FD00 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
+		4A19986627E16780001822E5 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ProximaNova.ttf; sourceTree = "<group>"; };
 		4A2FA86027B337DF00B55D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VarelaRound-Regular.ttf"; sourceTree = "<group>"; };
 		4A4C1F4727CEE48900D95264 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
@@ -171,6 +178,7 @@
 		4C0E53C927712DBE001BEA58 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentFriendReqView.swift; sourceTree = "<group>"; };
+		4C505BD327E8C8FD00815E85 /* animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = animation.gif; sourceTree = "<group>"; };
 		4C792CC62793136A00FDCF6E /* InterfaceBuilderKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilderKit.framework; path = Library/Frameworks/InterfaceBuilderKit.framework; sourceTree = DEVELOPER_DIR; };
 		4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		4C792CCB2793140D00FDCF6E /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
@@ -233,6 +241,7 @@
 				F22DB80327AC518200678872 /* AmplifyMapLibreAdapter in Frameworks */,
 				4C0E53BC27712CA4001BEA58 /* AWSDataStorePlugin in Frameworks */,
 				4C0E53B827712CA4001BEA58 /* AWSAPIPlugin in Frameworks */,
+				4AFB47AB27E16B4D00F7AF3A /* SDWebImageSwiftUI in Frameworks */,
 				4C0E53BE27712CA4001BEA58 /* AWSLocationGeoPlugin in Frameworks */,
 				4C0E53C227712CA4001BEA58 /* Amplify in Frameworks */,
 				F22DB80527AC518200678872 /* AmplifyMapLibreUI in Frameworks */,
@@ -321,8 +330,12 @@
 			children = (
 				4A2FA86027B337DF00B55D53 /* Info.plist */,
 				4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */,
-				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
+				4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */,
+				4A19986627E16780001822E5 /* LaunchView.swift */,
 				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
+
+				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
+
 				4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */,
 				4CA7D06427D5191F006B246C /* EmergencyContactEditView.swift */,
 				4A4C1F4727CEE48900D95264 /* NavBarView.swift */,
@@ -332,9 +345,9 @@
 				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
 				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
 				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
-				D9BE965127AF4B8A00ED177A /* FriendView.swift */,
 				D94A595827C4540D001CA61C /* Error1View.swift */,
 				4AB6137327B1DEDE0018F678 /* EmergContactView.swift */,
+				D9BE965127AF4B8A00ED177A /* FriendView.swift */,
 				4AB6137127B1DEC90018F678 /* ProfileView.swift */,
 				D9BE965327B2E60C00ED177A /* DataStore.swift */,
 				4C0E53A62770FE6F001BEA58 /* ContentView.swift */,
@@ -343,6 +356,7 @@
 				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
 				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
+				4C505BD327E8C8FD00815E85 /* animation.gif */,
 				35C1A98F27C9A6CE0032FD00 /* Message+Extensions.swift */,
 				35C1A99127C9A7130032FD00 /* MessageManager.swift */,
 				35C1A99327C9A73E0032FD00 /* MessageRow.swift */,
@@ -456,6 +470,7 @@
 				4C0E53C127712CA4001BEA58 /* Amplify */,
 				F22DB80227AC518200678872 /* AmplifyMapLibreAdapter */,
 				F22DB80427AC518200678872 /* AmplifyMapLibreUI */,
+				4AFB47AA27E16B4D00F7AF3A /* SDWebImageSwiftUI */,
 			);
 			productName = corre;
 			productReference = 4C0E53A12770FE6F001BEA58 /* corre.app */;
@@ -572,6 +587,8 @@
 			packageReferences = (
 				4C0E53B627712CA4001BEA58 /* XCRemoteSwiftPackageReference "amplify-ios" */,
 				F22DB80127AC518200678872 /* XCRemoteSwiftPackageReference "amplify-ios-maplibre" */,
+				4A19986827E16839001822E5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				4AFB47A927E16B4D00F7AF3A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 4C0E53A22770FE6F001BEA58 /* Products */;
 			projectDirPath = "";
@@ -592,11 +609,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C0E53A92770FE70001BEA58 /* Assets.xcassets in Resources */,
+				4C505BD427E8C8FD00815E85 /* animation.gif in Resources */,
 				4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */,
 				4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */,
 				4A2FA86727B359BF00B55D53 /* VarelaRound-Regular.ttf in Resources */,
 				C0D1D47BCA36C82E45CDC20F /* awsconfiguration.json in Resources */,
 				E4B3EDF3439FB6B8094E621C /* amplifyconfiguration.json in Resources */,
+				4A1EE56127E1AA3B0032138E /* ProximaNova.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +624,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9F4612827CAED030014E5EC /* Assets.xcassets in Resources */,
+				4A1EE56227E1AA3B0032138E /* ProximaNova.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,6 +659,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C99015B27BC071C00FE5D2B /* TrackerManager.swift in Sources */,
+				4A19986727E16780001822E5 /* LaunchView.swift in Sources */,
 				4CCF2A8927B59F0000C4E71D /* RunningMapView.swift in Sources */,
 				4C0E53CA27712DBE001BEA58 /* LoginView.swift in Sources */,
 				4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */,
@@ -883,7 +904,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Would you like to give Corre App the access to your location?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -914,7 +934,6 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Would you like to give Corre App the access to your location?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1178,6 +1197,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4A19986827E16839001822E5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		4AFB47A927E16B4D00F7AF3A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		4C0E53B627712CA4001BEA58 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
@@ -1197,6 +1232,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4AFB47AA27E16B4D00F7AF3A /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4A19986827E16839001822E5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
 		4C0E53B727712CA4001BEA58 /* AWSAPIPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4C0E53B627712CA4001BEA58 /* XCRemoteSwiftPackageReference "amplify-ios" */;

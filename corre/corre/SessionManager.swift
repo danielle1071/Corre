@@ -29,7 +29,7 @@ enum AuthState {
     case notification
     case friendView
     case preRun
-
+    
 
 
     case pendingReqs(requests: [Notification])
@@ -234,11 +234,13 @@ final class SessionManger: ObservableObject {
     // MARK: showSession
     func showSession() {
         if let user = Amplify.Auth.getCurrentUser() {
-            authState = .session(user: user)
+            self.showNavBar()
+//            authState = .session(user: user)
         } else {
             authState = .landing
         }
     }
+    
     
     
     // MARK: showNavBar

@@ -38,9 +38,14 @@ struct ProfileView: View {
         static let lblue = Color("lightBlue")
     }
     var body: some View {
+
+        
+           
+
         if !editing {
             VStack {
                 HStack{
+
 
 
                     Text("Profile Page")
@@ -89,6 +94,16 @@ struct ProfileView: View {
             .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
             Spacer()
+                Button("Sign Out", action: {
+                                sessionManager.signOut()
+                            }).padding()
+                                .padding(.horizontal, 100)
+                                .foregroundColor(CustomColor.primarycolor)
+                                .background(CustomColor.backcolor)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                                )
 
 
             }
@@ -155,7 +170,13 @@ struct ProfileView: View {
             }
             .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
-            Spacer()
+
+        Spacer()
+            
+        
+                        
+                    
+
 
 
             }
