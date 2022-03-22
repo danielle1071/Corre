@@ -793,6 +793,7 @@ class DatabaseManager: ObservableObject {
             }
         }
     }
+
       
     func checkUserExists(email: String) -> Bool {
         var retVal = false
@@ -865,4 +866,5 @@ class DatabaseManager: ObservableObject {
             }
         }
     }
+
 }
