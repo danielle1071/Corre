@@ -21,7 +21,7 @@ enum AuthState {
     case landing
     case running(phoneNumber: String)
     case profile
-    case emergencyContact(user: AuthUser)
+    case emergencyContact(contacts: [EmergencyContact])
     case trackContacts
     case trackRunner(userTrackingID: String)
     case nav(user: AuthUser)
@@ -282,11 +282,13 @@ final class SessionManger: ObservableObject {
     
     // MARK: showEmergencyContact
     func showEmergencyContact() {
-        if let user = Amplify.Auth.getCurrentUser() {
-            authState = .emergencyContact(user: user)
-        } else {
-            authState = .landing
-        }
+        databaseManager.getEmergencyContacts()
+        authState = .emergencyContact(contacts: databaseManager.emergencyContacts)
+//        if let user = Amplify.Auth.getCurrentUser() {
+//            authState = .emergencyContact(user: user)
+//        } else {
+//            authState = .landing
+//        }
     }
     
     // MARK: showFriendView

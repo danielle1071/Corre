@@ -83,8 +83,8 @@ struct correApp: App {
                 ProfileView()
                     .environmentObject(sessionManager)
             // Note: let User: was causing EXC_I386_GPFLT error through trackContacts
-            case .emergencyContact(_):
-                EmergContactView(/*user: user*/)
+            case .emergencyContact(let contacts):
+                EmergContactView(contacts: contacts)
                     .environmentObject(sessionManager)
             case .trackRunner(let userTrackingID):
                 TrackRunnerView(userTrackingID: userTrackingID)

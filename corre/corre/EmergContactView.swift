@@ -22,6 +22,7 @@ struct EmergContactView: View {
     
     @State private var showingSheet = false
     @EnvironmentObject var sessionManager: SessionManger
+    @State var contacts: [EmergencyContact]
     // @ObservedObject var contacts = EmergencyContactStore()
     @State var addedContact = false
     @State var ecFirst = ""
@@ -42,71 +43,83 @@ struct EmergContactView: View {
         
         // MARK: this needs to be a tab.. placeholder
         VStack{
-            HStack(/*alignment: .bottom*/){
-                Button (action: {sessionManager.showSession()}){
-                HStack{
-                    Image(systemName: "arrow.left")
-                        .foregroundColor(Color("primaryColor"))
-                    Text("Emergency Contacts")
-                        .font(.custom("Proxima Nova Rg Regular", size: 18))
-                        .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
-                        .foregroundColor(Color("primaryColor"))
-                   // Spacer()
-                }
-                }
-                .padding(.horizontal)
-                Spacer()
-                Button (action: {showingSheet.toggle()}){
-                VStack {
-                    Image(systemName: "plus")
-                        .foregroundColor(Color("primaryColor"))
-                }
-                .padding(.horizontal)
+            HStack{
+                Button (action: {
+                    sessionManager.showSession()
+                  }, label: {
+                      Image(systemName: "arrow.left")
+                          .renderingMode(.original)
+                          .edgesIgnoringSafeArea(.all)
+                          .foregroundColor(Color("primaryColor"))
+                      Text("Back")
+                          .font(.custom("Varela Round Regular", size: 18))
+                          .foregroundColor(Color("primaryColor"))
+                  })
+                  Spacer()
+                  .foregroundColor(Color("primaryColor"))
+                
+    
+                Button (action: {
+                    showingSheet.toggle()
+                }){
+                    HStack {
+                        Image(systemName: "plus")
+                            .foregroundColor(Color("primaryColor"))
+                        Text("Add New Contact")
+                            .font(.custom("Varela Round Regular", size: 18))
+                            .foregroundColor(Color("primaryColor"))
+                    }
                 }
                 .sheet(isPresented: $showingSheet, content: AddEmergencyContact.init)
-                    .padding()
             }
+            .padding(.all)
+            
+            Image("CreamLogo")
+                .resizable()
+                .frame(width: 125.0, height: 125.0)
+                .scaledToFit()
+                .shadow(radius: 2)
+                        
+            Text("Emergency Contacts")
+                .font(.custom("Varela Round Regular", size: 22))
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+            
             VStack {
                 List() {
-                    ForEach ( sessionManager.databaseManager.emergencyContacts, id: \.id) { emergencyContact in
-                    EmergencyContactRow(emergencyContact: emergencyContact)
+                    ForEach ( contacts, id: \.id) {
+                        emergencyContact in EmergencyContactRow(emergencyContact: emergencyContact)
                             .onTapGesture(perform: {
-                                            print("Tapped A Contact: \(emergencyContact)")
+                                print("Tapped A Contact: \(emergencyContact)")
                                 sessionManager.showEditContact(contact: emergencyContact)
                             })
-                            
-                    } .onDelete(perform: delete)
+                    }
+                    .onDelete(perform: delete)
                 }
-                Button("Track Contacts View", action: {
-                        sessionManager.showTrackContacts()
-                    })
-                    .padding()
-                    .foregroundColor(Color("primaryColor"))
-                    .font(.custom("Proxima Nova Rg Regular", size: 18))
-            }
+                .font(.custom("Proxima Nova Rg Regular", size: 18))
                 
-           
-            
-            /*
-            Image("CreamLogo")
-            .resizable()
-            .frame(width: 125.0, height: 125.0)
-            .scaledToFit()
-             */
-            Spacer()
+                
+                Button(action: {
+                        sessionManager.showTrackContacts()
+                }, label: {
+                    Text("Track Contacts View")
+                        .fontWeight(.bold)
+                        .font(.custom("Varela Round Regular", size: 18))
+                        .padding()
+                        .padding(.horizontal, 50)
+                        .background(Color("primaryColor"))
+                        .foregroundColor(Color.white)
+                        .clipShape(Capsule())
+                        .shadow(radius: 2)
+                })
+                    
+                
             }
+            Spacer()
             
+        }
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
     }
-    
-//    struct EmergencyContactRow: View {
-//
-//        var emergencyContact: EmergencyContact
-//
-//        var body: some View {
-//            Text("\(emergencyContact.firstName ?? "") \(emergencyContact.lastName ?? "")")
-//        }
-//    }
     
     func delete(_ indexSet: IndexSet) {
         indexSet.forEach { index in
@@ -115,7 +128,8 @@ struct EmergContactView: View {
             sessionManager.databaseManager.deleteEmergencyContact(contactId: contact.id)
         }
         
-//        print("This is the offsets: \(offsets)")
+        sessionManager.databaseManager.getEmergencyContacts()
+        contacts = sessionManager.databaseManager.emergencyContacts
     }
 }
 
@@ -133,79 +147,80 @@ struct AddEmergencyContact: View {
         
         GeometryReader { geometry in
             VStack {
-            
-            Text("Start running safely.")
-                .font(.custom("Proxima Nova Rg Regular", size: 20))
-                .multilineTextAlignment(.center)
-                .foregroundColor(CustomColor.primarycolor)
-                .opacity(0.5)
-                .padding([.horizontal], geometry.size.width * 0.09)
-                .padding([.top], geometry.size.height * 0.32)
-                .padding([.bottom], geometry.size.height * 0.02)
-                
-            VStack (alignment: .center) {
-                Spacer()
-                    .frame(height: geometry.size.height * 0.03)
-                
-                VStack (alignment: .center, spacing: 20){
-                    Group {
-                            TextField("First Name", text: $ecFirst)
-                            TextField("Last Name", text: $ecLast)
-                            TextField("E-mail or Username", text: $ecEmail)
-                            TextField("Phone Number", text: $ecPhone)
+                Text("Start running safely.")
+                    .font(.custom("Proxima Nova Rg Regular", size: 20))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(CustomColor.primarycolor)
+                    .opacity(0.5)
+                    .padding([.horizontal], geometry.size.width * 0.09)
+                    .padding([.top], geometry.size.height * 0.32)
+                    .padding([.bottom], geometry.size.height * 0.02)
+                    
+                VStack (alignment: .center) {
+                    Spacer()
+                        .frame(height: geometry.size.height * 0.03)
+                    
+                    VStack (alignment: .center, spacing: 20){
+                        Group {
+                                TextField("First Name", text: $ecFirst)
+                                TextField("Last Name", text: $ecLast)
+                                TextField("E-mail or Username", text: $ecEmail)
+                                TextField("Phone Number", text: $ecPhone)
+                        }
+                        .padding(geometry.size.height * 0.02)
+                        .padding([.horizontal], geometry.size.width * 0.08)
+                        .background(Color("backgroundColor"))
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color("lightGray"), lineWidth: 1)
+                                    .padding([.horizontal], geometry.size.width * 0.05)
+                        )
                     }
-                    .padding(geometry.size.height * 0.02)
-                    .padding([.horizontal], geometry.size.width * 0.08)
-                    .background(Color("backgroundColor"))
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color("lightGray"), lineWidth: 1)
-                                .padding([.horizontal], geometry.size.width * 0.05)
-                    )
+                    
+                    Spacer()
+                        .frame(height: geometry.size.height * 0.02)
+                    Button("Create", action: {
+                        
+                        
+                        sessionManager
+                            .databaseManager
+                            .createEmergencyContactRecord(
+                                firstName: ecFirst,
+                                lastName: ecLast,
+                                searchVal: ecEmail,
+                                phoneNumber: ecPhone
+                            )
+                        
+                        close()
+                    })
+                        .font(.custom("Proxima Nova Rg Regular", size: 20))
+                        .padding([.horizontal], geometry.size.width * 0.32)
+                        .padding([.vertical], geometry.size.height * 0.02)
+                        .foregroundColor(Color.white)
+                        .background(Color("primaryColor"))
+                        .cornerRadius(14)
+                       
+                    Spacer()
+                        .frame(height: geometry.size.height * 0.03)
+                
                 }
                 
-                Spacer()
-                    .frame(height: geometry.size.height * 0.02)
-                Button("Create", action: {
-                    
-                    
-                    sessionManager
-                        .databaseManager
-                        .createEmergencyContactRecord(
-                            firstName: ecFirst,
-                            lastName: ecLast,
-                            searchVal: ecEmail,
-                            phoneNumber: ecPhone
+                        .background(Color("backgroundColor"))
+                        .cornerRadius(10)
+                        .frame(width: geometry.size.width * 0.90,
+                               height: geometry.size.height * 0.50)
+                        .background(Color.gray
+                                                .opacity(0.08)
+                                                .shadow(color: .gray, radius: 6, x: 0, y: 4)
+                                                .blur(radius: 8, opaque: false)
                         )
-                    close()
-                })
-                    .font(.custom("Proxima Nova Rg Regular", size: 20))
-                    .padding([.horizontal], geometry.size.width * 0.32)
-                    .padding([.vertical], geometry.size.height * 0.02)
-                    .foregroundColor(Color.white)
-                    .background(Color("primaryColor"))
-                    .cornerRadius(14)
-                   
-                Spacer()
-                    .frame(height: geometry.size.height * 0.03)
-            
-            }
-            
-                    .background(Color("backgroundColor"))
-                    .cornerRadius(10)
-                    .frame(width: geometry.size.width * 0.90,
-                           height: geometry.size.height * 0.50)
-                    .background(Color.gray
-                                            .opacity(0.08)
-                                            .shadow(color: .gray, radius: 6, x: 0, y: 4)
-                                            .blur(radius: 8, opaque: false)
-                    )
+                    
+                    Spacer()
+                        .frame(height: geometry.size.height * 0.04)
                 
-                Spacer()
-                    .frame(height: geometry.size.height * 0.04)
-            
-            Button("Dismiss", action: close)
-                .font(.custom("Varela Round Regular", size: 20))
-            }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                Button("Dismiss", action: close)
+                    .font(.custom("Varela Round Regular", size: 20))
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             
         } //MARK: THIS IMAGE NEEDS TO BE CHANGED
         .interactiveDismissDisabled()
@@ -219,5 +234,8 @@ struct AddEmergencyContact: View {
 
     func close() {
         presentationMode.wrappedValue.dismiss()
+        
+        sessionManager.databaseManager.getEmergencyContacts()
+        EmergContactView(contacts: sessionManager.databaseManager.emergencyContacts)
     }
 }
