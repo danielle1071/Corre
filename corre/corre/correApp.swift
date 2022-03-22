@@ -105,7 +105,9 @@ struct correApp: App {
                 EmergencyContactEditView(contact: contact)
                     .environmentObject(sessionManager)
                 
-
+            case .errV:
+                Error1View()
+                    .environmentObject(sessionManager)
             }
             
         }
