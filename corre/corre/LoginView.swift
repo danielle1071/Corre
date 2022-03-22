@@ -114,6 +114,12 @@ struct LoginView: View {
                 
                 sessionManager.showSignUp()
                 })
+            
+            Spacer()
+            Button("Forgot password", action:{
+                sessionManager.databaseManager.resetPassword(email: "fsbattaglia7@gmail.com")
+                sessionManager.showConfirmEmailView()
+                })
                     
         } .background(CustomColor.backcolor.edgesIgnoringSafeArea(.all))
     }

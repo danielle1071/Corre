@@ -29,6 +29,8 @@ enum AuthState {
     case notification
     case friendView
     case preRun
+    case confirmPassResetView(email: String)
+    case confirmEmailView
 
 
 
@@ -315,6 +317,14 @@ final class SessionManger: ObservableObject {
     func showEditContact(contact: EmergencyContact) {
         authState = .editEmergencyContact(contact: contact)
 
+    }
+    
+    func showConfirmPassResetView(email: String){
+        authState = .confirmPassResetView(email: email)
+    }
+    
+    func showConfirmEmailView(){
+        authState = .confirmEmailView
     }
 }
 
