@@ -40,7 +40,7 @@ struct NavBarView: View {
                     Text("Home")
                 }.tag(0)
             
-            Text("")
+            PreRunningView()
                 .tabItem {
                     Image(systemName: "play")
                     Text("Run")
@@ -49,18 +49,17 @@ struct NavBarView: View {
                     if sessionManager.databaseManager.emergencyContacts.isEmpty {
                         showingSheet.toggle()
                     } else {
-                        PreRunningView()
+                        sessionManager.showPreRunning()
                         self.selectedTab = 1
                     }
                 }
-        
-            MessagesView()
+            FriendView()
                 .onTapGesture {
                     self.selectedTab = 2
                 }
                 .tabItem {
-                    Image(systemName: "message")
-                    Text("Messages")
+                    Image(systemName: "person.2.fill")
+                    Text("Friends")
                 }.tag(2)
             ProfileView()
                 .onTapGesture {

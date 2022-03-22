@@ -80,22 +80,22 @@ struct SessionView: View {
                     HStack {
                        
                             // MARK: Header Name Line
-                        Text("Hi \(sessionManager.databaseManager.currentUser?.username ?? "Name")")
+                        Text("Hi \(sessionManager.databaseManager.currentUser?.username ?? "")")
                                 .font(.custom("Varela Round Regular", size: 40))
                                 .foregroundColor(Color("primaryColor"))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 
                             
-                            HStack (spacing: (gWidth * 0.05)) {
+                            HStack (spacing: (gWidth * 0.035)) {
                                 
-                                // MARK: Friends Button
+                                // MARK: Messages Button
                                 
                                 Button(action: {
-                                    sessionManager.showFriendView()
+                                    sessionManager.showMessage()
                                 }) {
-                                    Image("friends")
+                                    Image("chatBubble")
                                         .resizable()
-                                        .frame(width: gWidth * 0.08, height: gWidth * 0.09)
+                                        .frame(width: gWidth * 0.09, height: gWidth * 0.08)
                                 }
                                 
                                 // MARK: Notifications Button
