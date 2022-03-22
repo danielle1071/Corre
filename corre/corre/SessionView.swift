@@ -68,8 +68,59 @@ struct SessionView: View {
 //            Spacer()
 
             
+
             let gWidth = geometry.size.width
             let gHeight = geometry.size.height
+
+//            Button("Show Sheet") {
+//                        showingSheet.toggle()
+//                    }
+//                    .sheet(isPresented: $showingSheet, content: ExampleSheet.init)
+//                    .padding()
+//                        .padding(.horizontal, 50)
+//                        .foregroundColor(CustomColor.primarycolor)
+//
+            
+//            Button("Emergency Contacts", action: {
+//                sessionManager.showEmergencyContact()
+//            }).padding()
+//                .padding(.horizontal, 50)
+//                .foregroundColor(CustomColor.primarycolor)
+//                .background(CustomColor.backcolor)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 20)
+//                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+//                )
+//        MARK: INTERESTING TO KNOW THIS ⬇️
+//            Button("PRINT") {
+//                print("!@#$%^&*() \(sessionManager.databaseManager.currentUser?.EmergencyContacts!.elements)")
+//            }
+            Group {
+                
+                
+            Button("Friends", action: {
+                sessionManager.showFriendView()
+            }).padding()
+                .padding(.horizontal, 108)
+                .foregroundColor(CustomColor.primarycolor)
+                .background(CustomColor.backcolor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                )
+            
+            Spacer()
+            Button("Notifications", action: {
+                sessionManager.showNotificationView()
+            }).padding()
+                .padding(.horizontal, 108)
+                .foregroundColor(CustomColor.primarycolor)
+                .background(CustomColor.backcolor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                )
+
             
             ZStack{
                 
