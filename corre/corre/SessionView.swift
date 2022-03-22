@@ -120,7 +120,7 @@ struct SessionView: View {
                     RoundedRectangle(cornerRadius: 20)
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
-
+            }
             
             ZStack{
                 
@@ -240,6 +240,7 @@ struct SessionView: View {
             
         }
     }
+    
 }
         
 

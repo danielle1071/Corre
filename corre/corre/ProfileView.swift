@@ -40,7 +40,7 @@ struct ProfileView: View {
     var body: some View {
 
         
-            HStack{
+           
 
         if !editing {
             VStack {
@@ -94,6 +94,16 @@ struct ProfileView: View {
             .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
             Spacer()
+                Button("Sign Out", action: {
+                                sessionManager.signOut()
+                            }).padding()
+                                .padding(.horizontal, 100)
+                                .foregroundColor(CustomColor.primarycolor)
+                                .background(CustomColor.backcolor)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                                )
 
 
             }
@@ -163,16 +173,7 @@ struct ProfileView: View {
 
         Spacer()
             
-        Button("Sign Out", action: {
-                        sessionManager.signOut()
-                    }).padding()
-                        .padding(.horizontal, 100)
-                        .foregroundColor(CustomColor.primarycolor)
-                        .background(CustomColor.backcolor)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                            .stroke(CustomColor.primarycolor, lineWidth: 2)
-                        )
+        
                         
                     
 
