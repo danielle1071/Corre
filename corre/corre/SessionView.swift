@@ -87,6 +87,8 @@ struct SessionView: View {
 //                print("!@#$%^&*() \(sessionManager.databaseManager.currentUser?.EmergencyContacts!.elements)")
 //            }
             Group {
+                
+                
             Button("Friends", action: {
                 sessionManager.showFriendView()
             }).padding()
