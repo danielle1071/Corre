@@ -26,8 +26,12 @@ struct ConfirmEmailView: View {
             Spacer()
             
             Button("Send code", action:{
-                sessionManager.databaseManager.resetPassword(email: email)
-                sessionManager.showConfirmPassResetView(email: email)
+                if(email != ""){
+                    sessionManager.databaseManager.resetPassword(email: email)
+                    sessionManager.showConfirmPassResetView(email: email)
+                } else {
+                    //MARK: Front end: display error "Email can't be empty"
+                }
             })
             
             Spacer()
