@@ -859,7 +859,7 @@ class DatabaseManager: ObservableObject {
             case .success(let result):
                 print("Result: \(result)")
                 print("Profile updated \(updatedUser)")
-                self.currentUser = self.getUserProfile(userID: updatedUser.id)!
+                self.currentUser = result
             case .failure(let error):
                 print(error.localizedDescription)
             }
