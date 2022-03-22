@@ -22,7 +22,12 @@ struct ProfileView: View {
     @State private var image = UIImage()
     @State private var showSheet = false
     
+    @State var editing = false
+    @State var bio = ""
+    @State var firstName = ""
+    @State var lastName = ""
     @EnvironmentObject var sessionManager: SessionManger
+    @State var user:User?
     
     struct CusColor {
         static let backcolor =
@@ -33,95 +38,180 @@ struct ProfileView: View {
         static let lblue = Color("lightBlue")
     }
     var body: some View {
-        VStack {
-            HStack{
+
+        
+           
+
+        if !editing {
+            VStack {
+                HStack{
 
 
-                Text("Profile Page")
-                    .foregroundColor(Color("primaryColor"))
 
-                    Spacer()
-                    }
-            .padding()
+                    Text("Profile Page")
+                        .foregroundColor(Color("primaryColor"))
+
+                        Spacer()
+                        }
+                .padding()
+                Button("Edit Bio", action: {
+                    self.editing = !self.editing
+                })
+                
 
             VStack{
+                HStack{
+                    Text("Name: \(user?.firstName ?? "") \(user?.lastName ?? "")")
+                        .foregroundColor(Color("primaryColor"))
+                    Spacer()
+                }
+                    Divider()
+                HStack{
+                    Text("Username: \(user?.username ?? "ERROR")")
+                        .foregroundColor(Color("primaryColor"))
+                    Spacer()
+                }
+                    Divider()
+                HStack{
+                    Text("Total Distance: \(user?.totalDistance ?? 0.0)")
+                        .foregroundColor(Color("primaryColor"))
+                    Spacer()
+                }
+                    Divider()
+                HStack{
+                    Text("Total Runs: \(user?.Runs?.count ?? 0)")
+                        .foregroundColor(Color("primaryColor"))
+                    Spacer()
+                }
+                    Divider()
 
-            Image(uiImage: self.image)
-                    .resizable()
-                    .cornerRadius(50)
-                    .padding(.all, 4)
-                    .frame(width: 100, height: 100)
-                    .background(Color.black.opacity(0.2))
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-                    .padding(8)
+                HStack{
+                    Text("Bio: \(user?.bio ?? "")")
+                        .foregroundColor(Color("primaryColor"))
+                    Spacer()
+                }
+            }
+            .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
+
+            Spacer()
+                Button("Sign Out", action: {
+                                sessionManager.signOut()
+                            }).padding()
+                                .padding(.horizontal, 100)
+                                .foregroundColor(CustomColor.primarycolor)
+                                .background(CustomColor.backcolor)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+                                )
 
 
-            Text("Change photo")
-                    .font(.headline)
-                    .frame(width: 150.0, height: 50)
-                    .background(Color("primaryColor"))
-                    .clipShape(Capsule())
-                    .foregroundColor(.white)
-                    .onTapGesture {
-                        showSheet = true
-                    }
             }
-            .padding(/*@START_MENU_TOKEN@*/.bottom/*@END_MENU_TOKEN@*/)
-            .sheet(isPresented: $showSheet) {
-                    ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
-        }
+            .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+            .onAppear(perform: {
+                if sessionManager.databaseManager.currentUser == nil {
+                    sessionManager.getCurrentAuthUser()
+                }
+                self.user = sessionManager.databaseManager.currentUser
+            })
+        } else {
+            VStack {
+                HStack{
 
-        VStack{
-            HStack{
-                Text("Name:")
-                    .foregroundColor(Color("primaryColor"))
-                Spacer()
-            }
-                Divider()
-            HStack{
-                Text("Username: PLACEHOLDER")
-                    .foregroundColor(Color("primaryColor"))
-                Spacer()
-            }
-                Divider()
-            HStack{
-                Text("Total Distance: \(sessionManager.databaseManager.currentUser?.totalDistance ?? 0.0)")
-                    .foregroundColor(Color("primaryColor"))
-                Spacer()
-            }
-                Divider()
-            HStack{
-                Text("Total Runs: \(sessionManager.databaseManager.currentUser?.Runs?.count ?? 0)")
-                    .foregroundColor(Color("primaryColor"))
-                Spacer()
-            }
-                Divider()
 
-            HStack{
-                Text("Bio: \(sessionManager.databaseManager.currentUser?.bio ?? "")")
-                    .foregroundColor(Color("primaryColor"))
-                Spacer()
+                    Text("Profile Page")
+                        .foregroundColor(Color("primaryColor"))
+
+                        Spacer()
+                        }
+                .padding()
+                Button("Cancel", action: {
+                    self.editing = !self.editing
+                })
+                    .foregroundColor(Color.red)
+                
+
+            VStack{
+                HStack{
+                    Text("Name: \(user?.firstName ?? "") \(user?.lastName ?? "")")
+                        .foregroundColor(Color("primaryColor"))
+                    Spacer()
+                }
+                    Divider()
+                HStack{
+                    Text("Username: \(user?.username ?? "ERROR")")
+                        .foregroundColor(Color("primaryColor"))
+                    Spacer()
+                }
+                    Divider()
+                HStack{
+                    Text("Total Distance: \(user?.totalDistance ?? 0.0)")
+                        .foregroundColor(Color("primaryColor"))
+                    Spacer()
+                }
+                    Divider()
+                HStack{
+                    Text("Total Runs: \(user?.Runs?.count ?? 0)")
+                        .foregroundColor(Color("primaryColor"))
+                    Spacer()
+                }
+                    Divider()
+
+                HStack{
+                    Text("Bio: ")
+                    TextField("\(user?.bio ?? "No Bio")", text: $bio)
+                        .foregroundColor(Color("primaryColor"))
+                    Spacer()
+                }
+                Button("Save Bio", action: {
+                    self.updateUserRecord()
+                })
+
             }
-        }
-        .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
+            .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
+
 
         Spacer()
+            
+        
+                        
+                    
 
 
-        }
-        .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
-        .onAppear(perform: {
-            if sessionManager.databaseManager.currentUser == nil {
-                sessionManager.getCurrentAuthUser()
+
             }
-        })
+            .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+            .onAppear(perform: {
+                if sessionManager.databaseManager.currentUser == nil {
+                    sessionManager.getCurrentAuthUser()
+                }
+                self.firstName = user?.firstName ?? ""
+                self.lastName = user?.lastName ?? ""
+                self.bio = user?.bio ?? ""
+            })
+        }
+    }
+    
+    func updateUserRecord() {
+        if self.bio == "No Bio" {
+            self.bio = ""
+        }
+        var updateUser = sessionManager.databaseManager.currentUser!
+        updateUser.bio = self.bio
+        
+        updateUser.firstName = self.firstName
+        updateUser.lastName = self.lastName
+        sessionManager.databaseManager.updateUserProfile(updatedUser: updateUser)
+        self.user = sessionManager.databaseManager.currentUser
+        self.editing = false
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        ProfileView()
+        let testUsr = User(id: "000", sub: "000", username: "Test", bio: "Test Bio", totalDistance: 0.0 ,firstName: "Test", lastName: "User", email: "TESTEMAIL PLACEHOLDER")
+        ProfileView(user: testUsr)
     }
 }
 

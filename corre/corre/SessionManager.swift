@@ -29,13 +29,13 @@ enum AuthState {
     case notification
     case friendView
     case preRun
-
+    
 
 
     case pendingReqs(requests: [Notification])
 
     case editEmergencyContact(contact: EmergencyContact)
-
+    case errV
 
 
 
@@ -234,11 +234,13 @@ final class SessionManger: ObservableObject {
     // MARK: showSession
     func showSession() {
         if let user = Amplify.Auth.getCurrentUser() {
-            authState = .session(user: user)
+            self.showNavBar()
+//            authState = .session(user: user)
         } else {
             authState = .landing
         }
     }
+    
     
     
     // MARK: showNavBar
@@ -268,9 +270,12 @@ final class SessionManger: ObservableObject {
     
     // MARK: showProfile
     func showProfile() {
-        authState = .profile
+        if databaseManager.currentUser != nil {
+            authState = .profile
+        } else {
+            authState = .errV
+        }
     }
-    
     func showMessage() {
         authState = .messaging
     }

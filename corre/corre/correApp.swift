@@ -21,8 +21,14 @@ struct correApp: App {
     
     
     init() {
+        
         // print("Number of users loaded: \(databaseManager.currentUser.count)")
         // print("Number of curent users loaded: \(databaseManager.get")
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            sessionManager.authState = .login
+        }
+        
+        
         if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
             sessionManager.authState = .login
         } else {
@@ -48,6 +54,8 @@ struct correApp: App {
     var body: some Scene {
         
         WindowGroup {
+            
+            
     
             switch sessionManager.authState {
             case .login:
@@ -100,12 +108,13 @@ struct correApp: App {
             case .pendingReqs(let requests):
                 SentFriendReqView(requests: requests)
                     .environmentObject(sessionManager)
-
             case .editEmergencyContact(let contact):
                 EmergencyContactEditView(contact: contact)
                     .environmentObject(sessionManager)
                 
-
+            case .errV:
+                Error1View()
+                    .environmentObject(sessionManager)
             }
             
         }
