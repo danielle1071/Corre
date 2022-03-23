@@ -794,6 +794,42 @@ class DatabaseManager: ObservableObject {
         }
     }
 
+    
+    func resetPassword(email: String) { //we can use username or passwork -> check during call
+        Amplify.Auth.resetPassword(for: email) { result in
+            do {
+                let resetResult = try result.get()
+                switch resetResult.nextStep {
+                case .confirmResetPasswordWithCode(let deliveryDetails, let info):
+                    print("Confirm reset password with code sent to - \(deliveryDetails) \(info)")
+                case .done:
+                    print("Reset completed")
+                }
+            } catch {
+                print("Reset password failed with error \(error)")
+            }
+        }
+    }
+    
+    func confirmResetPassword(
+        email: String,
+        newPassword: String,
+        confirmationCode: String
+    ) {
+        Amplify.Auth.confirmResetPassword(
+            for: email,
+            with: newPassword,
+            confirmationCode: confirmationCode
+        ) { result in
+            switch result {
+            case .success:
+                print("Password reset confirmed")
+            case .failure(let error):
+                print("Reset password failed with error \(error)")
+            }
+        }
+    }
+
       
     func checkUserExists(email: String) -> Bool {
         var retVal = false

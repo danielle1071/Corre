@@ -34,22 +34,22 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            
-            Image("CreamLogo")
-                .resizable()
-                .frame(width: 200.0, height: 200.0)
-                .scaledToFit()
-            
-            Spacer()
-                .frame(height: 50)
-            
-            Text("Welcome Back")
-                .font(.system(size: 36.0))
-                .foregroundColor(CustomColor.primarycolor)
-            
-            Spacer()
-                .frame(height: 25)
-            
+            Group {
+                Image("CreamLogo")
+                    .resizable()
+                    .frame(width: 200.0, height: 200.0)
+                    .scaledToFit()
+                
+                Spacer()
+                    .frame(height: 50)
+                
+                Text("Welcome Back")
+                    .font(.system(size: 36.0))
+                    .foregroundColor(CustomColor.primarycolor)
+                
+                Spacer()
+                    .frame(height: 25)
+            }
             
             TextField("Username", text: $login)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -113,6 +113,12 @@ struct LoginView: View {
             Button("Don't have an account? Sign up", action:{
                 
                 sessionManager.showSignUp()
+                })
+            
+            Spacer()
+            Button("Forgot password", action:{
+                sessionManager.databaseManager.resetPassword(email: "fsbattaglia7@gmail.com")
+                sessionManager.showConfirmEmailView()
                 })
                     
         } .background(CustomColor.backcolor.edgesIgnoringSafeArea(.all))
