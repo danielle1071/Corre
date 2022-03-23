@@ -4,7 +4,17 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ProximaNova.ttf</string>
 		<string>VarelaRound-Regular.ttf</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>backgroundColor</string>
+		<key>UIImageName</key>
+		<string>firstFrame</string>
+		<key>UILaunchScreen</key>
+		<dict/>
+	</dict>
 </dict>
 </plist>

@@ -17,17 +17,21 @@ import Amplify
 struct SessionView: View {
     
     @EnvironmentObject var sessionManager: SessionManger
+    
     @State private var showingSheet = false
-    @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
+//    @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
+    
     // @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
     let user: AuthUser
     
+    
     var body: some View {
-        VStack {
-        
+
+        GeometryReader { geometry in
+
         
             // MARK: NEED TO UPDATE THE USER TRACKING ID --- CURRENTLY HARD CODED FOR TESTING!
-            Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
+//            Button("TrackRunner", action: {sessionManager.showTrack(userTrackingID: userId)})
 
             Spacer()
             Button("Run", action: {
@@ -62,7 +66,12 @@ struct SessionView: View {
 //                )
             
 //            Spacer()
+
             
+
+            let gWidth = geometry.size.width
+            let gHeight = geometry.size.height
+
 //            Button("Show Sheet") {
 //                        showingSheet.toggle()
 //                    }
@@ -87,6 +96,8 @@ struct SessionView: View {
 //                print("!@#$%^&*() \(sessionManager.databaseManager.currentUser?.EmergencyContacts!.elements)")
 //            }
             Group {
+                
+                
             Button("Friends", action: {
                 sessionManager.showFriendView()
             }).padding()
@@ -109,72 +120,129 @@ struct SessionView: View {
                     RoundedRectangle(cornerRadius: 20)
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
+            }
             
-            Spacer()
-            }
-            Button("Emergency Contacts") {
-                if sessionManager.databaseManager.emergencyContacts.isEmpty {
-                    showingSheet.toggle()
-                } else {
-                    sessionManager.showEmergencyContact()
-                }
-            }
-                .sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
-                .padding()
-                    .padding(.horizontal, 50)
-                    .foregroundColor(CustomColor.primarycolor)
-                .padding(.horizontal, 10)
-                .foregroundColor(CustomColor.primarycolor)
-                .background(CustomColor.backcolor)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                    .stroke(CustomColor.primarycolor, lineWidth: 2)
-                )
+            ZStack{
+                
+                Color("backgroundColor")
+                    .ignoresSafeArea()
+                
+                SwiftUI.VStack {
+                    HStack {
+                       
+                            // MARK: Header Name Line
+                        Text("Hi \(sessionManager.databaseManager.currentUser?.username ?? "")")
+                                .font(.custom("Varela Round Regular", size: 40))
+                                .foregroundColor(Color("primaryColor"))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                            
+                            HStack (spacing: (gWidth * 0.035)) {
+                                
+                                // MARK: Messages Button
+                                
+                                Button(action: {
+                                    sessionManager.showMessage()
+                                }) {
+                                    Image("chatBubble")
+                                        .resizable()
+                                        .frame(width: gWidth * 0.09, height: gWidth * 0.08)
+                                }
+                                
+                                // MARK: Notifications Button
+                                Button(action: {
+                                    sessionManager.showNotificationView()
+                                }) {
+                                    Image("notifications")
+                                        .resizable()
+                                        .frame(width: gWidth * 0.08, height: gWidth * 0.08)
+                                }
+                                
+                                // MARK: Settings Button
+                                Button(action: {
+                                    sessionManager.showProfile()
+                                }) {
+                                    Image("settings")
+                                        .resizable()
+                                        .frame(width: gWidth * 0.09, height: gWidth * 0.02)
+                                }
+                            }
+                        
 
-            Spacer()
-            
-            Button("Message (for test)", action: {
-                sessionManager.showMessage()
-            }).padding()
-                .padding(.horizontal, 70)
-                .foregroundColor(CustomColor.primarycolor)
-                .background(CustomColor.backcolor)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                    .stroke(CustomColor.primarycolor, lineWidth: 2)
-                )
-            
-            Spacer()
-            Button("Sign Out", action: {
-                sessionManager.signOut()
-            }).padding()
-                .padding(.horizontal, 100)
-                .foregroundColor(CustomColor.primarycolor)
-                .background(CustomColor.backcolor)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                    .stroke(CustomColor.primarycolor, lineWidth: 2)
-                )
+                        
+                    }
+                    
+                    Text("Keep going. You can do it")
+                        .font(.custom("Proxima Nova Rg Regular", size: 20))
+                        .foregroundColor(Color("darkGray"))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding([.top], gWidth * -0.06)
+                        .padding([.bottom], gWidth * 0.03)
+                    
+                    Image("header2")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding([.bottom], 10)
+                    
+                    // MARK: Start Run Button
+                    Button(action: {
+                    if sessionManager.databaseManager.emergencyContacts.isEmpty {
+                        showingSheet.toggle()
+                    } else {
+                        sessionManager.showPreRunning()
+                    }
+                })
+                    {
+                    Image("startRun")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    }
+                    .sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
+                   
+    
+                    // MARK: Track Runner Button
+                    HStack (spacing: 20.0)
+                    {
+                        Button(action: {sessionManager.showTrackContacts()
+                        })
+                        {
+                            Image("track")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        }
+                        
+                        // MARK: Emergency Contacts Button
+                        
+                        Button(action: {
+                        if sessionManager.databaseManager.emergencyContacts.isEmpty {
+                            showingSheet.toggle()
+                        } else {
+                            sessionManager.showEmergencyContact()
+                        }
+                        })
+                        {
+                            Image("contacts")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        }
+                            .sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
+                         
+                        
+                    }
+                    .padding([.top], 10)
+                    
+                }
+                .padding()
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+
+            }
+           
             
         }
-        .onAppear(perform: {
-            if sessionManager.databaseManager.emergencyContacts.isEmpty {
-                if sessionManager.databaseManager.currentUser == nil {
-                    print("Error, current user empty")
-                    sessionManager.showSession()
-                } else {
-                    sessionManager.databaseManager.getEmergencyContacts()
-                    print("This is the emergency contacts: \(sessionManager.databaseManager.emergencyContacts)")
-                }
-            }
-        })
-//        .onAppear(perform: {
-//            sessionManager.databaseManager.createDeviceRecord()
-//        })
-
     }
     
 }
+        
 
 struct EmergencyPromptSheet: View {
     @Environment(\.presentationMode) var presentationMode
@@ -288,6 +356,5 @@ struct SessionView_Previews: PreviewProvider {
     static var previews: some View {
         SessionView(user: TestUser())
     }
-     
     
 }

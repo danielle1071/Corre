@@ -21,8 +21,14 @@ struct correApp: App {
     
     
     init() {
+        
         // print("Number of users loaded: \(databaseManager.currentUser.count)")
         // print("Number of curent users loaded: \(databaseManager.get")
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            sessionManager.authState = .login
+        }
+        
+        
         if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
             sessionManager.authState = .login
         } else {
@@ -48,6 +54,8 @@ struct correApp: App {
     var body: some Scene {
         
         WindowGroup {
+            
+            
     
             switch sessionManager.authState {
             case .login:
@@ -75,8 +83,8 @@ struct correApp: App {
                 ProfileView()
                     .environmentObject(sessionManager)
             // Note: let User: was causing EXC_I386_GPFLT error through trackContacts
-            case .emergencyContact(_):
-                EmergContactView(/*user: user*/)
+            case .emergencyContact(let contacts):
+                EmergContactView(contacts: contacts)
                     .environmentObject(sessionManager)
             case .trackRunner(let userTrackingID):
                 TrackRunnerView(userTrackingID: userTrackingID)
@@ -100,7 +108,6 @@ struct correApp: App {
             case .pendingReqs(let requests):
                 SentFriendReqView(requests: requests)
                     .environmentObject(sessionManager)
-
             case .editEmergencyContact(let contact):
                 EmergencyContactEditView(contact: contact)
                     .environmentObject(sessionManager)
@@ -108,9 +115,14 @@ struct correApp: App {
             case .confirmPassResetView(let email):
                 ResetPasswordView(email: email)
                     .environmentObject(sessionManager)
-                
+            
             case .confirmEmailView:
                 ConfirmEmailView()
+                    .environmentObject(sessionManager)
+
+
+            case .errV:
+                Error1View()
                     .environmentObject(sessionManager)
 
             }
