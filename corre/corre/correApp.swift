@@ -111,10 +111,20 @@ struct correApp: App {
             case .editEmergencyContact(let contact):
                 EmergencyContactEditView(contact: contact)
                     .environmentObject(sessionManager)
-                
+            
+            case .confirmPassResetView(let email):
+                ResetPasswordView(email: email)
+                    .environmentObject(sessionManager)
+            
+            case .confirmEmailView:
+                ConfirmEmailView()
+                    .environmentObject(sessionManager)
+
+
             case .errV:
                 Error1View()
                     .environmentObject(sessionManager)
+
             }
             
         }
