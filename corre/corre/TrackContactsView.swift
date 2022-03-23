@@ -29,6 +29,34 @@ struct TrackContactsView: View {
     
     var body: some View {
         VStack {
+            HStack{
+                Button(action: {
+                    sessionManager.showEmergencyContact()
+                }, label: {
+                Image(systemName: "arrow.left")
+                    .renderingMode(.original)
+                    .edgesIgnoringSafeArea(.all)
+                    .foregroundColor(Color("primaryColor"))
+                Text("Back")
+                    .font(.custom("Varela Round Regular", size: 18))
+                    .foregroundColor(Color("primaryColor"))
+                })
+                Spacer()
+                
+            }
+            .padding(.all)
+            
+            Image("CreamLogo")
+                .resizable()
+                .frame(width: 125.0, height: 125.0)
+                .scaledToFit()
+                .shadow(radius: 2)
+            
+            Text("Track Contacts")
+                .font(.custom("Varela Round Regular", size: 22))
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+            
             List(sessionManager.databaseManager.runners, id: \.id) {
                 item in
                 RunnerRow(emergencyContact: item)
@@ -38,49 +66,53 @@ struct TrackContactsView: View {
                         if runCheck {
                             sessionManager.showTrack(userTrackingID: item.userID)
                         } else {
-                            sessionManager.showSession()
+                            
+                            // MARK: user currently not running!
+                            sessionManager.showTrackContacts()
                         }
                     })
             }
+            .font(.custom("Proxima Nova Rg Regular", size: 18))
             
-            Button(action: {
-                    sessionManager.showSession()
-                }, label: {
-                    Text("Back")
-                    .fontWeight(.bold)
-                    .frame(width: 100.0, height: 40.0)
-                    .foregroundColor(Color.white)
-                    .background(CusColor.primarycolor)
-                    .clipShape(Capsule())
-            })
+//            Button(action: {
+//                    sessionManager.showSession()
+//
+//                }, label: {
+//                    Text("Back")
+//                    .fontWeight(.bold)
+//                    .frame(width: 100.0, height: 40.0)
+//                    .foregroundColor(Color.white)
+//                    .background(CusColor.primarycolor)
+//                    .clipShape(Capsule())
+//            })
             
             // MARK: deleteThis - this is temporary
-            VStack {
-                Group {
-                    Spacer()
-                        .frame(height: 30)
-                    
-                    TextField("User ID", text: $userId)
-                }
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(height: 40)
-                    .padding([.horizontal], 20)
-                    .cornerRadius(16)
-                    .shadow(radius: 2.0)
-                
-                Button(action: {
-                        sessionManager.showTrack(userTrackingID: userId)
-                    }, label: {
-                        Text("Track Runner")
-                        .fontWeight(.bold)
-                        .frame(width: 150.0, height: 40.0)
-                        .foregroundColor(Color.white)
-                        .background(CusColor.primarycolor)
-                        .clipShape(Capsule())
-                })
-            }
-
+//            VStack {
+//                Group {
+//                    Spacer()
+//                        .frame(height: 30)
+//
+//                    TextField("User ID", text: $userId)
+//                }
+//                    .textFieldStyle(RoundedBorderTextFieldStyle())
+//                    .frame(height: 40)
+//                    .padding([.horizontal], 20)
+//                    .cornerRadius(16)
+//                    .shadow(radius: 2.0)
+//
+//                Button(action: {
+//                        sessionManager.showTrack(userTrackingID: userId)
+//                    }, label: {
+//                        Text("Track Runner")
+//                        .fontWeight(.bold)
+//                        .frame(width: 150.0, height: 40.0)
+//                        .foregroundColor(Color.white)
+//                        .background(CusColor.primarycolor)
+//                        .clipShape(Capsule())
+//                })
+//            }
         }
+        .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
         
     }
     
