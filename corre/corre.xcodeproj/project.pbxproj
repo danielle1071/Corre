@@ -13,14 +13,11 @@
 		35C1A99227C9A7130032FD00 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99127C9A7130032FD00 /* MessageManager.swift */; };
 		35C1A99427C9A73E0032FD00 /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99327C9A73E0032FD00 /* MessageRow.swift */; };
 		35C1A99627C9A7880032FD00 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99527C9A7880032FD00 /* MessagesView.swift */; };
-
 		35F5636427EA5AF30044DD7B /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5636327EA5AF30044DD7B /* ResetPasswordView.swift */; };
 		35F5636627EA7D380044DD7B /* ConfirmEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5636527EA7D380044DD7B /* ConfirmEmailView.swift */; };
-
 		4A19986727E16780001822E5 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A19986627E16780001822E5 /* LaunchView.swift */; };
 		4A1EE56127E1AA3B0032138E /* ProximaNova.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */; };
 		4A1EE56227E1AA3B0032138E /* ProximaNova.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */; };
-
 		4A2FA86727B359BF00B55D53 /* VarelaRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */; };
 		4A4C1F4827CEE48900D95264 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C1F4727CEE48900D95264 /* NavBarView.swift */; };
 		4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6136F27B1DE4E0018F678 /* RunningView.swift */; };
@@ -166,13 +163,10 @@
 		35C1A99127C9A7130032FD00 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		35C1A99327C9A73E0032FD00 /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
 		35C1A99527C9A7880032FD00 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
-
 		35F5636327EA5AF30044DD7B /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		35F5636527EA7D380044DD7B /* ConfirmEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmEmailView.swift; sourceTree = "<group>"; };
-
 		4A19986627E16780001822E5 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ProximaNova.ttf; sourceTree = "<group>"; };
-
 		4A2FA86027B337DF00B55D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VarelaRound-Regular.ttf"; sourceTree = "<group>"; };
 		4A4C1F4727CEE48900D95264 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
@@ -379,12 +373,12 @@
 				DA7C44A127EA7BE6000453AC /* SelectTimeView.swift */,
 				4A4C1F4727CEE48900D95264 /* NavBarView.swift */,
 				4CEEB63027CADF3100391A9E /* NotificationView.swift */,
-				4CB74FCB27CD6B4A004476B7 /* PreRunningView.swift */,				
+				4CB74FCB27CD6B4A004476B7 /* PreRunningView.swift */,
 				35F5636327EA5AF30044DD7B /* ResetPasswordView.swift */,
 				35F5636527EA7D380044DD7B /* ConfirmEmailView.swift */,
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
 				DAD8F61F27CFEFF800E63D67 /* UINotificationView.swift */,
-				F213211B27EA672A00ECBC64 /* FriendsRow.swift */
+				F213211B27EA672A00ECBC64 /* FriendsRow.swift */,
 			);
 			path = corre;
 			sourceTree = "<group>";
@@ -402,6 +396,7 @@
 			children = (
 				EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */,
 				65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */,
+				4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */,
 			);
 			name = AmplifyConfig;
 			sourceTree = "<group>";
