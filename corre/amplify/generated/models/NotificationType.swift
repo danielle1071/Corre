@@ -8,4 +8,6 @@ public enum NotificationType: String, EnumPersistable {
   case message = "MESSAGE"
   case runnerstarted = "RUNNERSTARTED"
   case runnerended = "RUNNERENDED"
+  case runevent = "RUNEVENT"
+  case other = "OTHER"
 }
