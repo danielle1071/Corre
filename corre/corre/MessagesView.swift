@@ -11,13 +11,17 @@ import Amplify
 
 struct MessagesView: View {
 
+    @State var userId: String
     @State var text = String()
     @ObservedObject var messageManager = MessageManager()
     @EnvironmentObject var sessionManager: SessionManger
     //@ObservedObject var sessionManager = SessionManger()
     //same ad MessageRow, if sessionManager is not an Environment Object, it will fail to send the username in the message
     
-    init() {
+    init(userId: String) {
+        self.userId = userId
+        messageManager.setCurrentUserId(id: self.userId)
+//        self.messageManager = MessageManager(currentId: self.userId)
         messageManager.getMessages()
         messageManager.observeMessages()
         
@@ -47,6 +51,9 @@ struct MessagesView: View {
                                 message: message,
                                 isCurrentUser: message.senderId == sessionManager.databaseManager.currentUser?.username ?? "User not, found"
                             )
+                                .onTapGesture(perform: {
+                                    print("!!! \(messageManager.currentId) !!!")
+                                })
                         }
                     }
                 }
@@ -87,8 +94,8 @@ struct MessagesView: View {
     }
 }
 
-struct MessagesView_Previews: PreviewProvider {
-    static var previews: some View {
-        MessagesView()
-    }
-}
+//struct MessagesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MessagesView()
+//    }
+//}

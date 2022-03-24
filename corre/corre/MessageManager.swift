@@ -10,6 +10,7 @@ import Foundation
 
 class MessageManager: ObservableObject {
     @Published var messages = [Message]()
+    @Published var currentId = ""
     
     func send(_ message: Message) {
         Amplify.API.mutate(request: .create(message)) { mutationResult in
@@ -84,5 +85,8 @@ class MessageManager: ObservableObject {
                 print(completion)
             }
         )
+    }
+    func setCurrentUserId(id: String) {
+        self.currentId = id
     }
 }
