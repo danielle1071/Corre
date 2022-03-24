@@ -20,6 +20,8 @@ struct RunningView: View {
     @State var mapState = AMLMapViewState(zoomLevel: 17)
     @State var phoneNumber: String
     
+    var DEBUG = true
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -38,10 +40,17 @@ struct RunningView: View {
         LongPressGesture(minimumDuration: 3)
             .onEnded { _ in
                 sessionManager.databaseManager.setRunStatus(status: .notrunning)
+                
+                // informs all emergency contact
+                self.endRunNotif()
+                
                 sessionManager.showNavBar()
-
+                
+                
                 // stops tracker resources
                 locationService.stopTracking()
+                
+                
             }
             .updating($highlight) {
                 currentstate, gestureState, transaction in
@@ -142,21 +151,24 @@ struct RunningView: View {
             locationService.setSessionManager(sessionManager: sessionManager)
             getCurrentUserLocation()
             if sessionManager.databaseManager.currentUser == nil {
-                print("Error, no user loaded --- Running View")
+                if (DEBUG) { print("Error, no user loaded --- Running View") }
                 sessionManager.showSession()
             } else {
-                print("inside the on appear else block running view")
+                if (DEBUG) { print("inside the on appear else block running view") }
+                
+                // set user running status to running
                 sessionManager.databaseManager.setRunStatus(status: .running)
+                
+                // notify user's emergency contacts regarding changed running status
+                self.startRunNotif()
             }
-            
-            
         })
     }
 
     func getCurrentUserLocation() {
         
         if sessionManager.databaseManager.currentUser == nil {
-            print("getCurrentUserLocation - userName: nil")
+            print("getCurrentUserLocation -> userName: nil")
             
             // MARK: need to transition to error page not session page
             sessionManager.showSession()
@@ -175,6 +187,50 @@ struct RunningView: View {
         print("After the .store")
         
     }
+    
+    func startRunNotif() {
+        
+        sessionManager.databaseManager.getEmergencyContacts()
+        let contacts = sessionManager.databaseManager.emergencyContacts
+        
+        contacts.forEach { contact in contacts
+            if (DEBUG) {
+                print("RunningView -> startRunNotif -> Emergency Contact: \(contact.id) and \(String(describing: contact.emergencyContactAppUsername))")
+            }
+            
+            // In the event that the emergency has an account through corre,
+            // send them a start run notification in the app
+            if (contact.emergencyContactAppUsername != nil) {
+                sessionManager.databaseManager.startRunNotification(username: contact.emergencyContactAppUsername!)
+            }
+            
+            // MARK: add email logic here!
+            
+        }
+    }
+    
+    func endRunNotif() {
+    
+        sessionManager.databaseManager.getEmergencyContacts()
+        let contacts = sessionManager.databaseManager.emergencyContacts
+        
+        contacts.forEach { contact in contacts
+            if (DEBUG) {
+                print("RunningView -> endRunNotif -> Emergency Contact: \(contact.id) and \(String(describing: contact.emergencyContactAppUsername))")
+            }
+            
+            // In the event that the emergency has an account through corre,
+            // send them a start run notification in the app
+            if (contact.emergencyContactAppUsername != nil) {
+                sessionManager.databaseManager.endRunNotification(username: contact.emergencyContactAppUsername!)
+            }
+            
+            // MARK: add email logic here!
+            
+        }
+    }
+    
+    
 }
 
 struct RunningView_Previews: PreviewProvider {

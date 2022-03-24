@@ -7,4 +7,5 @@ public enum NotificationType: String, EnumPersistable {
   case emergencycontactrequest = "EMERGENCYCONTACTREQUEST"
   case message = "MESSAGE"
   case runnerstarted = "RUNNERSTARTED"
+  case runnerended = "RUNNERENDED"
 }
