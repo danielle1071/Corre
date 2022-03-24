@@ -108,6 +108,14 @@ struct NotificationView: View {
                             Text("Run Event Ended")
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                        case .runevent:
+                            Text("This is a generic runevent type")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        case .other:
+                            Text("This is a catch all notification type")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                             
                         case .none:
                             Text("No Type Listed")
