@@ -38,49 +38,80 @@ struct ProfileView: View {
         static let lblue = Color("lightBlue")
     }
     var body: some View {
-
-        
-           
-
         if !editing {
             VStack {
                 HStack{
-
-
-
-                    Text("Profile Page")
-                        .foregroundColor(Color("primaryColor"))
-
+                    Button (action: {
+                            sessionManager.showSession()
+                    }, label: {
+                        Image(systemName: "arrow.left")
+                            .renderingMode(.original)
+                            .edgesIgnoringSafeArea(.all)
+                            .foregroundColor(Color("primaryColor"))
+                        Text("Back")
+                            .font(.custom("Varela Round Regular", size: 18))
+                            .foregroundColor(Color("primaryColor"))
+                        })
                         Spacer()
+                        .foregroundColor(Color("primaryColor"))
+                        
+            
+                        Button (action: {
+                            sessionManager.signOut()
+                        }){
+                            Text("Sign Out")
+                                .font(.custom("Varela Round Regular", size: 18))
+                                .foregroundColor(Color.red)
                         }
-                .padding()
-                Button("Edit Bio", action: {
-                    self.editing = !self.editing
-                })
+                    }
+                    .padding(.all)
+            
+            Image("CreamLogo")
+                .resizable()
+                .frame(width: 125.0, height: 125.0)
+                .scaledToFit()
+                .shadow(radius: 2)
+                            
+            Text("Profile Page")
+                .font(.custom("Varela Round Regular", size: 22))
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
                 
-
+            Button (action: {
+                self.editing = !self.editing
+            }){
+                Text("Edit")
+                    .font(.custom("Varela Round Regular", size: 17))
+                    .foregroundColor(Color.blue)
+            }
+            
+                
             VStack{
                 HStack{
                     Text("Name: \(user?.firstName ?? "") \(user?.lastName ?? "")")
                         .foregroundColor(Color("primaryColor"))
+                        .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
                 }
                     Divider()
                 HStack{
                     Text("Username: \(user?.username ?? "ERROR")")
                         .foregroundColor(Color("primaryColor"))
+                        .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
                 }
                     Divider()
                 HStack{
                     Text("Total Distance: \(user?.totalDistance ?? 0.0)")
                         .foregroundColor(Color("primaryColor"))
+                        .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
                 }
                     Divider()
                 HStack{
                     Text("Total Runs: \(user?.Runs?.count ?? 0)")
                         .foregroundColor(Color("primaryColor"))
+                        .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
                 }
                     Divider()
@@ -88,23 +119,23 @@ struct ProfileView: View {
                 HStack{
                     Text("Bio: \(user?.bio ?? "")")
                         .foregroundColor(Color("primaryColor"))
+                        .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
                 }
             }
             .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
             Spacer()
-                Button("Sign Out", action: {
-                                sessionManager.signOut()
-                            }).padding()
-                                .padding(.horizontal, 100)
-                                .foregroundColor(CustomColor.primarycolor)
-                                .background(CustomColor.backcolor)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 20)
-                                    .stroke(CustomColor.primarycolor, lineWidth: 2)
-                                )
-
+//                Button("Sign Out", action: {
+//                                sessionManager.signOut()
+//                            }).padding()
+//                                .padding(.horizontal, 100)
+//                                .foregroundColor(CustomColor.primarycolor)
+//                                .background(CustomColor.backcolor)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 20)
+//                                    .stroke(CustomColor.primarycolor, lineWidth: 2)
+//                                )
 
             }
             .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
@@ -117,71 +148,113 @@ struct ProfileView: View {
         } else {
             VStack {
                 HStack{
-
-
-                    Text("Profile Page")
-                        .foregroundColor(Color("primaryColor"))
-
+                    Button (action: {
+                            sessionManager.showSession()
+                    }, label: {
+                        Image(systemName: "arrow.left")
+                            .renderingMode(.original)
+                            .edgesIgnoringSafeArea(.all)
+                            .foregroundColor(Color("primaryColor"))
+                        Text("Back")
+                            .font(.custom("Varela Round Regular", size: 18))
+                            .foregroundColor(Color("primaryColor"))
+                        })
                         Spacer()
-                        }
-                .padding()
-                Button("Cancel", action: {
-                    self.editing = !self.editing
-                })
-                    .foregroundColor(Color.red)
+                        .foregroundColor(Color("primaryColor"))
+                }
+                .padding(.all)
                 
+                Image("CreamLogo")
+                    .resizable()
+                    .frame(width: 125.0, height: 125.0)
+                    .scaledToFit()
+                    .shadow(radius: 2)
+                                    
+                Text("Profile Page")
+                    .font(.custom("Varela Round Regular", size: 22))
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                
+                Text(" ")
+                    .font(.custom("Varela Round Regular", size: 16))
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
 
             VStack{
                 HStack{
                     Text("Name: \(user?.firstName ?? "") \(user?.lastName ?? "")")
                         .foregroundColor(Color("primaryColor"))
+                        .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
                 }
                     Divider()
                 HStack{
                     Text("Username: \(user?.username ?? "ERROR")")
                         .foregroundColor(Color("primaryColor"))
+                        .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
                 }
                     Divider()
                 HStack{
                     Text("Total Distance: \(user?.totalDistance ?? 0.0)")
                         .foregroundColor(Color("primaryColor"))
+                        .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
                 }
                     Divider()
                 HStack{
                     Text("Total Runs: \(user?.Runs?.count ?? 0)")
                         .foregroundColor(Color("primaryColor"))
+                        .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
                 }
                     Divider()
 
                 HStack{
                     Text("Bio: ")
+                        .font(.custom("Varela Round Regular", size: 20))
+                        .foregroundColor(Color("primaryColor"))
                     TextField("\(user?.bio ?? "No Bio")", text: $bio)
                         .foregroundColor(Color("primaryColor"))
                     Spacer()
                 }
-                Button("Save Bio", action: {
-                    self.updateUserRecord()
-                })
-
             }
             .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
-
-        Spacer()
-            
-        
-                        
+            Spacer()
+            HStack{
+                Button(action: {
+                    self.editing = !self.editing
+                }, label: {
+                    Text("Cancel")
+                        .fontWeight(.bold)
+                        .font(.custom("Varela Round Regular", size: 18))
+                        .padding()
+                        .padding(.horizontal, 25)
+                        .background(Color.red)
+                        .foregroundColor(Color.white)
+                        .clipShape(Capsule())
+                        .shadow(radius: 2)
+                })
                     
-
-
-
+                Button(action: {
+                    self.updateUserRecord()
+                }, label: {
+                    Text("Save")
+                        .fontWeight(.bold)
+                        .font(.custom("Varela Round Regular", size: 18))
+                        .padding()
+                        .padding(.horizontal, 35)
+                        .background(Color("primaryColor"))
+                        .foregroundColor(Color.white)
+                        .clipShape(Capsule())
+                        .shadow(radius: 2)
+                })
             }
-            .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
-            .onAppear(perform: {
+            Spacer()
+        }
+        .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+        .onAppear(perform: {
                 if sessionManager.databaseManager.currentUser == nil {
                     sessionManager.getCurrentAuthUser()
                 }

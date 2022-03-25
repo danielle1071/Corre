@@ -29,7 +29,7 @@ struct PreRunningView: View {
         VStack{
             HStack{
                 Button(action: {
-                sessionManager.showNavBar()
+                sessionManager.showSession()
             }, label: {
                 Image(systemName: "arrow.left")
                     .renderingMode(.original)

@@ -99,19 +99,19 @@ struct EmergContactView: View {
                 .font(.custom("Proxima Nova Rg Regular", size: 18))
                 
                 
-                Button(action: {
-                        sessionManager.showTrackContacts()
-                }, label: {
-                    Text("Track Contacts View")
-                        .fontWeight(.bold)
-                        .font(.custom("Varela Round Regular", size: 18))
-                        .padding()
-                        .padding(.horizontal, 50)
-                        .background(Color("primaryColor"))
-                        .foregroundColor(Color.white)
-                        .clipShape(Capsule())
-                        .shadow(radius: 2)
-                })
+//                Button(action: {
+//                        sessionManager.showTrackContacts()
+//                }, label: {
+//                    Text("Track Contacts View")
+//                        .fontWeight(.bold)
+//                        .font(.custom("Varela Round Regular", size: 18))
+//                        .padding()
+//                        .padding(.horizontal, 50)
+//                        .background(Color("primaryColor"))
+//                        .foregroundColor(Color.white)
+//                        .clipShape(Capsule())
+//                        .shadow(radius: 2)
+//                })
                     
                 
             }
