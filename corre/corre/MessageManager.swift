@@ -10,6 +10,7 @@ import Foundation
 
 class MessageManager: ObservableObject {
     @Published var messages = [Message]()
+    @Published var currentId = ""
     
     func send(_ message: Message) {
         Amplify.API.mutate(request: .create(message)) { mutationResult in
@@ -28,7 +29,9 @@ class MessageManager: ObservableObject {
     }
     
     func getMessages() {
-        Amplify.API.query(request: .list(Message.self)) { [weak self] result in
+        //MARK: Once we have that you can select a chat by friend, add && Message.keys.senderID == friendID
+        //also add where senderId == currentId && receiverId == friendId
+        Amplify.API.query(request: .list(Message.self, where: Message.keys.receiverId == currentId)) { [weak self] result in
             do {
                 let messages = try result.get().get()
 
@@ -84,5 +87,9 @@ class MessageManager: ObservableObject {
                 print(completion)
             }
         )
+    }
+    
+    func setCurrentUserId(id: String) {
+        self.currentId = id
     }
 }
