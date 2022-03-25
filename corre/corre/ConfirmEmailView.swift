@@ -16,16 +16,52 @@ struct ConfirmEmailView: View {
     
     var body: some View {
         VStack {
-            TextField("email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .frame(height: 40)
-                .cornerRadius(16)
+            
+            Group {
+                Text("Forgot your password?")
+                    .font(.custom("Varela Round Regular", size: 40))
+                    .foregroundColor(Color("primaryColor"))
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding([.bottom], 2)
+                    .multilineTextAlignment(.center)
+                
+                Text("Enter your e-mail and we'll")
+                    .font(.custom("Proxima Nova Rg Regular", size: 20))
+                    .foregroundColor(Color("lightGray"))
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding([.top], 10)
+    //                .padding([.top], gWidth * -0.06)
+    //                .padding([.bottom], gWidth * 0.03)
+                
+                Text("send you a reset code.")
+                    .font(.custom("Proxima Nova Rg Regular", size: 20))
+                    .foregroundColor(Color("lightGray"))
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding([.bottom], 10)
+                    .padding([.top], 0)
+                
+                Image("forgotPassword")
+                    .resizable()
+                    .frame(width: 200.0, height: 160.0)
+                    .padding([.top], 20)
+                    .padding([.bottom], 20)
+            }
+           
+            TextField("E-mail", text: $email)
+                .frame(width: 320, height: 50)
                 .shadow(radius: 2.0)
-                .padding([.horizontal], 20)
+                .padding([.horizontal], 10)
+//                    .background(.white)
+                .cornerRadius(15)
+                .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color("textLight"), lineWidth: 0.8)
+                )
+    
             
-            Spacer()
+    
             
-            Button("Send code", action:{
+            Button("**Send**", action:{
                 if(email != ""){
                     sessionManager.databaseManager.resetPassword(email: email)
                     sessionManager.showConfirmPassResetView(email: email)
@@ -33,12 +69,31 @@ struct ConfirmEmailView: View {
                     //MARK: Front end: display error "Email can't be empty"
                 }
             })
+            .padding([.horizontal], 150)
+            .padding([.vertical],15)
+            .foregroundColor(Color.white)
+            .background(Color("primaryColor"))
+            .cornerRadius(14)
+            .padding([.top], 10)
+            
+            
+            
             
             Spacer()
-            
-            Button("Cancel", action:{
+            Divider()
+            Button("Back to Login", action:{
                 sessionManager.showLogin()
             })
+            .padding([.top], 5)
         }
+        .padding([.top], 40)
+        .padding()
+        .background(Color("backgroundColor"))
+    }
+}
+
+struct ConfirmEmailView_Previews: PreviewProvider {
+    static var previews: some View {
+        ConfirmEmailView()
     }
 }

@@ -34,6 +34,7 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
+            
             Group {
                 Image("CreamLogo")
                     .resizable()
@@ -49,6 +50,7 @@ struct LoginView: View {
                 
                 Spacer()
                     .frame(height: 25)
+                
             }
             
             TextField("Username", text: $login)
@@ -58,7 +60,6 @@ struct LoginView: View {
                 .shadow(radius: 2.0)
                 .padding([.horizontal], 20)
             
-    
             
             SecureField("Password", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -69,13 +70,19 @@ struct LoginView: View {
                 .stroke(lineWidth: 1)
                 .foregroundColor(invalidAttempts == 0 ? Color.clear : Color.red))
                 .padding([.horizontal], 20)
-            
-            .modifier(ShakeEffect(animatableData: CGFloat(invalidAttempts)))
+                .modifier(ShakeEffect(animatableData: CGFloat(invalidAttempts)))
             
             // end animation
             
-        
-            Spacer()
+            Button("Forgot password", action:{
+                sessionManager.databaseManager.resetPassword(email: "fsbattaglia7@gmail.com")
+                sessionManager.showConfirmEmailView()
+                })
+            .padding([.leading], 219)
+            .padding([.top], 8)
+            .padding([.bottom], 20)
+            
+//            Spacer()
                 .frame(height: 25)
            
             Button(action:
@@ -90,11 +97,13 @@ struct LoginView: View {
             }, label: {
                 Text("Login")
                     .padding()
+                    .padding([.horizontal], 38)
                     .foregroundColor(.white)
                     .padding(.horizontal, 100)
                     .background(CustomColor.primarycolor)
                     .cornerRadius(20)
             })
+            .padding([.top], 4)
             
             
             /*Button("Login", action: {
@@ -109,17 +118,19 @@ struct LoginView: View {
                 .cornerRadius(20)*/
                 
             
-            Spacer()
+            
+            Divider()
+                .padding([.top], 210)
+                .padding([.bottom], 20)
+            
+    
+                
             Button("Don't have an account? Sign up", action:{
                 
                 sessionManager.showSignUp()
                 })
-            
             Spacer()
-            Button("Forgot password", action:{
-                sessionManager.databaseManager.resetPassword(email: "fsbattaglia7@gmail.com")
-                sessionManager.showConfirmEmailView()
-                })
+            
                     
         } .background(CustomColor.backcolor.edgesIgnoringSafeArea(.all))
     }
