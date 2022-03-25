@@ -121,6 +121,12 @@ struct NotificationView: View {
                             Text("No Type Listed")
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                        case .runnerended:
+                            Text("This is a runnerended type")
+                        case .runevent:
+                            Text("This is a generic runevent type")
+                        case .other:
+                            Text("This is a catch all notification type")
                         }
                         
                         Text("User: \(notification.senderId)")

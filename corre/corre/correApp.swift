@@ -92,8 +92,8 @@ struct correApp: App {
             case .trackContacts:
                 TrackContactsView()
                     .environmentObject(sessionManager)
-            case .messaging:
-                MessagesView()
+            case .messaging(let id):
+                MessagesView(userId: id)
                     .environmentObject(sessionManager)
             case .notification:
                 NotificationView()
