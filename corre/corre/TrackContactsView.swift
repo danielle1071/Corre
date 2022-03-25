@@ -31,7 +31,7 @@ struct TrackContactsView: View {
         VStack {
             HStack{
                 Button(action: {
-                    sessionManager.showEmergencyContact()
+                    sessionManager.showSession()
                 }, label: {
                 Image(systemName: "arrow.left")
                     .renderingMode(.original)
