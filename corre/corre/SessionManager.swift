@@ -25,7 +25,7 @@ enum AuthState {
     case trackContacts
     case trackRunner(userTrackingID: String)
     case nav(user: AuthUser)
-    case messaging
+    case messaging(userId: String)
     case notification
     case friendView
     case preRun
@@ -281,7 +281,11 @@ final class SessionManger: ObservableObject {
         }
     }
     func showMessage() {
-        authState = .messaging
+        if databaseManager.currentUser == nil {
+            getCurrentAuthUser()
+        }
+        let userId = databaseManager.currentUser!.id
+        authState = .messaging(userId: userId)
     }
     
     // MARK: showEmergencyContact
