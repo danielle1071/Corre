@@ -11,8 +11,8 @@ struct PreRunningView: View {
     
     
     @EnvironmentObject var sessionManager: SessionManger
+    var DEBUG = true
 
-    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")

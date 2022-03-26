@@ -36,6 +36,8 @@ class DatabaseManager: ObservableObject {
     
     var updateEmail = ""
     
+    var DEBUG = true
+    
     func getUserProfile (user: AuthUser) async {
 
         
@@ -184,26 +186,6 @@ class DatabaseManager: ObservableObject {
             }
         }
     }
-    
-    func setRunStatus(status: RunningStatus) {
-        if currentUser == nil {
-            print("Error --- can't update running status, currentUser is empty")
-            return
-        } else {
-            var user = currentUser
-            user?.runningStatus = status
-            Amplify.DataStore.save(user!) { result in
-                switch result {
-                case .success(_):
-                    print("Updated User Record")
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    
     
     func createUserRecord(user: AuthUser) {
         
@@ -474,13 +456,85 @@ class DatabaseManager: ObservableObject {
                 }
             }
         }
-        
     }
     
     func checkIfRunning(userID: String) -> Bool {
         return (getUserProfile(userID: userID)?.runningStatus != RunningStatus.notrunning) && (getUserProfile(userID: userID)?.runningStatus != nil)
     }
     
+    
+    func setRunStatus(status: RunningStatus) {
+        if currentUser == nil {
+            print("Error --- can't update running status, currentUser is empty")
+            return
+        } else {
+            var user = currentUser
+            user?.runningStatus = status
+            Amplify.DataStore.save(user!) { result in
+                switch result {
+                case .success(_):
+                    print("Updated User Record")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func startRunNotification(username: String) {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        }
+        
+        let receiver = getUserProfile(username: username)
+        
+        if (receiver != nil) {
+            let notification = Notification(
+                // senderId: self.currentUser!.id,
+                senderId: self.currentUser!.username,
+                receiverId: receiver!.id,
+                type: NotificationType.runnerstarted)
+            
+            if (DEBUG) { print("startRunNotification -> \(receiver)")}
+            
+            createNotificationRecord(notification: notification)
+        }
+    }
+    
+    func endRunNotification(username: String) {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        }
+        
+        let receiver = getUserProfile(username: username)
+        
+        if (receiver != nil) {
+            let notification = Notification(
+                senderId: self.currentUser!.username,
+                receiverId: receiver!.id,
+                type: NotificationType.runnerended)
+            
+            if (DEBUG) { print("endRunNotification -> \(receiver)")}
+            
+            createNotificationRecord(notification: notification)
+        }
+    }
 
     func friendRequest(username: String) {
         if self.currentUser == nil {
