@@ -338,8 +338,16 @@
 		4C0E53A32770FE6F001BEA58 /* corre */ = {
 			isa = PBXGroup;
 			children = (
+				
+				
+				
+				35F5636527EA7D380044DD7B /* ConfirmEmailView.swift */,
+				
+				
 				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
+				D9BE965327B2E60C00ED177A /* DataStore.swift */,
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
+				4AB6137327B1DEDE0018F678 /* EmergContactView.swift */,
 				4CB74FCD27CD6DFD004476B7 /* EmergencyContactRow.swift */,
 				4A2FA86027B337DF00B55D53 /* Info.plist */,
 				4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */,
@@ -360,7 +368,7 @@
 				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
 				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
 				D94A595827C4540D001CA61C /* Error1View.swift */,
-				4AB6137327B1DEDE0018F678 /* EmergContactView.swift */,
+				F213211B27EA672A00ECBC64 /* FriendsRow.swift */,
 				D9BE965127AF4B8A00ED177A /* FriendView.swift */,
 				D9BE965327B2E60C00ED177A /* DataStore.swift */,
 				4C0E53A62770FE6F001BEA58 /* ContentView.swift */,
@@ -376,8 +384,15 @@
 				4CEEB63027CADF3100391A9E /* NotificationView.swift */,
 				4CB74FCB27CD6B4A004476B7 /* PreRunningView.swift */,
 				35F5636327EA5AF30044DD7B /* ResetPasswordView.swift */,
-				35F5636527EA7D380044DD7B /* ConfirmEmailView.swift */,
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
+				4AB6136F27B1DE4E0018F678 /* RunningView.swift */,
+				4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */,
+				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
+				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
+				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
+				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
+				4C99015A27BC071C00FE5D2B /* TrackerManager.swift */,
+				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
 				DAD8F61F27CFEFF800E63D67 /* UINotificationView.swift */,
 				F213211B27EA672A00ECBC64 /* FriendsRow.swift */,
 				35736C1C27EE8CD600FC4089 /* MessageFriendView.swift */,
@@ -398,6 +413,8 @@
 			children = (
 				EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */,
 				65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */,
+				4C792CCB2793140D00FDCF6E /* awsconfiguration.json */,
+				4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */,
 			);
 			name = AmplifyConfig;
 			sourceTree = "<group>";
@@ -1026,6 +1043,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"correWatch WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "correWatch WatchKit Extension/Info.plist";
@@ -1056,6 +1074,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"correWatch WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "correWatch WatchKit Extension/Info.plist";
@@ -1086,6 +1105,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchTests;
@@ -1106,6 +1126,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchTests;
@@ -1124,6 +1145,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchUITests;
@@ -1142,6 +1164,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchUITests;

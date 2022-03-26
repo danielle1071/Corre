@@ -11,6 +11,8 @@ struct NotificationView: View {
     
     @EnvironmentObject var sessionManager: SessionManger
     
+    var DEBUG = true
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -75,6 +77,8 @@ struct NotificationView: View {
     }
     
     struct NotificationRow: View {
+        
+        var DEBUG = true
 
         var notification: Notification
         @EnvironmentObject var sessionManager: SessionManger
@@ -89,7 +93,7 @@ struct NotificationView: View {
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         case .emergencycontactrequest:
-                            Text("Emergency Contact Reqeust")
+                            Text("Emergency Contact Request")
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         case .message:
@@ -97,9 +101,22 @@ struct NotificationView: View {
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         case .runnerstarted:
-                            Text("Run Started By Sender")
+                            Text("Run Event Started")
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                        case .runnerended:
+                            Text("Run Event Ended")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        case .runevent:
+                            Text("This is a generic runevent type")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        case .other:
+                            Text("This is a catch all notification type")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
                         case .none:
                             Text("No Type Listed")
                                 .fontWeight(.bold)
@@ -112,22 +129,40 @@ struct NotificationView: View {
                             Text("This is a catch all notification type")
                         }
                         
-                        Text("Sender: \(notification.senderId)")
-                            .font(.custom("Proxima Nova Rg Regular", size: 12))
+                        Text("User: \(notification.senderId)")
+                            .font(.custom("Proxima Nova Rg Regular", size: 16))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     
+                if (notification.type == .runnerstarted) {
+                    Button("Remove", action: {
+                        if (DEBUG) { print("NotificationView -> .runnerstarted -> Remove \(notification)") }
+                        
+                        sessionManager.databaseManager.deleteNotificationRecord(notification: notification)
+                    })
+                }
                 
-                    if notification.type == .friendrequest || notification.type == .emergencycontactrequest {
+                if (notification.type == .runnerended) {
+                    Button("Remove", action: {
+                        if (DEBUG) { print("NotificationView -> .runnerend -> Remove \(notification)") }
+                        
+                        sessionManager.databaseManager.deleteNotificationRecord(notification: notification)
+                    })
+                }
                     
-                        Button("Accept", action: {
-                            print("Accept")
-                            sessionManager.databaseManager.acceptedFriendRequest(notification: notification, userId: notification.senderId)
-                        })
-                        Button("Decline", action: {
-                            print("Decline")
-                        })
-                    }
+                if notification.type == .friendrequest || notification.type == .emergencycontactrequest {
+                    
+                    
+                    Button("Accept", action: {
+                        print("Accept")
+                        sessionManager.databaseManager.acceptedFriendRequest(notification: notification, userId: notification.senderId)
+                    })
+                        
+                    Button("Decline", action: {
+                        print("Decline")
+                    })
+                    
+                }
             }
         }
 }
