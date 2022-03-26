@@ -1001,10 +1001,16 @@ class DatabaseManager: ObservableObject {
                 return
             }
         }
-        let contactInfo = "[{\"firstName\": \"\(firstName)\", \"lastName\": \"\(lastName)\", \"phoneNumber\": \"\(phoneNumber)\"}]"
         
-        let notification = Notification(senderId: currentUser!.id, receiverId: user.id,body: contactInfo, type: NotificationType.emergencycontactrequest)
-        self.createNotificationRecord(notification: notification)
+        let requestExist = checkEmergencyRequest(id: user.id)
+        if !requestExist {
+            let contactInfo = "[{\"firstName\": \"\(firstName)\", \"lastName\": \"\(lastName)\", \"phoneNumber\": \"\(phoneNumber)\"}]"
+            
+            let notification = Notification(senderId: currentUser!.id, receiverId: user.id,body: contactInfo, type: NotificationType.emergencycontactrequest)
+            self.createNotificationRecord(notification: notification)
+        } else {
+            print("ERROR -- request already exists!")
+        }
     }
     
     func acceptEmergencyContactRequest(notification: Notification) {
@@ -1070,6 +1076,18 @@ class DatabaseManager: ObservableObject {
         deleteNotificationRecord(notification: notification)
     }
     
-    
+    func checkEmergencyRequest(id: String) -> Bool {
+        let keys = Notification.keys
+        var retVal = false
+        Amplify.DataStore.query(Notification.self, where: keys.senderId == currentUser!.id && keys.receiverId == id && keys.type == NotificationType.emergencycontactrequest) { result in
+            switch(result) {
+            case .success(let item):
+                retVal = item.count > 0
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        return retVal
+    }
 
 }
