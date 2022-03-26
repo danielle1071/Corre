@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B1B62079EF12C81BD39060D /* Message+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FC320847CC11E5CC09428 /* Message+Schema.swift */; };
 		2FED12DD95715F6AA9174C11 /* Run+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2971D63A5BBF77E2136689 /* Run+Schema.swift */; };
+		35736C1D27EE8CD600FC4089 /* MessageFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35736C1C27EE8CD600FC4089 /* MessageFriendView.swift */; };
 		35C1A99027C9A6CE0032FD00 /* Message+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A98F27C9A6CE0032FD00 /* Message+Extensions.swift */; };
 		35C1A99227C9A7130032FD00 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99127C9A7130032FD00 /* MessageManager.swift */; };
 		35C1A99427C9A73E0032FD00 /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1A99327C9A73E0032FD00 /* MessageRow.swift */; };
@@ -159,6 +160,7 @@
 		0CD0D90BC7F5625BEA15C4CB /* User+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "User+Schema.swift"; path = "amplify/generated/models/User+Schema.swift"; sourceTree = "<group>"; };
 		1E0BAF37876727B72DDD7B54 /* Run.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Run.swift; path = amplify/generated/models/Run.swift; sourceTree = "<group>"; };
 		33A46E3CE696CF2816B06B2A /* EmergencyContact+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "EmergencyContact+Schema.swift"; path = "amplify/generated/models/EmergencyContact+Schema.swift"; sourceTree = "<group>"; };
+		35736C1C27EE8CD600FC4089 /* MessageFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFriendView.swift; sourceTree = "<group>"; };
 		35C1A98F27C9A6CE0032FD00 /* Message+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+Extensions.swift"; sourceTree = "<group>"; };
 		35C1A99127C9A7130032FD00 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		35C1A99327C9A73E0032FD00 /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
@@ -342,7 +344,6 @@
 				4A2FA86027B337DF00B55D53 /* Info.plist */,
 				4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */,
 				4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */,
-				4A4C1F4727CEE48900D95264 /* NavBarView.swift */,
 				4AB6136F27B1DE4E0018F678 /* RunningView.swift */,
 				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
 				4A19986627E16780001822E5 /* LaunchView.swift */,
@@ -379,6 +380,7 @@
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
 				DAD8F61F27CFEFF800E63D67 /* UINotificationView.swift */,
 				F213211B27EA672A00ECBC64 /* FriendsRow.swift */,
+				35736C1C27EE8CD600FC4089 /* MessageFriendView.swift */,
 			);
 			path = corre;
 			sourceTree = "<group>";
@@ -396,7 +398,6 @@
 			children = (
 				EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */,
 				65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */,
-				4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */,
 			);
 			name = AmplifyConfig;
 			sourceTree = "<group>";
@@ -698,6 +699,7 @@
 				35C1A99027C9A6CE0032FD00 /* Message+Extensions.swift in Sources */,
 				4CEEB63127CADF3100391A9E /* NotificationView.swift in Sources */,
 				D9BE965427B2E60C00ED177A /* DataStore.swift in Sources */,
+				35736C1D27EE8CD600FC4089 /* MessageFriendView.swift in Sources */,
 				4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */,
 				4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */,
 				A3348095665A8CC53DC55054 /* AmplifyModels.swift in Sources */,

@@ -13,14 +13,17 @@ struct MessagesView: View {
 
     @State var userId: String
     @State var text = String()
+    @State var friendId: String
     @ObservedObject var messageManager = MessageManager()
     @EnvironmentObject var sessionManager: SessionManger
     //@ObservedObject var sessionManager = SessionManger()
     //same ad MessageRow, if sessionManager is not an Environment Object, it will fail to send the username in the message
     
-    init(userId: String) {
+    init(userId: String, friendId: String) {
         self.userId = userId
+        self.friendId = friendId
         messageManager.setCurrentUserId(id: self.userId)
+        messageManager.setCurrentFriendId(id: self.friendId)
         messageManager.getMessages()
         messageManager.observeMessages()
         
@@ -82,7 +85,7 @@ struct MessagesView: View {
         print(text)
 
         let message = Message(
-            senderId: sessionManager.databaseManager.currentUser?.id ?? "000", receiverId: sessionManager.databaseManager.currentUser?.id ?? "000", body: text, creationDate: Int(Date().timeIntervalSince1970)
+            senderId: sessionManager.databaseManager.currentUser?.id ?? "000", receiverId: friendId, body: text, creationDate: Int(Date().timeIntervalSince1970)
         )
         messageManager.send(message)
 
