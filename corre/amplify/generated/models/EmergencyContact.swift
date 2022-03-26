@@ -10,8 +10,8 @@ public struct EmergencyContact: Model {
   public var phoneNumber: String
   public var appUser: Bool?
   public var emergencyContactUserId: String?
-  public var userID: String
   public var emergencyContactAppUsername: String?
+  public var userID: String
   public var createdAt: Temporal.DateTime?
   public var updatedAt: Temporal.DateTime?
   
@@ -22,8 +22,8 @@ public struct EmergencyContact: Model {
       phoneNumber: String,
       appUser: Bool? = nil,
       emergencyContactUserId: String? = nil,
-      userID: String,
-      emergencyContactAppUsername: String? = nil) {
+      emergencyContactAppUsername: String? = nil,
+      userID: String) {
     self.init(id: id,
       firstName: firstName,
       lastName: lastName,
@@ -31,8 +31,8 @@ public struct EmergencyContact: Model {
       phoneNumber: phoneNumber,
       appUser: appUser,
       emergencyContactUserId: emergencyContactUserId,
-      userID: userID,
       emergencyContactAppUsername: emergencyContactAppUsername,
+      userID: userID,
       createdAt: nil,
       updatedAt: nil)
   }
@@ -43,8 +43,8 @@ public struct EmergencyContact: Model {
       phoneNumber: String,
       appUser: Bool? = nil,
       emergencyContactUserId: String? = nil,
-      userID: String,
       emergencyContactAppUsername: String? = nil,
+      userID: String,
       createdAt: Temporal.DateTime? = nil,
       updatedAt: Temporal.DateTime? = nil) {
       self.id = id
@@ -54,8 +54,8 @@ public struct EmergencyContact: Model {
       self.phoneNumber = phoneNumber
       self.appUser = appUser
       self.emergencyContactUserId = emergencyContactUserId
-      self.userID = userID
       self.emergencyContactAppUsername = emergencyContactAppUsername
+      self.userID = userID
       self.createdAt = createdAt
       self.updatedAt = updatedAt
   }
