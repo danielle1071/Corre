@@ -106,7 +106,7 @@ struct FriendView: View {
     func addFriend(){
         if !sessionManager.databaseManager.checkFriendRequestExist(username: newFriend.lowercased()) {
             sessionManager.databaseManager.friendRequest(username: newFriend.lowercased())
-        } else { print("Request already exists") }
+        } else {  print("Request already exists") }
         newFriend = ""
         friendStore.friends.append(Friend(id: String(friendStore.friends.count + 1), friendItem: newFriend))
     }
