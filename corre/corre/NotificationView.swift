@@ -166,6 +166,7 @@ struct NotificationView: View {
                         
                     Button("Decline", action: {
                         print("Decline")
+                        sessionManager.databaseManager.deleteNotificationRecord(notification: notification)
                     })
                     
                 }

@@ -239,6 +239,7 @@ final class SessionManger: ObservableObject {
     func showSession() {
         if let user = Amplify.Auth.getCurrentUser() {
             self.showNavBar()
+            databaseManager.getEmergencyContacts()
 //            authState = .session(user: user)
         } else {
             authState = .landing

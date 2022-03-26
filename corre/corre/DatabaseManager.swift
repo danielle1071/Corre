@@ -57,7 +57,7 @@ class DatabaseManager: ObservableObject {
                         print("This is the item: \(item)")
                         self.currentUser = item
                     }
-                    if self.currentUser!.email == nil || self.currentUser!.email! == "donotemail@error.com" {
+                    if self.currentUser != nil && (self.currentUser!.email == nil || self.currentUser!.email! == "donotemail@error.com") {
                         fixProfileEmail()
                     }
                 }
@@ -387,7 +387,7 @@ class DatabaseManager: ObservableObject {
                         print("THIS IS THE EMERGENCY CONTACT WHEN USER == NIL :  \(contact)")
                         createEmergencyContactRecord(contact: contact)
                     } else {
-                        let contact = EmergencyContact (firstName: firstName, lastName: lastName, email: user?.email ?? "ERROR@ERROR.com".lowercased(), phoneNumber: phoneNumber, appUser: true, emergencyContactUserId: user?.id ?? "0000", userID: currentUser?.id ?? "0000", emergencyContactAppUsername: user?.username ?? "ERROR")
+                        let contact = EmergencyContact (firstName: firstName, lastName: lastName, email: user?.email ?? "ERROR@ERROR.com".lowercased(), phoneNumber: phoneNumber, appUser: true, emergencyContactUserId: user?.id ?? "0000", emergencyContactAppUsername: user?.username ?? "ERROR", userID: currentUser?.id ?? "0000")
                         print("THIS IS THE EMERGENCY CONTACT WHEN USER != NIL : \(contact)")
                         createEmergencyContactRecord(contact: contact)
                     }
@@ -1009,7 +1009,12 @@ class DatabaseManager: ObservableObject {
     
     func acceptEmergencyContactRequest(notification: Notification) {
         //MARK: USE THIS LATER -LM
-        if notification.body == nil { return }
+        if notification.body == nil {
+            print("EXITING EARLY")
+            return
+        } else {
+            print("THIS IS THE NOTIFICATION!!!")
+        }
         let contactInfo = notification.body!
         let data = contactInfo.data(using: .utf8)!
         
@@ -1023,6 +1028,10 @@ class DatabaseManager: ObservableObject {
                 print("HERE !@#$%")
                print(jsonArray) // use the json here
                 for items in jsonArray {
+                    if let phoneNumberPrint = items["phoneNumber"] as? String {
+                        print("Here is phoneNumber: \(phoneNumberPrint)")
+                        phoneNumberEM = phoneNumberPrint
+                    }
                     if let firstNamePrint = items["firstName"] as? String {
                         print("Here is firstName: \(firstNamePrint)")
                         firstNameEM = firstNamePrint
@@ -1031,12 +1040,11 @@ class DatabaseManager: ObservableObject {
                         print("Here is lastName: \(lastNamePrint)")
                         lastNameEM = lastNamePrint
                     }
-                    if let phoneNumberPrint = ["phoneNumber"] as? String {
-                        print("Here is phoneNumber: \(phoneNumberPrint)")
-                        phoneNumberEM = phoneNumberPrint
-                    }
+                    
                     print("This is the item \(items)")
                 }
+                
+                
             } else {
                 print("bad json")
             }
@@ -1046,14 +1054,16 @@ class DatabaseManager: ObservableObject {
         }
         let user = self.getUserProfile(userID: notification.senderId)
         if user != nil && currentUser != nil {
-            let emergencyContact = EmergencyContact(firstName: firstNameEM, lastName: lastNameEM, email: user!.email!, phoneNumber: phoneNumberEM, appUser: true, emergencyContactUserId: notification.receiverId, userID: notification.senderId, emergencyContactAppUsername: currentUser!.username)
-            print("Sending \(emergencyContacts) to the createEmergencyConactRecord")
-            createEmergencyContactRecord(contact: emergencyContact)
-//            deleteNotificationRecord(notification: notification)
+            let contact = EmergencyContact(firstName: firstNameEM, lastName: lastNameEM, email: user!.email!, phoneNumber: phoneNumberEM, appUser: true, emergencyContactUserId: currentUser!.id, emergencyContactAppUsername: currentUser!.username, userID: user!.id)
+            print("Sending \(contact) to the createEmergencyConactRecord")
+            self.createEmergencyContactRecord(contact: contact)
+            deleteNotificationRecord(notification: notification)
             
         } else {
             print("Either user or currentUser === nil --> sender: \(user) | ---> currentUser: \(currentUser)")
+            return
         }
+        
     }
     
     func declineEmergencyContactRequest(notification: Notification) {
