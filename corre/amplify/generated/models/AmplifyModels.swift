@@ -12,7 +12,7 @@ final public class AmplifyModels: AmplifyModelRegistration {
     ModelRegistry.register(modelType: Message.self)
     ModelRegistry.register(modelType: Device.self)
     ModelRegistry.register(modelType: User.self)
-    ModelRegistry.register(modelType: EmergencyContact.self)
     ModelRegistry.register(modelType: Run.self)
+    ModelRegistry.register(modelType: EmergencyContact.self)
   }
 }

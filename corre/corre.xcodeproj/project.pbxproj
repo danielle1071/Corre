@@ -342,12 +342,7 @@
 		4C0E53A32770FE6F001BEA58 /* corre */ = {
 			isa = PBXGroup;
 			children = (
-				
-				
-				
 				35F5636527EA7D380044DD7B /* ConfirmEmailView.swift */,
-				
-				
 				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
 				D9BE965327B2E60C00ED177A /* DataStore.swift */,
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,

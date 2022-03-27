@@ -18,6 +18,6 @@ struct EmergencyContactRow: View {
 
 struct EmergencyContactRow_Previews: PreviewProvider {
     static var previews: some View {
-        EmergencyContactRow(emergencyContact: EmergencyContact(id: "000", firstName: "Database", lastName: "Guy", email: "ERROR@ERROR.COM", phoneNumber: "+10000000000", appUser: true, emergencyContactUserId: "002", userID: "001", emergencyContactAppUsername: "test"))
+        EmergencyContactRow(emergencyContact: EmergencyContact(id: "000", firstName: "Database", lastName: "Guy", email: "ERROR@ERROR.COM", phoneNumber: "+10000000000", appUser: true, emergencyContactUserId: "002", emergencyContactAppUsername: "test", userID: "001"))
     }
 }
