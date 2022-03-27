@@ -502,7 +502,7 @@ class DatabaseManager: ObservableObject {
         }
     }
     
-    func startRunNotification(username: String) {
+    func startRunNotification(id: String) {
         if self.currentUser == nil {
             if let user = Amplify.Auth.getCurrentUser() {
                 Task() {
@@ -515,12 +515,16 @@ class DatabaseManager: ObservableObject {
             }
         }
         
-        let receiver = getUserProfile(username: username)
+        //MARK: Why don't we utilize the userID - this would allow
+        //MARK: For a fast query instead of a slow scan?
+        
+        let receiver = getUserProfile(userID: id)
         
         if (receiver != nil) {
             let notification = Notification(
-                // senderId: self.currentUser!.id,
-                senderId: self.currentUser!.username,
+                //MARK: This sender ID should be the current user id - not username
+                senderId: self.currentUser!.id,
+//                senderId: self.currentUser!.username,
                 receiverId: receiver!.id,
                 type: NotificationType.runnerstarted)
             
@@ -530,7 +534,8 @@ class DatabaseManager: ObservableObject {
         }
     }
     
-    func endRunNotification(username: String) {
+    //MARK: See above comments made about startRunNotification function 
+    func endRunNotification(id: String) {
         if self.currentUser == nil {
             if let user = Amplify.Auth.getCurrentUser() {
                 Task() {
@@ -543,11 +548,11 @@ class DatabaseManager: ObservableObject {
             }
         }
         
-        let receiver = getUserProfile(username: username)
+        let receiver = getUserProfile(userID: id)
         
         if (receiver != nil) {
             let notification = Notification(
-                senderId: self.currentUser!.username,
+                senderId: self.currentUser!.id,
                 receiverId: receiver!.id,
                 type: NotificationType.runnerended)
             
