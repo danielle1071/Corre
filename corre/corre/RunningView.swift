@@ -13,8 +13,14 @@ import AmplifyMapLibreUI
 
 
 struct RunningView: View {
-    // For timer
-    func startTimer(){
+    // map
+    @EnvironmentObject var sessionManager: SessionManger
+    @StateObject var locationService = LocationManager()
+    @State var tokens: Set<AnyCancellable> = .init()
+    @State var mapState = AMLMapViewState(zoomLevel: 17)
+    @State var phoneNumber: String
+    
+    func startTimer() {
         timerIsPaused = false
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ tempTimer in
           if self.seconds == 59 {
@@ -29,37 +35,37 @@ struct RunningView: View {
             self.seconds = self.seconds + 1
           }
         }
-      }
-    func stopTimer(){
+    }
+    
+    func stopTimer() {
        timerIsPaused = true
        timer?.invalidate()
        timer = nil
      }
      
-     func restartTimer(){
+     func restartTimer() {
        hours = 0
        minutes = 0
        seconds = 0
      }
+    
+    // timer
     @State var hours: Int = 0
-      @State var minutes: Int = 0
-      @State var seconds: Int = 0
-      @State var timerIsPaused: Bool = true
+    @State var minutes: Int = 0
+    @State var seconds: Int = 0
+    @State var timerIsPaused: Bool = true
     @State var timer: Timer? = nil
+    
+    // sliding window
     @State private var showingPopover = false
     @State private var showingPopover_1 = false
     @State private var timeRemaining = 100
     let timer_1 = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    //
-//
     
-    @EnvironmentObject var sessionManager: SessionManger
-    @StateObject var locationService = LocationManager()
-    @State var tokens: Set<AnyCancellable> = .init()
-    @State var mapState = AMLMapViewState(zoomLevel: 17)
-    @State var phoneNumber: String
     
+    // run stats
     var DEBUG = true
+    @State var userSpeed: Double = 0.00
     
     struct CusColor {
         static let backcolor =
@@ -69,10 +75,6 @@ struct RunningView: View {
 
         static let lblue = Color("lightBlue")
     }
-    
-    // MARK: Phone Number
-    // example phone number. Refer to SOS button
-    //    var phoneNumber = "718-555-5555"
     
     @GestureState var highlight = false
     var longPress: some Gesture {
@@ -292,8 +294,11 @@ struct RunningView: View {
 
     func getCurrentUserLocation() {
         
+        var currSpeed = 0.00
+        var currDistance = 0.00
+        
         if sessionManager.databaseManager.currentUser == nil {
-            print("getCurrentUserLocation -> userName: nil")
+            print("ERROR: getCurrentUserLocation -> userName: nil")
             
             // MARK: need to transition to error page not session page
             sessionManager.showSession()
@@ -304,13 +309,125 @@ struct RunningView: View {
         locationService.coordinatesPublisher
             .receive(on: DispatchQueue.main)
             .sink { coordinates in
-                print("getCurrentUserLocation - user's Coordinates: ", coordinates)
+                print("RunningView -> getCurrentUserLocation -> user's Coordinates: ", coordinates)
                 self.mapState.center = coordinates
-                print("getCurrentUserLocation - after the map!")
+                
+                if (DEBUG) {
+                    // print("RunningView -> getCurrentUserLocation -> locationService.userSpeed: \(locationService.userSpeed!)")
+                    // print("RunningView -> getCurrentUserLocation -> totalSpeedSum: \(totalSpeed)")
+                    // calculateDistance(hours: 0, minutes: 0, seconds: 1, speed: 2.75)
+                }
+                
+                print("RunningView -> getCurrentUserLocation -> timer: \(hours)hr \(minutes)min \(seconds)sec")
+                
+                currSpeed = locationService.userSpeed!
+                
+                isCurrSpeedNormal(
+                    hours: hours,
+                    minutes: minutes,
+                    seconds: seconds,
+                    speed: currSpeed)
+                
+                
+                
+                
             }
             .store(in: &tokens)
         print("After the .store")
         
+        
+    }
+    
+    func isCurrSpeedNormal(hours: Int,
+                       minutes: Int,
+                       seconds: Int,
+                       speed: Double) -> Bool {
+        
+        // check if the user is not idle
+        if (speed > 0.00 && speed < 7.88) {
+            userSpeed = speed
+            return true
+        }
+        
+        // user is moving too quickly!
+        else if (speed >= 7.88) {
+            
+            // MARK: trigger sliding window here!
+            togglePopover()
+            
+            // MARK: send RUNEVENT notification here
+            
+            // MARK: set email notification here!
+            
+            return false
+        }
+        
+        // user has been idle for too long?
+        else {
+            // if the user was running prior to idle, reset totalSpeed to zero
+            if (userSpeed > 0.00) { userSpeed = 0.00 }
+            
+            userSpeed += locationService.userSpeed!
+            
+            // if the user has accumulated a userSpeed of -20, this means that the user
+            // has been idle for 10mins or (600sec divided by 30sec)
+            if (DEBUG ? userSpeed == -2.00 : userSpeed == -20.00) {
+                // revert it back to zero to check on user again after an additional
+                // 10 mins of idle
+                userSpeed = 0.00
+                
+                // MARK: trigger sliding window here!
+                togglePopover()
+                
+                // MARK: send RUNEVENT notification here
+                
+                // MARK: set email notification here!
+                
+                
+                return false
+            }
+            
+            // if the user's idle is less than 10min
+            return true
+        }
+    }
+    
+    func togglePopover() {
+        if (DEBUG) { print("RunningView -> togglePopover triggered!") }
+        
+        if (showingPopover_1 == false) {
+            showingPopover_1 = true
+        }
+        
+        
+        else {
+            showingPopover_1 = false
+        }
+    }
+    
+    func calculateDistance(hours: Int,
+                           minutes: Int,
+                           seconds: Int,
+                           speed: Double) -> Double {
+        
+        var h = Double(hours)
+        var m = Double(minutes)
+        var s = Double(seconds)
+        var distance: Double
+        
+        if (DEBUG) { print("RunningView -> calculateDistance -> timerToDouble: \(h)hr \(m)min \(s)sec ") }
+        
+        // if either hr or min is not 0, then convert them to seconds
+        if (h != 0.00) { m += (h * 60.00) }
+        if (m != 0.00) { s += (m * 60.00) }
+        
+        if (DEBUG) { print("RunningView -> calculateDistance -> timeCombined: \(s)sec ") }
+        
+        distance = speed * s
+        
+        if (DEBUG) { print("RunningView -> calculateDistance -> distance: \(distance)m ") }
+        
+        return distance
     }
     
     func startRunNotif() {
