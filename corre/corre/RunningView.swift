@@ -322,11 +322,8 @@ struct RunningView: View {
                 
                 currSpeed = locationService.userSpeed!
                 
-                isCurrSpeedNormal(
-                    hours: hours,
-                    minutes: minutes,
-                    seconds: seconds,
-                    speed: currSpeed)
+                // MARK: working progress
+                isCurrSpeedNormal(hours: hours, minutes: minutes, seconds: seconds, speed: currSpeed)
                 
                 
                 
@@ -353,7 +350,7 @@ struct RunningView: View {
         else if (speed >= 7.88) {
             
             // MARK: trigger sliding window here!
-            togglePopover()
+            // togglePopover()
             
             // MARK: send RUNEVENT notification here
             
@@ -377,7 +374,7 @@ struct RunningView: View {
                 userSpeed = 0.00
                 
                 // MARK: trigger sliding window here!
-                togglePopover()
+                // togglePopover()
                 
                 // MARK: send RUNEVENT notification here
                 
