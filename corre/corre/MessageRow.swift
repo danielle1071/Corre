@@ -56,16 +56,16 @@ struct MessageRow: View {
                     .foregroundColor(.blue)
 
                 VStack(alignment: .leading) {
-                    Text("From: \((sessionManager.databaseManager.getUserProfile(userID: message.senderId))?.username ?? "ERROR")")
+                    Text("\((sessionManager.databaseManager.getUserProfile(userID: message.senderId))?.username ?? "ERROR")")
                         .font(Font.custom("Proxima Nova Rg Regular", size: 20))
                         .foregroundColor(Color("primaryColor"))
                     //MARK: Time displays work, we just have to format it since it shows seconds since epoch
                     //Text("Time: \(message.creationDate)")
                         //.font(Font.custom("Proxima Nova Rg Regular", size: 20))
                         //.foregroundColor(Color("primaryColor"))
-                    Text("To: \((sessionManager.databaseManager.getUserProfile(userID: message.receiverId))?.username ?? "ERROR")")
-                        .font(Font.custom("Proxima Nova Rg Regular", size: 20))
-                        .foregroundColor(Color("primaryColor"))
+                    //Text("To: \((sessionManager.databaseManager.getUserProfile(userID: message.receiverId))?.username ?? "ERROR")")
+                      //  .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                      //  .foregroundColor(Color("primaryColor"))
                     //Text("Current User: \(sessionManager.databaseManager.currentUser?.username ?? "Error: User not found")")
                     //    .font(Font.custom("Proxima Nova Rg Regular", size: 20))
                     //    .foregroundColor(Color("primaryColor"))

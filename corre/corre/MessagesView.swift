@@ -39,7 +39,7 @@ struct MessagesView: View {
     var body: some View {
         VStack {
             HStack{
-            Button("Back", action: sessionManager.showSession)
+            Button("Back", action: sessionManager.showMessageFriendView)
                     .padding()
                     .foregroundColor(Color("primaryColor"))
                     .font(Font.custom("Proxima Nova Rg Regular", size: 18))
