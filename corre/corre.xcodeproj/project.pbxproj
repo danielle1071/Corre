@@ -25,6 +25,7 @@
 		4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137127B1DEC90018F678 /* ProfileView.swift */; };
 		4AB6137427B1DEDE0018F678 /* EmergContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137327B1DEDE0018F678 /* EmergContactView.swift */; };
 		4AFB47AB27E16B4D00F7AF3A /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 4AFB47AA27E16B4D00F7AF3A /* SDWebImageSwiftUI */; };
+		4AFC7D3D27F22656001B5163 /* StoppedRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7D3C27F22656001B5163 /* StoppedRunningView.swift */; };
 		4C0E11F227AE0F1200F239AA /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */; };
 		4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53A42770FE6F001BEA58 /* correApp.swift */; };
 		4C0E53A72770FE6F001BEA58 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53A62770FE6F001BEA58 /* ContentView.swift */; };
@@ -177,6 +178,7 @@
 		4AB6136F27B1DE4E0018F678 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
 		4AB6137127B1DEC90018F678 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4AB6137327B1DEDE0018F678 /* EmergContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactView.swift; sourceTree = "<group>"; };
+		4AFC7D3C27F22656001B5163 /* StoppedRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoppedRunningView.swift; sourceTree = "<group>"; };
 		4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		4C0E53A12770FE6F001BEA58 /* corre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = corre.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C0E53A42770FE6F001BEA58 /* correApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = correApp.swift; sourceTree = "<group>"; };
@@ -342,39 +344,25 @@
 		4C0E53A32770FE6F001BEA58 /* corre */ = {
 			isa = PBXGroup;
 			children = (
-				
-				
-				
+				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
+				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
 				35F5636527EA7D380044DD7B /* ConfirmEmailView.swift */,
-				
-				
 				4C0E11F127AE0F1200F239AA /* DatabaseManager.swift */,
-				D9BE965327B2E60C00ED177A /* DataStore.swift */,
 				4CCF2A8627B59D7800C4E71D /* EditContactView.swift */,
 				4AB6137327B1DEDE0018F678 /* EmergContactView.swift */,
 				4CB74FCD27CD6DFD004476B7 /* EmergencyContactRow.swift */,
 				4A2FA86027B337DF00B55D53 /* Info.plist */,
 				4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */,
 				4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */,
-				4AB6136F27B1DE4E0018F678 /* RunningView.swift */,
-				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
 				4A19986627E16780001822E5 /* LaunchView.swift */,
-				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
-				4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */,
-				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
 				4AB6137127B1DEC90018F678 /* ProfileView.swift */,
-				4C99015A27BC071C00FE5D2B /* TrackerManager.swift */,
-				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
 				DA5154CD27EEBC3F00D820D6 /* FriendProfileView.swift */,
 				DA5154CF27EEBCC000D820D6 /* RunHistoryView.swift */,
-				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
-				4C0E53A42770FE6F001BEA58 /* correApp.swift */,
 				4CA7D06427D5191F006B246C /* EmergencyContactEditView.swift */,
 				4C0E53C927712DBE001BEA58 /* LoginView.swift */,
 				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
 				D9C2B62227AB1AFB0058365E /* LandingView.swift */,
 				D94A595827C4540D001CA61C /* Error1View.swift */,
-				F213211B27EA672A00ECBC64 /* FriendsRow.swift */,
 				D9BE965127AF4B8A00ED177A /* FriendView.swift */,
 				D9BE965327B2E60C00ED177A /* DataStore.swift */,
 				4C0E53A62770FE6F001BEA58 /* ContentView.swift */,
@@ -393,12 +381,12 @@
 				4CCF2A8827B59F0000C4E71D /* RunningMapView.swift */,
 				4AB6136F27B1DE4E0018F678 /* RunningView.swift */,
 				4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */,
-				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
 				4C0E53C727712DAA001BEA58 /* SessionView.swift */,
 				4C0E53C327712D5A001BEA58 /* SignUpView.swift */,
 				F2A1714B27BDB1C900DFA288 /* TrackContactsView.swift */,
 				4C99015A27BC071C00FE5D2B /* TrackerManager.swift */,
 				4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */,
+				4AFC7D3C27F22656001B5163 /* StoppedRunningView.swift */,
 				DAD8F61F27CFEFF800E63D67 /* UINotificationView.swift */,
 				F213211B27EA672A00ECBC64 /* FriendsRow.swift */,
 				35736C1C27EE8CD600FC4089 /* MessageFriendView.swift */,
@@ -419,8 +407,6 @@
 			children = (
 				EA99A460EC3F73EB97FCEB80 /* awsconfiguration.json */,
 				65C92F2E0A356BD0AD91F8A0 /* amplifyconfiguration.json */,
-				4C792CCB2793140D00FDCF6E /* awsconfiguration.json */,
-				4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */,
 			);
 			name = AmplifyConfig;
 			sourceTree = "<group>";
@@ -724,6 +710,7 @@
 				35C1A99027C9A6CE0032FD00 /* Message+Extensions.swift in Sources */,
 				4CEEB63127CADF3100391A9E /* NotificationView.swift in Sources */,
 				D9BE965427B2E60C00ED177A /* DataStore.swift in Sources */,
+				4AFC7D3D27F22656001B5163 /* StoppedRunningView.swift in Sources */,
 				35736C1D27EE8CD600FC4089 /* MessageFriendView.swift in Sources */,
 				4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */,
 				4C0E53A52770FE6F001BEA58 /* correApp.swift in Sources */,

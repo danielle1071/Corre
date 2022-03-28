@@ -122,8 +122,9 @@ struct correApp: App {
             case .confirmEmailView:
                 ConfirmEmailView()
                     .environmentObject(sessionManager)
-
-
+            case .stopppedRunningView:
+                StoppedRunningView()
+                    .environmentObject(sessionManager)
             case .errV:
                 Error1View()
                     .environmentObject(sessionManager)
