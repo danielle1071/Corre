@@ -142,7 +142,8 @@ struct SessionView: View {
                                 // MARK: Messages Button
                                 
                                 Button(action: {
-                                    sessionManager.showMessage()
+                                    //sessionManager.showMessage()
+                                    sessionManager.showMessageFriendView()
                                 }) {
                                     Image("chatBubble")
                                         .resizable()

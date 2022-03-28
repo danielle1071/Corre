@@ -92,14 +92,17 @@ struct correApp: App {
             case .trackContacts:
                 TrackContactsView()
                     .environmentObject(sessionManager)
-            case .messaging(let id):
-                MessagesView(userId: id)
+            case .messaging(let id, let friendId):
+                MessagesView(userId: id, friendId: friendId)
                     .environmentObject(sessionManager)
             case .notification:
                 NotificationView()
                     .environmentObject(sessionManager)
             case .friendView:
                 FriendView()
+                    .environmentObject(sessionManager)
+            case .messageFriendView:
+                MessageFriendView()
                     .environmentObject(sessionManager)
             case .preRun:
                 PreRunningView()
