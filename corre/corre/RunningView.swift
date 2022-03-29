@@ -520,12 +520,6 @@ struct RunningView: View {
             
         }
     }
-    
-    func saverRunLog() {
-        
-    }
-    
-    
 }
 
 struct RunningView_Previews: PreviewProvider {
