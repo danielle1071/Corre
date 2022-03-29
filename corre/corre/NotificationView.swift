@@ -128,8 +128,8 @@ struct NotificationView: View {
                         case .other:
                             Text("This is a catch all notification type")
                         }
-                        
-                        Text("User: \(notification.senderId)")
+                        let user = sessionManager.databaseManager.getUserProfile(userID: notification.senderId)
+                        Text("User: \(user?.username ?? notification.senderId)")
                             .font(.custom("Proxima Nova Rg Regular", size: 16))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
