@@ -13,6 +13,8 @@ import AmplifyMapLibreUI
 
 
 struct RunningView: View {
+    var DEBUG = true
+    
     // map
     @EnvironmentObject var sessionManager: SessionManger
     @StateObject var locationService = LocationManager()
@@ -64,8 +66,11 @@ struct RunningView: View {
     
     
     // run stats
-    var DEBUG = true
-    @State var userSpeed: Double = 0.00
+    @State var userSpeed: Double = 0.00 // super important, this keeps track of the idling of user
+    @State var currentDistance: Double = 0.00
+    @State var prevTime: Double = 0.00
+    @State var totalSpeed: Double = 0.00
+    @State var speedCounter: Int = 0
     
     struct CusColor {
         static let backcolor =
@@ -85,13 +90,22 @@ struct RunningView: View {
                 // informs all emergency contact
                 self.endRunNotif()
                 
-                sessionManager.showNavBar()
-                
-                
                 // stops tracker resources
                 locationService.stopTracking()
                 
+                // calculate for the average speed
+                let doubleSpeedCounter = Double(speedCounter)
+                let avgSpeed = totalSpeed / doubleSpeedCounter
                 
+                if (DEBUG) {
+                    // sessionManager.databaseManager.saveUserRunLog(distance: 99.99, time: "600sec", averageSpeed: 5.75)
+                    print("Long Press Gesture State -> totalSpeed: \(totalSpeed) and speedCounter: \(speedCounter) -> avgSpeed: \(avgSpeed)")
+                    print("Long Press Gesture State -> totalDistance: \(currentDistance) meters")
+                }
+                
+                // save current run log to database
+                sessionManager.databaseManager.saveUserRunLog(distance: currentDistance, time: "\(prevTime)sec", averageSpeed: avgSpeed)
+                sessionManager.showNavBar()
             }
             .updating($highlight) {
                 currentstate, gestureState, transaction in
@@ -138,8 +152,8 @@ struct RunningView: View {
                     Text("Running Statistics")
                                 .font(.headline)
                                 .padding()
-                    Text("Distance: 0")
-                    Text("Current pace: 0")
+                    Text("Distance: \(currentDistance) meters")
+                    Text("Current pace: \(userSpeed) meters/second")
                     Spacer()
                     }
                     
@@ -323,10 +337,47 @@ struct RunningView: View {
                 currSpeed = locationService.userSpeed!
                 
                 // MARK: working progress
-                isCurrSpeedNormal(hours: hours, minutes: minutes, seconds: seconds, speed: currSpeed)
-                
-                
-                
+                if (isCurrSpeedNormal(
+                        hours: hours,
+                        minutes: minutes,
+                        seconds: seconds,
+                        speed: currSpeed)) {
+            
+                    let currTime = combineTimeToSeconds(hours: hours, minutes: minutes, seconds: seconds)
+                    
+                    // avoid adding distance to short idle speeds
+                    if (currSpeed > 0.00) { currentDistance += calculateDistance(s: currTime - prevTime, speed: currSpeed) }
+                    
+                    prevTime = currTime
+                    
+                    if (DEBUG) { print("RunningView -> getCurrentUserLocation -> currSpeed is \(currSpeed)(normal) and currentDistance is \(currentDistance) meters") }
+                    
+                    totalSpeed += currSpeed
+                    speedCounter += 1
+  
+                } else {
+                    // MARK: trigger sliding window here!
+                    togglePopover()
+                    
+                    // MARK: send RUNEVENT notification
+                    sessionManager.databaseManager.getEmergencyContacts()
+                    let contacts = sessionManager.databaseManager.emergencyContacts
+                    
+                    contacts.forEach { contact in contacts
+                        if (DEBUG) {
+                            print("RunningView -> endRunNotif -> Emergency Contact: \(contact.id) and \(String(describing: contact.emergencyContactAppUsername))")
+                        }
+                        
+                        // In the event that the emergency has an account through corre,
+                        // send them a start run notification in the app
+                        if (contact.emergencyContactAppUsername != nil) {
+                            sessionManager.databaseManager.runnerEventNotification(username: contact.emergencyContactAppUsername!)
+                        }
+                    
+                        // MARK: set email notification here!
+                        
+                    }
+                }
                 
             }
             .store(in: &tokens)
@@ -342,25 +393,25 @@ struct RunningView: View {
         
         // check if the user is not idle
         if (speed > 0.00 && speed < 7.88) {
+            print("RunningView -> isCurrentSpeedNormal -> normal")
+            
             userSpeed = speed
             return true
         }
         
         // user is moving too quickly!
         else if (speed >= 7.88) {
+            print("RunningView -> isCurrentSpeedNormal -> too fast!")
             
-            // MARK: trigger sliding window here!
-            // togglePopover()
+            // MARK: you can move runevent here if you want! this is for more specified types of events!
             
-            // MARK: send RUNEVENT notification here
-            
-            // MARK: set email notification here!
             
             return false
         }
         
         // user has been idle for too long?
         else {
+            if (DEBUG) { print("RunningView -> isCurrentSpeedNormal -> idle detected") }
             // if the user was running prior to idle, reset totalSpeed to zero
             if (userSpeed > 0.00) { userSpeed = 0.00 }
             
@@ -368,19 +419,15 @@ struct RunningView: View {
             
             // if the user has accumulated a userSpeed of -20, this means that the user
             // has been idle for 10mins or (600sec divided by 30sec)
-            if (DEBUG ? userSpeed == -2.00 : userSpeed == -20.00) {
+            if (DEBUG ? userSpeed == -10.00 : userSpeed == -20.00) {
+                if (DEBUG) { print("RunningView -> isCurrentSpeedNormal -> idle too long!") }
+                
                 // revert it back to zero to check on user again after an additional
                 // 10 mins of idle
                 userSpeed = 0.00
                 
-                // MARK: trigger sliding window here!
-                // togglePopover()
-                
-                // MARK: send RUNEVENT notification here
-                
-                // MARK: set email notification here!
-                
-                
+                // MARK: you can move runevent here if you want! this is for more specified types of events!
+ 
                 return false
             }
             
@@ -402,15 +449,12 @@ struct RunningView: View {
         }
     }
     
-    func calculateDistance(hours: Int,
-                           minutes: Int,
-                           seconds: Int,
-                           speed: Double) -> Double {
-        
-        var h = Double(hours)
+    func combineTimeToSeconds(hours: Int,
+                              minutes: Int,
+                              seconds: Int) -> Double {
+        let h = Double(hours)
         var m = Double(minutes)
         var s = Double(seconds)
-        var distance: Double
         
         if (DEBUG) { print("RunningView -> calculateDistance -> timerToDouble: \(h)hr \(m)min \(s)sec ") }
         
@@ -420,9 +464,17 @@ struct RunningView: View {
         
         if (DEBUG) { print("RunningView -> calculateDistance -> timeCombined: \(s)sec ") }
         
+        return s
+    }
+    
+    func calculateDistance(s: Double,
+                           speed: Double) -> Double {
+        var distance: Double
+        
+        // distance(m) = speed (m/s) * s (seconds)
         distance = speed * s
         
-        if (DEBUG) { print("RunningView -> calculateDistance -> distance: \(distance)m ") }
+        if (DEBUG) { print("RunningView -> calculateDistance -> distance: \(distance) meters ") }
         
         return distance
     }
@@ -467,6 +519,10 @@ struct RunningView: View {
             // MARK: add email logic here!
             
         }
+    }
+    
+    func saverRunLog() {
+        
     }
     
     
