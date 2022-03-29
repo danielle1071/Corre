@@ -345,12 +345,12 @@ struct RunningView: View {
             
                     let currTime = combineTimeToSeconds(hours: hours, minutes: minutes, seconds: seconds)
                     
-                    // avoid adding distance to short idle speeds
+                    // avoid adding distance to abrupt idle speeds
                     if (currSpeed > 0.00) { currentDistance += calculateDistance(s: currTime - prevTime, speed: currSpeed) }
                     
                     prevTime = currTime
                     
-                    if (DEBUG) { print("RunningView -> getCurrentUserLocation -> currSpeed is \(currSpeed)(normal) and currentDistance is \(currentDistance) meters") }
+                    if (DEBUG) { print("RunningView -> getCurrentUserLocation -> currSpeed is \(currSpeed)(normal) and currentTotalDistance is \(currentDistance) meters") }
                     
                     totalSpeed += currSpeed
                     speedCounter += 1
