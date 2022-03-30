@@ -300,7 +300,7 @@ class DatabaseManager: ObservableObject {
         }
     }
     
-    func getUserRunLogs() async {
+    func getUserRunLogs() {
         if (DEBUG) { print("DatabaseManager -> getUserRunLogs ") }
         if self.currentUser == nil {
             if let user = Amplify.Auth.getCurrentUser() {

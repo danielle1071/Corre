@@ -76,7 +76,7 @@ final class SessionManger: ObservableObject {
                             
                             try await self.databaseManager.getEmergencyContacts()
                             try await self.databaseManager.getRunnerRecords()
-                            try await self.databaseManager.getUserRunLogs()
+                            self.databaseManager.getUserRunLogs()
                         } catch {
                             print("ERROR IN GET CURRENT AUTH USER")
                         }

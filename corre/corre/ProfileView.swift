@@ -290,7 +290,9 @@ struct ProfileView: View {
                 self.firstName = user?.firstName ?? ""
                 self.lastName = user?.lastName ?? ""
                 self.bio = user?.bio ?? ""
-            })
+            sessionManager.databaseManager.getUserRunLogs()
+        })
+            
         }
     }
     
