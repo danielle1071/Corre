@@ -1,97 +1,95 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Amplify",
-        "repositoryURL": "https://github.com/aws-amplify/amplify-ios",
-        "state": {
-          "branch": "main",
-          "revision": "11839bade19e71bac709c2996af8b90a0a461a30",
-          "version": null
-        }
-      },
-      {
-        "package": "AmplifyMapLibreAdapter",
-        "repositoryURL": "https://github.com/aws-amplify/amplify-ios-maplibre",
-        "state": {
-          "branch": null,
-          "revision": "176416a11dcbb4ca16c183b0ce438e66f58ef892",
-          "version": "0.1.4"
-        }
-      },
-      {
-        "package": "AppSyncRealTimeClient",
-        "repositoryURL": "https://github.com/aws-amplify/aws-appsync-realtime-client-ios.git",
-        "state": {
-          "branch": null,
-          "revision": "73b042998cf91ff3c8f335ca935b504881473a61",
-          "version": "1.6.0"
-        }
-      },
-      {
-        "package": "AWSiOSSDKV2",
-        "repositoryURL": "https://github.com/aws-amplify/aws-sdk-ios-spm.git",
-        "state": {
-          "branch": null,
-          "revision": "de0dd3f85aa9e661ed9e45569122f9a7c7f9ef5c",
-          "version": "2.26.6"
-        }
-      },
-      {
-        "package": "MapLibre GL Native",
-        "repositoryURL": "https://github.com/maplibre/maplibre-gl-native-distribution",
-        "state": {
-          "branch": null,
-          "revision": "d524c18d8c572db72c753f88492c36b9749725e1",
-          "version": "5.12.0"
-        }
-      },
-      {
-        "package": "SDWebImage",
-        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
-        "state": {
-          "branch": null,
-          "revision": "2e63d0061da449ad0ed130768d05dceb1496de44",
-          "version": "5.12.5"
-        }
-      },
-      {
-        "package": "SDWebImageSwiftUI",
-        "repositoryURL": "https://github.com/SDWebImage/SDWebImageSwiftUI",
-        "state": {
-          "branch": null,
-          "revision": "cd8625b7cf11a97698e180d28bb7d5d357196678",
-          "version": "2.0.2"
-        }
-      },
-      {
-        "package": "SQLite.swift",
-        "repositoryURL": "https://github.com/stephencelis/SQLite.swift.git",
-        "state": {
-          "branch": null,
-          "revision": "0a9893ec030501a3956bee572d6b4fdd3ae158a1",
-          "version": "0.12.2"
-        }
-      },
-      {
-        "package": "Starscream",
-        "repositoryURL": "https://github.com/daltoniam/Starscream",
-        "state": {
-          "branch": null,
-          "revision": "e6b65c6d9077ea48b4a7bdda8994a1d3c6969c8d",
-          "version": "3.1.1"
-        }
-      },
-      {
-        "package": "swift-nio-zlib-support",
-        "repositoryURL": "https://github.com/apple/swift-nio-zlib-support.git",
-        "state": {
-          "branch": null,
-          "revision": "37760e9a52030bb9011972c5213c3350fa9d41fd",
-          "version": "1.0.0"
-        }
+  "pins" : [
+    {
+      "identity" : "amplify-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aws-amplify/amplify-ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "11839bade19e71bac709c2996af8b90a0a461a30"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "amplify-ios-maplibre",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aws-amplify/amplify-ios-maplibre",
+      "state" : {
+        "revision" : "176416a11dcbb4ca16c183b0ce438e66f58ef892",
+        "version" : "0.1.4"
+      }
+    },
+    {
+      "identity" : "aws-appsync-realtime-client-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aws-amplify/aws-appsync-realtime-client-ios.git",
+      "state" : {
+        "revision" : "73b042998cf91ff3c8f335ca935b504881473a61",
+        "version" : "1.6.0"
+      }
+    },
+    {
+      "identity" : "aws-sdk-ios-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aws-amplify/aws-sdk-ios-spm.git",
+      "state" : {
+        "revision" : "de0dd3f85aa9e661ed9e45569122f9a7c7f9ef5c",
+        "version" : "2.26.6"
+      }
+    },
+    {
+      "identity" : "maplibre-gl-native-distribution",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maplibre/maplibre-gl-native-distribution",
+      "state" : {
+        "revision" : "d524c18d8c572db72c753f88492c36b9749725e1",
+        "version" : "5.12.0"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "2e63d0061da449ad0ed130768d05dceb1496de44",
+        "version" : "5.12.5"
+      }
+    },
+    {
+      "identity" : "sdwebimageswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImageSwiftUI",
+      "state" : {
+        "revision" : "cd8625b7cf11a97698e180d28bb7d5d357196678",
+        "version" : "2.0.2"
+      }
+    },
+    {
+      "identity" : "sqlite.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stephencelis/SQLite.swift.git",
+      "state" : {
+        "revision" : "0a9893ec030501a3956bee572d6b4fdd3ae158a1",
+        "version" : "0.12.2"
+      }
+    },
+    {
+      "identity" : "starscream",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daltoniam/Starscream",
+      "state" : {
+        "revision" : "e6b65c6d9077ea48b4a7bdda8994a1d3c6969c8d",
+        "version" : "3.1.1"
+      }
+    },
+    {
+      "identity" : "swift-nio-zlib-support",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-nio-zlib-support.git",
+      "state" : {
+        "revision" : "37760e9a52030bb9011972c5213c3350fa9d41fd",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
 }
