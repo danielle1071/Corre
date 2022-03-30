@@ -27,7 +27,7 @@ struct LoginView: View {
     
     
     @EnvironmentObject var sessionManager: SessionManger
-    
+    @State var validLogin = true
     @State var login = ""
     @State var password = ""
     @State var invalidAttempts = 0
@@ -68,6 +68,7 @@ struct LoginView: View {
             
             
             SecureField("Password", text: $password)
+
                 .frame(width: 320, height: 50)
                 .font(.custom("Proxima Nova Rg Regular", size: 20))
                 .padding([.horizontal], 10)
@@ -78,9 +79,17 @@ struct LoginView: View {
                             .stroke(Color("textLight"), lineWidth: 0.8)
                             .foregroundColor(invalidAttempts == 0 ? Color.clear : Color.red)
                 )
+
                 .padding([.horizontal], 20)
-                .modifier(ShakeEffect(animatableData: CGFloat(invalidAttempts)))
-            
+                /*.overlay(RoundedRectangle(cornerRadius: 16)
+                .stroke(lineWidth: 1)
+                .foregroundColor(!validLogin ? Color.clear : Color.red))
+                .modifier(ShakeEffect(animatableData: CGFloat(invalidAttempts)))*/
+            if !validLogin {
+                Text("Error logging in")
+                    .font(.system(size: 16.0))
+                    .foregroundColor(Color.red)
+            }
             // end animation
             
             Button("Forgot password?", action:{
@@ -101,9 +110,16 @@ struct LoginView: View {
                     username: login,
                     password: password
                 )
-                withAnimation(.default) {
-                    self.invalidAttempts += 1
-                }
+                self.validLogin = sessionManager.loginValid
+               withAnimation(.default) {
+                   self.invalidAttempts += 1
+                   
+                   if !validLogin {
+                       Text("Error logging in")
+                           .font(.system(size: 16.0))
+                           .foregroundColor(Color.red)
+                   }
+              }
             }, label: {
                 Text("Login")
                     .padding([.horizontal], 147)
