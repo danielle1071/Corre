@@ -122,7 +122,7 @@ struct SignUpView: View {
                                 .multilineTextAlignment(.center)
                         }
                     }
-                    SecureField("Re-type Password", text: $reTypePassword)
+                    SecureField("Confirm Password", text: $reTypePassword)
                         .frame(width: 320, height: 50)
                         .font(.custom("Proxima Nova Rg Regular", size: 20))
                         .padding([.horizontal], 10)
