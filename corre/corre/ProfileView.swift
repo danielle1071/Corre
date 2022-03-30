@@ -41,7 +41,7 @@ struct ProfileView: View {
         if !editing {
             VStack {
                 HStack{
-                   /*
+                   
                     Button (action: {
                             sessionManager.showSession()
                     }, label: {
@@ -55,7 +55,7 @@ struct ProfileView: View {
                         })
                        
                         .foregroundColor(Color("primaryColor"))
-                    */
+                    
                     
                 Button (action: {
                     self.editing = !self.editing
@@ -159,7 +159,7 @@ struct ProfileView: View {
         } else {
             VStack {
                 HStack{
-                   /*
+                   
                     Button (action: {
                             sessionManager.showSession()
                     }, label: {
@@ -174,7 +174,7 @@ struct ProfileView: View {
                         Spacer()
                         .foregroundColor(Color("primaryColor"))
                     
-                    */
+                    
                 }
                 .padding(.all)
                 
