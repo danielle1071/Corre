@@ -234,7 +234,7 @@ struct RunningView: View {
                     .cornerRadius(20)
                     .edgesIgnoringSafeArea(.all)
                     .shadow(radius: 2)
-                // start timer when maps appear
+                    // start timer when maps appear
                     .onAppear(perform: {self.startTimer()})
             }
             Spacer()

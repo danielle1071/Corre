@@ -23,13 +23,11 @@ class DatabaseManager: ObservableObject {
     
     @Published var deviceTracking:Device?
     
-
     @Published var runners = [EmergencyContact]()
     
-
+    @Published var runs = [Run]()
 
     @Published var notifications = [Notification]()
-    
 
     @Published var friends = [User]()
 
@@ -297,6 +295,36 @@ class DatabaseManager: ObservableObject {
                     
                 case .failure(let error):
                     print("Could not query DataStore: \(error)")
+                }
+            }
+        }
+    }
+    
+    func getUserRunLogs() async {
+        if (DEBUG) { print("DatabaseManager -> getUserRunLogs ") }
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task () {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print ("")
+                    }
+                }
+            }
+        } else {
+            let keys = Run.keys
+            Amplify.DataStore.query(Run.self, where: keys.userID == currentUser!.id) { result in
+                switch(result) {
+                case .success(let items):
+                    self.runs = items
+                    if (DEBUG) {
+                        print("DatabaseManager -> getUserRunLogs -> successful query")
+                        print("Runs: \(runs)")
+                    }
+                    
+                case .failure(let error):
+                    print("DatabaseManager -> getUserRunLogs -> Could not query DataStore: \(error)")
                 }
             }
         }
