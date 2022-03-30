@@ -77,6 +77,7 @@ final class SessionManger: ObservableObject {
                             
                             try await self.databaseManager.getEmergencyContacts()
                             try await self.databaseManager.getRunnerRecords()
+                            try await self.databaseManager.getUserRunLogs()
                         } catch {
                             print("ERROR IN GET CURRENT AUTH USER")
                         }
@@ -281,6 +282,11 @@ final class SessionManger: ObservableObject {
     func showProfile() {
         if databaseManager.currentUser != nil {
             authState = .profile
+            
+            Task() {
+                do { await databaseManager.getUserRunLogs() }
+                catch { print("SessionManager -> showProfile -> ERROR IN SHOW SESSION") }
+            }
         } else {
             authState = .errV
         }

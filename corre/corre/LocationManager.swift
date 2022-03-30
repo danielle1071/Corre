@@ -19,7 +19,6 @@ final class LocationManager: NSObject,
                              ObservableObject,
                              CLLocationManagerDelegate,
                              AWSLocationTrackerDelegate {
-    
     var DEBUG = true
     
     // MARK: deleteThis
