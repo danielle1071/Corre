@@ -37,18 +37,24 @@ struct ConfirmationView: View {
             
 
             Text("Username: \(username)")
-                .font(.system(size: 23.0))
+                .font(.custom("Varela Round Regular", size: 21))
                 .foregroundColor(CustomColor.primarycolor)
+                .padding([.bottom], 5)
+                
             
             TextField("Confirmation Code", text:
                         $confirmationCode)
                 .keyboardType(.decimalPad)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .frame(height: 40)
-                .padding([.horizontal], 20)
-                .cornerRadius(16)
-                .shadow(radius: 2.0)
-                .padding()
+                .frame(width: 320, height: 50)
+                .font(.custom("Proxima Nova Rg Regular", size: 20))
+                .padding([.horizontal], 10)
+                .background(.white)
+                .cornerRadius(15)
+                .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color("textLight"), lineWidth: 0.8)
+                )
+                .padding([.bottom], 8)
             Button("Confirm", action: {
                 sessionManager.confirm(
                     username: username,
@@ -57,14 +63,16 @@ struct ConfirmationView: View {
             })
                 .padding()
                 .foregroundColor(.white)
-                .padding(.horizontal, 100)
+                .padding(.horizontal, 122)
                 .background(CustomColor.primarycolor)
                 .cornerRadius(20)
+                .font(.custom("Proxima Nova Rg Regular", size: 18))
             
             Button("Didn't get it? Retry", action: {
                     Amplify.Auth.resendSignUpCode(for: username)
                     })
             .padding()
+            .font(.custom("Proxima Nova Rg Regular", size: 18))
             }
 
             .frame(maxWidth: .infinity, maxHeight: .infinity)

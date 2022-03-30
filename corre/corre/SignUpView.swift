@@ -20,6 +20,11 @@ import SwiftUI
 
 struct SignUpView: View {
     
+    init(){
+            UITableView.appearance().backgroundColor = .clear
+            UITableView.appearance().contentInset.top = -35
+        }
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -51,6 +56,7 @@ struct SignUpView: View {
    
     
     var body: some View {
+        
         VStack{
             
             HStack{
@@ -58,78 +64,115 @@ struct SignUpView: View {
                 .resizable()
                 .frame(width: 50.0, height: 50.0)
                 .scaledToFit()
-            
             Text("Sign Up")
-                .font(.system(size: 30.0))
+                    .font(.custom("Varela Round Regular", size: 30))
                 .foregroundColor(CustomColor.primarycolor)
             }
             Group {
-                
-                TextField("Username", text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(height: 40)
-                    .cornerRadius(16)
-                    .padding([.horizontal], 38)
-                    .shadow(radius: 1.0)
+                TextField("First Name", text: $givenName)
+                    .frame(width: 320, height: 50)
+                    .font(.custom("Proxima Nova Rg Regular", size: 20))
+                    .padding([.horizontal], 10)
+                    .background(.white)
+                    .cornerRadius(15)
+                    .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color("textLight"), lineWidth: 0.8)
+                    )
+                TextField("Last Name", text: $familyName)
+                    .frame(width: 320, height: 50)
+                    .font(.custom("Proxima Nova Rg Regular", size: 20))
+                    .padding([.horizontal], 10)
+                    .background(.white)
+                    .cornerRadius(15)
+                    .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color("textLight"), lineWidth: 0.8)
+                    )
         
-                Text("Password must have 1 uppercase, 1 lowercase, 1 number, 1 special character, and a length of 8")
-                    .font(.system(size: 10.0))
-                    .foregroundColor(Color.red)
-                    .padding([.horizontal], 38)
+                TextField("Username", text: $username)
+                    .frame(width: 320, height: 50)
+                    .font(.custom("Proxima Nova Rg Regular", size: 20))
+                    .padding([.horizontal], 10)
+                    .background(.white)
+                    .cornerRadius(15)
+                    .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color("textLight"), lineWidth: 0.8)
+                    )
+              
+               
                 Group {
                     SecureField("Password", text: $password)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(height: 40)
-                        .cornerRadius(16)
-                        .padding([.horizontal], 38)
-                        .shadow(radius: 2.0)
-                    SecureField("Re-type Password", text: $reTypePassword)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(height: 40)
-                        .cornerRadius(16)
-                        .padding([.horizontal], 38)
-                        .shadow(radius: 2.0)
-                    if password == reTypePassword {
-                        Text("password match")
-                            .font(.system(size: 10.0))
-                            .foregroundColor(Color.green)
-                    } else {
-                        Text("passwords do not match")
-                            .font(.system(size: 10.0))
-                            .foregroundColor(Color.red)
+                        .frame(width: 320, height: 50)
+                        .font(.custom("Proxima Nova Rg Regular", size: 20))
+                        .padding([.horizontal], 10)
+                        .background(.white)
+                        .cornerRadius(15)
+                        .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color("textLight"), lineWidth: 0.8)
+                        )
+                    if password != "" && reTypePassword != "" {
+                        if password != reTypePassword {
+                            Text("Password must have 1 uppercase, 1 lowercase, 1 number, 1 special character, and a length of 8")
+                                .font(.custom("Proxima Nova Rg Regular", size: 10))
+                                .foregroundColor(Color.red)
+                                .padding([.horizontal], 20)
+                                .multilineTextAlignment(.center)
+                        }
                     }
+                    SecureField("Confirm Password", text: $reTypePassword)
+                        .frame(width: 320, height: 50)
+                        .font(.custom("Proxima Nova Rg Regular", size: 20))
+                        .padding([.horizontal], 10)
+                        .background(.white)
+                        .cornerRadius(15)
+                        .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color("textLight"), lineWidth: 0.8)
+                        )
+                    if password != "" && reTypePassword != "" {
+                        if password == reTypePassword {
+                            Text("Password match")
+                                .font(.custom("Proxima Nova Rg Regular", size: 10))
+                                .foregroundColor(Color.green)
+                        } else {
+                            Text("Passwords do not match")
+                                .font(.custom("Proxima Nova Rg Regular", size: 10))
+                                .foregroundColor(Color.red)
+                        }
+                        
+                    }
+                    
                 }
                 TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(height: 40)
-                    .cornerRadius(16)
-                    .padding([.horizontal], 38)
-                    .shadow(radius: 2.0)
+                    .frame(width: 320, height: 50)
+                    .font(.custom("Proxima Nova Rg Regular", size: 20))
+                    .padding([.horizontal], 10)
+                    .background(.white)
+                    .cornerRadius(15)
+                    .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color("textLight"), lineWidth: 0.8)
+                    )
                     
                 if userExist {
                     Text("user exists with that email")
                         .font(.system(size: 10.0))
                         .foregroundColor(Color.red)
                 }
-                
-                TextField("Phone Number (+1##########)", text: $phone)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(height: 40)
-                    .cornerRadius(16)
-                    .padding([.horizontal], 38)
-                    .shadow(radius: 2.0)
-                TextField("First Name", text: $givenName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(height: 40)
-                    .cornerRadius(16)
-                    .padding([.horizontal], 38)
-                    .shadow(radius: 2.0)
-                TextField("Last Name", text: $familyName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(height: 40)
-                    .cornerRadius(16)
-                    .padding([.horizontal], 38)
-                    .shadow(radius: 2.0)
+                Group {
+                    TextField("Phone Number (+1##########)", text: $phone)
+                        .frame(width: 320, height: 50)
+                        .font(.custom("Proxima Nova Rg Regular", size: 20))
+                        .padding([.horizontal], 10)
+                        .background(.white)
+                        .cornerRadius(15)
+                        .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color("textLight"), lineWidth: 0.8)
+                        )
                 
                 HStack(alignment: .bottom){
                 DatePicker(
@@ -137,29 +180,30 @@ struct SignUpView: View {
                         selection: $birthDate,
                         displayedComponents: [.date]
                     )
-                    .padding([.horizontal], 38)
+                    .padding([.horizontal], 31)
                     .colorInvert()
                     .colorMultiply(Color.blue)
-                    .font(.system(size: 15.0))
+                    .font(.custom("Proxima Nova Rg Regular", size: 20))
                     
-                Spacer(minLength: 100)
+                Spacer(minLength: 0)
                         
                 }
                 
                 Picker(selection: $gender, label: Text("Gender")) {
-                        Text("Gender").tag(1)
-                        Text("Male").tag(2)
-                        Text("Female").tag(3)
-                        Text("Other").tag(4)
-                    }
-                .frame(width: 310, height: 60, alignment: .leading)
+                                      Text("Gender").tag(1)
+                                      Text("Male").tag(2)
+                                      Text("Female").tag(3)
+                                      Text("Other").tag(4)
+                                  }
+                .frame(width: 330, height: 30, alignment: .leading)
             
+                }
+                
             }
                 
             
-            
             Spacer()
-                .frame(height: 30)
+                .frame(height: 20)
             
             Button("Create Account", action: {
                 if email != "" {
@@ -194,22 +238,25 @@ struct SignUpView: View {
             })
                 .padding()
                 .foregroundColor(.white)
-                .padding(.horizontal, 50)
+                .padding(.horizontal, 90)
                 .background(CustomColor.primarycolor)
                 .cornerRadius(20)
+                .font(.custom("Proxima Nova Rg Regular", size: 18))
                 
+            Divider()
+                .padding([.top], 30)
+            HStack {
+                
+                Button("Already have an account? Sign in", action: {
+                        sessionManager.showLogin()
+                        })
+                .font(.custom("Proxima Nova Rg Regular", size: 18))
+                
+                
+            }.padding([.top], 10)
             
-            VStack{
             
-            Spacer()
-                    .frame(height: 15)
             
-            Button("Already have an account? Sign in", action: {
-                    sessionManager.showLogin()
-                    })
-                    .font(.system(size: 15.0))
-
-            }
         } .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
     }
