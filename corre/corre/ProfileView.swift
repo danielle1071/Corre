@@ -41,6 +41,7 @@ struct ProfileView: View {
         if !editing {
             VStack {
                 HStack{
+                   /*
                     Button (action: {
                             sessionManager.showSession()
                     }, label: {
@@ -52,10 +53,18 @@ struct ProfileView: View {
                             .font(.custom("Varela Round Regular", size: 18))
                             .foregroundColor(Color("primaryColor"))
                         })
-                        Spacer()
+                       
                         .foregroundColor(Color("primaryColor"))
-                        
-            
+                    */
+                    
+                Button (action: {
+                    self.editing = !self.editing
+                }){
+                    Text("Edit")
+                        .font(.custom("Varela Round Regular", size: 18))
+                        .foregroundColor(Color("primaryColor"))
+                }
+                    Spacer()
                         Button (action: {
                             sessionManager.signOut()
                         }){
@@ -76,15 +85,17 @@ struct ProfileView: View {
                 .font(.custom("Varela Round Regular", size: 22))
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
+                .foregroundColor(Color("primaryColor"))
                 
-            Button (action: {
+           /*
+                Button (action: {
                 self.editing = !self.editing
             }){
                 Text("Edit")
                     .font(.custom("Varela Round Regular", size: 17))
-                    .foregroundColor(Color.blue)
+                    .foregroundColor(Color("primaryColor"))
             }
-            
+            */
                 
             VStack{
                 HStack{
@@ -148,6 +159,7 @@ struct ProfileView: View {
         } else {
             VStack {
                 HStack{
+                   /*
                     Button (action: {
                             sessionManager.showSession()
                     }, label: {
@@ -161,6 +173,8 @@ struct ProfileView: View {
                         })
                         Spacer()
                         .foregroundColor(Color("primaryColor"))
+                    
+                    */
                 }
                 .padding(.all)
                 
@@ -174,6 +188,7 @@ struct ProfileView: View {
                     .font(.custom("Varela Round Regular", size: 22))
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
+                    .foregroundColor(Color("primaryColor"))
                 
                 Text(" ")
                     .font(.custom("Varela Round Regular", size: 16))

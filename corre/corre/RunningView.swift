@@ -60,7 +60,7 @@ struct RunningView: View {
     @State var phoneNumber: String
     
     var DEBUG = true
-    
+    @State private var showActionSheet: Bool = false
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -268,6 +268,19 @@ struct RunningView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 25.0,
                                                 style: .circular))
                     .gesture(longPress)
+                
+                .alert(isPresented: $showActionSheet){
+                    Alert(
+                        title: Text("Important message!"),
+                        message: Text("Hold button to stop run."),
+                        dismissButton: .default(Text("Got it!"))
+                    )
+                
+                }
+                .onTapGesture(count: 1 ,perform:{showActionSheet = true
+                
+               
+            })
             })
             
         }
