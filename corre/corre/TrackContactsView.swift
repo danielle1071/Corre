@@ -57,6 +57,10 @@ struct TrackContactsView: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
             
+            
+            // Text("🏃🏼‍♀️")
+            // Text("🧍🏼‍♀️")
+            
             List(sessionManager.databaseManager.runners, id: \.id) {
                 item in
                 RunnerRow(emergencyContact: item)
@@ -121,8 +125,17 @@ struct TrackContactsView: View {
         var emergencyContact: EmergencyContact
         
         var body: some View {
-            
-            Text("\(sessionManager.databaseManager.getUserProfile(userID: emergencyContact.userID)?.username ?? "ERROR") ")
+            HStack{
+                Text("\(sessionManager.databaseManager.getUserProfile(userID: emergencyContact.userID)?.username ?? "ERROR") ")
+                let runCheck = sessionManager.databaseManager.checkIfRunning(userID: emergencyContact.userID)
+                if runCheck {
+                    Text("🏃‍♂️")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                } else {
+                    Text("🧍‍♂️")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+            }
         }
     }
     

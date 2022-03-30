@@ -57,7 +57,7 @@ class DatabaseManager: ObservableObject {
                         print("This is the item: \(item)")
                         self.currentUser = item
                     }
-                    if self.currentUser!.email == nil || self.currentUser!.email! == "donotemail@error.com" {
+                    if self.currentUser != nil && (self.currentUser!.email == nil || self.currentUser!.email! == "donotemail@error.com") {
                         fixProfileEmail()
                     }
                 }
@@ -99,6 +99,27 @@ class DatabaseManager: ObservableObject {
         var returnVal: User? = nil
         let keys = User.keys
         Amplify.DataStore.query(User.self, where: keys.username == username) { result in
+            switch(result) {
+            case .success(let items):
+                if items.count > 1 {
+                    print("More than 1 user found")
+                }
+                if items.count < 1 {
+                    print("No record found")
+                } else {
+                    returnVal = items[0]
+                }
+            case .failure(let error):
+                print("Could not query DataStore: \(error)")
+            }
+        }
+        return returnVal
+    }
+    
+    func getUserProfile(email: String) -> User? {
+        var returnVal: User? = nil
+        let keys = User.keys
+        Amplify.DataStore.query(User.self, where: keys.email == email) { result in
             switch(result) {
             case .success(let items):
                 if items.count > 1 {
@@ -335,11 +356,11 @@ class DatabaseManager: ObservableObject {
         print("RECORD TRYING TO SAVE: \(contact)")
         Amplify.DataStore.save(contact) { result in
             switch result {
-            case .success(_):
-                print("Saved")
-                DispatchQueue.main.async {
-                    print(self.emergencyContacts.append(contact))
-                }
+            case .success(let resultItem):
+                print("Saved \(resultItem)")
+//                DispatchQueue.main.async {
+//                    print(self.emergencyContacts.append(contact))
+//                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -366,7 +387,7 @@ class DatabaseManager: ObservableObject {
                         print("THIS IS THE EMERGENCY CONTACT WHEN USER == NIL :  \(contact)")
                         createEmergencyContactRecord(contact: contact)
                     } else {
-                        let contact = EmergencyContact (firstName: firstName, lastName: lastName, email: user?.email ?? "ERROR@ERROR.com".lowercased(), phoneNumber: phoneNumber, appUser: true, emergencyContactUserId: user?.id ?? "0000", userID: currentUser?.id ?? "0000", emergencyContactAppUsername: user?.username ?? "ERROR")
+                        let contact = EmergencyContact (firstName: firstName, lastName: lastName, email: user?.email ?? "ERROR@ERROR.com".lowercased(), phoneNumber: phoneNumber, appUser: true, emergencyContactUserId: user?.id ?? "0000", emergencyContactAppUsername: user?.username ?? "ERROR", userID: currentUser?.id ?? "0000")
                         print("THIS IS THE EMERGENCY CONTACT WHEN USER != NIL : \(contact)")
                         createEmergencyContactRecord(contact: contact)
                     }
@@ -481,7 +502,7 @@ class DatabaseManager: ObservableObject {
         }
     }
     
-    func startRunNotification(username: String) {
+    func startRunNotification(id: String) {
         if self.currentUser == nil {
             if let user = Amplify.Auth.getCurrentUser() {
                 Task() {
@@ -494,12 +515,16 @@ class DatabaseManager: ObservableObject {
             }
         }
         
-        let receiver = getUserProfile(username: username)
+        //MARK: Why don't we utilize the userID - this would allow
+        //MARK: For a fast query instead of a slow scan?
+        
+        let receiver = getUserProfile(userID: id)
         
         if (receiver != nil) {
             let notification = Notification(
-                // senderId: self.currentUser!.id,
-                senderId: self.currentUser!.username,
+                //MARK: This sender ID should be the current user id - not username
+                senderId: self.currentUser!.id,
+//                senderId: self.currentUser!.username,
                 receiverId: receiver!.id,
                 type: NotificationType.runnerstarted)
             
@@ -509,7 +534,8 @@ class DatabaseManager: ObservableObject {
         }
     }
     
-    func endRunNotification(username: String) {
+    //MARK: See above comments made about startRunNotification function 
+    func endRunNotification(id: String) {
         if self.currentUser == nil {
             if let user = Amplify.Auth.getCurrentUser() {
                 Task() {
@@ -522,11 +548,11 @@ class DatabaseManager: ObservableObject {
             }
         }
         
-        let receiver = getUserProfile(username: username)
+        let receiver = getUserProfile(userID: id)
         
         if (receiver != nil) {
             let notification = Notification(
-                senderId: self.currentUser!.username,
+                senderId: self.currentUser!.id,
                 receiverId: receiver!.id,
                 type: NotificationType.runnerended)
             
@@ -617,6 +643,13 @@ class DatabaseManager: ObservableObject {
                 print("Deleted Notification Record")
             case .failure(let error):
                 print(error.localizedDescription)
+            }
+        }
+        Task() {
+            do {
+                try await getNotifications()
+            } catch {
+                print("ERROR INSIDE ACCEPT EMERGENCY CONTACT!")
             }
         }
     }
@@ -955,6 +988,111 @@ class DatabaseManager: ObservableObject {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func sendEmergencyContactRequest(user: User, firstName: String, lastName: String, phoneNumber: String) {
+        if currentUser == nil {
+            print("ERROR -- no user loaded --> sendEmergencyContactRequest currentUser = \(currentUser) --- Exiting function without sending request")
+            return
+        }
+        let emgContacts = self.getEmergencyContacts()
+        // ensuring the current user hasn't been blocked by the requester
+        if user.blockedUsers != nil && user.blockedUsers!.contains(currentUser!.id) {
+            print("Curent user is blocked by requester -- exiting")
+            return
+        }
+        for contact in self.emergencyContacts {
+            if contact.appUser != nil && contact.appUser!  && contact.emergencyContactUserId == user.id {
+                return
+            }
+        }
+        
+        let requestExist = checkEmergencyRequest(id: user.id)
+        if !requestExist {
+            let contactInfo = "[{\"firstName\": \"\(firstName)\", \"lastName\": \"\(lastName)\", \"phoneNumber\": \"\(phoneNumber)\"}]"
+            
+            let notification = Notification(senderId: currentUser!.id, receiverId: user.id,body: contactInfo, type: NotificationType.emergencycontactrequest)
+            self.createNotificationRecord(notification: notification)
+        } else {
+            print("ERROR -- request already exists!")
+        }
+    }
+    
+    func acceptEmergencyContactRequest(notification: Notification) {
+        //MARK: USE THIS LATER -LM
+        if notification.body == nil {
+            print("EXITING EARLY")
+            return
+        } else {
+            print("THIS IS THE NOTIFICATION!!!")
+        }
+        let contactInfo = notification.body!
+        let data = contactInfo.data(using: .utf8)!
+        
+        var firstNameEM = ""
+        var lastNameEM = ""
+        var phoneNumberEM = ""
+        
+        do {
+            if let jsonArray = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? [Dictionary<String,Any>]
+            {
+                print("HERE !@#$%")
+               print(jsonArray) // use the json here
+                for items in jsonArray {
+                    if let phoneNumberPrint = items["phoneNumber"] as? String {
+                        print("Here is phoneNumber: \(phoneNumberPrint)")
+                        phoneNumberEM = phoneNumberPrint
+                    }
+                    if let firstNamePrint = items["firstName"] as? String {
+                        print("Here is firstName: \(firstNamePrint)")
+                        firstNameEM = firstNamePrint
+                    }
+                    if let lastNamePrint = items["lastName"] as? String {
+                        print("Here is lastName: \(lastNamePrint)")
+                        lastNameEM = lastNamePrint
+                    }
+                    
+                    print("This is the item \(items)")
+                }
+                
+                
+            } else {
+                print("bad json")
+            }
+        } catch let error as NSError {
+            print("HERE )(*&^")
+            print(error)
+        }
+        let user = self.getUserProfile(userID: notification.senderId)
+        if user != nil && currentUser != nil {
+            let contact = EmergencyContact(firstName: firstNameEM, lastName: lastNameEM, email: user!.email!, phoneNumber: phoneNumberEM, appUser: true, emergencyContactUserId: currentUser!.id, emergencyContactAppUsername: currentUser!.username, userID: user!.id)
+            print("Sending \(contact) to the createEmergencyConactRecord")
+            self.createEmergencyContactRecord(contact: contact)
+            deleteNotificationRecord(notification: notification)
+            
+        } else {
+            print("Either user or currentUser === nil --> sender: \(user) | ---> currentUser: \(currentUser)")
+            return
+        }
+        
+    }
+    
+    func declineEmergencyContactRequest(notification: Notification) {
+        deleteNotificationRecord(notification: notification)
+    }
+    
+    func checkEmergencyRequest(id: String) -> Bool {
+        let keys = Notification.keys
+        var retVal = false
+        Amplify.DataStore.query(Notification.self, where: keys.senderId == currentUser!.id && keys.receiverId == id && keys.type == NotificationType.emergencycontactrequest) { result in
+            switch(result) {
+            case .success(let item):
+                retVal = item.count > 0
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        return retVal
     }
 
 }

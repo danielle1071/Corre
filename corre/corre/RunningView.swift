@@ -440,11 +440,8 @@ struct RunningView: View {
             // In the event that the emergency has an account through corre,
             // send them a start run notification in the app
             if (contact.emergencyContactAppUsername != nil) {
-                sessionManager.databaseManager.startRunNotification(username: contact.emergencyContactAppUsername!)
+                sessionManager.databaseManager.startRunNotification(id: contact.emergencyContactUserId!)
             }
-            
-            // MARK: add email logic here!
-            
         }
     }
     
@@ -461,11 +458,8 @@ struct RunningView: View {
             // In the event that the emergency has an account through corre,
             // send them a start run notification in the app
             if (contact.emergencyContactAppUsername != nil) {
-                sessionManager.databaseManager.endRunNotification(username: contact.emergencyContactAppUsername!)
+                sessionManager.databaseManager.endRunNotification(id: contact.emergencyContactUserId!)
             }
-            
-            // MARK: add email logic here!
-            
         }
     }
     

@@ -13,11 +13,11 @@ extension User {
     case runningStatus
     case friends
     case blockedUsers
-    case EmergencyContacts
     case Runs
     case firstName
     case lastName
     case email
+    case EmergencyContacts
     case createdAt
     case updatedAt
   }
@@ -43,11 +43,11 @@ extension User {
       .field(user.runningStatus, is: .optional, ofType: .enum(type: RunningStatus.self)),
       .field(user.friends, is: .optional, ofType: .embeddedCollection(of: String.self)),
       .field(user.blockedUsers, is: .optional, ofType: .embeddedCollection(of: String.self)),
-      .hasMany(user.EmergencyContacts, is: .optional, ofType: EmergencyContact.self, associatedWith: EmergencyContact.keys.userID),
       .hasMany(user.Runs, is: .optional, ofType: Run.self, associatedWith: Run.keys.userID),
       .field(user.firstName, is: .optional, ofType: .string),
       .field(user.lastName, is: .optional, ofType: .string),
       .field(user.email, is: .optional, ofType: .string),
+      .hasMany(user.EmergencyContacts, is: .optional, ofType: EmergencyContact.self, associatedWith: EmergencyContact.keys.userID),
       .field(user.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(user.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
     )
