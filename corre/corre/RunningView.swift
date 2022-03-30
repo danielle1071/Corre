@@ -105,6 +105,7 @@ struct RunningView: View {
         VStack {
             // MARK: change this to stop run!
             HStack{
+                /*
                 Button(action: {
                 sessionManager.databaseManager.setRunStatus(status: .notrunning)
                 sessionManager.showPreRunning()
@@ -120,6 +121,7 @@ struct RunningView: View {
                     .font(.custom("Varela Round Regular", size: 18))
                     .foregroundColor(Color("primaryColor"))
                 })
+                */
                 // Pop ups for check in and run stats
                 //
                 Button (action: {showingPopover = true}){
