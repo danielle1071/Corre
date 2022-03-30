@@ -153,12 +153,19 @@ struct NotificationView: View {
                     
                     
                     Button("Accept", action: {
-                        print("Accept")
-                        sessionManager.databaseManager.acceptedFriendRequest(notification: notification, userId: notification.senderId)
+                        if notification.type == NotificationType.friendrequest {
+                            print("Accept Friend Req")
+                            sessionManager.databaseManager.acceptedFriendRequest(notification: notification, userId: notification.senderId)
+                        } else if notification.type == NotificationType.emergencycontactrequest {
+                            print("Accept Emergency Contact")
+                            print("Notification *** \(notification)")
+                            sessionManager.databaseManager.acceptEmergencyContactRequest(notification: notification)
+                        }
                     })
                         
                     Button("Decline", action: {
                         print("Decline")
+                        sessionManager.databaseManager.deleteNotificationRecord(notification: notification)
                     })
                     
                 }

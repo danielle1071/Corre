@@ -25,11 +25,11 @@ enum AuthState {
     case trackContacts
     case trackRunner(userTrackingID: String)
     case nav(user: AuthUser)
-    case messaging(userId: String)
+    case messaging(userId: String, friendId: String)
     case notification
     case friendView
     case preRun
-
+    case messageFriendView
     case confirmPassResetView(email: String)
     case confirmEmailView
 
@@ -50,6 +50,7 @@ final class SessionManger: ObservableObject {
     @Published var isSignedIn = false
     @Published var authState: AuthState = .login
     @ObservedObject var databaseManager: DatabaseManager = DatabaseManager()
+    @Published var loginValid = true
     
     struct Address: Codable {
         var locality: String
@@ -194,6 +195,7 @@ final class SessionManger: ObservableObject {
                         print("Inside confirmSignInWithCustomeChallenge")
                     case .confirmSignInWithNewPassword(_):
                         // There is currently no way to get into this case of the switch
+//                    self.loginValid = true
                         print("Inside confirmSIgnInWIthNewPassword")
                     case .resetPassword(_):
                         // There is currently no way to get into this case of the switch
@@ -205,16 +207,18 @@ final class SessionManger: ObservableObject {
                         }
                     case .done:
                         print("Inside done")
-                        
+                    self?.loginValid = true
                         //print(Amplify.Auth.fetchUserAttributes())
                         DispatchQueue.main.async {
                             self?.getCurrentAuthUser()
                         }
+                    
                 }
                 
                 
                 
             case .failure(let error):
+                self?.loginValid = false
                 print("Login error:", error)
             }
         }
@@ -240,6 +244,7 @@ final class SessionManger: ObservableObject {
     func showSession() {
         if let user = Amplify.Auth.getCurrentUser() {
             self.showNavBar()
+            databaseManager.getEmergencyContacts()
 //            authState = .session(user: user)
         } else {
             authState = .landing
@@ -286,12 +291,12 @@ final class SessionManger: ObservableObject {
             authState = .errV
         }
     }
-    func showMessage() {
+    func showMessage(friendId: String) {
         if databaseManager.currentUser == nil {
             getCurrentAuthUser()
         }
         let userId = databaseManager.currentUser!.id
-        authState = .messaging(userId: userId)
+        authState = .messaging(userId: userId, friendId: friendId)
     }
     
     // MARK: showEmergencyContact
@@ -309,6 +314,11 @@ final class SessionManger: ObservableObject {
     func showFriendView() {
         databaseManager.getFriends()
         authState = .friendView
+    }
+    
+    func showMessageFriendView() {
+        databaseManager.getFriends()
+        authState = .messageFriendView
     }
     
     // MARK: showNotificationView

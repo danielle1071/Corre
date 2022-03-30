@@ -113,8 +113,7 @@ struct EmergencyContactEditView_Previews: PreviewProvider {
             phoneNumber: "+14078231000",
             appUser: true,
             emergencyContactUserId: "0001",
-            userID: "0002",
-            emergencyContactAppUsername: "ldawg")
+            emergencyContactAppUsername: "ldawg", userID: "0002")
     
         EmergencyContactEditView(contact: previewContact)
     }
