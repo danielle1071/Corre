@@ -72,7 +72,7 @@ struct RunningView: View {
     @State var totalSpeed: Double = 0.00
     @State var speedCounter: Int = 0
     
-    var DEBUG = true
+    
     @State private var showActionSheet: Bool = false
     struct CusColor {
         static let backcolor =
