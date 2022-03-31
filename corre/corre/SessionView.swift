@@ -23,8 +23,7 @@ struct SessionView: View {
     
     // @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
     let user: AuthUser
-    
-    
+     
     var body: some View {
 
         GeometryReader { geometry in
@@ -51,22 +50,6 @@ struct SessionView: View {
                     RoundedRectangle(cornerRadius: 20)
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
-            
-            
-//            Spacer()
-//            Button("Profile", action: {
-//                sessionManager.showProfile()
-//            }).padding()
-//                .padding(.horizontal, 108)
-//                .foregroundColor(CustomColor.primarycolor)
-//                .background(CustomColor.backcolor)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 20)
-//                    .stroke(CustomColor.primarycolor, lineWidth: 2)
-//                )
-            
-//            Spacer()
-
             
 
             let gWidth = geometry.size.width
@@ -132,9 +115,10 @@ struct SessionView: View {
                        
                             // MARK: Header Name Line
                         Text("Hi \(sessionManager.databaseManager.currentUser?.username ?? "")")
-                                .font(.custom("Varela Round Regular", size: 40))
+                                .font(.custom("Varela Round Regular", size: 29))
                                 .foregroundColor(Color("primaryColor"))
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                
                                 
                             
                             HStack (spacing: (gWidth * 0.035)) {
@@ -169,15 +153,13 @@ struct SessionView: View {
                                 }
                             }
                         
-
-                        
                     }
                     
                     Text("Keep going. You can do it")
                         .font(.custom("Proxima Nova Rg Regular", size: 20))
                         .foregroundColor(Color("darkGray"))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.top], gWidth * -0.06)
+                        
                         .padding([.bottom], gWidth * 0.03)
                     
                     Image("header2")
@@ -200,7 +182,6 @@ struct SessionView: View {
                         .aspectRatio(contentMode: .fit)
                     }
                     .sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
-                   
     
                     // MARK: Track Runner Button
                     HStack (spacing: 20.0)

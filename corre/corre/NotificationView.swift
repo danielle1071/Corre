@@ -119,8 +119,8 @@ struct NotificationView: View {
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        
-                        Text("User: \(notification.senderId)")
+                        let user = sessionManager.databaseManager.getUserProfile(userID: notification.senderId)
+                        Text("User: \(user?.username ?? notification.senderId)")
                             .font(.custom("Proxima Nova Rg Regular", size: 16))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }

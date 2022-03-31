@@ -49,6 +49,7 @@ struct MessageFriendView: View {
                         .foregroundColor(Color("primaryColor"))
                         .font(.custom("Varela Round Regular", size: 18))
                 })
+                Spacer()
 
             }
             .padding(.all)
@@ -63,6 +64,7 @@ struct MessageFriendView: View {
                 .font(.custom("Varela Round Regular", size: 22))
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
+                .foregroundColor(Color("primaryColor"))
             
             HStack {
                 List{
