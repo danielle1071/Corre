@@ -132,7 +132,36 @@ struct ProfileView: View {
                         .foregroundColor(Color("primaryColor"))
                         .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
+                    Spacer()
                 }
+    
+                List{
+                    ForEach(sessionManager.databaseManager.runs, id: \.id) { run in
+                        VStack {
+                            Text(" ")
+                            
+                            // MARK: frontend help! super ugly!
+                            Text("Date: 03/31/22 (placeholder)")
+//                            Text("Date: \(String(describing: run.createdAt!.foundationDate))")
+                                .listRowBackground(Color("orange"))
+                                .foregroundColor(Color("primaryColor"))
+                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                                
+                            Text("Distance: \(run.distance) m")
+                                .listRowBackground(Color("orange"))
+                                .foregroundColor(Color("primaryColor"))
+                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                                
+                            Text("Average Speed: \(run.averageSpeed!) m/s")
+                                .listRowBackground(Color("orange"))
+                                .foregroundColor(Color("primaryColor"))
+                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                            
+                            Text(" ")
+                        }
+                    }
+                }
+                
             }
             .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
@@ -276,7 +305,9 @@ struct ProfileView: View {
                 self.firstName = user?.firstName ?? ""
                 self.lastName = user?.lastName ?? ""
                 self.bio = user?.bio ?? ""
-            })
+            sessionManager.databaseManager.getUserRunLogs()
+        })
+            
         }
     }
     

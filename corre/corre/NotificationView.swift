@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct NotificationView: View {
-    
-    @EnvironmentObject var sessionManager: SessionManger
-    
     var DEBUG = true
     
+    @EnvironmentObject var sessionManager: SessionManger
+
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -77,7 +76,6 @@ struct NotificationView: View {
     }
     
     struct NotificationRow: View {
-        
         var DEBUG = true
 
         var notification: Notification
@@ -116,23 +114,24 @@ struct NotificationView: View {
                             Text("This is a catch all notification type")
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                            
                         case .none:
                             Text("No Type Listed")
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                        case .runnerended:
-                            Text("This is a runnerended type")
-                        case .runevent:
-                            Text("This is a generic runevent type")
-                        case .other:
-                            Text("This is a catch all notification type")
                         }
                         let user = sessionManager.databaseManager.getUserProfile(userID: notification.senderId)
                         Text("User: \(user?.username ?? notification.senderId)")
                             .font(.custom("Proxima Nova Rg Regular", size: 16))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                
+                if (notification.type == .runevent) {
+                    Button("Remove", action: {
+                        if (DEBUG) { print("NotificationView -> .runevent -> Remove \(notification)") }
+                        
+                        sessionManager.databaseManager.deleteNotificationRecord(notification: notification)
+                    })
+                }
                     
                 if (notification.type == .runnerstarted) {
                     Button("Remove", action: {
