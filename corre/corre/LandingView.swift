@@ -55,7 +55,10 @@ struct LandingView: View {
                 .padding([.top], gHeight * 0.6)
             }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background((Image("Landing")).edgesIgnoringSafeArea(.all))
+        .background((Image("Landing"))
+            .resizable()
+            .edgesIgnoringSafeArea(.all)
+        )
         .onAppear(perform: {
             print("LANDING PAGE: \(sessionManager.databaseManager.currentUser)")
         })
