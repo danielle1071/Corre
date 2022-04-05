@@ -20,7 +20,7 @@ struct MessageRow: View {
     let message: Message
     let isCurrentUser: Bool
 
-    let iconName = "questionmark"
+    var iconName = "questionmark"
     /*
     private var iconName: String {
         if let initial = message.senderId//message.senderName.first{
@@ -50,12 +50,14 @@ struct MessageRow: View {
     var body: some View {
         if (sessionManager.databaseManager.currentUser?.id == message.receiverId) {
             ZStack{
+                let receiverUser = sessionManager.databaseManager.getUserProfile(userID: message.receiverId)
+                let initial = receiverUser?.username.first
                 CusColor.backcolor.edgesIgnoringSafeArea(.all)
                 VStack(alignment: .leading)  {
                 HStack(alignment: .top) {
-                    Image(systemName: "\(iconName).circle.fill")
+                    Image(systemName: "\(initial ?? "?").circle.fill")
                         .font(.largeTitle)
-                        .foregroundColor(.blue)
+                        .foregroundColor(.gray)
 
                     //Image(systemName: "\(iconName).circle.fill")
                       //  .font(.largeTitle)
@@ -80,6 +82,7 @@ struct MessageRow: View {
                         Text(message.body)
                             .font(Font.custom("Proxima Nova Rg Regular", size: 20))
                             .foregroundColor(Color("primaryColor"))
+                            .padding(.trailing, 50)
                         
                         }
                 }
@@ -117,10 +120,12 @@ struct MessageRow: View {
                         Text(message.body)
                             .font(Font.custom("Proxima Nova Rg Regular", size: 20))
                             .foregroundColor(Color("primaryColor"))
+                            .padding(.leading, 50)
                         
                         }
                     
-                        Image(systemName: "\(iconName).circle.fill")
+                    let initial = sessionManager.databaseManager.currentUser?.username.first
+                        Image(systemName: "\(initial ?? "?").circle.fill")
                             .font(.largeTitle)
                             .foregroundColor(.blue)
                     

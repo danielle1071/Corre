@@ -46,8 +46,8 @@ struct MessagesView: View {
                 Spacer()
             }
             VStack {
-                Text("\((sessionManager.databaseManager.getUserProfile(userID: friendId))?.username ?? "ERROR")")
-                    .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                Text("\((sessionManager.databaseManager.getUserProfile(userID: friendId))?.username.uppercased() ?? "ERROR")")
+                    .font(Font.custom("Proxima Nova Rg Regular", size: 25))
                     .foregroundColor(Color("primaryColor"))
                 ScrollView {
                     LazyVStack {
