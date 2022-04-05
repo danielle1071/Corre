@@ -61,33 +61,30 @@ final class SessionManger: ObservableObject {
     
     // MARK: getCurrentAuthUser
     func getCurrentAuthUser() {
-        
-        // some duck tape and glue :)
-        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
-            authState = .login
-        }
-        else if let user = Amplify.Auth.getCurrentUser() {
-            print("This is user: ", user)
-            if self.databaseManager.currentUser == nil {
-                print("database current user loaded is empty")
-                Task() {
-                        do {
-                            try await self.databaseManager.getUserProfile(user: user)
-                            try await self.databaseManager.createDeviceRecord()
-                            
-                            try await self.databaseManager.getEmergencyContacts()
-                            try await self.databaseManager.getRunnerRecords()
-                            self.databaseManager.getUserRunLogs()
-                        } catch {
-                            print("ERROR IN GET CURRENT AUTH USER")
-                        }
+        DispatchQueue.main.async {
+            // some duck tape and glue :)
+            if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+                self.authState = .login
+            }
+            else if let user = Amplify.Auth.getCurrentUser() {
+                print("This is user: ", user)
+                if self.databaseManager.currentUser == nil {
+                    print("database current user loaded is empty")
+                    Task() {
+                            do {
+                                try await self.databaseManager.getUserProfile(user: user)
+                                try await self.databaseManager.createDeviceRecord()
+                                try await self.databaseManager.getEmergencyContacts()
+                                try await self.databaseManager.getRunnerRecords()
+                                self.databaseManager.getUserRunLogs()
+                                try await self.databaseManager.getFriends()
+                            } catch {
+                                print("ERROR IN GET CURRENT AUTH USER")
+                            }
+                    }
                 }
-            }
-            DispatchQueue.main.async {
                 self.authState = .nav(user: user)
-            }
-        } else {
-            DispatchQueue.main.async {
+            } else {
                 self.authState = .landing
             }
         }
