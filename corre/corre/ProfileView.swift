@@ -152,7 +152,7 @@ struct ProfileView: View {
                                 .foregroundColor(Color("primaryColor"))
                                 .font(Font.custom("VarelaRound-Regular", size: 18))
                                 
-                            Text("Average Speed: \(run.averageSpeed!) m/s")
+                            Text("Average Speed: \(run.averageSpeed ?? 0.0) m/s")
                                 .listRowBackground(Color("orange"))
                                 .foregroundColor(Color("primaryColor"))
                                 .font(Font.custom("VarelaRound-Regular", size: 18))
