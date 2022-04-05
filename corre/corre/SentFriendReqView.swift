@@ -24,7 +24,7 @@ struct SentFriendReqView: View {
         VStack {
             HStack{
                 Button(action: {
-                    sessionManager.showFriendView()
+                    sessionManager.showSession()
                 }, label: {
                     Image(systemName: "arrow.left")
                         .renderingMode(.original)

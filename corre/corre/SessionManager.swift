@@ -92,7 +92,9 @@ final class SessionManger: ObservableObject {
     
     // MARK: showSignUp
     func showSignUp() {
-        authState = .signUp
+        DispatchQueue.main.async {
+            self.authState = .signUp
+        }
     }
     
     // MARK: signUp
@@ -173,7 +175,9 @@ final class SessionManger: ObservableObject {
     
     // MARK: showLogin
     func showLogin() {
-        authState = .login
+        DispatchQueue.main.async {
+            self.authState = .login
+        }
     }
     
     // MARK: login
@@ -243,12 +247,14 @@ final class SessionManger: ObservableObject {
     
     // MARK: showSession
     func showSession() {
-        if let user = Amplify.Auth.getCurrentUser() {
-            self.showNavBar()
-            databaseManager.getEmergencyContacts()
-//            authState = .session(user: user)
-        } else {
-            authState = .landing
+        DispatchQueue.main.async {
+            if let user = Amplify.Auth.getCurrentUser() {
+                self.showNavBar()
+                self.databaseManager.getEmergencyContacts()
+    //            authState = .session(user: user)
+            } else {
+                self.authState = .landing
+            }
         }
     }
     
@@ -256,40 +262,51 @@ final class SessionManger: ObservableObject {
     
     // MARK: showNavBar
     func showNavBar() {
-        if let user = Amplify.Auth.getCurrentUser() {
-            authState = .nav(user: user)
-        } else {
-            authState = .landing
+        DispatchQueue.main.async {
+            if let user = Amplify.Auth.getCurrentUser() {
+                self.authState = .nav(user: user)
+            } else {
+                self.authState = .landing
+            }
         }
     }
 
     
     // MARK: showRunning
     func showRunning(phoneNumber: String) {
-        authState = .running(phoneNumber: phoneNumber)
+        DispatchQueue.main.async {
+            self.authState = .running(phoneNumber: phoneNumber)
+        }
     }
     
     // MARK: showTrackContacts
     func showTrackContacts() {
-        authState = .trackContacts
+        DispatchQueue.main.async {
+            self.authState = .trackContacts
+        }
     }
     
     // MARK: showTrack
     func showTrack(userTrackingID: String) {
-        authState = .trackRunner(userTrackingID: userTrackingID)
+        DispatchQueue.main.async {
+            self.authState = .trackRunner(userTrackingID: userTrackingID)
+        }
     }
     
     // MARK: showProfile
     func showProfile() {
         if databaseManager.currentUser != nil {
-            authState = .profile
-            
+            DispatchQueue.main.async {
+                self.authState = .profile
+            }
             Task() {
                 do { await databaseManager.getUserRunLogs() }
                 catch { print("SessionManager -> showProfile -> ERROR IN SHOW SESSION") }
             }
         } else {
-            authState = .errV
+            DispatchQueue.main.async {
+                self.authState = .errV
+            }
         }
     }
     func showMessage(friendId: String) {
@@ -297,29 +314,32 @@ final class SessionManger: ObservableObject {
             getCurrentAuthUser()
         }
         let userId = databaseManager.currentUser!.id
-        authState = .messaging(userId: userId, friendId: friendId)
+        DispatchQueue.main.async {
+            self.authState = .messaging(userId: userId, friendId: friendId)
+        }
     }
     
     // MARK: showEmergencyContact
     func showEmergencyContact() {
         databaseManager.getEmergencyContacts()
-        authState = .emergencyContact(contacts: databaseManager.emergencyContacts)
-//        if let user = Amplify.Auth.getCurrentUser() {
-//            authState = .emergencyContact(user: user)
-//        } else {
-//            authState = .landing
-//        }
+        DispatchQueue.main.async {
+            self.authState = .emergencyContact(contacts: self.databaseManager.emergencyContacts)
+        }
     }
     
     // MARK: showFriendView
     func showFriendView() {
-        databaseManager.getFriends()
-        authState = .friendView
+        DispatchQueue.main.async {
+            self.databaseManager.getFriends()
+            self.authState = .friendView
+        }
     }
     
     func showMessageFriendView() {
-        databaseManager.getFriends()
-        authState = .messageFriendView
+        DispatchQueue.main.async{
+            self.databaseManager.getFriends()
+            self.authState = .messageFriendView
+        }
     }
     
     // MARK: showNotificationView
@@ -331,30 +351,41 @@ final class SessionManger: ObservableObject {
                 print("ERROR IN SHOW SESSION")
             }
         }
-        authState = .notification
+        DispatchQueue.main.async {
+            self.authState = .notification
+        }
     }
     
     func showPreRunning() {
-        authState = .preRun
+        DispatchQueue.main.async {
+            self.authState = .preRun
+        }
     }
     
 
     func showPendingRequests() {
         let listReqs = databaseManager.getFriendRequestsSent()
-        authState = .pendingReqs(requests: listReqs)
+        DispatchQueue.main.async {
+            self.authState = .pendingReqs(requests: listReqs)
+        }
 
     }
     func showEditContact(contact: EmergencyContact) {
-        authState = .editEmergencyContact(contact: contact)
-
+        DispatchQueue.main.async {
+            self.authState = .editEmergencyContact(contact: contact)
+        }
     }
     
     func showConfirmPassResetView(email: String){
-        authState = .confirmPassResetView(email: email)
+        DispatchQueue.main.async {
+            self.authState = .confirmPassResetView(email: email)
+        }
     }
     
     func showConfirmEmailView(){
-        authState = .confirmEmailView
+        DispatchQueue.main.async {
+            self.authState = .confirmEmailView
+        }
     }
 }
 
