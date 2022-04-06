@@ -137,31 +137,32 @@ struct ProfileView: View {
     
                 List{
                     ForEach(sessionManager.databaseManager.runs, id: \.id) { run in
-                        VStack {
-                            Text(" ")
+                        Section(header: Text("DATE")) {
+                            //Text(" ")
                             
                             // MARK: frontend help! super ugly!
                             Text("Date: 03/31/22 (placeholder)")
 //                            Text("Date: \(String(describing: run.createdAt!.foundationDate))")
-                                .listRowBackground(Color("orange"))
+                                //.listRowBackground(Color("orange"))
                                 .foregroundColor(Color("primaryColor"))
                                 .font(Font.custom("VarelaRound-Regular", size: 18))
                                 
                             Text("Distance: \(run.distance) m")
-                                .listRowBackground(Color("orange"))
+                               // .listRowBackground(Color("orange"))
                                 .foregroundColor(Color("primaryColor"))
                                 .font(Font.custom("VarelaRound-Regular", size: 18))
-                                
+                              
+                            /*
                             Text("Average Speed: \(run.averageSpeed!) m/s")
                                 .listRowBackground(Color("orange"))
                                 .foregroundColor(Color("primaryColor"))
                                 .font(Font.custom("VarelaRound-Regular", size: 18))
-                            
-                            Text(" ")
+                            */
+                            //Text(" ")
                         }
                     }
                 }
-                
+                .listRowBackground(Color("orange"))
             }
             .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
