@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct DashboardView: View {
+    
+    @EnvironmentObject var controller : ConnectionProvider
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")

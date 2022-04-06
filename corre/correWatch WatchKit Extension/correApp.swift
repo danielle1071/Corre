@@ -9,11 +9,25 @@ import SwiftUI
 
 @main
 struct correApp: App {
+    
+    @ObservedObject var connector = ConnectionProvider()
+    
+    init() {
+        connector.connect()
+        
+    }
+    
     @SceneBuilder var body: some Scene {
         WindowGroup {
-            NavigationView {
-                ContentView()
+            switch connector.controller.currentState {
+            case .landing:
+                LandingPageView()
+                    .environmentObject(connector)
+            case .loggedIn:
+                DashboardView()
+                    .environmentObject(connector)
             }
+             
         }
 
         WKNotificationScene(controller: NotificationController.self, category: "myCategory")

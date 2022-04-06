@@ -51,6 +51,12 @@ final class SessionManger: ObservableObject {
     @Published var authState: AuthState = .login
     @ObservedObject var databaseManager: DatabaseManager = DatabaseManager()
     @Published var loginValid = true
+    @Published var connect : ConnectionProvider
+    
+    init() {
+        connect = ConnectionProvider()
+        connect.connect()
+    }
     
     struct Address: Codable {
         var locality: String
@@ -82,10 +88,12 @@ final class SessionManger: ObservableObject {
                                 print("ERROR IN GET CURRENT AUTH USER")
                             }
                     }
+                    self.connect.controller.setState(currentState: .loggedIn)
                 }
                 self.authState = .nav(user: user)
             } else {
                 self.authState = .landing
+                self.connect.controller.setState(currentState: .landing)
             }
         }
     }
@@ -212,7 +220,8 @@ final class SessionManger: ObservableObject {
                         }
                     case .done:
                         print("Inside done")
-                    self?.loginValid = true
+                        self?.connect.controller.setState(currentState: .loggedIn)
+                        self?.loginValid = true
                         //print(Amplify.Auth.fetchUserAttributes())
                         DispatchQueue.main.async {
                             self?.getCurrentAuthUser()
@@ -236,6 +245,7 @@ final class SessionManger: ObservableObject {
             switch result {
             case .success:
                 self!.databaseManager.clearLocalDataOnSignOut()
+                self?.connect.controller.setState(currentState: .landing)
                 DispatchQueue.main.async {
                     self?.getCurrentAuthUser()
                 }
