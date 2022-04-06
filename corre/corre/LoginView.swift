@@ -110,16 +110,14 @@ struct LoginView: View {
                     username: login,
                     password: password
                 )
-                self.validLogin = sessionManager.loginValid
-               withAnimation(.default) {
-                   self.invalidAttempts += 1
-                   
-                   if !validLogin {
-                       Text("Error logging in")
-                           .font(.system(size: 16.0))
-                           .foregroundColor(Color.red)
-                   }
-              }
+                //MARK: Probably not the best way to do this, but it's a viable temp. fix 
+                DispatchQueue.main.asyncAfter(deadline:.now() + 0.7) {
+                    self.validLogin = sessionManager.loginValid
+                    print("Look at this boolean! \(self.validLogin)")
+                }
+//               withAnimation(.default) {
+//                   self.invalidAttempts += 1
+//              }
             }, label: {
                 Text("Login")
                     .padding([.horizontal], 147)
@@ -144,8 +142,12 @@ struct LoginView: View {
             .font(.custom("Proxima Nova Rg Regular", size: 18))
             Spacer()
             
-                    
-        } .background(CustomColor.backcolor.edgesIgnoringSafeArea(.all))
+            
+            
+        }
+        .background(CustomColor.backcolor.edgesIgnoringSafeArea(.all))
+            
+            
     }
     
 }
