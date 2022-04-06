@@ -143,12 +143,12 @@ struct ProfileView: View {
                             // MARK: frontend help! super ugly!
                             Text("Date: 03/31/22 (placeholder)")
 //                            Text("Date: \(String(describing: run.createdAt!.foundationDate))")
-                                //.listRowBackground(Color("orange"))
+                                .listRowBackground(Color("orange"))
                                 .foregroundColor(Color("primaryColor"))
                                 .font(Font.custom("VarelaRound-Regular", size: 18))
                                 
                             Text("Distance: \(run.distance) m")
-                               // .listRowBackground(Color("orange"))
+                                .listRowBackground(Color("orange"))
                                 .foregroundColor(Color("primaryColor"))
                                 .font(Font.custom("VarelaRound-Regular", size: 18))
                               
@@ -162,7 +162,7 @@ struct ProfileView: View {
                         }
                     }
                 }
-                .listRowBackground(Color("orange"))
+               // .listRowBackground(Color("orange"))
             }
             .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
