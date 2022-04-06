@@ -212,9 +212,10 @@ final class SessionManger: ObservableObject {
                         }
                     case .done:
                         print("Inside done")
-                    self?.loginValid = true
-                        //print(Amplify.Auth.fetchUserAttributes())
                         DispatchQueue.main.async {
+                            self?.loginValid = true
+                        //print(Amplify.Auth.fetchUserAttributes())
+                    
                             self?.getCurrentAuthUser()
                         }
                     
@@ -223,7 +224,9 @@ final class SessionManger: ObservableObject {
                 
                 
             case .failure(let error):
-                self?.loginValid = false
+                DispatchQueue.main.async {
+                    self?.loginValid = false
+                }
                 print("Login error:", error)
             }
         }
