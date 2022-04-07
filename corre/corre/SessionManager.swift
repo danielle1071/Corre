@@ -32,6 +32,7 @@ enum AuthState {
     case messageFriendView
     case confirmPassResetView(email: String)
     case confirmEmailView
+    case stopppedRunningView
 
 
 
@@ -390,6 +391,14 @@ final class SessionManger: ObservableObject {
             self.authState = .confirmEmailView
         }
     }
+    
+    
+    func showStoppedRunningView(){
+        DispatchQueue.main.async {
+            self.authState = .stopppedRunningView
+        }
+    }
+
 }
 
 // Need to build a list of friend users
