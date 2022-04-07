@@ -41,6 +41,7 @@ struct ProfileView: View {
         if !editing {
             VStack {
                 HStack{
+                   
                     Button (action: {
                             sessionManager.showSession()
                     }, label: {
@@ -52,10 +53,18 @@ struct ProfileView: View {
                             .font(.custom("Varela Round Regular", size: 18))
                             .foregroundColor(Color("primaryColor"))
                         })
-                        Spacer()
+                       
                         .foregroundColor(Color("primaryColor"))
-                        
-            
+                    
+                    
+                Button (action: {
+                    self.editing = !self.editing
+                }){
+                    Text("Edit")
+                        .font(.custom("Varela Round Regular", size: 18))
+                        .foregroundColor(Color("primaryColor"))
+                }
+                    Spacer()
                         Button (action: {
                             sessionManager.signOut()
                         }){
@@ -76,15 +85,17 @@ struct ProfileView: View {
                 .font(.custom("Varela Round Regular", size: 22))
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
+                .foregroundColor(Color("primaryColor"))
                 
-            Button (action: {
+           /*
+                Button (action: {
                 self.editing = !self.editing
             }){
                 Text("Edit")
                     .font(.custom("Varela Round Regular", size: 17))
-                    .foregroundColor(Color.blue)
+                    .foregroundColor(Color("primaryColor"))
             }
-            
+            */
                 
             VStack{
                 HStack{
@@ -121,7 +132,36 @@ struct ProfileView: View {
                         .foregroundColor(Color("primaryColor"))
                         .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
+                    Spacer()
                 }
+    
+                List{
+                    ForEach(sessionManager.databaseManager.runs, id: \.id) { run in
+                        VStack {
+                            Text(" ")
+                            
+                            // MARK: frontend help! super ugly!
+                            Text("Date: 03/31/22 (placeholder)")
+//                            Text("Date: \(String(describing: run.createdAt!.foundationDate))")
+                                .listRowBackground(Color("orange"))
+                                .foregroundColor(Color("primaryColor"))
+                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                                
+                            Text("Distance: \(run.distance) m")
+                                .listRowBackground(Color("orange"))
+                                .foregroundColor(Color("primaryColor"))
+                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                                
+                            Text("Average Speed: \(run.averageSpeed ?? 0.0) m/s")
+                                .listRowBackground(Color("orange"))
+                                .foregroundColor(Color("primaryColor"))
+                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                            
+                            Text(" ")
+                        }
+                    }
+                }
+                
             }
             .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
@@ -148,6 +188,7 @@ struct ProfileView: View {
         } else {
             VStack {
                 HStack{
+                   
                     Button (action: {
                             sessionManager.showSession()
                     }, label: {
@@ -161,6 +202,8 @@ struct ProfileView: View {
                         })
                         Spacer()
                         .foregroundColor(Color("primaryColor"))
+                    
+                    
                 }
                 .padding(.all)
                 
@@ -174,6 +217,7 @@ struct ProfileView: View {
                     .font(.custom("Varela Round Regular", size: 22))
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
+                    .foregroundColor(Color("primaryColor"))
                 
                 Text(" ")
                     .font(.custom("Varela Round Regular", size: 16))
@@ -261,7 +305,9 @@ struct ProfileView: View {
                 self.firstName = user?.firstName ?? ""
                 self.lastName = user?.lastName ?? ""
                 self.bio = user?.bio ?? ""
-            })
+            sessionManager.databaseManager.getUserRunLogs()
+        })
+            
         }
     }
     

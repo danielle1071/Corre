@@ -26,6 +26,7 @@ struct TrackContactsView: View {
     
     // MARK: deleteThis - this is temporary
     @State var userId = ""
+    @State private var showAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -56,10 +57,22 @@ struct TrackContactsView: View {
                 .font(.custom("Varela Round Regular", size: 22))
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
+                .foregroundColor(Color("primaryColor"))
+            
+            
+            // Text("🏃🏼‍♀️")
+            // Text("🧍🏼‍♀️")
             
             List(sessionManager.databaseManager.runners, id: \.id) {
                 item in
                 RunnerRow(emergencyContact: item)
+                    .alert(isPresented: $showAlert){
+                    Alert(
+                        title: Text("Oops!"),
+                        message: Text("This user is currently not running."),
+                        dismissButton: .default(Text("Got it!"))
+                    )
+                    }
                     .onTapGesture(perform: {
                         print("This is the item: \(item)")
                         let runCheck = sessionManager.databaseManager.checkIfRunning(userID: item.userID)
@@ -68,6 +81,7 @@ struct TrackContactsView: View {
                         } else {
                             
                             // MARK: user currently not running!
+                            showAlert = true
                             sessionManager.showTrackContacts()
                         }
                     })
@@ -121,8 +135,17 @@ struct TrackContactsView: View {
         var emergencyContact: EmergencyContact
         
         var body: some View {
-            
-            Text("\(sessionManager.databaseManager.getUserProfile(userID: emergencyContact.userID)?.username ?? "ERROR") ")
+            HStack{
+                Text("\(sessionManager.databaseManager.getUserProfile(userID: emergencyContact.userID)?.username ?? "ERROR") ")
+                let runCheck = sessionManager.databaseManager.checkIfRunning(userID: emergencyContact.userID)
+                if runCheck {
+                    Text("🏃‍♂️")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                } else {
+                    Text("🧍‍♂️")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+            }
         }
     }
     

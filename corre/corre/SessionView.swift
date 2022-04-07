@@ -23,8 +23,7 @@ struct SessionView: View {
     
     // @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
     let user: AuthUser
-    
-    
+     
     var body: some View {
 
         GeometryReader { geometry in
@@ -51,22 +50,6 @@ struct SessionView: View {
                     RoundedRectangle(cornerRadius: 20)
                     .stroke(CustomColor.primarycolor, lineWidth: 2)
                 )
-            
-            
-//            Spacer()
-//            Button("Profile", action: {
-//                sessionManager.showProfile()
-//            }).padding()
-//                .padding(.horizontal, 108)
-//                .foregroundColor(CustomColor.primarycolor)
-//                .background(CustomColor.backcolor)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 20)
-//                    .stroke(CustomColor.primarycolor, lineWidth: 2)
-//                )
-            
-//            Spacer()
-
             
 
             let gWidth = geometry.size.width
@@ -132,9 +115,10 @@ struct SessionView: View {
                        
                             // MARK: Header Name Line
                         Text("Hi \(sessionManager.databaseManager.currentUser?.username ?? "")")
-                                .font(.custom("Varela Round Regular", size: 40))
+                                .font(.custom("Varela Round Regular", size: 29))
                                 .foregroundColor(Color("primaryColor"))
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                
                                 
                             
                             HStack (spacing: (gWidth * 0.035)) {
@@ -169,15 +153,13 @@ struct SessionView: View {
                                 }
                             }
                         
-
-                        
                     }
                     
                     Text("Keep going. You can do it")
                         .font(.custom("Proxima Nova Rg Regular", size: 20))
                         .foregroundColor(Color("darkGray"))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.top], gWidth * -0.06)
+                        
                         .padding([.bottom], gWidth * 0.03)
                     
                     Image("header2")
@@ -188,6 +170,7 @@ struct SessionView: View {
                     // MARK: Start Run Button
                     Button(action: {
                     if sessionManager.databaseManager.emergencyContacts.isEmpty {
+                        print("!!@@## \(sessionManager.databaseManager.emergencyContacts)")
                         showingSheet.toggle()
                     } else {
                         sessionManager.showPreRunning()
@@ -199,7 +182,6 @@ struct SessionView: View {
                         .aspectRatio(contentMode: .fit)
                     }
                     .sheet(isPresented: $showingSheet, content: EmergencyPromptSheet.init)
-                   
     
                     // MARK: Track Runner Button
                     HStack (spacing: 20.0)
@@ -216,6 +198,7 @@ struct SessionView: View {
                         
                         Button(action: {
                         if sessionManager.databaseManager.emergencyContacts.isEmpty {
+                            print("!!@@## \(sessionManager.databaseManager.emergencyContacts)")
                             showingSheet.toggle()
                         } else {
                             sessionManager.showEmergencyContact()
@@ -253,7 +236,9 @@ struct EmergencyPromptSheet: View {
     @State var ecLast = ""
     @State var ecEmail = ""
     @State var ecPhone = ""
-
+    @State var userExist = true
+    @State var addYourself = false
+    
     var body: some View {
 
         GeometryReader { geometry in
@@ -274,34 +259,78 @@ struct EmergencyPromptSheet: View {
 
                 VStack (alignment: .center, spacing: 20){
                     Group {
-                            TextField("First Name", text: $ecFirst)
-                            TextField("Last Name", text: $ecLast)
-                            TextField("E-mail or Username", text: $ecEmail)
-                            TextField("Phone Number", text: $ecPhone)
+                        TextField("First Name", text: $ecFirst)
+                            .padding(geometry.size.height * 0.02)
+                            .padding([.horizontal], geometry.size.width * 0.08)
+                            .background(Color("backgroundColor"))
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color("lightGray"), lineWidth: 1)
+                                        .padding([.horizontal], geometry.size.width * 0.05)
+                            )
+                        TextField("Last Name", text: $ecLast)
+                            .padding(geometry.size.height * 0.02)
+                            .padding([.horizontal], geometry.size.width * 0.08)
+                            .background(Color("backgroundColor"))
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color("lightGray"), lineWidth: 1)
+                                        .padding([.horizontal], geometry.size.width * 0.05)
+                            )
+                        TextField("E-mail or Username", text: $ecEmail)
+                            .padding(geometry.size.height * 0.02)
+                            .padding([.horizontal], geometry.size.width * 0.08)
+                            .background(Color("backgroundColor"))
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color("lightGray"), lineWidth: 1)
+                                        .padding([.horizontal], geometry.size.width * 0.05)
+                            )
+                        if addYourself {
+                            Text("Error: Cannot Add Yourself")
+                                .font(.system(size: 10.0))
+                                .foregroundColor(Color.red)
+                            
+                        }
+                        if !userExist {
+                            Text("Error: User Not Found")
+                                .font(.system(size: 10.0))
+                                .foregroundColor(Color.red)
+                        }
+                        TextField("Phone Number", text: $ecPhone)
+                            .padding(geometry.size.height * 0.02)
+                            .padding([.horizontal], geometry.size.width * 0.08)
+                            .background(Color("backgroundColor"))
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color("lightGray"), lineWidth: 1)
+                                        .padding([.horizontal], geometry.size.width * 0.05)
+                            )
                     }
-                    .padding(geometry.size.height * 0.02)
-                    .padding([.horizontal], geometry.size.width * 0.08)
-                    .background(Color("backgroundColor"))
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color("lightGray"), lineWidth: 1)
-                                .padding([.horizontal], geometry.size.width * 0.05)
-                    )
+                    
                 }
 
                 Spacer()
                     .frame(height: geometry.size.height * 0.02)
                 Button("Create", action: {
+                    var user =
+                    sessionManager.databaseManager.getUserProfile(username: self.ecEmail.lowercased())
+                    if user == nil {
+                        addYourself = false
+                        sessionManager.databaseManager.getUserProfile(email: self.ecEmail.lowercased())
+                    }
+                    
+                    print("Here is the user in the emergency contact view: \(user)")
+                    if user != nil && sessionManager.databaseManager.currentUser != nil{
+                        userExist = true
+                            if sessionManager.databaseManager.currentUser!.id == user!.id {
+                                addYourself = true
+                            } else {
+                                addYourself = false
+                                sessionManager.databaseManager.sendEmergencyContactRequest(user: user!, firstName: ecFirst, lastName: ecLast, phoneNumber: ecPhone)
+                            close()
+                            }
+                        
+                    } else {
+                        userExist = false
+                    }
 
-
-                    sessionManager
-                        .databaseManager
-                        .createEmergencyContactRecord(
-                            firstName: ecFirst,
-                            lastName: ecLast,
-                            searchVal: ecEmail,
-                            phoneNumber: ecPhone
-                        )
-                    sessionManager.showEmergencyContact()
                 })
                     .font(.custom("Proxima Nova Rg Regular", size: 20))
                     .padding([.horizontal], geometry.size.width * 0.32)

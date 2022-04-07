@@ -49,9 +49,9 @@ struct ConfirmEmailView: View {
            
             TextField("E-mail", text: $email)
                 .frame(width: 320, height: 50)
-                .shadow(radius: 2.0)
+                .font(.custom("Proxima Nova Rg Regular", size: 20))
                 .padding([.horizontal], 10)
-//                    .background(.white)
+                .background(.white)
                 .cornerRadius(15)
                 .overlay(
                         RoundedRectangle(cornerRadius: 15)
@@ -69,12 +69,13 @@ struct ConfirmEmailView: View {
                     //MARK: Front end: display error "Email can't be empty"
                 }
             })
-            .padding([.horizontal], 150)
+            .padding([.horizontal], 147)
             .padding([.vertical],15)
             .foregroundColor(Color.white)
             .background(Color("primaryColor"))
             .cornerRadius(14)
             .padding([.top], 10)
+            .font(.custom("Proxima Nova Rg Regular", size: 20))
             
             
             
@@ -85,6 +86,7 @@ struct ConfirmEmailView: View {
                 sessionManager.showLogin()
             })
             .padding([.top], 5)
+            .font(.custom("Proxima Nova Rg Regular", size: 18))
         }
         .padding([.top], 40)
         .padding()

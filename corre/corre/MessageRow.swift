@@ -20,7 +20,7 @@ struct MessageRow: View {
     let message: Message
     let isCurrentUser: Bool
 
-    let iconName = "questionmark"
+    var iconName = "questionmark"
     /*
     private var iconName: String {
         if let initial = message.senderId//message.senderName.first{
@@ -46,45 +46,99 @@ struct MessageRow: View {
         
         static let lblue = Color("lightBlue")
     }
+    
     var body: some View {
-        ZStack{
-            CusColor.backcolor.edgesIgnoringSafeArea(.all)
-        VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                Image(systemName: "\(iconName).circle.fill")
-                    .font(.largeTitle)
-                    .foregroundColor(.blue)
+        if (sessionManager.databaseManager.currentUser?.id == message.receiverId) {
+            ZStack{
+                let receiverUser = sessionManager.databaseManager.getUserProfile(userID: message.receiverId)
+                let initial = receiverUser?.username.first
+                CusColor.backcolor.edgesIgnoringSafeArea(.all)
+                VStack(alignment: .leading)  {
+                HStack(alignment: .top) {
+                    Image(systemName: "\(initial ?? "?").circle.fill")
+                        .font(.largeTitle)
+                        .foregroundColor(.gray)
 
-                VStack(alignment: .leading) {
-                    Text("From: \((sessionManager.databaseManager.getUserProfile(userID: message.senderId))?.username ?? "ERROR")")
-                        .font(Font.custom("Proxima Nova Rg Regular", size: 20))
-                        .foregroundColor(Color("primaryColor"))
-                    //MARK: Time displays work, we just have to format it since it shows seconds since epoch
-                    //Text("Time: \(message.creationDate)")
-                        //.font(Font.custom("Proxima Nova Rg Regular", size: 20))
-                        //.foregroundColor(Color("primaryColor"))
-                    Text("To: \((sessionManager.databaseManager.getUserProfile(userID: message.receiverId))?.username ?? "ERROR")")
-                        .font(Font.custom("Proxima Nova Rg Regular", size: 20))
-                        .foregroundColor(Color("primaryColor"))
-                    //Text("Current User: \(sessionManager.databaseManager.currentUser?.username ?? "Error: User not found")")
-                    //    .font(Font.custom("Proxima Nova Rg Regular", size: 20))
-                    //    .foregroundColor(Color("primaryColor"))
+                    //Image(systemName: "\(iconName).circle.fill")
+                      //  .font(.largeTitle)
+                        //.foregroundColor(.blue)
 
-                    Text(message.body)
-                        .font(Font.custom("Proxima Nova Rg Regular", size: 15))
-                        .foregroundColor(Color("primaryColor"))
+                    VStack(alignment: .leading) {
+                        //MARK: To be deleted when page is final
+                        /*Text("From: \((sessionManager.databaseManager.getUserProfile(userID: message.senderId))?.username ?? "ERROR")")
+                            .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                            .foregroundColor(Color("primaryColor"))
+                        //MARK: Time displays work, we just have to format it since it shows seconds since epoch
+                        //Text("Time: \(message.creationDate)")
+                            //.font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                            //.foregroundColor(Color("primaryColor"))
+                        Text("To: \((sessionManager.databaseManager.getUserProfile(userID: message.receiverId))?.username ?? "ERROR")")
+                            .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                            .foregroundColor(Color("primaryColor"))
+                        //Text("Current User: \(sessionManager.databaseManager.currentUser?.username ?? "Error: User not found")")
+                        //    .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                        //    .foregroundColor(Color("primaryColor"))
+                        */
+                        Text(message.body)
+                            .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                            .foregroundColor(Color("primaryColor"))
+                            .padding(.trailing, 50)
                         
+                        }
                 }
-            }
-            .padding(.horizontal, 16)
+                .padding(.horizontal, 16)
 
-            Divider().padding(.leading, 16)
+                Divider().padding(.leading, 16)
+            }
+            .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
         }
-        .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+    } else {
+            ZStack{
+                CusColor.backcolor.edgesIgnoringSafeArea(.all)
+                VStack(alignment: .trailing)  {
+                HStack(alignment: .top) {
+                    //Image(systemName: "\(iconName).circle.fill")
+                      //  .font(.largeTitle)
+                        //.foregroundColor(.blue)
+
+                    VStack(alignment: .leading) {
+                        //MARK: To be deleted when page is final
+                        /*Text("From: \((sessionManager.databaseManager.getUserProfile(userID: message.senderId))?.username ?? "ERROR")")
+                            .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                            .foregroundColor(Color("primaryColor"))
+                        //MARK: Time displays work, we just have to format it since it shows seconds since epoch
+                        //Text("Time: \(message.creationDate)")
+                            //.font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                            //.foregroundColor(Color("primaryColor"))
+                        Text("To: \((sessionManager.databaseManager.getUserProfile(userID: message.receiverId))?.username ?? "ERROR")")
+                            .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                            .foregroundColor(Color("primaryColor"))
+                        //Text("Current User: \(sessionManager.databaseManager.currentUser?.username ?? "Error: User not found")")
+                        //    .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                        //    .foregroundColor(Color("primaryColor"))
+                        */
+                        Text(message.body)
+                            .font(Font.custom("Proxima Nova Rg Regular", size: 20))
+                            .foregroundColor(Color("primaryColor"))
+                            .padding(.leading, 50)
+                        
+                        }
+                    
+                    let initial = sessionManager.databaseManager.currentUser?.username.first
+                        Image(systemName: "\(initial ?? "?").circle.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.blue)
+                    
+                }
+                .padding(.horizontal, 16)
+
+                Divider().padding(.leading, 16)
+            }
+            .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+        }
     }
 }
 }
-
 /*
 struct MessageRow_Previews: PreviewProvider {
     static var previews: some View {

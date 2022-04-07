@@ -41,6 +41,8 @@ struct FriendView: View {
     var body: some View {
         VStack {
             HStack{
+               
+                /*
                 Button(action: {
                     sessionManager.showSession()
                 }, label: {
@@ -52,6 +54,8 @@ struct FriendView: View {
                         .foregroundColor(Color("primaryColor"))
                         .font(.custom("Varela Round Regular", size: 18))
                 })
+                */
+                
                 Spacer()
                         
                 Button ("View Sent Requests", action: {
@@ -59,6 +63,7 @@ struct FriendView: View {
                 })
                 .foregroundColor(Color("primaryColor"))
                 .font(.custom("Varela Round Regular", size: 18))
+               // Spacer()
             }
             .padding(.all)
             
@@ -85,10 +90,10 @@ struct FriendView: View {
                         .foregroundColor(Color("primaryColor"))
                 })
             }
-            .padding(.all)
+            .padding(.horizontal)
             
             
-            HStack {
+            VStack {
                 List{
                     ForEach(sessionManager.databaseManager.friends, id: \.id) { friend in
                         Text("\(friend.username)")
@@ -99,6 +104,7 @@ struct FriendView: View {
                     .onDelete(perform: self.delete)
                 }
             }
+            .frame(width: 400)
         }
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
     }
