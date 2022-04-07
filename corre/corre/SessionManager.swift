@@ -34,7 +34,7 @@ enum AuthState {
     case confirmEmailView
 
 
-
+    case friendProfileView(friend: User)
 
     case pendingReqs(requests: [Notification])
 
@@ -74,7 +74,7 @@ final class SessionManger: ObservableObject {
                         do {
                             try await self.databaseManager.getUserProfile(user: user)
                             try await self.databaseManager.createDeviceRecord()
-                            
+                            try await self.databaseManager.getFriends()
                             try await self.databaseManager.getEmergencyContacts()
                             try await self.databaseManager.getRunnerRecords()
                             self.databaseManager.getUserRunLogs()
@@ -376,6 +376,13 @@ final class SessionManger: ObservableObject {
     func showEditContact(contact: EmergencyContact) {
         DispatchQueue.main.async {
             self.authState = .editEmergencyContact(contact: contact)
+        }
+    }
+    func showFriendProfile(username: String) {
+        DispatchQueue.main.async {
+            let friend = self.databaseManager.getUserProfile(username: username)!
+            
+            self.authState = .friendProfileView(friend: friend)
         }
     }
     

@@ -287,20 +287,21 @@ struct RunningView: View {
                     .background(self.highlight ? Color.red : CusColor.primarycolor)
                     .clipShape(RoundedRectangle(cornerRadius: 25.0,
                                                 style: .circular))
+                    .onTapGesture(count: 1 ,perform:{
+                        showActionSheet = true
+                        print("YOO YOU TAPPED!")
+                    })
                     .gesture(longPress)
+                    
+                    // alert message if user taps stop run
+                    .alert(isPresented: $showActionSheet){
+                        Alert(
+                            title: Text("Important message!"),
+                            message: Text("Hold button to stop run."),
+                            dismissButton: .default(Text("Got it!"))
+                        )
+                    }
                 
-                .alert(isPresented: $showActionSheet){
-                    Alert(
-                        title: Text("Important message!"),
-                        message: Text("Hold button to stop run."),
-                        dismissButton: .default(Text("Got it!"))
-                    )
-                
-                }
-                .onTapGesture(count: 1 ,perform:{showActionSheet = true
-                
-               
-            })
             })
             
         }
