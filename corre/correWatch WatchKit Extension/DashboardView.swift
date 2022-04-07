@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DashboardView: View {
     
-    @EnvironmentObject var controller : ConnectionProvider
+    @EnvironmentObject var connector : ConnectionProvider
     
     struct CusColor {
         static let backcolor =
@@ -47,6 +47,7 @@ struct DashboardView: View {
                 }
 
                 Button(action:{
+                    print("USER ID ^^^^**** \(connector.controller.usrID)")
                 }, label: {
                     Text("Start Run")
                         .frame(width: 100, height: 40)
@@ -57,7 +58,9 @@ struct DashboardView: View {
                    
             Spacer()
             }
-        }
+        }.onAppear(perform: {
+            print("### %%% ### %%% \(connector.controller.usrID)")
+        })
     }
 }
 

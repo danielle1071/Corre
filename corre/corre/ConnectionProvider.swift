@@ -50,7 +50,7 @@ class ConnectionProvider: NSObject, WCSessionDelegate, ObservableObject {
     
     func sendStateUpdate() {
         NSKeyedArchiver.setClassName("Controller", for: WatchController.self)
-        let vState = try! NSKeyedArchiver.archivedData(withRootObject: controller)
+        let vState = try! NSKeyedArchiver.archivedData(withRootObject: controller, requiringSecureCoding: true)
         sendWatchMessage(vState)
     }
     
@@ -92,10 +92,12 @@ class ConnectionProvider: NSObject, WCSessionDelegate, ObservableObject {
             print("Controller no reply handler")
             
             NSKeyedUnarchiver.setClass(WatchController.self, forClassName: "Controller")
+            print("loadedData: \(loadedData)")
+            let loadedPerson = try! NSKeyedUnarchiver.unarchivedObject(ofClass: WatchController.self, from: loadedData as! Data)
             
-            let loadedPerson = try! NSKeyedUnarchiver.unarchivedObject(ofClass: WatchController.self, from: loadedData as! Data) as? WatchController
-            
-            self.controller = loadedPerson!
+            DispatchQueue.main.async {
+                self.controller = loadedPerson!
+            }
         }
         
     }

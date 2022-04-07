@@ -20,11 +20,15 @@ struct correApp: App {
     @SceneBuilder var body: some Scene {
         WindowGroup {
             switch connector.controller.currentState {
-            case .landing:
+            case "0":
                 LandingPageView()
                     .environmentObject(connector)
-            case .loggedIn:
+            case "1":
                 DashboardView()
+                    .environmentObject(connector)
+            
+            default:
+                LandingPageView()
                     .environmentObject(connector)
             }
              
