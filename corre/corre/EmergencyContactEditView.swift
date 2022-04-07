@@ -27,47 +27,105 @@ struct EmergencyContactEditView: View {
                 Text("Emergency Contacts")
                     .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/,40)
                     .foregroundColor(Color("primaryColor"))
-                    .font(.system(size: 26.0))
+                    .font(.custom("Proxima Nova Rg Regular", size: 26))
     
                 Spacer()
             }
             .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             }
             
+            Spacer()
+                .frame(height: 50)
             
             
-            Image("CreamLogo")
+            Image("emergencyContactLogo")
                 .resizable()
-                .frame(width: 200.0, height: 200.0)
+                .frame(width: 150.0, height: 150.0)
                 .scaledToFit()
             
+         
+                
             
             if contact.appUser ?? false {
                 Text("Username: \(self.contact.emergencyContactAppUsername ?? "No Username Found")")
-                    .font(.system(size: 36.0))
+                    .font(.custom("Proxima Nova Rg Regular", size: 36))
                     .foregroundColor(CustomColor.primarycolor)
             }
             
             Spacer()
-                .frame(height: 55)
+                .frame(height: 10)
+           
+            Text("\(contact.email)")
+                .foregroundColor(CustomColor.red)
+                .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/,30)
+                    //.shadow(radius: 2.0)
+                .font(.custom("Proxima Nova Rg Regular", size: 26))
             
+            Spacer()
+                .frame(height: 60)
+                
             
             Group {
             TextField("\(contact.firstName ?? "No First Name Saved")", text: $updateFirstName)
-            TextField("\(contact.lastName ?? "No Last Name Saved")", text: $updateLastName)
-            TextField("\(contact.email)", text: $updateEmail)
-            TextField("\(contact.phoneNumber)", text: $updatePhone)
-            
-            }.foregroundColor(CustomColor.primarycolor)
-                .background(Color.white)
-                .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/,30)
-                .shadow(radius: 2.0)
-                .font(.system(size: 20.0))
-                
-                
+                    .font(.custom("Proxima Nova Rg Regular", size: 22))
+                    .foregroundColor(CustomColor.primarycolor)
+                    .padding(8)
+                    .background(Color.white)
+                    .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(CustomColor.primarycolor)
+                        )
+                    .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/,30)
+                    //.shadow(radius: 2.0)
             
             Spacer()
-                .frame(height: 55)
+                    .frame(height: 30)
+                
+            TextField("\(contact.lastName ?? "No Last Name Saved")", text: $updateLastName)
+                    .font(.custom("Proxima Nova Rg Regular", size: 22))
+                    .foregroundColor(CustomColor.primarycolor)
+                    .padding(8)
+                    .background(Color.white)
+                    .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(CustomColor.primarycolor)
+                        )
+                    .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/,30)
+                    //.shadow(radius: 2.0)
+                
+            Spacer()
+                        .frame(height: 30)
+                
+            TextField("\(contact.phoneNumber)", text: $updatePhone)
+                    .font(.custom("Proxima Nova Rg Regular", size: 22))
+                    .foregroundColor(CustomColor.primarycolor)
+                    .padding(8)
+                    .background(Color.white)
+                    .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(CustomColor.primarycolor)
+                        )
+                    .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/,30)
+                    //.shadow(radius: 2.0)
+            
+            }
+            
+            /*.foregroundColor(CustomColor.primarycolor)
+                .font(.custom("Proxima Nova Rg Regular", size: 26))
+                .padding()
+                .background(Color.white)
+                .border(CustomColor.primarycolor)
+                .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/,30)
+                //.shadow(radius: 2.0)*/
+                
+            
+            
+            
+            Spacer()
+                .frame(height: 130)
             
             HStack{
                 
@@ -77,22 +135,22 @@ struct EmergencyContactEditView: View {
                 contact.phoneNumber = updatePhone
                 contact.email = updateEmail
                 sessionManager.databaseManager.updateEmergencyContact(contact: contact)
-            }).font(.system(size: 20.0))
+            }).font(.custom("Proxima Nova Rg Regular", size: 20))
+            .padding()
             
-            Text("       ")
                 
             Button("Delete Contact", action: {
                 sessionManager.databaseManager.deleteEmergencyContact(contactId: contact.id)
                 sessionManager.showEmergencyContact()
-            }).font(.system(size: 20.0))
+            }).font(.custom("Proxima Nova Rg Regular", size: 20))
                     .foregroundColor(CustomColor.red)
-                
+                .padding()
           }
             
         }.onAppear(perform: {
             self.updateFirstName = contact.firstName ?? ""
             self.updateLastName = contact.lastName ?? ""
-            self.updateEmail = contact.email
+            //self.updateEmail = contact.email
             self.updatePhone = contact.phoneNumber
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -32,6 +32,7 @@ enum AuthState {
     case messageFriendView
     case confirmPassResetView(email: String)
     case confirmEmailView
+    case stopppedRunningView
 
 
 
@@ -227,6 +228,9 @@ final class SessionManger: ObservableObject {
                         self?.loginValid = true
                         //print(Amplify.Auth.fetchUserAttributes())
                         DispatchQueue.main.async {
+                            self?.loginValid = true
+                        //print(Amplify.Auth.fetchUserAttributes())
+                    
                             self?.getCurrentAuthUser()
                         }
                     
@@ -235,7 +239,9 @@ final class SessionManger: ObservableObject {
                 
                 
             case .failure(let error):
-                self?.loginValid = false
+                DispatchQueue.main.async {
+                    self?.loginValid = false
+                }
                 print("Login error:", error)
             }
         }
@@ -402,6 +408,14 @@ final class SessionManger: ObservableObject {
             self.authState = .confirmEmailView
         }
     }
+    
+    
+    func showStoppedRunningView(){
+        DispatchQueue.main.async {
+            self.authState = .stopppedRunningView
+        }
+    }
+
 }
 
 // Need to build a list of friend users
