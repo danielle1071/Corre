@@ -394,9 +394,10 @@ final class SessionManger: ObservableObject {
     
     
     func showStoppedRunningView(){
-        authState = .stopppedRunningView
+        DispatchQueue.main.async {
+            self.authState = .stopppedRunningView
+        }
     }
-    
 
 }
 
