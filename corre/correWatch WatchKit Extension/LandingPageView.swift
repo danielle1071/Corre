@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LandingPageView: View {
+    
+    @EnvironmentObject var connector : ConnectionProvider
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")

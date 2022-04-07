@@ -76,6 +76,9 @@ struct NotificationView: View {
             }
         }
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+        .onAppear(perform: {
+            sessionManager.connect.sendStateUpdate()
+        })
     }
     
     func delete(_ indexSet: IndexSet) {
