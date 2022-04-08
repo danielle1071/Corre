@@ -12,7 +12,8 @@ import Foundation
 
 final class PostManager {
     
-    
+    //MARK: parameter should be formatted as:
+    //MARK: parameter = ["key":"value","key":"value",...]
     func post(parameter: Any, url: URL) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
