@@ -10,7 +10,7 @@ import SwiftUI
 struct DashboardView: View {
     
     @EnvironmentObject var connector : ConnectionProvider
-    
+    @ObservedObject var runMan = RunningManager()
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -61,6 +61,7 @@ struct DashboardView: View {
         }.onAppear(perform: {
             print("### %%% ### %%% \(connector.controller.usrID)")
         })
+            .onReceive(connector.$controller, perform: {_ in runMan.getEmergencyContacts(for: connector.controller.usrID)})
     }
 }
 
