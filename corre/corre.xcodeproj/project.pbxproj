@@ -42,6 +42,7 @@
 		4C0E53CA27712DBE001BEA58 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53C927712DBE001BEA58 /* LoginView.swift */; };
 		4C0E53CC27712DF3001BEA58 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */; };
 		4C36609527DE7C1C00D0B210 /* SentFriendReqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */; };
+		4C3821EF2800CF7200738A11 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3821EE2800CF7200738A11 /* PostManager.swift */; };
 		4C505BD427E8C8FD00815E85 /* animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4C505BD327E8C8FD00815E85 /* animation.gif */; };
 		4C792CCC2793140D00FDCF6E /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */; };
 		4C792CCD2793140D00FDCF6E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 4C792CCB2793140D00FDCF6E /* awsconfiguration.json */; };
@@ -57,6 +58,7 @@
 		4C9212DE28007AA8005EACC2 /* EmergencyContactResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9212DD28007AA8005EACC2 /* EmergencyContactResponseModel.swift */; };
 		4C9212E028009135005EACC2 /* ViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9212DF28009135005EACC2 /* ViewManager.swift */; };
 		4C9212E22800B2D4005EACC2 /* RunningStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9212E12800B2D4005EACC2 /* RunningStatusModel.swift */; };
+		4C9212E42800BC1A005EACC2 /* WatchLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9212E32800BC1A005EACC2 /* WatchLocationManager.swift */; };
 		4C99015B27BC071C00FE5D2B /* TrackerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99015A27BC071C00FE5D2B /* TrackerManager.swift */; };
 		4CA7D06527D5191F006B246C /* EmergencyContactEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA7D06427D5191F006B246C /* EmergencyContactEditView.swift */; };
 		4CAE029227B9BFD8007AF11C /* TrackRunnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */; };
@@ -202,6 +204,7 @@
 		4C0E53C927712DBE001BEA58 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		4C36609427DE7C1C00D0B210 /* SentFriendReqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentFriendReqView.swift; sourceTree = "<group>"; };
+		4C3821EE2800CF7200738A11 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		4C505BD327E8C8FD00815E85 /* animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = animation.gif; sourceTree = "<group>"; };
 		4C792CC62793136A00FDCF6E /* InterfaceBuilderKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilderKit.framework; path = Library/Frameworks/InterfaceBuilderKit.framework; sourceTree = DEVELOPER_DIR; };
 		4C792CCA2793140D00FDCF6E /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 		4C9212DD28007AA8005EACC2 /* EmergencyContactResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContactResponseModel.swift; sourceTree = "<group>"; };
 		4C9212DF28009135005EACC2 /* ViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewManager.swift; sourceTree = "<group>"; };
 		4C9212E12800B2D4005EACC2 /* RunningStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusModel.swift; sourceTree = "<group>"; };
+		4C9212E32800BC1A005EACC2 /* WatchLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLocationManager.swift; sourceTree = "<group>"; };
 		4C99015A27BC071C00FE5D2B /* TrackerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerManager.swift; sourceTree = "<group>"; };
 		4CA7D06427D5191F006B246C /* EmergencyContactEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContactEditView.swift; sourceTree = "<group>"; };
 		4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRunnerView.swift; sourceTree = "<group>"; };
@@ -463,6 +467,7 @@
 				DA05349827E16FE3000FA50B /* ErrorView.swift */,
 				D9F4613A27CAED030014E5EC /* ComplicationController.swift */,
 				4C9212D52800688E005EACC2 /* NetworkManager.swift */,
+				4C3821EE2800CF7200738A11 /* PostManager.swift */,
 				D9F4613C27CAED050014E5EC /* Assets.xcassets */,
 				D9F4614127CAED050014E5EC /* Info.plist */,
 				D9F4614227CAED050014E5EC /* PushNotificationPayload.apns */,
@@ -473,6 +478,7 @@
 				4C9212D9280074CE005EACC2 /* RunningManager.swift */,
 				4C9212E12800B2D4005EACC2 /* RunningStatusModel.swift */,
 				4C9212DF28009135005EACC2 /* ViewManager.swift */,
+				4C9212E32800BC1A005EACC2 /* WatchLocationManager.swift */,
 			);
 			path = "correWatch WatchKit Extension";
 			sourceTree = "<group>";
@@ -786,12 +792,14 @@
 				DA921C2827CFF62200A4AE50 /* RunningView.swift in Sources */,
 				4C9212D828006AF5005EACC2 /* TestNetworkResponseModel.swift in Sources */,
 				4C9212E22800B2D4005EACC2 /* RunningStatusModel.swift in Sources */,
+				4C9212E42800BC1A005EACC2 /* WatchLocationManager.swift in Sources */,
 				4C7E8BAB27FE285B006A5357 /* ConnectionProvider.swift in Sources */,
 				4C9212DA280074CE005EACC2 /* RunningManager.swift in Sources */,
 				D9F4613727CAED030014E5EC /* NotificationController.swift in Sources */,
 				4C9212D62800688E005EACC2 /* NetworkManager.swift in Sources */,
 				DA921C2427CFF57200A4AE50 /* LandingPageView.swift in Sources */,
 				D9F4613527CAED030014E5EC /* ContentView.swift in Sources */,
+				4C3821EF2800CF7200738A11 /* PostManager.swift in Sources */,
 				4C9212DE28007AA8005EACC2 /* EmergencyContactResponseModel.swift in Sources */,
 				DA921C2627CFF5CE00A4AE50 /* DashboardView.swift in Sources */,
 				DA05349927E16FE3000FA50B /* ErrorView.swift in Sources */,

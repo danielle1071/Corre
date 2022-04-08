@@ -12,8 +12,12 @@ struct RunningView: View {
     
     @EnvironmentObject var connector : ConnectionProvider
     @EnvironmentObject var viewManager : ViewManager
+    @ObservedObject var locationManager = WatchLocationManager()
     var phone : String
     var runMan : RunningManager
+    
+    
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -109,6 +113,10 @@ struct RunningView: View {
                 self.viewManager.setError()
             }
         })
+            .onReceive(locationManager.$coordinate, perform: {_ in
+                print ("Here are the cords: \(locationManager.coordinate)")
+            })
+            
             
     }
 }

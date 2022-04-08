@@ -12,6 +12,7 @@ struct correApp: App {
     
     @ObservedObject var connector = ConnectionProvider()
     @ObservedObject var viewManager = ViewManager()
+//    @ObservedObject var locationManager = WatchLocationManager()
     init() {
         connector.connect()
         
@@ -41,6 +42,7 @@ struct correApp: App {
                 RunningView(phone: number, runMan: runMan)
                     .environmentObject(connector)
                     .environmentObject(viewManager)
+//                    .environmentObject(locationManager)
             case .error:
                 ErrorView()
                     .environmentObject(connector)

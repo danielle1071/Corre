@@ -44,6 +44,7 @@ final class NetworkManager<T: Codable> {
             }
         }.resume()
     }
+    
 }
 
 enum NetworkError: Error {
