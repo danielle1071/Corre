@@ -33,7 +33,12 @@ struct SelectContactView: View {
            
                 List(runMan.emergencyContacts.emergencyContacts, id: \.id) { emergencyContact in
                     Button (action: {
-                        self.viewManager.setRunning(number: emergencyContact.phoneNumber)
+                        
+                        if runMan.runningStatus.status == "RUNNING" {
+                            self.viewManager.setError()
+                        }
+                        
+                        self.viewManager.setRunning(number: emergencyContact.phoneNumber, runMan: self.runMan)
                     }){
                         HStack{
                             VStack{

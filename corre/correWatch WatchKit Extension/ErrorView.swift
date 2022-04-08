@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ErrorView: View {
+    @EnvironmentObject var viewManager : ViewManager
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -26,18 +27,27 @@ struct ErrorView: View {
         Text("Oops!")
         .foregroundColor(Color("primaryColor"))
         .font(.system(size: 30.0))
-            Text("Log in needed to start a run!")
+            Text("Looks Like Something")
+                .font(.system(size: 12.0))
+                .foregroundColor(CusColor.primarycolor)
+            Text("  Went Wrong!")
                 .font(.system(size: 12.0))
                 .foregroundColor(CusColor.primarycolor)
             
             
-            
             Image("CreamLogo")
             .resizable()
-            .frame(width: 140.0, height: 140.0)
+            .frame(width: 100.0, height: 100.0)
             .scaledToFit()
             
             Spacer()
+            Button(action: {
+                self.viewManager.setDashboard()
+            }, label: {
+                Text("Back")
+                    .font(.system(size: 12.0))
+                    .foregroundColor(CusColor.primarycolor)
+            })
         }
        
     }

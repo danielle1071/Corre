@@ -10,20 +10,10 @@ import Combine
 
 final class RunningManager: ObservableObject {
     
-//    @Published var emergencyContactList = TestNetworkResponseModel(usrID: "")
+
     @Published var emergencyContacts = EmergencyContactResponseModel(emergencyContacts: [])
-//    func getNetworkCall(for id: String) {
-//        let url = URL(string: "https://vmt4adr728.execute-api.us-east-1.amazonaws.com/dev/correres?usrID=\(id)")!
-//        NetworkManager<TestNetworkResponseModel>().fetch(for: url) { (result) in
-//            switch result {
-//            case .failure(let err):
-//                print(err.localizedDescription)
-//            case .success(let resp):
-//                self.emergencyContactList = resp
-//                print("RESPONSE DATA FROM NETWORK CALL : \(self.emergencyContactList)")
-//            }
-//        }
-//    }
+    @Published var runningStatus = RunningStatusModel()
+    
     
     func getEmergencyContacts(for id: String) {
         let url = URL(string: "https://vmt4adr728.execute-api.us-east-1.amazonaws.com/dev/correres?usrID=\(id)")!
@@ -37,4 +27,18 @@ final class RunningManager: ObservableObject {
             }
         }
     }
+    
+    func getRunningStatus(for id: String) {
+        let url = URL(string: "https://vmt4adr728.execute-api.us-east-1.amazonaws.com/dev/getstatus?usrID=\(id)")!
+        NetworkManager<RunningStatusModel>().fetch(for: url) { (result) in
+            switch result {
+            case .failure(let err):
+                print(err.localizedDescription)
+            case .success(let resp):
+                self.runningStatus = resp
+                print("RESPONSE DATA FROM STATUS NETWORK CALL : \(self.runningStatus)")
+            }
+        }
+    }
+    
 }

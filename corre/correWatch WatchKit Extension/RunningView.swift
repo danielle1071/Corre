@@ -13,7 +13,7 @@ struct RunningView: View {
     @EnvironmentObject var connector : ConnectionProvider
     @EnvironmentObject var viewManager : ViewManager
     var phone : String
-    
+    var runMan : RunningManager
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -103,7 +103,13 @@ struct RunningView: View {
                     
             Spacer()
             }
-        }
+        }.onAppear(perform: {
+            print("Running Status: \(self.runMan.runningStatus)")
+            if self.runMan.runningStatus.status == "RUNNING" {
+                self.viewManager.setError()
+            }
+        })
+            
     }
 }
 

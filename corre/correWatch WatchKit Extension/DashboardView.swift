@@ -50,6 +50,7 @@ struct DashboardView: View {
                 if !runMan.emergencyContacts.emergencyContacts.isEmpty {
                     Button(action:{
                         print("USER ID ^^^^**** \(connector.controller.usrID)")
+                        self.runMan.getRunningStatus(for: connector.controller.usrID)
                         self.viewManager.setSelectRunner(runManager: runMan)
                     }, label: {
                         Text("Start Run")
