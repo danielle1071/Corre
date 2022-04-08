@@ -37,9 +37,10 @@ struct correApp: App {
                 SelectContactView(runMan: manager)
                     .environmentObject(connector)
                     .environmentObject(viewManager)
-            case .running:
-                RunningView()
-//                    .environmentObject(connector)
+            case .running(let number):
+                RunningView(phone: number)
+                    .environmentObject(connector)
+                    .environmentObject(viewManager)
             case .error:
                 ErrorView()
 //                    .environmentObject(connector)

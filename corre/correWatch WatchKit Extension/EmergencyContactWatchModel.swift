@@ -8,6 +8,7 @@
 import Foundation
 
 struct EmergencyContactWatchModel: Codable {
+    var id: String
     var firstName: String
     var lastName: String
     var phoneNumber: String

@@ -31,20 +31,43 @@ struct SelectContactView: View {
                     .foregroundColor(Color("primaryColor"))
                 }
            
-                List {
-                Button (action: {}){
-                    HStack{
-                        Text("Jane Doe")
-                            .foregroundColor(Color("primaryColor"))
-                        Spacer()
-                        Image(systemName: "arrow.right")
-                            .foregroundColor(Color("primaryColor"))
-                    }
-                   
-                    }
-                .listRowBackground(Color.clear)
-                    }
+                List(runMan.emergencyContacts.emergencyContacts, id: \.id) { emergencyContact in
+                    Button (action: {
+                        self.viewManager.setRunning(number: emergencyContact.phoneNumber)
+                    }){
+                        HStack{
+                            VStack{
+                                Text("\(emergencyContact.firstName)")
+                                    .foregroundColor(Color("primaryColor"))
+                                Text("\(emergencyContact.lastName)")
+                                    .foregroundColor(Color("primaryColor"))
+                            }
+                            Spacer()
+                            Image(systemName: "arrow.right")
+                                .foregroundColor(Color("primaryColor"))
+                        }
+                       
+                        }
+                    .listRowBackground(Color.clear)
+                }
+                
+//                List {
+//                Button (action: {
+//
+//                }){
+//                    HStack{
+//                        Text("Jane Doe")
+//                            .foregroundColor(Color("primaryColor"))
+//                        Spacer()
+//                        Image(systemName: "arrow.right")
+//                            .foregroundColor(Color("primaryColor"))
+//                    }
+//
+//                    }
+//                .listRowBackground(Color.clear)
+//                    }
                 Button(action:{
+                    viewManager.setDashboard()
                 }, label: {
                     Text("Back")
                         .fontWeight(.bold)

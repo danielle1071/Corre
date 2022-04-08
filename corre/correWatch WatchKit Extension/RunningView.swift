@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct RunningView: View {
+    
+    
+    @EnvironmentObject var connector : ConnectionProvider
+    @EnvironmentObject var viewManager : ViewManager
+    var phone : String
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -17,7 +23,7 @@ struct RunningView: View {
         static let lblue = Color("lightBlue")
     }
    // emergency contact phone number example
-    var phone = "718-555-5555"
+    
     var body: some View {
         ZStack{
             CusColor.backcolor
@@ -29,14 +35,14 @@ struct RunningView: View {
                     Text("Distance: 0 mi")
                         .foregroundColor(CusColor.primarycolor)
                         .font(.system(size: 12.0))
-                        .padding(/*@START_MENU_TOKEN@*/[.top, .leading, .trailing]/*@END_MENU_TOKEN@*/)
+                        .padding(.all)
                     Spacer()
                 }
                 HStack{
                     Text("Speed: 0 m/s")
                         .foregroundColor(CusColor.primarycolor)
                         .font(.system(size: 12.0))
-                        .padding(/*@START_MENU_TOKEN@*/[.top, .leading, .trailing]/*@END_MENU_TOKEN@*/)
+                        .padding(.all)
                Spacer()
                 }
                 
@@ -44,7 +50,7 @@ struct RunningView: View {
                     Text("Heart Rate: 0 bpm")
                         .foregroundColor(CusColor.primarycolor)
                         .font(.system(size: 12.0))
-                        .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                        .padding(.all)
                         
                     Image(systemName: "bolt.heart.fill")
                     .resizable()
@@ -57,17 +63,28 @@ struct RunningView: View {
                 
                 
                
-                
+                HStack {
                 
                 Button(action:{
                 }, label: {
                     Text("Pause Run")
-                        .frame(width: 120, height: 40)
+                        .frame(width: 90, height: 40)
                         .foregroundColor(Color.white)
                         .background(CusColor.primarycolor)
                         .clipShape(Capsule())
                 })
                 
+                
+                Button(action:{
+                }, label: {
+                    Text("End Run")
+                        .frame(width: 90, height: 40)
+                        .foregroundColor(Color.white)
+                        .background(CusColor.primarycolor)
+                        .clipShape(Capsule())
+                })
+                
+                }
                 
                 Button(action:{
                     if let telURL = URL(string: "tel:\(phone)") {
@@ -90,8 +107,8 @@ struct RunningView: View {
     }
 }
 
-struct RunningView_Previews: PreviewProvider {
-    static var previews: some View {
-        RunningView()
-    }
-}
+//struct RunningView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RunningView()
+//    }
+//}

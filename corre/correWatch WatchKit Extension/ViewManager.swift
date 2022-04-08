@@ -12,7 +12,7 @@ enum Views {
     case landing
     case dashboard
     case selectContact(runManager: RunningManager)
-    case running
+    case running(number: String)
     case error
 }
 
@@ -35,6 +35,12 @@ class ViewManager: ObservableObject {
     func setLanding() {
         DispatchQueue.main.async {
             self.currentView = .landing
+        }
+    }
+    
+    func setRunning(number: String) {
+        DispatchQueue.main.async {
+            self.currentView = .running(number: number)
         }
     }
 }
