@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct SelectContactView: View {
+    
+    @EnvironmentObject var connector : ConnectionProvider
+    @EnvironmentObject var viewManager : ViewManager
+    var runMan : RunningManager
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -55,8 +60,8 @@ struct SelectContactView: View {
     }
 
 
-struct SelectContactView_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectContactView()
-    }
-}
+//struct SelectContactView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SelectContactView()
+//    }
+//}

@@ -50,6 +50,12 @@
 		4C7E8BA827FE21EF006A5357 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7E8BA727FE21EF006A5357 /* WatchConnectivity.framework */; };
 		4C7E8BAB27FE285B006A5357 /* ConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7E8BA527FE217B006A5357 /* ConnectionProvider.swift */; };
 		4C7E8BAC27FE285B006A5357 /* WatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7E8BA327FE1610006A5357 /* WatchController.swift */; };
+		4C9212D62800688E005EACC2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9212D52800688E005EACC2 /* NetworkManager.swift */; };
+		4C9212D828006AF5005EACC2 /* TestNetworkResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9212D728006AF5005EACC2 /* TestNetworkResponseModel.swift */; };
+		4C9212DA280074CE005EACC2 /* RunningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9212D9280074CE005EACC2 /* RunningManager.swift */; };
+		4C9212DC28007A28005EACC2 /* EmergencyContactWatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9212DB28007A28005EACC2 /* EmergencyContactWatchModel.swift */; };
+		4C9212DE28007AA8005EACC2 /* EmergencyContactResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9212DD28007AA8005EACC2 /* EmergencyContactResponseModel.swift */; };
+		4C9212E028009135005EACC2 /* ViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9212DF28009135005EACC2 /* ViewManager.swift */; };
 		4C99015B27BC071C00FE5D2B /* TrackerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C99015A27BC071C00FE5D2B /* TrackerManager.swift */; };
 		4CA7D06527D5191F006B246C /* EmergencyContactEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA7D06427D5191F006B246C /* EmergencyContactEditView.swift */; };
 		4CAE029227B9BFD8007AF11C /* TrackRunnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */; };
@@ -204,6 +210,12 @@
 		4C7E8BA727FE21EF006A5357 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
 		4C7E8BA927FE21FF006A5357 /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.3.sdk/System/Library/Frameworks/WatchKit.framework; sourceTree = DEVELOPER_DIR; };
 		4C7E8BAA27FE21FF006A5357 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.3.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
+		4C9212D52800688E005EACC2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4C9212D728006AF5005EACC2 /* TestNetworkResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNetworkResponseModel.swift; sourceTree = "<group>"; };
+		4C9212D9280074CE005EACC2 /* RunningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningManager.swift; sourceTree = "<group>"; };
+		4C9212DB28007A28005EACC2 /* EmergencyContactWatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContactWatchModel.swift; sourceTree = "<group>"; };
+		4C9212DD28007AA8005EACC2 /* EmergencyContactResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContactResponseModel.swift; sourceTree = "<group>"; };
+		4C9212DF28009135005EACC2 /* ViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewManager.swift; sourceTree = "<group>"; };
 		4C99015A27BC071C00FE5D2B /* TrackerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerManager.swift; sourceTree = "<group>"; };
 		4CA7D06427D5191F006B246C /* EmergencyContactEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContactEditView.swift; sourceTree = "<group>"; };
 		4CAE029127B9BFD8007AF11C /* TrackRunnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRunnerView.swift; sourceTree = "<group>"; };
@@ -355,9 +367,6 @@
 		4C0E53A32770FE6F001BEA58 /* corre */ = {
 			isa = PBXGroup;
 			children = (
-				
-				4C0E53C527712D7B001BEA58 /* SessionManager.swift */,
-				
 				4C505BD327E8C8FD00815E85 /* animation.gif */,
 				4C0E53A82770FE70001BEA58 /* Assets.xcassets */,
 				4C0E53CB27712DF3001BEA58 /* ConfirmationView.swift */,
@@ -451,10 +460,16 @@
 				DA05349627E16F62000FA50B /* SelectContactView.swift */,
 				DA05349827E16FE3000FA50B /* ErrorView.swift */,
 				D9F4613A27CAED030014E5EC /* ComplicationController.swift */,
+				4C9212D52800688E005EACC2 /* NetworkManager.swift */,
 				D9F4613C27CAED050014E5EC /* Assets.xcassets */,
 				D9F4614127CAED050014E5EC /* Info.plist */,
 				D9F4614227CAED050014E5EC /* PushNotificationPayload.apns */,
 				D9F4613E27CAED050014E5EC /* Preview Content */,
+				4C9212D728006AF5005EACC2 /* TestNetworkResponseModel.swift */,
+				4C9212DB28007A28005EACC2 /* EmergencyContactWatchModel.swift */,
+				4C9212DD28007AA8005EACC2 /* EmergencyContactResponseModel.swift */,
+				4C9212D9280074CE005EACC2 /* RunningManager.swift */,
+				4C9212DF28009135005EACC2 /* ViewManager.swift */,
 			);
 			path = "correWatch WatchKit Extension";
 			sourceTree = "<group>";
@@ -764,15 +779,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C9212E028009135005EACC2 /* ViewManager.swift in Sources */,
 				DA921C2827CFF62200A4AE50 /* RunningView.swift in Sources */,
+				4C9212D828006AF5005EACC2 /* TestNetworkResponseModel.swift in Sources */,
 				4C7E8BAB27FE285B006A5357 /* ConnectionProvider.swift in Sources */,
+				4C9212DA280074CE005EACC2 /* RunningManager.swift in Sources */,
 				D9F4613727CAED030014E5EC /* NotificationController.swift in Sources */,
+				4C9212D62800688E005EACC2 /* NetworkManager.swift in Sources */,
 				DA921C2427CFF57200A4AE50 /* LandingPageView.swift in Sources */,
 				D9F4613527CAED030014E5EC /* ContentView.swift in Sources */,
+				4C9212DE28007AA8005EACC2 /* EmergencyContactResponseModel.swift in Sources */,
 				DA921C2627CFF5CE00A4AE50 /* DashboardView.swift in Sources */,
 				DA05349927E16FE3000FA50B /* ErrorView.swift in Sources */,
 				4C7E8BAC27FE285B006A5357 /* WatchController.swift in Sources */,
 				D9F4613B27CAED030014E5EC /* ComplicationController.swift in Sources */,
+				4C9212DC28007A28005EACC2 /* EmergencyContactWatchModel.swift in Sources */,
 				D9F4613327CAED030014E5EC /* correApp.swift in Sources */,
 				D9F4613927CAED030014E5EC /* NotificationView.swift in Sources */,
 				DA05349727E16F62000FA50B /* SelectContactView.swift in Sources */,
