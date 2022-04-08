@@ -10,6 +10,7 @@ import SwiftUI
 struct DashboardView: View {
     
     @EnvironmentObject var connector : ConnectionProvider
+    @EnvironmentObject var viewManager : ViewManager
     @ObservedObject var runMan = RunningManager()
     struct CusColor {
         static let backcolor =
@@ -46,22 +47,30 @@ struct DashboardView: View {
                 
                 }
 
-                Button(action:{
-                    print("USER ID ^^^^**** \(connector.controller.usrID)")
-                }, label: {
-                    Text("Start Run")
-                        .frame(width: 100, height: 40)
-                        .foregroundColor(Color.white)
-                        .background(CusColor.primarycolor)
-                        .clipShape(Capsule())
-                })
+                if !runMan.emergencyContacts.emergencyContacts.isEmpty {
+                    Button(action:{
+                        print("USER ID ^^^^**** \(connector.controller.usrID)")
+                        self.viewManager.setSelectRunner(runManager: runMan)
+                    }, label: {
+                        Text("Start Run")
+                            .frame(width: 100, height: 40)
+                            .foregroundColor(Color.white)
+                            .background(CusColor.primarycolor)
+                            .clipShape(Capsule())
+                    })
+                } else {
+                    Text("If no run button appears, head to the phone app and add emergency contacts or sign in")
+                        .foregroundColor(Color.red)
+                }
                    
             Spacer()
             }
         }.onAppear(perform: {
             print("### %%% ### %%% \(connector.controller.usrID)")
         })
-            .onReceive(connector.$controller, perform: {_ in runMan.getEmergencyContacts(for: connector.controller.usrID)})
+            .onReceive(connector.$controller, perform: {_ in runMan.getEmergencyContacts(for: connector.controller.usrID)
+            })
+
     }
 }
 

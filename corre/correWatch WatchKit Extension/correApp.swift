@@ -11,29 +11,47 @@ import SwiftUI
 struct correApp: App {
     
     @ObservedObject var connector = ConnectionProvider()
-    
+    @ObservedObject var viewManager = ViewManager()
     init() {
         connector.connect()
+        
+            if self.connector.controller.currentState == "1" {
+                self.viewManager.setDashboard()
+            }
+            
         
     }
     
     @SceneBuilder var body: some Scene {
         WindowGroup {
-            switch connector.controller.currentState {
-            case "0":
+            switch viewManager.currentView {
+            case .landing:
                 LandingPageView()
                     .environmentObject(connector)
-            case "1":
+                    .environmentObject(viewManager)
+            case .dashboard:
                 DashboardView()
                     .environmentObject(connector)
-            
+                    .environmentObject(viewManager)
+            case .selectContact(let manager):
+                SelectContactView(runMan: manager)
+                    .environmentObject(connector)
+                    .environmentObject(viewManager)
+            case .running:
+                RunningView()
+//                    .environmentObject(connector)
+            case .error:
+                ErrorView()
+//                    .environmentObject(connector)
+                    
             default:
                 LandingPageView()
                     .environmentObject(connector)
+                    .environmentObject(viewManager)
             }
              
         }
 
-        WKNotificationScene(controller: NotificationController.self, category: "myCategory")
+//        WKNotificationScene(controller: NotificationController.self, category: "myCategory")
     }
 }

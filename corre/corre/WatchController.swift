@@ -10,6 +10,7 @@ import UIKit
 //MARK: String Definitions Since enums can't be encoded!
 //MARK: Landing  === 0
 //MARK: Dashboard === 1
+//MARK: SelectRunner == 2
 
 public class WatchController: NSObject, ObservableObject, NSSecureCoding {
     public static var supportsSecureCoding: Bool = true
