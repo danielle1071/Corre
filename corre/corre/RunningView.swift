@@ -13,7 +13,7 @@ import AmplifyMapLibreUI
 
 
 struct RunningView: View {
-    var DEBUG = true
+    var DEBUG = false
     
     // map
     @EnvironmentObject var sessionManager: SessionManger
