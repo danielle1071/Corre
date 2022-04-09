@@ -913,7 +913,13 @@ class DatabaseManager: ObservableObject {
             }
         }
         
-        let count = currentUser!.friends?.count ?? 0
+        var count = 0
+        if (currentUser != nil) {
+            if (currentUser!.friends != nil) {
+                let count = currentUser!.friends!.count
+            }
+        }
+       
         print("This is count: \(count)")
         let usrKeys = User.keys
         var retArr = [User]()
