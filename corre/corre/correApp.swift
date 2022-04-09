@@ -73,9 +73,17 @@ struct correApp: App {
             case .landing:
                 LandingView()
                     .environmentObject(sessionManager)
-            case .running(let phoneNumber):
-                RunningView(phoneNumber: phoneNumber)
+            case .selectTime(let phoneNumber):
+                SelectTimeView(phoneNumber: phoneNumber)
                     .environmentObject(sessionManager)
+            case .running(let phoneNumber, let selectedHours, let selectedMins):
+                RunningView(phoneNumber: phoneNumber,
+                            selectedHours: selectedHours,
+                            selectedMins: selectedMins)
+                    .environmentObject(sessionManager)
+//            case .running(let phoneNumber):
+//                RunningView(phoneNumber: phoneNumber)
+//                    .environmentObject(sessionManager)
             case .profile:
                 ProfileView()
                     .environmentObject(sessionManager)

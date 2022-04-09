@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct SelectTimeView: View {
+    
+    @EnvironmentObject var sessionManager: SessionManger
+    
+    // MARK: from PreRunningView
+    @State var phoneNumber: String
+
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -19,7 +25,7 @@ struct SelectTimeView: View {
     var hours = Array(0...23)
        var min = Array(0...59)
        
-    @State var selectedHours:Int = 0
+    @State var selectedHours: Int = 0
     @State var selectedMins: Int = 0
    
     
@@ -29,15 +35,18 @@ struct SelectTimeView: View {
            CusColor.backcolor.edgesIgnoringSafeArea(.all)
         VStack{
             HStack{
+                Button(action: {
+                    sessionManager.showPreRunning()
+                }, label: {
                 Image(systemName: "arrow.left")
-                .renderingMode(.original)
-                .edgesIgnoringSafeArea(.all)
-                .foregroundColor(Color("primaryColor"))
-                Text("Back")
+                    .renderingMode(.original)
+                    .edgesIgnoringSafeArea(.all)
                     .foregroundColor(Color("primaryColor"))
-                    .font(.custom("VarelaRound-Regular", size: 18))
-                   
-        Spacer()
+                Text("Back")
+                    .font(.custom("Varela Round Regular", size: 18))
+                    .foregroundColor(Color("primaryColor"))
+                })
+                Spacer()
             }
             .padding()
            // Spacer()
@@ -87,6 +96,10 @@ struct SelectTimeView: View {
                
             
             Button(action:{
+                sessionManager.showRunning(
+                    phoneNumber: phoneNumber,
+                    selectedHours: selectedHours,
+                    selectedMins: selectedMins)
             }, label: {
                 Text("Submit")
                     .fontWeight(.bold)
@@ -105,6 +118,6 @@ struct SelectTimeView: View {
 struct SelectTimeView_Previews: PreviewProvider {
     static var previews: some View {
 
-        SelectTimeView( )
+        SelectTimeView(phoneNumber: "+10000000000")
     }
 }
