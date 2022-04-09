@@ -9,4 +9,5 @@ import Foundation
 
 struct RunningStatusModel: Codable {
     var status: String = "NOTRUNNING"
+    var devRecordID: String
 }

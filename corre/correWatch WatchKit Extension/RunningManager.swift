@@ -12,7 +12,7 @@ final class RunningManager: ObservableObject {
     
 
     @Published var emergencyContacts = EmergencyContactResponseModel(emergencyContacts: [])
-    @Published var runningStatus = RunningStatusModel()
+    @Published var runningStatus = RunningStatusModel(devRecordID: "")
     
     
     func getEmergencyContacts(for id: String) {
