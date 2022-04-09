@@ -16,7 +16,7 @@ struct RunningView: View {
     var phone : String
     var runMan : RunningManager
     
-    
+    var postMan = PostManager()
     
     struct CusColor {
         static let backcolor =
@@ -80,6 +80,8 @@ struct RunningView: View {
                 
                 
                 Button(action:{
+                    self.postMan.endRunNotification(id: connector.controller.usrID)
+                    self.viewManager.setDashboard()
                 }, label: {
                     Text("End Run")
                         .frame(width: 90, height: 40)
@@ -95,7 +97,7 @@ struct RunningView: View {
                     let wkExt = WKExtension.shared()
                     wkExt.openSystemURL(telURL)
                     }
-                 
+                    self.postMan.sosNotification(id: connector.controller.usrID)
                    
                 }, label: {
                     Text("SOS")

@@ -12,6 +12,7 @@ struct correApp: App {
     
     @ObservedObject var connector = ConnectionProvider()
     @ObservedObject var viewManager = ViewManager()
+    var postManager = PostManager()
 //    @ObservedObject var locationManager = WatchLocationManager()
     init() {
         connector.connect()

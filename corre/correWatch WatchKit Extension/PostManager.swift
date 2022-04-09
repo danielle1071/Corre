@@ -36,4 +36,31 @@ final class PostManager {
             
         }.resume()
     }
+    
+    func startRunNotification(id: String)
+    {
+        let parameter = ["notificationType":"RUNNERSTARTED","userID":"\(id)", "key":"\(UUID())"]
+        let url = URL(string: "https://vmt4adr728.execute-api.us-east-1.amazonaws.com/dev/notificationupdate")!
+        self.post(parameter:parameter, url:url)
+    }
+    
+    func endRunNotification(id: String)
+    {
+        let parameter = ["notificationType":"RUNNERENDED","userID":"\(id)", "key":"\(UUID())"]
+        let url = URL(string: "https://vmt4adr728.execute-api.us-east-1.amazonaws.com/dev/notificationupdate")!
+        self.post(parameter:parameter, url:url)
+    }
+    
+    func sosNotification(id: String)
+    {
+        let parameter = ["notificationType":"RUNEVENT","userID":"\(id)", "key":"\(UUID())"]
+        let url = URL(string: "https://vmt4adr728.execute-api.us-east-1.amazonaws.com/dev/notificationupdate")!
+        self.post(parameter:parameter, url:url)
+    }
+    
+    func locationUpdate(deviceId: String, xCord: Float, yCord: Float) {
+        let parameter = ["deviceRecordID":"\(deviceId)", "xCord":"\(xCord)", "yCord":"\(yCord)"]
+        
+        self.post(parameter: parameter, url: url)
+    }
 }

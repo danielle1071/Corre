@@ -12,6 +12,7 @@ struct SelectContactView: View {
     @EnvironmentObject var connector : ConnectionProvider
     @EnvironmentObject var viewManager : ViewManager
     var runMan : RunningManager
+    var postManager = PostManager()
     
     struct CusColor {
         static let backcolor =
@@ -37,8 +38,10 @@ struct SelectContactView: View {
                         if runMan.runningStatus.status == "RUNNING" {
                             self.viewManager.setError()
                         }
-                        
-                        self.viewManager.setRunning(number: emergencyContact.phoneNumber, runMan: self.runMan)
+                        else {
+                            postManager.startRunNotification(id: connector.controller.usrID)
+                            self.viewManager.setRunning(number: emergencyContact.phoneNumber, runMan: self.runMan)
+                        }
                     }){
                         HStack{
                             VStack{
