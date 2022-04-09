@@ -58,9 +58,9 @@ final class PostManager {
         self.post(parameter:parameter, url:url)
     }
     
-    func locationUpdate(deviceId: String, xCord: Float, yCord: Float) {
+    func locationUpdate(deviceId: String, xCord: Double, yCord: Double) {
         let parameter = ["deviceRecordID":"\(deviceId)", "xCord":"\(xCord)", "yCord":"\(yCord)"]
-        
+        let url = URL(string: "https://vmt4adr728.execute-api.us-east-1.amazonaws.com/dev/deviceupdate")!
         self.post(parameter: parameter, url: url)
     }
 }

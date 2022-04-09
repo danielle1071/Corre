@@ -117,6 +117,9 @@ struct RunningView: View {
         })
             .onReceive(locationManager.$coordinate, perform: {_ in
                 print ("Here are the cords: \(locationManager.coordinate)")
+                print ("LAT : \(locationManager.coordinate.latitude)")
+                print ("LONG: \(locationManager.coordinate.longitude)")
+                self.postMan.locationUpdate(deviceId: runMan.runningStatus.devRecordID, xCord: locationManager.coordinate.latitude, yCord: locationManager.coordinate.longitude)
             })
             
             
