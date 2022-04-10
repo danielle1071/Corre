@@ -84,10 +84,10 @@ final class SessionManger: ObservableObject {
                                 try await self.databaseManager.getEmergencyContacts()
                                 try await self.databaseManager.getRunnerRecords()
                                 self.databaseManager.getUserRunLogs()
-                                try await self.databaseManager.getFriends()
                                 self.connect.controller.setState(currentState: "1")
                                 self.connect.controller.setUsrID(id: self.databaseManager.currentUser?.id ?? "-1")
                                 self.connect.sendStateUpdate()
+                                try await self.databaseManager.getFriends()
                             } catch {
                                 print("ERROR IN GET CURRENT AUTH USER")
                             }

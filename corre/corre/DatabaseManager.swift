@@ -843,6 +843,7 @@ class DatabaseManager: ObservableObject {
         if flag1 == false {
             //friend was not found
         } else {
+            print("Deleting index1!")
             //remove from index and re-index array
             user1?.friends?.remove(at: index1)
         }
@@ -860,6 +861,7 @@ class DatabaseManager: ObservableObject {
         if flag2 == false {
             //friend was not found
         } else {
+            print("Deleting index2!")
             user2?.friends?.remove(at: index2)
         }
     }
@@ -907,20 +909,24 @@ class DatabaseManager: ObservableObject {
                     do {
                         try await getUserProfile(user: user)
                     } catch {
-                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                        print("ERROR IN GET FRIENDS CONTACT FUNCTION")
                     }
                 }
             }
         }
         
+        /*
         var count = 0
-        if (currentUser != nil) {
-            if (currentUser!.friends != nil) {
-                let count = currentUser!.friends!.count
-            }
+
+        if (currentUser != nil && currentUser!.friends != nil) {
+            let count = currentUser!.friends!.count
         }
+        */
+        
+        let count = currentUser!.friends?.count ?? 0
        
-        print("This is count: \(count)")
+        print("DatabaseManager -> getFriends -> friend count: \(count)")
+        
         let usrKeys = User.keys
         var retArr = [User]()
         for index in 0...count {
@@ -928,6 +934,8 @@ class DatabaseManager: ObservableObject {
                 print("This is index: \(index)")
                 if let frien = self.getUserProfile(userID: self.currentUser!.friends![index]!) {
                     retArr.append(frien)
+                    
+                    print("DatabaseManager -> getFriends -> \(frien)")
                 }
             }
         }
@@ -959,6 +967,8 @@ class DatabaseManager: ObservableObject {
         print("THIS IS REQUESTS: \(requests)")
         return requests
     }
+    
+    
   
     func deleteEmergencyContact(contactId: String) {
         Amplify.DataStore.delete(EmergencyContact.self, withId: contactId) { result in
