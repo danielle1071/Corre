@@ -95,8 +95,8 @@ struct TrackRunnerView: View {
                         print("NOT TRACKING! --- TrackRunnerView")
                         self.timer?.invalidate()
                         
-                        // MARK: front-end needs transition page to tell the user has stopped running
-                        sessionManager.showTrackContacts()
+
+                        sessionManager.showStoppedRunningView()
                     }
                 
                 print("getRunnerLocation - trackingManager latitude: ", trackingManager.xCord)

@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct LandingPageView: View {
+    
+    @EnvironmentObject var connector : ConnectionProvider
+    @EnvironmentObject var viewManager : ViewManager
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -33,13 +37,40 @@ struct LandingPageView: View {
             
             Image("CreamLogo")
             .resizable()
-            .frame(width: 140.0, height: 140.0)
+            .frame(width: 120.0, height: 120.0)
             .scaledToFit()
             
-            Spacer()
+            
+//            Button(action: {
+//                if connector.controller.currentState == "1" {
+//                    self.viewManager.setDashboard()
+//                }
+//            }, label: {Text("Check")})
+            
+            if connector.controller.currentState == "1" {
+                Button(action: {
+                    viewManager.setDashboard()
+                    
+                }, label: {
+                    Text("Start").foregroundColor(Color.black)
+                        .font(.custom("Proxima Nova Rg Regular", size: 15))
+                        .foregroundColor(CusColor.primarycolor)
+                })
+            } else {
+                Text("")
+            }
+        
         }
        
-    }
+        }.onReceive(connector.$controller, perform: {_ in
+            if connector.controller.currentState == "1" {
+                self.viewManager.setDashboard()
+            }
+            if connector.controller.currentState == "0" {
+                self.viewManager.setLanding()
+            }
+        })
+            
     }
 }
 

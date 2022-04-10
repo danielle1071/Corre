@@ -67,12 +67,39 @@ struct NotificationView: View {
                 .multilineTextAlignment(.center)
 
             
-            List(sessionManager.databaseManager.notifications, id: \.id) {
+            List(){
+                ForEach(sessionManager.databaseManager.notifications, id: \.id) {
                 notification in
                 NotificationRow(notification: notification)
+                }
+                .onDelete(perform: delete)
             }
         }
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+        .onAppear(perform: {
+            sessionManager.connect.sendStateUpdate()
+        })
+    }
+    
+    func delete(_ indexSet: IndexSet) {
+        indexSet.forEach { index in
+            let notification = sessionManager.databaseManager.notifications[index]
+            print("This is the notification to delete \(notification)")
+            sessionManager.databaseManager.deleteNotificationRecord(notification: notification)
+        }
+        
+        Task() {
+            do {
+                try await sessionManager.databaseManager.getNotifications()
+                DispatchQueue.main.async {
+                    self.sessionManager.showNotificationView()
+                }
+            } catch {
+                print("ERROR")
+            }
+        }
+        
+//        contacts = sessionManager.databaseManager.emergencyContacts
     }
     
     struct NotificationRow: View {
@@ -87,13 +114,57 @@ struct NotificationView: View {
                         
                         switch notification.type {
                         case .friendrequest:
-                            Text("Friend Request")
-                                .fontWeight(.bold)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                            HStack{
+                                Text("Friend Request")
+                                    .fontWeight(.bold)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                Button("Accept", action: {
+                                    if notification.type == NotificationType.friendrequest {
+                                        print("Accept Friend Req")
+                                        sessionManager.databaseManager.acceptedFriendRequest(notification: notification, userId: notification.senderId)
+                                    } else if notification.type == NotificationType.emergencycontactrequest {
+                                        print("Accept Emergency Contact")
+                                        print("Notification *** \(notification)")
+                                        sessionManager.databaseManager.acceptEmergencyContactRequest(notification: notification)
+                                    }
+                                    Task() {
+                                        do {
+                                            try await sessionManager.databaseManager.getNotifications()
+                                            DispatchQueue.main.async {
+                                                self.sessionManager.showNotificationView()
+                                            }
+                                        } catch {
+                                            print("ERROR")
+                                        }
+                                    }
+                                })
+                            }
                         case .emergencycontactrequest:
-                            Text("Emergency Contact Request")
-                                .fontWeight(.bold)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                            HStack{
+                                Text("Emergency Contact Request")
+                                    .fontWeight(.bold)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                Button("Accept", action: {
+                                    if notification.type == NotificationType.friendrequest {
+                                        print("Accept Friend Req")
+                                        sessionManager.databaseManager.acceptedFriendRequest(notification: notification, userId: notification.senderId)
+                                    } else if notification.type == NotificationType.emergencycontactrequest {
+                                        print("Accept Emergency Contact")
+                                        print("Notification *** \(notification)")
+                                        sessionManager.databaseManager.acceptEmergencyContactRequest(notification: notification)
+                                    }
+                                    Task() {
+                                        do {
+                                            try await sessionManager.databaseManager.getNotifications()
+                                            DispatchQueue.main.async {
+                                                self.sessionManager.showNotificationView()
+                                            }
+                                        } catch {
+                                            print("ERROR")
+                                        }
+                                    }
+                                })
+                            }
                         case .message:
                             Text("Message")
                                 .fontWeight(.bold)
@@ -124,51 +195,6 @@ struct NotificationView: View {
                             .font(.custom("Proxima Nova Rg Regular", size: 16))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                
-                if (notification.type == .runevent) {
-                    Button("Remove", action: {
-                        if (DEBUG) { print("NotificationView -> .runevent -> Remove \(notification)") }
-                        
-                        sessionManager.databaseManager.deleteNotificationRecord(notification: notification)
-                    })
-                }
-                    
-                if (notification.type == .runnerstarted) {
-                    Button("Remove", action: {
-                        if (DEBUG) { print("NotificationView -> .runnerstarted -> Remove \(notification)") }
-                        
-                        sessionManager.databaseManager.deleteNotificationRecord(notification: notification)
-                    })
-                }
-                
-                if (notification.type == .runnerended) {
-                    Button("Remove", action: {
-                        if (DEBUG) { print("NotificationView -> .runnerend -> Remove \(notification)") }
-                        
-                        sessionManager.databaseManager.deleteNotificationRecord(notification: notification)
-                    })
-                }
-                    
-                if notification.type == .friendrequest || notification.type == .emergencycontactrequest {
-                    
-                    
-                    Button("Accept", action: {
-                        if notification.type == NotificationType.friendrequest {
-                            print("Accept Friend Req")
-                            sessionManager.databaseManager.acceptedFriendRequest(notification: notification, userId: notification.senderId)
-                        } else if notification.type == NotificationType.emergencycontactrequest {
-                            print("Accept Emergency Contact")
-                            print("Notification *** \(notification)")
-                            sessionManager.databaseManager.acceptEmergencyContactRequest(notification: notification)
-                        }
-                    })
-                        
-                    Button("Decline", action: {
-                        print("Decline")
-                        sessionManager.databaseManager.deleteNotificationRecord(notification: notification)
-                    })
-                    
-                }
             }
         }
 }

@@ -127,6 +127,9 @@ struct correApp: App {
             case .friendProfileView(let friend):
                 FriendProfileView(friend: friend)
                     .environmentObject(sessionManager)
+            case .stopppedRunningView:
+                StoppedRunningView()
+                    .environmentObject(sessionManager)
             case .errV:
                 Error1View()
                     .environmentObject(sessionManager)

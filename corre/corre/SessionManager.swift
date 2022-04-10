@@ -34,6 +34,7 @@ enum AuthState {
     case messageFriendView
     case confirmPassResetView(email: String)
     case confirmEmailView
+    case stopppedRunningView
 
 
     case friendProfileView(friend: User)
@@ -53,6 +54,12 @@ final class SessionManger: ObservableObject {
     @Published var authState: AuthState = .login
     @ObservedObject var databaseManager: DatabaseManager = DatabaseManager()
     @Published var loginValid = true
+    @Published var connect : ConnectionProvider
+    
+    init() {
+        connect = ConnectionProvider()
+        connect.connect()
+    }
     
     struct Address: Codable {
         var locality: String
@@ -63,34 +70,36 @@ final class SessionManger: ObservableObject {
     
     // MARK: getCurrentAuthUser
     func getCurrentAuthUser() {
-        
-        // some duck tape and glue :)
-        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
-            authState = .login
-        }
-        else if let user = Amplify.Auth.getCurrentUser() {
-            print("This is user: ", user)
-            if self.databaseManager.currentUser == nil {
-                print("database current user loaded is empty")
-                Task() {
-                        do {
-                            try await self.databaseManager.getUserProfile(user: user)
-                            try await self.databaseManager.createDeviceRecord()
-                            try await self.databaseManager.getFriends()
-                            try await self.databaseManager.getEmergencyContacts()
-                            try await self.databaseManager.getRunnerRecords()
-                            self.databaseManager.getUserRunLogs()
-                        } catch {
-                            print("ERROR IN GET CURRENT AUTH USER")
-                        }
+        DispatchQueue.main.async {
+            // some duck tape and glue :)
+            if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+                self.authState = .login
+            }
+            else if let user = Amplify.Auth.getCurrentUser() {
+                print("This is user: ", user)
+                if self.databaseManager.currentUser == nil {
+                    print("database current user loaded is empty")
+                    Task() {
+                            do {
+                                try await self.databaseManager.getUserProfile(user: user)
+                                try await self.databaseManager.createDeviceRecord()
+                                try await self.databaseManager.getEmergencyContacts()
+                                try await self.databaseManager.getRunnerRecords()
+                                self.databaseManager.getUserRunLogs()
+                                try await self.databaseManager.getFriends()
+                                self.connect.controller.setState(currentState: "1")
+                                self.connect.controller.setUsrID(id: self.databaseManager.currentUser?.id ?? "-1")
+                                self.connect.sendStateUpdate()
+                            } catch {
+                                print("ERROR IN GET CURRENT AUTH USER")
+                            }
+                    }
+                    self.connect.controller.setState(currentState: "1")
                 }
-            }
-            DispatchQueue.main.async {
                 self.authState = .nav(user: user)
-            }
-        } else {
-            DispatchQueue.main.async {
+            } else {
                 self.authState = .landing
+                self.connect.controller.setState(currentState: "0")
             }
         }
     }
@@ -217,9 +226,13 @@ final class SessionManger: ObservableObject {
                         }
                     case .done:
                         print("Inside done")
-                    self?.loginValid = true
+                        self?.connect.controller.setState(currentState: "1")
+                        self?.loginValid = true
                         //print(Amplify.Auth.fetchUserAttributes())
                         DispatchQueue.main.async {
+                            self?.loginValid = true
+                        //print(Amplify.Auth.fetchUserAttributes())
+                    
                             self?.getCurrentAuthUser()
                         }
                     
@@ -228,7 +241,9 @@ final class SessionManger: ObservableObject {
                 
                 
             case .failure(let error):
-                self?.loginValid = false
+                DispatchQueue.main.async {
+                    self?.loginValid = false
+                }
                 print("Login error:", error)
             }
         }
@@ -241,6 +256,9 @@ final class SessionManger: ObservableObject {
             switch result {
             case .success:
                 self!.databaseManager.clearLocalDataOnSignOut()
+                self?.connect.controller.setState(currentState: "0")
+                self?.connect.controller.setUsrID(id: "0")
+                self?.connect.sendStateUpdate()
                 DispatchQueue.main.async {
                     self?.getCurrentAuthUser()
                 }
@@ -411,6 +429,14 @@ final class SessionManger: ObservableObject {
             self.authState = .confirmEmailView
         }
     }
+    
+    
+    func showStoppedRunningView(){
+        DispatchQueue.main.async {
+            self.authState = .stopppedRunningView
+        }
+    }
+
 }
 
 // Need to build a list of friend users
