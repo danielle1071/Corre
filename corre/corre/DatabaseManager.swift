@@ -26,6 +26,8 @@ class DatabaseManager: ObservableObject {
     @Published var runners = [EmergencyContact]()
     
     @Published var runs = [Run]()
+    
+    @Published var friendRuns = [Run]()
 
     @Published var notifications = [Notification]()
 
@@ -36,8 +38,6 @@ class DatabaseManager: ObservableObject {
     var updateEmail = ""
     
     func getUserProfile (user: AuthUser) async {
-
-        
         let usrKey = User.keys
         await Amplify.DataStore.query(User.self, where: usrKey.sub == user.userId) { result in
             print("RESULT: \(result)")
@@ -90,8 +90,7 @@ class DatabaseManager: ObservableObject {
         }
         return retVal
     }
-    
-    
+
     func getUserProfile(username: String) -> User? {
         var returnVal: User? = nil
         let keys = User.keys
@@ -166,7 +165,6 @@ class DatabaseManager: ObservableObject {
         }
         print("End of create device record function")
     }
-    
 
     func findDeviceRecord (userDeviceID: String) -> Device? {
         
@@ -254,9 +252,6 @@ class DatabaseManager: ObservableObject {
         }
 
         print("Finished the createUserRecordFunction")
-        
-        
-        
     }
 
     func clearLocalDataOnSignOut() {
@@ -353,6 +348,24 @@ class DatabaseManager: ObservableObject {
                 }
             }
         }
+    }
+    
+    func getFriendRunLogs(friendId: String) {
+        if (DEBUG) { print("DatabaseManager -> getFriendRunLogs ") }
+            let keys = Run.keys
+            Amplify.DataStore.query(Run.self, where: keys.userID == friendId) { result in
+                switch(result) {
+                case .success(let items):
+                    self.friendRuns = items
+                    if (DEBUG) {
+                        print("DatabaseManager -> getUserFriendLogs -> successful query")
+                        print("Runs: \(friendRuns)")
+                    }
+                    
+                case .failure(let error):
+                    print("DatabaseManager -> getFriendRunLogs -> Could not query DataStore: \(error)")
+                }
+            }
     }
 
 
@@ -733,8 +746,7 @@ class DatabaseManager: ObservableObject {
         }
         return retVal
     }
-    
-    
+
     func deleteNotificationRecord(notification: Notification) {
         Amplify.DataStore.delete(notification) { result in
             switch result {
@@ -979,7 +991,6 @@ class DatabaseManager: ObservableObject {
             }
         }
     }
-
     
     func resetPassword(email: String) { //we can use username or passwork -> check during call
         Amplify.Auth.resetPassword(for: email) { result in

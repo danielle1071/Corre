@@ -13,14 +13,21 @@ import AmplifyMapLibreUI
 
 
 struct RunningView: View {
-    var DEBUG = true
+    var DEBUG = false
     
     // map
     @EnvironmentObject var sessionManager: SessionManger
     @StateObject var locationService = LocationManager()
     @State var tokens: Set<AnyCancellable> = .init()
     @State var mapState = AMLMapViewState(zoomLevel: 17)
+    
+    // MARK: from PreRunningView
     @State var phoneNumber: String
+    
+    // MARK: from SelectTimeView
+    @State var selectedTimeFlag = false
+    @State var selectedHours: Int
+    @State var selectedMins: Int
     
     func startTimer() {
         timerIsPaused = false
@@ -287,20 +294,21 @@ struct RunningView: View {
                     .background(self.highlight ? Color.red : CusColor.primarycolor)
                     .clipShape(RoundedRectangle(cornerRadius: 25.0,
                                                 style: .circular))
+                    .onTapGesture(count: 1 ,perform:{
+                        showActionSheet = true
+                        print("YOO YOU TAPPED!")
+                    })
                     .gesture(longPress)
+                    
+                    // alert message if user taps stop run
+                    .alert(isPresented: $showActionSheet){
+                        Alert(
+                            title: Text("Important message!"),
+                            message: Text("Hold button to stop run."),
+                            dismissButton: .default(Text("Got it!"))
+                        )
+                    }
                 
-                .alert(isPresented: $showActionSheet){
-                    Alert(
-                        title: Text("Important message!"),
-                        message: Text("Hold button to stop run."),
-                        dismissButton: .default(Text("Got it!"))
-                    )
-                
-                }
-                .onTapGesture(count: 1 ,perform:{showActionSheet = true
-                
-               
-            })
             })
             
         }
@@ -347,6 +355,7 @@ struct RunningView: View {
                     // print("RunningView -> getCurrentUserLocation -> locationService.userSpeed: \(locationService.userSpeed!)")
                     // print("RunningView -> getCurrentUserLocation -> totalSpeedSum: \(totalSpeed)")
                     // calculateDistance(hours: 0, minutes: 0, seconds: 1, speed: 2.75)
+                    // print("RunningView -> getCurrentUserLocation -> selectedHours \(selectedHours) and selectedMins \(selectedMins)")
                 }
                 
                 print("RunningView -> getCurrentUserLocation -> timer: \(hours)hr \(minutes)min \(seconds)sec")
@@ -359,6 +368,18 @@ struct RunningView: View {
                         minutes: minutes,
                         seconds: seconds,
                         speed: currSpeed)) {
+                    
+                    // user has passed the anticipated run duration, check
+                    // if user is ok!
+                    if (selectedTimeFlag == false && hours == selectedHours && minutes == selectedMins) {
+                        
+                        if (DEBUG) { print("RunningView -> getCurrentUserLocation -> selectedTimeFlag triggered!") }
+                        // MARK: trigger sliding window here!
+                        togglePopover()
+                        
+                        // change the flag to true to avoid multiple spam
+                        selectedTimeFlag = true
+                    }
             
                     let currTime = combineTimeToSeconds(hours: hours, minutes: minutes, seconds: seconds)
                     
@@ -535,6 +556,6 @@ struct RunningView: View {
 
 struct RunningView_Previews: PreviewProvider {
     static var previews: some View {
-        RunningView(phoneNumber: "+10000000000")
+        RunningView(phoneNumber: "+10000000000", selectedHours: 4, selectedMins: 30)
     }
 }

@@ -19,7 +19,9 @@ enum AuthState {
     case confirmCode(username: String)
     case session(user: AuthUser)
     case landing
-    case running(phoneNumber: String)
+    case selectTime(phoneNumber: String)
+    case running(phoneNumber: String, selectedHours: Int, selectedMins: Int)
+//    case running(phoneNumber: String)
     case profile
     case emergencyContact(contacts: [EmergencyContact])
     case trackContacts
@@ -35,7 +37,7 @@ enum AuthState {
     case stopppedRunningView
 
 
-
+    case friendProfileView(friend: User)
 
     case pendingReqs(requests: [Notification])
 
@@ -291,14 +293,26 @@ final class SessionManger: ObservableObject {
             }
         }
     }
-
     
-    // MARK: showRunning
-    func showRunning(phoneNumber: String) {
+    func showSelectTime(phoneNumber: String) {
         DispatchQueue.main.async {
-            self.authState = .running(phoneNumber: phoneNumber)
+            self.authState = .selectTime(phoneNumber: phoneNumber)
         }
     }
+    
+    // MARK: showRunning
+    func showRunning(phoneNumber: String, selectedHours: Int, selectedMins: Int) {
+        DispatchQueue.main.async {
+            self.authState = .running(phoneNumber: phoneNumber, selectedHours: selectedHours, selectedMins: selectedMins)
+        }
+    }
+
+//    // MARK: showRunning
+//    func showRunning(phoneNumber: String) {
+//        DispatchQueue.main.async {
+//            self.authState = .running(phoneNumber: phoneNumber)
+//        }
+//    }
     
     // MARK: showTrackContacts
     func showTrackContacts() {
@@ -394,6 +408,13 @@ final class SessionManger: ObservableObject {
     func showEditContact(contact: EmergencyContact) {
         DispatchQueue.main.async {
             self.authState = .editEmergencyContact(contact: contact)
+        }
+    }
+    func showFriendProfile(username: String) {
+        DispatchQueue.main.async {
+            let friend = self.databaseManager.getUserProfile(username: username)!
+            
+            self.authState = .friendProfileView(friend: friend)
         }
     }
     

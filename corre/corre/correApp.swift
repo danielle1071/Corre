@@ -54,9 +54,6 @@ struct correApp: App {
     var body: some Scene {
         
         WindowGroup {
-            
-            
-    
             switch sessionManager.authState {
             case .login:
                 LoginView()
@@ -76,9 +73,17 @@ struct correApp: App {
             case .landing:
                 LandingView()
                     .environmentObject(sessionManager)
-            case .running(let phoneNumber):
-                RunningView(phoneNumber: phoneNumber)
+            case .selectTime(let phoneNumber):
+                SelectTimeView(phoneNumber: phoneNumber)
                     .environmentObject(sessionManager)
+            case .running(let phoneNumber, let selectedHours, let selectedMins):
+                RunningView(phoneNumber: phoneNumber,
+                            selectedHours: selectedHours,
+                            selectedMins: selectedMins)
+                    .environmentObject(sessionManager)
+//            case .running(let phoneNumber):
+//                RunningView(phoneNumber: phoneNumber)
+//                    .environmentObject(sessionManager)
             case .profile:
                 ProfileView()
                     .environmentObject(sessionManager)
@@ -107,20 +112,20 @@ struct correApp: App {
             case .preRun:
                 PreRunningView()
                     .environmentObject(sessionManager)
-
             case .pendingReqs(let requests):
                 SentFriendReqView(requests: requests)
                     .environmentObject(sessionManager)
             case .editEmergencyContact(let contact):
                 EmergencyContactEditView(contact: contact)
                     .environmentObject(sessionManager)
-            
             case .confirmPassResetView(let email):
                 ResetPasswordView(email: email)
                     .environmentObject(sessionManager)
-            
             case .confirmEmailView:
                 ConfirmEmailView()
+                    .environmentObject(sessionManager)
+            case .friendProfileView(let friend):
+                FriendProfileView(friend: friend)
                     .environmentObject(sessionManager)
             case .stopppedRunningView:
                 StoppedRunningView()
@@ -128,7 +133,6 @@ struct correApp: App {
             case .errV:
                 Error1View()
                     .environmentObject(sessionManager)
-
             }
             
         }
