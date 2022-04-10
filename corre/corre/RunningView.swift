@@ -13,8 +13,23 @@ import AmplifyMapLibreUI
 
 
 struct RunningView: View {
-    // For timer
-    func startTimer(){
+    var DEBUG = false
+    
+    // map
+    @EnvironmentObject var sessionManager: SessionManger
+    @StateObject var locationService = LocationManager()
+    @State var tokens: Set<AnyCancellable> = .init()
+    @State var mapState = AMLMapViewState(zoomLevel: 17)
+    
+    // MARK: from PreRunningView
+    @State var phoneNumber: String
+    
+    // MARK: from SelectTimeView
+    @State var selectedTimeFlag = false
+    @State var selectedHours: Int
+    @State var selectedMins: Int
+    
+    func startTimer() {
         timerIsPaused = false
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ tempTimer in
           if self.seconds == 59 {
@@ -29,37 +44,42 @@ struct RunningView: View {
             self.seconds = self.seconds + 1
           }
         }
-      }
-    func stopTimer(){
+    }
+    
+    func stopTimer() {
        timerIsPaused = true
        timer?.invalidate()
        timer = nil
      }
      
-     func restartTimer(){
+     func restartTimer() {
        hours = 0
        minutes = 0
        seconds = 0
      }
+    
+    // timer
     @State var hours: Int = 0
-      @State var minutes: Int = 0
-      @State var seconds: Int = 0
-      @State var timerIsPaused: Bool = true
+    @State var minutes: Int = 0
+    @State var seconds: Int = 0
+    @State var timerIsPaused: Bool = true
     @State var timer: Timer? = nil
+    
+    // sliding window
     @State private var showingPopover = false
     @State private var showingPopover_1 = false
     @State private var timeRemaining = 100
     let timer_1 = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    //
-//
     
-    @EnvironmentObject var sessionManager: SessionManger
-    @StateObject var locationService = LocationManager()
-    @State var tokens: Set<AnyCancellable> = .init()
-    @State var mapState = AMLMapViewState(zoomLevel: 17)
-    @State var phoneNumber: String
     
-    var DEBUG = true
+    // run stats
+    @State var userSpeed: Double = 0.00 // super important, this keeps track of the idling of user
+    @State var currentDistance: Double = 0.00
+    @State var prevTime: Double = 0.00
+    @State var totalSpeed: Double = 0.00
+    @State var speedCounter: Int = 0
+    
+    
     @State private var showActionSheet: Bool = false
     struct CusColor {
         static let backcolor =
@@ -70,10 +90,6 @@ struct RunningView: View {
         static let lblue = Color("lightBlue")
     }
     
-    // MARK: Phone Number
-    // example phone number. Refer to SOS button
-    //    var phoneNumber = "718-555-5555"
-    
     @GestureState var highlight = false
     var longPress: some Gesture {
         LongPressGesture(minimumDuration: 3)
@@ -83,13 +99,22 @@ struct RunningView: View {
                 // informs all emergency contact
                 self.endRunNotif()
                 
-                sessionManager.showNavBar()
-                
-                
                 // stops tracker resources
                 locationService.stopTracking()
                 
+                // calculate for the average speed
+                let doubleSpeedCounter = Double(speedCounter)
+                let avgSpeed = totalSpeed / doubleSpeedCounter
                 
+                if (DEBUG) {
+                    // sessionManager.databaseManager.saveUserRunLog(distance: 99.99, time: "600sec", averageSpeed: 5.75)
+                    print("Long Press Gesture State -> totalSpeed: \(totalSpeed) and speedCounter: \(speedCounter) -> avgSpeed: \(avgSpeed)")
+                    print("Long Press Gesture State -> totalDistance: \(currentDistance) meters")
+                }
+                
+                // save current run log to database
+                sessionManager.databaseManager.saveUserRunLog(distance: currentDistance, time: "\(prevTime)sec", averageSpeed: avgSpeed)
+                sessionManager.showNavBar()
             }
             .updating($highlight) {
                 currentstate, gestureState, transaction in
@@ -138,8 +163,8 @@ struct RunningView: View {
                     Text("Running Statistics")
                                 .font(.headline)
                                 .padding()
-                    Text("Distance: 0")
-                    Text("Current pace: 0")
+                    Text("Distance: \(currentDistance) meters")
+                    Text("Current pace: \(userSpeed) meters/second")
                     Spacer()
                     }
                     
@@ -220,7 +245,7 @@ struct RunningView: View {
                     .cornerRadius(20)
                     .edgesIgnoringSafeArea(.all)
                     .shadow(radius: 2)
-                // start timer when maps appear
+                    // start timer when maps appear
                     .onAppear(perform: {self.startTimer()})
             }
             Spacer()
@@ -269,20 +294,21 @@ struct RunningView: View {
                     .background(self.highlight ? Color.red : CusColor.primarycolor)
                     .clipShape(RoundedRectangle(cornerRadius: 25.0,
                                                 style: .circular))
+                    .onTapGesture(count: 1 ,perform:{
+                        showActionSheet = true
+                        print("YOO YOU TAPPED!")
+                    })
                     .gesture(longPress)
+                    
+                    // alert message if user taps stop run
+                    .alert(isPresented: $showActionSheet){
+                        Alert(
+                            title: Text("Important message!"),
+                            message: Text("Hold button to stop run."),
+                            dismissButton: .default(Text("Got it!"))
+                        )
+                    }
                 
-                .alert(isPresented: $showActionSheet){
-                    Alert(
-                        title: Text("Important message!"),
-                        message: Text("Hold button to stop run."),
-                        dismissButton: .default(Text("Got it!"))
-                    )
-                
-                }
-                .onTapGesture(count: 1 ,perform:{showActionSheet = true
-                
-               
-            })
             })
             
         }
@@ -307,8 +333,11 @@ struct RunningView: View {
 
     func getCurrentUserLocation() {
         
+        var currSpeed = 0.00
+        var currDistance = 0.00
+        
         if sessionManager.databaseManager.currentUser == nil {
-            print("getCurrentUserLocation -> userName: nil")
+            print("ERROR: getCurrentUserLocation -> userName: nil")
             
             // MARK: need to transition to error page not session page
             sessionManager.showSession()
@@ -319,13 +348,173 @@ struct RunningView: View {
         locationService.coordinatesPublisher
             .receive(on: DispatchQueue.main)
             .sink { coordinates in
-                print("getCurrentUserLocation - user's Coordinates: ", coordinates)
+                print("RunningView -> getCurrentUserLocation -> user's Coordinates: ", coordinates)
                 self.mapState.center = coordinates
-                print("getCurrentUserLocation - after the map!")
+                
+                if (DEBUG) {
+                    // print("RunningView -> getCurrentUserLocation -> locationService.userSpeed: \(locationService.userSpeed!)")
+                    // print("RunningView -> getCurrentUserLocation -> totalSpeedSum: \(totalSpeed)")
+                    // calculateDistance(hours: 0, minutes: 0, seconds: 1, speed: 2.75)
+                    // print("RunningView -> getCurrentUserLocation -> selectedHours \(selectedHours) and selectedMins \(selectedMins)")
+                }
+                
+                print("RunningView -> getCurrentUserLocation -> timer: \(hours)hr \(minutes)min \(seconds)sec")
+                
+                currSpeed = locationService.userSpeed!
+                
+                // MARK: working progress
+                if (isCurrSpeedNormal(
+                        hours: hours,
+                        minutes: minutes,
+                        seconds: seconds,
+                        speed: currSpeed)) {
+                    
+                    // user has passed the anticipated run duration, check
+                    // if user is ok!
+                    if (selectedTimeFlag == false && hours == selectedHours && minutes == selectedMins) {
+                        
+                        if (DEBUG) { print("RunningView -> getCurrentUserLocation -> selectedTimeFlag triggered!") }
+                        // MARK: trigger sliding window here!
+                        togglePopover()
+                        
+                        // change the flag to true to avoid multiple spam
+                        selectedTimeFlag = true
+                    }
+            
+                    let currTime = combineTimeToSeconds(hours: hours, minutes: minutes, seconds: seconds)
+                    
+                    // avoid adding distance to abrupt idle speeds
+                    if (currSpeed > 0.00) { currentDistance += calculateDistance(s: currTime - prevTime, speed: currSpeed) }
+                    
+                    prevTime = currTime
+                    
+                    if (DEBUG) { print("RunningView -> getCurrentUserLocation -> currSpeed is \(currSpeed)(normal) and currentTotalDistance is \(currentDistance) meters") }
+                    
+                    totalSpeed += currSpeed
+                    speedCounter += 1
+  
+                } else {
+                    // MARK: trigger sliding window here!
+                    togglePopover()
+                    
+                    // MARK: send RUNEVENT notification
+                    sessionManager.databaseManager.getEmergencyContacts()
+                    let contacts = sessionManager.databaseManager.emergencyContacts
+                    
+                    contacts.forEach { contact in contacts
+                        if (DEBUG) {
+                            print("RunningView -> endRunNotif -> Emergency Contact: \(contact.id) and \(String(describing: contact.emergencyContactAppUsername))")
+                        }
+                        
+                        // In the event that the emergency has an account through corre,
+                        // send them a start run notification in the app
+                        if (contact.emergencyContactAppUsername != nil) {
+                            sessionManager.databaseManager.runnerEventNotification(username: contact.emergencyContactAppUsername!)
+                        }
+                    
+                        // MARK: set email notification here!
+                        
+                    }
+                }
+                
             }
             .store(in: &tokens)
         print("After the .store")
         
+        
+    }
+    
+    func isCurrSpeedNormal(hours: Int,
+                       minutes: Int,
+                       seconds: Int,
+                       speed: Double) -> Bool {
+        
+        // check if the user is not idle
+        if (speed > 0.00 && speed < 7.88) {
+            print("RunningView -> isCurrentSpeedNormal -> normal")
+            
+            userSpeed = speed
+            return true
+        }
+        
+        // user is moving too quickly!
+        else if (speed >= 7.88) {
+            print("RunningView -> isCurrentSpeedNormal -> too fast!")
+            
+            // MARK: you can move runevent here if you want! this is for more specified types of events!
+            
+            
+            return false
+        }
+        
+        // user has been idle for too long?
+        else {
+            if (DEBUG) { print("RunningView -> isCurrentSpeedNormal -> idle detected") }
+            // if the user was running prior to idle, reset totalSpeed to zero
+            if (userSpeed > 0.00) { userSpeed = 0.00 }
+            
+            userSpeed += locationService.userSpeed!
+            
+            // if the user has accumulated a userSpeed of -20, this means that the user
+            // has been idle for 10mins or (600sec divided by 30sec)
+            if (DEBUG ? userSpeed == -10.00 : userSpeed == -20.00) {
+                if (DEBUG) { print("RunningView -> isCurrentSpeedNormal -> idle too long!") }
+                
+                // revert it back to zero to check on user again after an additional
+                // 10 mins of idle
+                userSpeed = 0.00
+                
+                // MARK: you can move runevent here if you want! this is for more specified types of events!
+ 
+                return false
+            }
+            
+            // if the user's idle is less than 10min
+            return true
+        }
+    }
+    
+    func togglePopover() {
+        if (DEBUG) { print("RunningView -> togglePopover triggered!") }
+        
+        if (showingPopover_1 == false) {
+            showingPopover_1 = true
+        }
+        
+        
+        else {
+            showingPopover_1 = false
+        }
+    }
+    
+    func combineTimeToSeconds(hours: Int,
+                              minutes: Int,
+                              seconds: Int) -> Double {
+        let h = Double(hours)
+        var m = Double(minutes)
+        var s = Double(seconds)
+        
+        if (DEBUG) { print("RunningView -> calculateDistance -> timerToDouble: \(h)hr \(m)min \(s)sec ") }
+        
+        // if either hr or min is not 0, then convert them to seconds
+        if (h != 0.00) { m += (h * 60.00) }
+        if (m != 0.00) { s += (m * 60.00) }
+        
+        if (DEBUG) { print("RunningView -> calculateDistance -> timeCombined: \(s)sec ") }
+        
+        return s
+    }
+    
+    func calculateDistance(s: Double,
+                           speed: Double) -> Double {
+        var distance: Double
+        
+        // distance(m) = speed (m/s) * s (seconds)
+        distance = speed * s
+        
+        if (DEBUG) { print("RunningView -> calculateDistance -> distance: \(distance) meters ") }
+        
+        return distance
     }
     
     func startRunNotif() {
@@ -363,12 +552,10 @@ struct RunningView: View {
             }
         }
     }
-    
-    
 }
 
 struct RunningView_Previews: PreviewProvider {
     static var previews: some View {
-        RunningView(phoneNumber: "+10000000000")
+        RunningView(phoneNumber: "+10000000000", selectedHours: 4, selectedMins: 30)
     }
 }

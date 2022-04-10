@@ -29,6 +29,8 @@ struct ProfileView: View {
     @EnvironmentObject var sessionManager: SessionManger
     @State var user:User?
     
+    var num = 1
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -113,7 +115,7 @@ struct ProfileView: View {
                 }
                     Divider()
                 HStack{
-                    Text("Total Distance: \(user?.totalDistance ?? 0.0)")
+                    Text("Total Distance: \(user?.totalDistance ?? 0.0, specifier: "%.2f")")
                         .foregroundColor(Color("primaryColor"))
                         .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
@@ -132,7 +134,36 @@ struct ProfileView: View {
                         .foregroundColor(Color("primaryColor"))
                         .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
+                    Spacer()
                 }
+    
+                List{
+                    ForEach(sessionManager.databaseManager.runs, id: \.id) { run in
+                        VStack {
+                            Text(" ")
+                            
+                            // MARK: frontend help! super ugly!
+//                            Text("Date: \(String(describing: run.createdAt!))")
+//                                .listRowBackground(Color("orange"))
+//                                .foregroundColor(Color("primaryColor"))
+//                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                            Text("Distance: \(run.distance, specifier: "%.2f") m")
+                                .listRowBackground(Color("orange"))
+                                .foregroundColor(Color("primaryColor"))
+                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                
+                            Text("Average Speed: \(run.averageSpeed ?? 0.0, specifier: "%.2f") m/s")
+                                .listRowBackground(Color("orange"))
+                                .foregroundColor(Color("primaryColor"))
+                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                                .frame(maxWidth: .infinity, alignment: .center)
+                            
+                            Text(" ")
+                        }
+                    }
+                }
+                
             }
             .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
@@ -276,7 +307,9 @@ struct ProfileView: View {
                 self.firstName = user?.firstName ?? ""
                 self.lastName = user?.lastName ?? ""
                 self.bio = user?.bio ?? ""
-            })
+            sessionManager.databaseManager.getUserRunLogs()
+        })
+            
         }
     }
     

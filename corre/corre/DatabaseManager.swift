@@ -15,6 +15,7 @@ import Amplify
 import AWSDataStorePlugin
 
 class DatabaseManager: ObservableObject {
+    var DEBUG = true
     
     @Published var currentUser:User?
     
@@ -22,13 +23,13 @@ class DatabaseManager: ObservableObject {
     
     @Published var deviceTracking:Device?
     
-
     @Published var runners = [EmergencyContact]()
     
-
+    @Published var runs = [Run]()
+    
+    @Published var friendRuns = [Run]()
 
     @Published var notifications = [Notification]()
-    
 
     @Published var friends = [User]()
 
@@ -36,11 +37,7 @@ class DatabaseManager: ObservableObject {
     
     var updateEmail = ""
     
-    var DEBUG = true
-    
     func getUserProfile (user: AuthUser) async {
-
-        
         let usrKey = User.keys
         await Amplify.DataStore.query(User.self, where: usrKey.sub == user.userId) { result in
             print("RESULT: \(result)")
@@ -93,8 +90,7 @@ class DatabaseManager: ObservableObject {
         }
         return retVal
     }
-    
-    
+
     func getUserProfile(username: String) -> User? {
         var returnVal: User? = nil
         let keys = User.keys
@@ -169,7 +165,6 @@ class DatabaseManager: ObservableObject {
         }
         print("End of create device record function")
     }
-    
 
     func findDeviceRecord (userDeviceID: String) -> Device? {
         
@@ -257,9 +252,6 @@ class DatabaseManager: ObservableObject {
         }
 
         print("Finished the createUserRecordFunction")
-        
-        
-        
     }
 
     func clearLocalDataOnSignOut() {
@@ -272,18 +264,22 @@ class DatabaseManager: ObservableObject {
                     self.currentUser = nil
                     self.emergencyContacts.removeAll()
                     self.deviceTracking = nil
+                    self.runs.removeAll()
                     print("Local data cleared successfully.")
                     Amplify.DataStore.stop { (result) in
                             switch(result) {
                             case .success:
-                                Amplify.DataStore.start { (result) in
-                                    switch(result) {
-                                    case .success:
-                                        print("DataStore started")
-                                    case .failure(let error):
-                                        print("Error starting DataStore:\(error)")
+                                DispatchQueue.main.async {
+                                    Amplify.DataStore.start { (result) in
+                                        switch(result) {
+                                        case .success:
+                                            print("DataStore started")
+                                        case .failure(let error):
+                                            print("Error starting DataStore:\(error)")
+                                        }
                                     }
                                 }
+                                
                             case .failure(let error):
                                 print("Error stopping DataStore:\(error)")
                             }
@@ -322,6 +318,54 @@ class DatabaseManager: ObservableObject {
                 }
             }
         }
+    }
+    
+    func getUserRunLogs() {
+        if (DEBUG) { print("DatabaseManager -> getUserRunLogs ") }
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task () {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print ("")
+                    }
+                }
+            }
+        } else {
+            let keys = Run.keys
+            Amplify.DataStore.query(Run.self, where: keys.userID == currentUser!.id) { result in
+                switch(result) {
+                case .success(let items):
+                    self.runs = items
+                    if (DEBUG) {
+                        print("DatabaseManager -> getUserRunLogs -> successful query")
+                        print("Runs: \(runs)")
+                    }
+                    
+                case .failure(let error):
+                    print("DatabaseManager -> getUserRunLogs -> Could not query DataStore: \(error)")
+                }
+            }
+        }
+    }
+    
+    func getFriendRunLogs(friendId: String) {
+        if (DEBUG) { print("DatabaseManager -> getFriendRunLogs ") }
+            let keys = Run.keys
+            Amplify.DataStore.query(Run.self, where: keys.userID == friendId) { result in
+                switch(result) {
+                case .success(let items):
+                    self.friendRuns = items
+                    if (DEBUG) {
+                        print("DatabaseManager -> getUserFriendLogs -> successful query")
+                        print("Runs: \(friendRuns)")
+                    }
+                    
+                case .failure(let error):
+                    print("DatabaseManager -> getFriendRunLogs -> Could not query DataStore: \(error)")
+                }
+            }
     }
 
 
@@ -528,7 +572,7 @@ class DatabaseManager: ObservableObject {
                 receiverId: receiver!.id,
                 type: NotificationType.runnerstarted)
             
-            if (DEBUG) { print("startRunNotification -> \(receiver)")}
+            if (DEBUG) { print("DatabaseManager -> startRunNotification -> \(receiver)")}
             
             createNotificationRecord(notification: notification)
         }
@@ -556,9 +600,88 @@ class DatabaseManager: ObservableObject {
                 receiverId: receiver!.id,
                 type: NotificationType.runnerended)
             
-            if (DEBUG) { print("endRunNotification -> \(receiver)")}
+            if (DEBUG) { print("DatabaseManager -> endRunNotification -> \(receiver)")}
             
             createNotificationRecord(notification: notification)
+        }
+    }
+    
+    func runnerEventNotification(username: String) {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        }
+        
+        let receiver = getUserProfile(username: username)
+        
+        if (receiver != nil) {
+            let notification = Notification(
+                senderId: self.currentUser!.id,
+                receiverId: receiver!.id,
+                type: NotificationType.runevent)
+            
+            if (DEBUG) { print("DatabaseManager -> runnerEventNotification -> \(receiver)")}
+            
+            createNotificationRecord(notification: notification)
+        }
+    }
+    
+    func saveUserRunLog(distance: Double,
+                        time: String,
+                        averageSpeed: Double) {
+        if self.currentUser == nil {
+            if let user = Amplify.Auth.getCurrentUser() {
+                Task() {
+                    do {
+                        try await getUserProfile(user: user)
+                    } catch {
+                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                    }
+                }
+            }
+        }
+        
+        if (self.currentUser != nil) {
+            
+            let run = Run(
+                distance: distance,
+                // time: time,
+                averageSpeed: averageSpeed,
+                userID: self.currentUser!.id)
+            
+            if (DEBUG) { print("DatabaseManager -> saveUserRunLog -> \(run)")}
+            
+            createRunRecord(run: run)
+        }
+    }
+    
+    func createRunRecord(run: Run) {
+        
+        Amplify.DataStore.save(run) { result in
+            switch result {
+            case .success(let item):
+                print("DatabaseManager -> createRunRecord -> Saved Run Record")
+            case .failure(let error):
+                print("DatabaseManager -> createRunRecord -> Error on Run Record \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func createNotificationRecord(notification: Notification) {
+        Amplify.DataStore.save(notification) { result in
+            switch result {
+            case .success(_):
+                print("Saved Notification Record")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 
@@ -578,17 +701,6 @@ class DatabaseManager: ObservableObject {
         if receiver != nil && !checkAlreadyFriends(user: receiver!, currentID: currentUser!.id) && !checkBlocked(user: receiver!, currentID: currentUser!.id) {
             let notification = Notification(senderId: self.currentUser!.id, receiverId: receiver!.id, type: NotificationType.friendrequest)
             createNotificationRecord(notification: notification)
-        }
-    }
-    
-    func createNotificationRecord(notification: Notification) {
-        Amplify.DataStore.save(notification) { result in
-            switch result {
-            case .success(_):
-                print("Saved Notification Record")
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
         }
     }
     
@@ -634,8 +746,7 @@ class DatabaseManager: ObservableObject {
         }
         return retVal
     }
-    
-    
+
     func deleteNotificationRecord(notification: Notification) {
         Amplify.DataStore.delete(notification) { result in
             switch result {
@@ -880,7 +991,6 @@ class DatabaseManager: ObservableObject {
             }
         }
     }
-
     
     func resetPassword(email: String) { //we can use username or passwork -> check during call
         Amplify.Auth.resetPassword(for: email) { result in

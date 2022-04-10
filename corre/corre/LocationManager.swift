@@ -19,10 +19,13 @@ final class LocationManager: NSObject,
                              ObservableObject,
                              CLLocationManagerDelegate,
                              AWSLocationTrackerDelegate {
+    var DEBUG = true
     
     // MARK: deleteThis
     // @Published var sessionManager = SessionManger()
     // var sessionMananger: SessionManger
+    
+    @Published var userSpeed: Double?
     
     var coordinatesPublisher = PassthroughSubject<CLLocationCoordinate2D, Never>()
     
@@ -175,8 +178,11 @@ final class LocationManager: NSObject,
         guard let location = locations.last else { return }
         manager.stopUpdatingLocation()
         
+        // update the currSpeed of user
+        userSpeed = location.speed
+        
         // tracking implementations:
-        print("locationManager - got locations: \(locations) ")
+        print("LocationManager -> locationManager -> Data: \(locations) ")
         print("This is the location xCord: \(location.coordinate.latitude)")
         print("This is the location yCord: \(location.coordinate.longitude)")
         sessionManager!.databaseManager.updateDeviceLocation(
