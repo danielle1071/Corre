@@ -67,8 +67,8 @@ struct PreRunningView: View {
                 }
             }
             
-            Divider()
-            .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
+//            Divider()
+//            .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
         }
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
     }

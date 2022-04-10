@@ -67,28 +67,36 @@ struct RunHistoryView: View {
         ZStack{
             CusColor.backcolor.edgesIgnoringSafeArea(.all)
         VStack{
-            HStack{
-                Button (action: {}){
-                Image(systemName: "arrow.left")
-                .renderingMode(.original)
-                .edgesIgnoringSafeArea(.all)
-                .foregroundColor(Color("primaryColor"))
-                Text("Run History")
-                    .foregroundColor(Color("primaryColor"))
-                    .font(.custom("Varela Round Regular", size: 17))
-       
-            }
-                Spacer()
-            }
-            .padding()
+            
+//            HStack{
+//                Button (action: {}){
+//                Image(systemName: "arrow.left")
+//                .renderingMode(.original)
+//                .edgesIgnoringSafeArea(.all)
+//                .foregroundColor(Color("primaryColor"))
+//                Text("Run History")
+//                    .foregroundColor(Color("primaryColor"))
+//                    .font(.custom("Varela Round Regular", size: 17))
+//
+//            }
+//                Spacer()
+//            }
+//            .padding()
+            
             
             VStack{
+            Text("Run History")
+                    .font(.custom("Varela Round Regular", size: 17))
+                    .padding([.bottom], -7)
+
             List(history, rowContent: RunHistoryRow.init)
+
                    // .shadow(radius: 1)
                    
             }
-            //.frame(height: 650)
-            Spacer()
+            .padding([.top], -33)
+            .frame(height: 620)
+//            Spacer()
            // .padding()
         
         

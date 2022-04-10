@@ -87,7 +87,7 @@ final class SessionManger: ObservableObject {
             authState = .landing
         }
     }
-    
+        
     // MARK: showSignUp
     func showSignUp() {
         authState = .signUp
