@@ -12,23 +12,57 @@ import Amplify
 
 struct NavBarView: View {
     
+    
+    init(user: AuthUser) {
+        UITabBar.appearance().unselectedItemTintColor = UIColor(named: "primaryColor")
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: "Varela Round Regular", size: 12)! ], for: .normal)
+        self.user = user
+    }
+    
+
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var sessionManager: SessionManger
-    
-    @State private var showingSheet = false
-    @State private var selectedTab = 0
-    @State private var oldSelectedTab = 0
-    
-    @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
-    let user: AuthUser
-    
+
     @State var addedContact = false
     @State var ecFirst = ""
     @State var ecLast = ""
     @State var ecEmail = ""
     @State var ecPhone = ""
     
+    
+    @State var userId = "C8BC189F-E05F-4F80-9507-5B3A556C4330"
+    let user: AuthUser
+    
+    @State var showingSheet = false
+    @State var selectedTab = 0
+    @State var oldSelectedTab = 0
+    
     var body: some View {
+      
+        
+        let home = Image("home.nofill")
+                    .font(.system(size: 60))
+        
+        let homePressed = Image("home.fill")
+                    .font(.system(size: 60))
+        
+        let run = Image("run.nofill")
+                    .font(.system(size: 60))
+        
+        let runPressed = Image("run.fill")
+                    .font(.system(size: 60))
+        
+        let friends = Image("friends.nofill")
+                    .font(.system(size: 60))
+        
+        let friendsPressed = Image("friends.fill")
+                    .font(.system(size: 60))
+        
+        let stats = Image("stats.nofill")
+                    .font(.system(size: 60))
+        
+        let statsPressed = Image("stats.fill")
+                    .font(.system(size: 60))
                 
         TabView(selection: $selectedTab) {
             SessionView(user: user)
@@ -36,13 +70,13 @@ struct NavBarView: View {
                     self.selectedTab = 0
                 }
                 .tabItem {
-                    Image(systemName: "house")
+                    selectedTab == 0 ? homePressed : home
                     Text("Home")
                 }.tag(0)
             
             PreRunningView()
                 .tabItem {
-                    Image(systemName: "play")
+                    selectedTab == 1 ? runPressed : run
                     Text("Run")
                 }.tag(1)
                 .onTapGesture {
@@ -58,19 +92,22 @@ struct NavBarView: View {
                     self.selectedTab = 2
                 }
                 .tabItem {
-                    Image(systemName: "person.2.fill")
+                    selectedTab == 2 ? friendsPressed : friends
                     Text("Friends")
                 }.tag(2)
-            ProfileView()
+            
+            
+            RunHistoryView()
                 .onTapGesture {
                     self.selectedTab = 3
                 }
                 .tabItem {
-                    Image(systemName: "person")
-                    Text("Profile")
+                    selectedTab == 3 ? statsPressed : stats
+                    Text("Stats")
                 }.tag(3)
             
         }
+        .accentColor(Color("primaryColor"))
         .onChange(of: selectedTab) {
                        if 1 == selectedTab {
                            if sessionManager.databaseManager.emergencyContacts.isEmpty {
@@ -84,7 +121,7 @@ struct NavBarView: View {
                            self.oldSelectedTab = $0
                        }
                    }
-    
+        
         .sheet(isPresented: $showingSheet, onDismiss: {
             self.selectedTab = self.oldSelectedTab
         }, content: EmergencyPromptSheetNav.init)
@@ -192,14 +229,14 @@ struct EmergencyPromptSheetNav: View {
         
     }
 }
-
-    struct NavBarView_Previews: PreviewProvider {
-        @EnvironmentObject var sessionManager: SessionManger
-        private struct TestUser: AuthUser {
-            let userId: String = "1"
-            let username: String = "Test"
-        }
-        static var previews: some View {
-            NavBarView(user: TestUser())
-        }
-    }
+//
+//    struct NavBarView_Previews: PreviewProvider {
+//        @EnvironmentObject var sessionManager: SessionManger
+//        private struct TestUser: AuthUser {
+//            let userId: String = "1"
+//            let username: String = "Test"
+//        }
+//        static var previews: some View {
+//            NavBarView(user: TestUser())
+//        }
+//    }

@@ -103,7 +103,7 @@ final class SessionManger: ObservableObject {
             }
         }
     }
-    
+        
     // MARK: showSignUp
     func showSignUp() {
         DispatchQueue.main.async {

@@ -21,6 +21,7 @@
 		4A1EE56227E1AA3B0032138E /* ProximaNova.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EE56027E1AA3B0032138E /* ProximaNova.ttf */; };
 		4A2FA86727B359BF00B55D53 /* VarelaRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */; };
 		4A4C1F4827CEE48900D95264 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C1F4727CEE48900D95264 /* NavBarView.swift */; };
+		4A805DF4280369C3003AA374 /* NAVTEST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A805DF3280369C3003AA374 /* NAVTEST.swift */; };
 		4AB6137027B1DE4E0018F678 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6136F27B1DE4E0018F678 /* RunningView.swift */; };
 		4AB6137227B1DEC90018F678 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137127B1DEC90018F678 /* ProfileView.swift */; };
 		4AB6137427B1DEDE0018F678 /* EmergContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6137327B1DEDE0018F678 /* EmergContactView.swift */; };
@@ -186,6 +187,7 @@
 		4A2FA86027B337DF00B55D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A2FA86627B359BF00B55D53 /* VarelaRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VarelaRound-Regular.ttf"; sourceTree = "<group>"; };
 		4A4C1F4727CEE48900D95264 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
+		4A805DF3280369C3003AA374 /* NAVTEST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NAVTEST.swift; sourceTree = "<group>"; };
 		4AB6136F27B1DE4E0018F678 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
 		4AB6137127B1DEC90018F678 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4AB6137327B1DEDE0018F678 /* EmergContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergContactView.swift; sourceTree = "<group>"; };
@@ -398,6 +400,8 @@
 				35C1A99127C9A7130032FD00 /* MessageManager.swift */,
 				35C1A99327C9A73E0032FD00 /* MessageRow.swift */,
 				35C1A99527C9A7880032FD00 /* MessagesView.swift */,
+			
+				4A805DF3280369C3003AA374 /* NAVTEST.swift */,
 				4A4C1F4727CEE48900D95264 /* NavBarView.swift */,
 				4CEEB63027CADF3100391A9E /* NotificationView.swift */,
 				4CB74FCB27CD6B4A004476B7 /* PreRunningView.swift */,
@@ -746,6 +750,7 @@
 				D9BE965227AF4B8A00ED177A /* FriendView.swift in Sources */,
 				35C1A99027C9A6CE0032FD00 /* Message+Extensions.swift in Sources */,
 				4CEEB63127CADF3100391A9E /* NotificationView.swift in Sources */,
+				4A805DF4280369C3003AA374 /* NAVTEST.swift in Sources */,
 				D9BE965427B2E60C00ED177A /* DataStore.swift in Sources */,
 				4AFC7D3D27F22656001B5163 /* StoppedRunningView.swift in Sources */,
 				35736C1D27EE8CD600FC4089 /* MessageFriendView.swift in Sources */,
@@ -973,7 +978,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = corre/;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z83SKT34LA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = corre/Info.plist;
@@ -1003,7 +1008,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = corre/;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z83SKT34LA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = corre/Info.plist;
@@ -1033,7 +1038,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z83SKT34LA;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = correWatch_WatchKit_Extension;
 				INFOPLIST_KEY_CFBundleDisplayName = correWatch;
@@ -1059,7 +1064,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z83SKT34LA;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = correWatch_WatchKit_Extension;
 				INFOPLIST_KEY_CFBundleDisplayName = correWatch;
@@ -1084,7 +1089,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"correWatch WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z83SKT34LA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "correWatch WatchKit Extension/Info.plist";
@@ -1115,7 +1120,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"correWatch WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z83SKT34LA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "correWatch WatchKit Extension/Info.plist";
@@ -1146,7 +1151,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z83SKT34LA;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchTests;
@@ -1167,7 +1172,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z83SKT34LA;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchTests;
@@ -1186,7 +1191,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z83SKT34LA;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchUITests;
@@ -1205,7 +1210,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z83SKT34LA;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = my.org.corre.correWatchUITests;
