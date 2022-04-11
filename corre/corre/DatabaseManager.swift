@@ -864,6 +864,23 @@ class DatabaseManager: ObservableObject {
             print("Deleting index2!")
             user2?.friends?.remove(at: index2)
         }
+        Amplify.DataStore.save(user2!) { result in
+            switch (result){
+            case .success:
+                print("SUCCES")
+            case .failure(let error):
+                print(error.localizedDescription);
+            }
+        }
+        Amplify.DataStore.save(user1!) { result in
+            switch (result){
+            case .success:
+                print("SUCCES")
+            case .failure(let error):
+                print(error.localizedDescription);
+            }
+        }
+//        self.getFriends()
     }
     
     

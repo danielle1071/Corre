@@ -21,7 +21,7 @@ struct FriendView: View {
     @ObservedObject var friendStore = FriendStore()
     // @State var friends: [User] = []
     @State var newFriend: String = ""
-    
+    @State var friends = [User]()
     
     struct CusColor {
         static let backcolor =
@@ -100,7 +100,7 @@ struct FriendView: View {
             
             VStack {
                 List{
-                    ForEach(sessionManager.databaseManager.friends, id: \.id) { friend in
+                    ForEach(friends, id: \.id) { friend in
                     // ForEach(friends, id: \.id) { friend in
                         Text("\(friend.username)")
                             .listRowBackground(Color("orange"))
@@ -112,7 +112,13 @@ struct FriendView: View {
             }
             .frame(width: 400)
         }
+//        .onReceive(sessionManager.databaseManager.$friends, perform: {_ in
+//            friends = sessionManager.databaseManager.friends
+//        })
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+        .onAppear(perform: {
+            friends = sessionManager.databaseManager.friends
+        })
     }
     
     func addFriend(){
@@ -134,8 +140,11 @@ struct FriendView: View {
             sessionManager.databaseManager.removeFriendFromArray(userId: friend.id)
         }
         
-        // sessionManager.databaseManager.getFriends()
-        // friends = sessionManager.databaseManager.friends
+        sessionManager.databaseManager.getFriends()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            friends = sessionManager.databaseManager.friends
+//        }
+        sessionManager.showSession()
     }
     
     func delete(_ offsets: IndexSet){
