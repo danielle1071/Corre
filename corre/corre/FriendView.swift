@@ -100,7 +100,7 @@ struct FriendView: View {
             
             VStack {
                 List{
-                    ForEach(friends, id: \.id) { friend in
+                    ForEach(sessionManager.databaseManager.friends, id: \.id) { friend in
                     // ForEach(friends, id: \.id) { friend in
                         Text("\(friend.username)")
                             .listRowBackground(Color("orange"))
@@ -112,9 +112,12 @@ struct FriendView: View {
             }
             .frame(width: 400)
         }
-//        .onReceive(sessionManager.databaseManager.$friends, perform: {_ in
-//            friends = sessionManager.databaseManager.friends
-//        })
+        .onReceive(sessionManager.databaseManager.$friends, perform: {_ in
+//            DispatchQueue.main.async {
+//                self.sessionManager.getCurrentAuthUser()
+//                self.friends = sessionManager.databaseManager.friends
+//            }
+        })
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
         .onAppear(perform: {
             friends = sessionManager.databaseManager.friends
