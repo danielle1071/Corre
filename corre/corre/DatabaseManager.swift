@@ -1209,11 +1209,12 @@ class DatabaseManager: ObservableObject {
         }
         let user = self.getUserProfile(userID: notification.senderId)
         if user != nil && currentUser != nil {
-            let contact = EmergencyContact(firstName: firstNameEM, lastName: lastNameEM, email: user!.email!, phoneNumber: phoneNumberEM, appUser: true, emergencyContactUserId: currentUser!.id, emergencyContactAppUsername: currentUser!.username, userID: user!.id)
+            print("LOOK AT THE USER DETAILS \(user!)")
+            let contact = EmergencyContact(firstName: firstNameEM, lastName: lastNameEM, email: currentUser!.email!, phoneNumber: phoneNumberEM, appUser: true, emergencyContactUserId: currentUser!.id, emergencyContactAppUsername: currentUser!.username, userID: user!.id)
             print("Sending \(contact) to the createEmergencyConactRecord")
             self.createEmergencyContactRecord(contact: contact)
             deleteNotificationRecord(notification: notification)
-            
+            self.getRunnerRecords()
         } else {
             print("Either user or currentUser === nil --> sender: \(user) | ---> currentUser: \(currentUser)")
             return

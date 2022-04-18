@@ -302,6 +302,7 @@ final class SessionManger: ObservableObject {
     
     // MARK: showTrackContacts
     func showTrackContacts() {
+        databaseManager.getRunnerRecords()
         DispatchQueue.main.async {
             self.authState = .trackContacts
         }
