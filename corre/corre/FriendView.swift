@@ -106,6 +106,10 @@ struct FriendView: View {
                             .listRowBackground(Color("orange"))
                             .foregroundColor(Color("primaryColor"))
                             .font(Font.custom("VarelaRound-Regular", size: 18))
+                            .onTapGesture(perform: {
+                                print("Tapped A Friend: \(friend.username)")
+                                sessionManager.showFriendProfile(username: friend.username)
+                            })
                     }
                     .onDelete(perform: self.delete2)
                 }
@@ -122,6 +126,9 @@ struct FriendView: View {
         .onAppear(perform: {
             friends = sessionManager.databaseManager.friends
         })
+//         .onAppear(perform: {
+//             sessionManager.databaseManager.getFriends()
+//         })
     }
     
     func addFriend(){

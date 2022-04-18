@@ -29,6 +29,8 @@ struct ProfileView: View {
     @EnvironmentObject var sessionManager: SessionManger
     @State var user:User?
     
+    var num = 1
+    
     struct CusColor {
         static let backcolor =
             Color("backgroundColor")
@@ -113,7 +115,7 @@ struct ProfileView: View {
                 }
                     Divider()
                 HStack{
-                    Text("Total Distance: \(user?.totalDistance ?? 0.0)")
+                    Text("Total Distance: \(user?.totalDistance ?? 0.0, specifier: "%.2f")")
                         .foregroundColor(Color("primaryColor"))
                         .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
@@ -141,21 +143,21 @@ struct ProfileView: View {
                             Text(" ")
                             
                             // MARK: frontend help! super ugly!
-                            Text("Date: 03/31/22 (placeholder)")
-//                            Text("Date: \(String(describing: run.createdAt!.foundationDate))")
+//                            Text("Date: \(String(describing: run.createdAt!))")
+//                                .listRowBackground(Color("orange"))
+//                                .foregroundColor(Color("primaryColor"))
+//                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                            Text("Distance: \(run.distance, specifier: "%.2f") m")
                                 .listRowBackground(Color("orange"))
                                 .foregroundColor(Color("primaryColor"))
                                 .font(Font.custom("VarelaRound-Regular", size: 18))
+                                .frame(maxWidth: .infinity, alignment: .center)
                                 
-                            Text("Distance: \(run.distance) m")
+                            Text("Average Speed: \(run.averageSpeed ?? 0.0, specifier: "%.2f") m/s")
                                 .listRowBackground(Color("orange"))
                                 .foregroundColor(Color("primaryColor"))
                                 .font(Font.custom("VarelaRound-Regular", size: 18))
-                                
-                            Text("Average Speed: \(run.averageSpeed ?? 0.0) m/s")
-                                .listRowBackground(Color("orange"))
-                                .foregroundColor(Color("primaryColor"))
-                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                                .frame(maxWidth: .infinity, alignment: .center)
                             
                             Text(" ")
                         }

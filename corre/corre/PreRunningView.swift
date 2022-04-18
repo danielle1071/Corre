@@ -29,8 +29,8 @@ struct PreRunningView: View {
         VStack{
             HStack{
                 Button(action: {
-                sessionManager.showSession()
-            }, label: {
+                    sessionManager.showSession()
+                }, label: {
                 Image(systemName: "arrow.left")
                     .renderingMode(.original)
                     .edgesIgnoringSafeArea(.all)
@@ -62,13 +62,13 @@ struct PreRunningView: View {
                 List(sessionManager.databaseManager.emergencyContacts, id: \.id) { emergencyContact in
                     EmergencyContactRow(emergencyContact: emergencyContact)
                         .onTapGesture(perform: {
-                            sessionManager.showRunning(phoneNumber: emergencyContact.phoneNumber)
+                            sessionManager.showSelectTime(phoneNumber: emergencyContact.phoneNumber)
                         })
                 }
             }
             
-            Divider()
-            .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
+//            Divider()
+//            .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
         }
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
     }

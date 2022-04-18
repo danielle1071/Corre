@@ -219,7 +219,7 @@ struct AddEmergencyContact: View {
                         sessionManager.databaseManager.getUserProfile(username: self.ecEmail.lowercased())
                         if user == nil {
                             addYourself = false
-                            sessionManager.databaseManager.getUserProfile(email: self.ecEmail.lowercased())
+                            user = sessionManager.databaseManager.getUserProfile(email: self.ecEmail.lowercased())
                         }
                         
                         print("Here is the user in the emergency contact view: \(user)")
