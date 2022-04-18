@@ -855,6 +855,7 @@ class DatabaseManager: ObservableObject {
         if flag1 == false {
             //friend was not found
         } else {
+            print("Deleting index1!")
             //remove from index and re-index array
             user1?.friends?.remove(at: index1)
         }
@@ -872,8 +873,36 @@ class DatabaseManager: ObservableObject {
         if flag2 == false {
             //friend was not found
         } else {
+            print("Deleting index2!")
             user2?.friends?.remove(at: index2)
         }
+        
+        
+        
+        
+//        DispatchQueue.main.async {
+            
+        
+        
+            Amplify.DataStore.save(user2!) { result in
+                switch (result){
+                case .success:
+                    print("SUCCES")
+                case .failure(let error):
+                    print(error.localizedDescription);
+                }
+            }
+            Amplify.DataStore.save(user1!) { result in
+                switch (result){
+                case .success:
+                    print("SUCCES")
+                case .failure(let error):
+                    print(error.localizedDescription);
+                }
+            }
+            
+            self.getFriends()
+//        }
     }
     
     
@@ -919,14 +948,26 @@ class DatabaseManager: ObservableObject {
                     do {
                         try await getUserProfile(user: user)
                     } catch {
-                        print("ERROR IN GET EMERGENCY CONTACT FUNCTION")
+                        print("ERROR IN GET FRIENDS CONTACT FUNCTION")
                     }
                 }
             }
+        } else {
+            self.currentUser = self.getUserProfile(userID: self.currentUser!.id)
         }
         
+        /*
+        var count = 0
+
+        if (currentUser != nil && currentUser!.friends != nil) {
+            let count = currentUser!.friends!.count
+        }
+        */
+        
         let count = currentUser!.friends?.count ?? 0
-        print("This is count: \(count)")
+       
+        print("DatabaseManager -> getFriends -> friend count: \(count)")
+        
         let usrKeys = User.keys
         var retArr = [User]()
         for index in 0...count {
@@ -934,6 +975,8 @@ class DatabaseManager: ObservableObject {
                 print("This is index: \(index)")
                 if let frien = self.getUserProfile(userID: self.currentUser!.friends![index]!) {
                     retArr.append(frien)
+                    
+                    print("DatabaseManager -> getFriends -> \(frien)")
                 }
             }
         }
@@ -965,6 +1008,8 @@ class DatabaseManager: ObservableObject {
         print("THIS IS REQUESTS: \(requests)")
         return requests
     }
+    
+    
   
     func deleteEmergencyContact(contactId: String) {
         Amplify.DataStore.delete(EmergencyContact.self, withId: contactId) { result in
@@ -1175,11 +1220,12 @@ class DatabaseManager: ObservableObject {
         }
         let user = self.getUserProfile(userID: notification.senderId)
         if user != nil && currentUser != nil {
-            let contact = EmergencyContact(firstName: firstNameEM, lastName: lastNameEM, email: user!.email!, phoneNumber: phoneNumberEM, appUser: true, emergencyContactUserId: currentUser!.id, emergencyContactAppUsername: currentUser!.username, userID: user!.id)
+            print("LOOK AT THE USER DETAILS \(user!)")
+            let contact = EmergencyContact(firstName: firstNameEM, lastName: lastNameEM, email: currentUser!.email!, phoneNumber: phoneNumberEM, appUser: true, emergencyContactUserId: currentUser!.id, emergencyContactAppUsername: currentUser!.username, userID: user!.id)
             print("Sending \(contact) to the createEmergencyConactRecord")
             self.createEmergencyContactRecord(contact: contact)
             deleteNotificationRecord(notification: notification)
-            
+            self.getRunnerRecords()
         } else {
             print("Either user or currentUser === nil --> sender: \(user) | ---> currentUser: \(currentUser)")
             return

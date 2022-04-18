@@ -15,11 +15,13 @@ import SwiftUI
 
 
 struct FriendView: View {
+    var DEBUG = true
     
     @EnvironmentObject var sessionManager: SessionManger
     @ObservedObject var friendStore = FriendStore()
+    // @State var friends: [User] = []
     @State var newFriend: String = ""
-    
+    @State var friends = [User]()
     
     struct CusColor {
         static let backcolor =
@@ -36,6 +38,9 @@ struct FriendView: View {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont(name: "VarelaRound-Regular", size: 30.0)!, .foregroundColor: UIColor(named: "primaryColor") ?? .red]
         
         UITableView.appearance().backgroundColor = UIColor.clear
+        
+        // sessionManager.databaseManager.getFriends()
+        // friends = sessionManager.databaseManager.friends
     }
     
     var body: some View {
@@ -96,6 +101,7 @@ struct FriendView: View {
             VStack {
                 List{
                     ForEach(sessionManager.databaseManager.friends, id: \.id) { friend in
+                    // ForEach(friends, id: \.id) { friend in
                         Text("\(friend.username)")
                             .listRowBackground(Color("orange"))
                             .foregroundColor(Color("primaryColor"))
@@ -105,12 +111,21 @@ struct FriendView: View {
                                 sessionManager.showFriendProfile(username: friend.username)
                             })
                     }
-                    .onDelete(perform: self.delete)
+                    .onDelete(perform: self.delete2)
                 }
             }
             .frame(width: 400)
         }
+        .onReceive(sessionManager.databaseManager.$friends, perform: {_ in
+//            DispatchQueue.main.async {
+//                self.sessionManager.getCurrentAuthUser()
+//                self.friends = sessionManager.databaseManager.friends
+//            }
+        })
         .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
+        .onAppear(perform: {
+            friends = sessionManager.databaseManager.friends
+        })
 //         .onAppear(perform: {
 //             sessionManager.databaseManager.getFriends()
 //         })
@@ -122,6 +137,24 @@ struct FriendView: View {
         } else {  print("Request already exists") }
         newFriend = ""
         friendStore.friends.append(Friend(id: String(friendStore.friends.count + 1), friendItem: newFriend))
+    }
+    
+    func delete2(_ indexSet: IndexSet) {
+        indexSet.forEach { index in
+            let friend = sessionManager.databaseManager.friends[index]
+            
+            if (DEBUG) { print("This is the friend to delete \(friend)") }
+            
+            // sessionManager.databaseManager.deleteEmergencyContact(contactId: friend.id)
+            
+            sessionManager.databaseManager.removeFriendFromArray(userId: friend.id)
+        }
+        
+        sessionManager.databaseManager.getFriends()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            friends = sessionManager.databaseManager.friends
+//        }
+        sessionManager.showSession()
     }
     
     func delete(_ offsets: IndexSet){

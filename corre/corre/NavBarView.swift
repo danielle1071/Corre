@@ -89,6 +89,7 @@ struct NavBarView: View {
                 }
             FriendView()
                 .onTapGesture {
+                    self.sessionManager.databaseManager.getFriends()
                     self.selectedTab = 2
                 }
                 .tabItem {
