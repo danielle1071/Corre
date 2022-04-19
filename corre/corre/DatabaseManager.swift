@@ -606,7 +606,7 @@ class DatabaseManager: ObservableObject {
         }
     }
     
-    func runnerEventNotification(username: String) {
+    func runnerEventNotification(id: String) {
         if self.currentUser == nil {
             if let user = Amplify.Auth.getCurrentUser() {
                 Task() {
@@ -619,7 +619,7 @@ class DatabaseManager: ObservableObject {
             }
         }
         
-        let receiver = getUserProfile(username: username)
+        let receiver = getUserProfile(userID: id)
         
         if (receiver != nil) {
             let notification = Notification(

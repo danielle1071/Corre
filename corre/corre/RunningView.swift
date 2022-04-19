@@ -213,6 +213,11 @@ struct RunningView: View {
                                     .clipShape(Capsule())
                             })
                             Button(action:{
+                                self.sosRunNotif()
+                                let phone = "tel://"
+                                                let phoneNumberformatted = phone + phoneNumber
+                                                guard let url = URL(string: phoneNumberformatted) else { return }
+                                                UIApplication.shared.open(url)
                             }, label: {
                                 Text("SOS")
                                     .fontWeight(.bold)
@@ -254,6 +259,7 @@ struct RunningView: View {
             HStack(spacing: 30)  {
                 // call emergency contact with example phone number
                 Button(action:{
+                    self.sosRunNotif()
                     let phone = "tel://"
                                     let phoneNumberformatted = phone + phoneNumber
                                     guard let url = URL(string: phoneNumberformatted) else { return }
@@ -409,7 +415,7 @@ struct RunningView: View {
                         // In the event that the emergency has an account through corre,
                         // send them a start run notification in the app
                         if (contact.emergencyContactAppUsername != nil) {
-                            sessionManager.databaseManager.runnerEventNotification(username: contact.emergencyContactAppUsername!)
+                            sessionManager.databaseManager.runnerEventNotification(id: contact.emergencyContactUserId!)
                         }
                     
                         // MARK: set email notification here!
@@ -550,6 +556,23 @@ struct RunningView: View {
             if (contact.emergencyContactAppUsername != nil) {
                 sessionManager.databaseManager.endRunNotification(id: contact.emergencyContactUserId!)
             }
+        }
+    }
+    
+    func sosRunNotif() {
+        
+        sessionManager.databaseManager.getEmergencyContacts()
+        let contacts = sessionManager.databaseManager.emergencyContacts
+        
+        for emContact in contacts {
+            if (DEBUG) {
+                print("RunningView -> endRunNotif -> Emergency Contact: \(emContact.id) and \(String(describing: emContact.emergencyContactAppUsername))")
+            }
+            
+            if (emContact.emergencyContactAppUsername != nil) {
+                sessionManager.databaseManager.runnerEventNotification(id: emContact.emergencyContactUserId!)
+            }
+            
         }
     }
 }
