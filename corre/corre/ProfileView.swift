@@ -114,7 +114,7 @@ struct ProfileView: View {
                 }
                     Divider()
                 HStack{
-                    Text("Total Distance: \(user?.totalDistance ?? 0.0)")
+                    Text("Total Distance: \(user?.totalDistance ?? 0.0, specifier: "%.2f")")
                         .foregroundColor(Color("primaryColor"))
                         .font(.custom("Varela Round Regular", size: 20))
                     Spacer()
