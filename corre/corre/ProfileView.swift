@@ -14,8 +14,9 @@
 //  Modified by Lucas Morehouse on 2/10/22.
 //  Modified by Lucas Morehouse on 2/12/22.
 
+
 import SwiftUI
-import PhotosUI
+import Amplify
 
 struct ProfileView: View {
 
@@ -28,8 +29,6 @@ struct ProfileView: View {
     @State var lastName = ""
     @EnvironmentObject var sessionManager: SessionManger
     @State var user:User?
-    
-    var num = 1
     
     struct CusColor {
         static let backcolor =
@@ -139,31 +138,31 @@ struct ProfileView: View {
     
                 List{
                     ForEach(sessionManager.databaseManager.runs, id: \.id) { run in
-                        VStack {
-                            Text(" ")
+                        Section(header: Text("RUN")) {
+                            //Text(" ")
                             
                             // MARK: frontend help! super ugly!
-//                            Text("Date: \(String(describing: run.createdAt!))")
+//                            Text("Date: 03/31/22 (placeholder)")
+//                            Text("Date: \(String(describing: run.createdAt!.foundationDate))")
 //                                .listRowBackground(Color("orange"))
 //                                .foregroundColor(Color("primaryColor"))
 //                                .font(Font.custom("VarelaRound-Regular", size: 18))
+                                
                             Text("Distance: \(run.distance, specifier: "%.2f") m")
                                 .listRowBackground(Color("orange"))
                                 .foregroundColor(Color("primaryColor"))
                                 .font(Font.custom("VarelaRound-Regular", size: 18))
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                
+                              
                             Text("Average Speed: \(run.averageSpeed ?? 0.0, specifier: "%.2f") m/s")
                                 .listRowBackground(Color("orange"))
                                 .foregroundColor(Color("primaryColor"))
                                 .font(Font.custom("VarelaRound-Regular", size: 18))
-                                .frame(maxWidth: .infinity, alignment: .center)
                             
-                            Text(" ")
+                            //Text(" ")
                         }
                     }
                 }
-                
+               // .listRowBackground(Color("orange"))
             }
             .padding(EdgeInsets(top: 0, leading: 20, bottom:0, trailing: 20))
 
@@ -178,7 +177,6 @@ struct ProfileView: View {
 //                                    RoundedRectangle(cornerRadius: 20)
 //                                    .stroke(CustomColor.primarycolor, lineWidth: 2)
 //                                )
-
             }
             .background(CusColor.backcolor.edgesIgnoringSafeArea(.all))
             .onAppear(perform: {
@@ -186,6 +184,10 @@ struct ProfileView: View {
                     sessionManager.getCurrentAuthUser()
                 }
                 self.user = sessionManager.databaseManager.currentUser
+                if self.user?.firstName == "" || self.user?.lastName == "" || self.user?.firstName == nil || self.user?.lastName == nil {
+                    self.sessionManager.databaseManager.setNames()
+                    self.user = sessionManager.databaseManager.currentUser
+                }
             })
         } else {
             VStack {
@@ -307,6 +309,13 @@ struct ProfileView: View {
                 self.firstName = user?.firstName ?? ""
                 self.lastName = user?.lastName ?? ""
                 self.bio = user?.bio ?? ""
+            
+            print("LOOK HERE AT THIS FIRST ANME: \(self.firstName)")
+            
+            if self.firstName == "" || self.lastName == "" {
+                self.sessionManager.databaseManager.setNames()
+                
+            }
             sessionManager.databaseManager.getUserRunLogs()
         })
             
