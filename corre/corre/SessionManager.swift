@@ -348,7 +348,7 @@ final class SessionManger: ObservableObject {
     func showMessage(friendId: String) {
         if databaseManager.currentUser == nil {
             getCurrentAuthUser()
-        }
+        } 
         let userId = databaseManager.currentUser!.id
         DispatchQueue.main.async {
             self.authState = .messaging(userId: userId, friendId: friendId)

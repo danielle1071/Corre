@@ -100,6 +100,7 @@ struct NavBarView: View {
             
             RunHistoryView()
                 .onTapGesture {
+                    self.sessionManager.databaseManager.getRunnerRecords()
                     self.selectedTab = 3
                 }
                 .tabItem {
