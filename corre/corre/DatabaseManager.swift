@@ -1255,5 +1255,49 @@ class DatabaseManager: ObservableObject {
         }
         return retVal
     }
-
+    
+    func setNames() {
+        
+        print("Inside setNames()")
+        
+        if currentUser == nil {
+            return
+        }
+        
+        var firstName = ""
+        var lastName = ""
+        var updateUser = currentUser!
+        Amplify.Auth.fetchUserAttributes() { result in
+            switch result {
+            case .success(let attributes):
+                for attribute in attributes {
+                    if attribute.key == AuthUserAttributeKey.givenName {
+                        firstName = attribute.value
+                    } else if attribute.key == AuthUserAttributeKey.familyName {
+                        lastName = attribute.value
+                    }
+                }
+                print("User attributes - \(attributes)")
+                print("Name: \(firstName) \(lastName)")
+                
+                updateUser.firstName = firstName
+                updateUser.lastName = lastName
+                
+                print(updateUser)
+                
+                Amplify.DataStore.save(updateUser) { result in
+                    switch result {
+                    case .success(_):
+                        print("Saved new user record!")
+                        self.currentUser = updateUser
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+                
+            case .failure(let error):
+                print("Fetching user attributes failed with error \(error)")
+            }
+        }
+    }
 }

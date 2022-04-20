@@ -16,7 +16,7 @@
 
 
 import SwiftUI
-import PhotosUI
+import Amplify
 
 struct ProfileView: View {
 
@@ -184,6 +184,10 @@ struct ProfileView: View {
                     sessionManager.getCurrentAuthUser()
                 }
                 self.user = sessionManager.databaseManager.currentUser
+                if self.user?.firstName == "" || self.user?.lastName == "" || self.user?.firstName == nil || self.user?.lastName == nil {
+                    self.sessionManager.databaseManager.setNames()
+                    self.user = sessionManager.databaseManager.currentUser
+                }
             })
         } else {
             VStack {
@@ -305,6 +309,13 @@ struct ProfileView: View {
                 self.firstName = user?.firstName ?? ""
                 self.lastName = user?.lastName ?? ""
                 self.bio = user?.bio ?? ""
+            
+            print("LOOK HERE AT THIS FIRST ANME: \(self.firstName)")
+            
+            if self.firstName == "" || self.lastName == "" {
+                self.sessionManager.databaseManager.setNames()
+                
+            }
             sessionManager.databaseManager.getUserRunLogs()
         })
             
